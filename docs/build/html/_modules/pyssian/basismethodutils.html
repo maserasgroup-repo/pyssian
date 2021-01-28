@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>pyssian.basismethodutils &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pyssian.basismethodutils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains all the hardcoded basis and functionals as well as the neccesary</span>
+<span class="sd">regex expressions to identify if a certain string is a valid basis or a valid</span>
+<span class="sd">methods.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1">######################## METHODS SECTION #####################################</span>
+<span class="n">shellWaveFunctions</span> <span class="o">=</span> <span class="s1">&#39;RO|U|R|&#39;</span>
+<span class="n">mutlipleMethodRegex</span> <span class="o">=</span> <span class="s1">&#39;ONIOM|IRCMAX&#39;</span>
+
+<span class="n">methodsRegex</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DFT&#39;</span><span class="p">,</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span><span class="s1">&#39;Amber&#39;</span><span class="p">,</span><span class="s1">&#39;Dreiding&#39;</span><span class="p">,</span><span class="s1">&#39;UFF&#39;</span><span class="p">,</span><span class="s1">&#39;AM1&#39;</span><span class="p">,</span><span class="s1">&#39;PM3&#39;</span><span class="p">,</span><span class="s1">&#39;PM3MM&#39;</span><span class="p">,</span><span class="s1">&#39;PM6&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;PDDG&#39;</span><span class="p">,</span><span class="s1">&#39;HF&#39;</span><span class="p">,</span><span class="s1">&#39;HFS&#39;</span><span class="p">,</span><span class="s1">&#39;XAlpha&#39;</span><span class="p">,</span><span class="s1">&#39;HFB&#39;</span><span class="p">,</span><span class="s1">&#39;VSXC&#39;</span><span class="p">,</span><span class="s1">&#39;HCTH&#39;</span><span class="p">,</span><span class="s1">&#39;HCTH93&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;HCTH147&#39;</span><span class="p">,</span><span class="s1">&#39;HCTH407&#39;</span><span class="p">,</span><span class="s1">&#39;tHCTH&#39;</span><span class="p">,</span><span class="s1">&#39;M06L&#39;</span><span class="p">,</span><span class="s1">&#39;B97D&#39;</span><span class="p">,</span><span class="s1">&#39;LSDA&#39;</span><span class="p">,</span><span class="s1">&#39;LC-wPBE&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;CAM-B3LYP&#39;</span><span class="p">,</span><span class="s1">&#39;wB97XD&#39;</span><span class="p">,</span><span class="s1">&#39;wB97&#39;</span><span class="p">,</span><span class="s1">&#39;wB97X&#39;</span><span class="p">,</span><span class="s1">&#39;LC-BLYP&#39;</span><span class="p">,</span><span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span><span class="s1">&#39;B3P86&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;B3PW91&#39;</span><span class="p">,</span><span class="s1">&#39;B1B95&#39;</span><span class="p">,</span><span class="s1">&#39;mPW1PW91&#39;</span><span class="p">,</span><span class="s1">&#39;mPW1LYP&#39;</span><span class="p">,</span><span class="s1">&#39;mPW1PBE&#39;</span><span class="p">,</span><span class="s1">&#39;mPW3PBE&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;B98&#39;</span><span class="p">,</span><span class="s1">&#39;B971&#39;</span><span class="p">,</span><span class="s1">&#39;B972&#39;</span><span class="p">,</span><span class="s1">&#39;PBE1PBE&#39;</span><span class="p">,</span><span class="s1">&#39;B1LYP&#39;</span><span class="p">,</span><span class="s1">&#39;O3LYP&#39;</span><span class="p">,</span><span class="s1">&#39;TPSSh&#39;</span><span class="p">,</span><span class="s1">&#39;BMK&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;M062X&#39;</span><span class="p">,</span><span class="s1">&#39;M06&#39;</span><span class="p">,</span><span class="s1">&#39;M06HF&#39;</span><span class="p">,</span><span class="s1">&#39;M05&#39;</span><span class="p">,</span><span class="s1">&#39;M052X&#39;</span><span class="p">,</span><span class="s1">&#39;X3LYP&#39;</span><span class="p">,</span><span class="s1">&#39;BHandH&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;BHandHLYP&#39;</span><span class="p">,</span><span class="s1">&#39;tHCTHhyb&#39;</span><span class="p">,</span><span class="s1">&#39;HSEh1PBE&#39;</span><span class="p">,</span><span class="s1">&#39;HSE2PBE&#39;</span><span class="p">,</span><span class="s1">&#39;HSEhPBE&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;PBEh1PBE&#39;</span><span class="p">,</span><span class="s1">&#39;CASSCF&#39;</span><span class="p">,</span><span class="s1">&#39;CAS&#39;</span><span class="p">,</span><span class="s1">&#39;MP2&#39;</span><span class="p">,</span><span class="s1">&#39;MP3&#39;</span><span class="p">,</span><span class="s1">&#39;MP4&#39;</span><span class="p">,</span><span class="s1">&#39;MP5&#39;</span><span class="p">,</span><span class="s1">&#39;B2PLYP&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;B2PLYPD&#39;</span><span class="p">,</span><span class="s1">&#39;mPW2PLYP&#39;</span><span class="p">,</span><span class="s1">&#39;mPW2PLYPD&#39;</span><span class="p">,</span><span class="s1">&#39;QCISD&#39;</span><span class="p">,</span><span class="s1">&#39;CCD&#39;</span><span class="p">,</span><span class="s1">&#39;CCSD\(T\)&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;CCSD&#39;</span><span class="p">,</span><span class="s1">&#39;CC&#39;</span><span class="p">,</span><span class="s1">&#39;QCID&#39;</span><span class="p">,</span><span class="s1">&#39;BD&#39;</span><span class="p">,</span><span class="s1">&#39;EPT&#39;</span><span class="p">,</span><span class="s1">&#39;CBS-4M&#39;</span><span class="p">,</span><span class="s1">&#39;CBS-QB3&#39;</span><span class="p">,</span><span class="s1">&#39;ROCBS-QB3&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;CBS-APNO&#39;</span><span class="p">,</span><span class="s1">&#39;G1&#39;</span><span class="p">,</span><span class="s1">&#39;G2&#39;</span><span class="p">,</span><span class="s1">&#39;G2MP2&#39;</span><span class="p">,</span><span class="s1">&#39;G3&#39;</span><span class="p">,</span><span class="s1">&#39;G3MP2&#39;</span><span class="p">,</span><span class="s1">&#39;G3B3&#39;</span><span class="p">,</span><span class="s1">&#39;G3MP2B3&#39;</span><span class="p">,</span><span class="s1">&#39;G4&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;G4MP2&#39;</span><span class="p">,</span><span class="s1">&#39;W1U&#39;</span><span class="p">,</span><span class="s1">&#39;W1BD&#39;</span><span class="p">,</span><span class="s1">&#39;W1RO&#39;</span><span class="p">,</span><span class="s1">&#39;CIS&#39;</span><span class="p">,</span><span class="s1">&#39;CIS\(D\)&#39;</span><span class="p">,</span><span class="s1">&#39;CID&#39;</span><span class="p">,</span><span class="s1">&#39;CISD&#39;</span><span class="p">,</span><span class="s1">&#39;TD&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;EOMCCSD&#39;</span><span class="p">,</span><span class="s1">&#39;ZINDO&#39;</span><span class="p">,</span><span class="s1">&#39;DFTB&#39;</span><span class="p">,</span><span class="s1">&#39;DFTBA&#39;</span><span class="p">,</span><span class="s1">&#39;GVB&#39;</span><span class="p">,</span><span class="s1">&#39;CNDO&#39;</span><span class="p">,</span><span class="s1">&#39;INDO&#39;</span><span class="p">,</span><span class="s1">&#39;MINDO&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;MNDO&#39;</span><span class="p">,</span><span class="s1">&#39;NMR&#39;</span><span class="p">,</span><span class="s1">&#39;SAC-CI&#39;</span><span class="p">]</span>
+<span class="n">methodsRegex</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">methodsRegex</span><span class="p">]</span>
+<span class="n">methodsRegex</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">methodsRegex</span><span class="p">)</span>
+
+<span class="n">exchangeFunctional</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;XA&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;PW91&#39;</span><span class="p">,</span><span class="s1">&#39;MPW&#39;</span><span class="p">,</span><span class="s1">&#39;G96&#39;</span><span class="p">,</span><span class="s1">&#39;PBE&#39;</span><span class="p">,</span><span class="s1">&#39;OPBE&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;TPSS&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;BRX&#39;</span><span class="p">,</span><span class="s1">&#39;PKZB&#39;</span><span class="p">,</span><span class="s1">&#39;WPBEH&#39;</span><span class="p">,</span><span class="s1">&#39;PBEH&#39;</span><span class="p">,</span><span class="s1">&#39;LC-&#39;</span><span class="p">]</span>
+<span class="n">exchangeFunctional</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">exchangeFunctional</span><span class="p">)</span>
+
+<span class="n">correlationFunctional</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VWN&#39;</span><span class="p">,</span><span class="s1">&#39;VWN5&#39;</span><span class="p">,</span><span class="s1">&#39;LYP&#39;</span><span class="p">,</span><span class="s1">&#39;PL&#39;</span><span class="p">,</span><span class="s1">&#39;P86&#39;</span><span class="p">,</span><span class="s1">&#39;PW91&#39;</span><span class="p">,</span><span class="s1">&#39;B95&#39;</span><span class="p">,</span><span class="s1">&#39;PBE&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;TPSS&#39;</span><span class="p">,</span><span class="s1">&#39;KCIS&#39;</span><span class="p">,</span><span class="s1">&#39;BRC&#39;</span><span class="p">,</span><span class="s1">&#39;PKZB&#39;</span><span class="p">,</span><span class="s1">&#39;VP86&#39;</span><span class="p">,</span><span class="s1">&#39;V5LYP&#39;</span><span class="p">]</span>
+<span class="n">correlationFunctional</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">correlationFunctional</span><span class="p">)</span>
+
+<span class="n">methodRegex</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1">)(</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shellWaveFunctions</span><span class="p">,</span><span class="n">methodsRegex</span><span class="p">)</span>
+<span class="n">compoundMethodRegex</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1">)(</span><span class="si">{1}</span><span class="s1">)[0-9]*(</span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shellWaveFunctions</span><span class="p">,</span>
+                                                 <span class="n">exchangeFunctional</span><span class="p">,</span>
+                                                 <span class="n">correlationFunctional</span><span class="p">)</span>
+
+<span class="n">method_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">methodRegex</span><span class="p">)</span>
+<span class="n">multiplemethod_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">mutlipleMethodRegex</span><span class="p">)</span>
+<span class="n">compoundmethod_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">compoundMethodRegex</span><span class="p">)</span>
+
+
+<span class="c1">###################### THE PRETTY FUNCTION ######################</span>
+<div class="viewcode-block" id="is_method"><a class="viewcode-back" href="../../pyssian.basismethodutils.html#pyssian.basismethodutils.is_method">[docs]</a><span class="k">def</span> <span class="nf">is_method</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tests if a candidate string is a valid method recognized by Gaussian.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    candidate : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">candidate</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">methodRegex</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1">)(</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shellWaveFunctions</span><span class="p">,</span><span class="n">methodsRegex</span><span class="p">)</span>
+    <span class="n">compoundMethodRegex</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1">)(</span><span class="si">{1}</span><span class="s1">).*(</span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shellWaveFunctions</span><span class="p">,</span>
+                                                     <span class="n">exchangeFunctional</span><span class="p">,</span>
+                                                     <span class="n">correlationFunctional</span><span class="p">)</span>
+    <span class="n">test1</span> <span class="o">=</span> <span class="n">multiplemethod_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="n">test2</span> <span class="o">=</span> <span class="n">method_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="n">test3</span> <span class="o">=</span> <span class="n">compoundmethod_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">test1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">test1</span> <span class="o">=</span> <span class="n">test1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">candidate</span>
+    <span class="k">if</span> <span class="n">test2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">test2</span> <span class="o">=</span> <span class="n">test2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">candidate</span>
+    <span class="k">if</span> <span class="n">test3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">test3</span> <span class="o">=</span> <span class="n">test3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">candidate</span>
+    <span class="k">return</span> <span class="n">test1</span> <span class="ow">or</span> <span class="n">test2</span> <span class="ow">or</span> <span class="n">test3</span></div>
+
+<span class="c1">######################## BASIS SECTION #########################################</span>
+<span class="c1">## Pople Bases require lowercasing for design reasons.</span>
+<span class="n">Pople</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">primitives</span> <span class="o">=</span> <span class="s1">&#39;sto|mc|[0-9]&#39;</span><span class="p">,</span>
+             <span class="n">zeta</span> <span class="o">=</span> <span class="s1">&#39;[0-9]{1,3}&#39;</span><span class="p">,</span>
+             <span class="n">diffuse</span> <span class="o">=</span> <span class="s1">&#39;[\+]{0,2}&#39;</span><span class="p">,</span>
+             <span class="n">pol1</span> <span class="o">=</span> <span class="s1">&#39;[0-9]?(d|f|d</span><span class="se">\&#39;</span><span class="s1">|f</span><span class="se">\&#39;</span><span class="s1">){1,2}&#39;</span><span class="p">,</span>
+             <span class="n">pol2</span> <span class="o">=</span> <span class="s1">&#39;[0-9]?(\,p|d|p</span><span class="se">\&#39;</span><span class="s1">|d</span><span class="se">\&#39;</span><span class="s1">)?&#39;</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;pol1&#39;</span><span class="p">]</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;pol2&#39;</span><span class="p">]</span>
+<span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;polarization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;\((</span><span class="si">{pol1}{pol2}</span><span class="s1">)\)|\*|\*\*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pol1</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span><span class="n">pol2</span><span class="o">=</span><span class="n">x2</span><span class="p">)</span>
+<span class="n">Pople_Basis</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{primitives}</span><span class="s1">)\-(</span><span class="si">{zeta}</span><span class="s1">)(</span><span class="si">{diffuse}</span><span class="s1">)g(</span><span class="si">{polarization}</span><span class="s1">)?&#39;</span>
+<span class="n">Pople_Basis</span> <span class="o">=</span> <span class="n">Pople_Basis</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">Pople</span><span class="p">)</span>
+<span class="c1"># The resulting regex is this one but I wanted the reasoning to be written down</span>
+<span class="c1"># (sto|mc|[0-9])\-([0-9]{1,3})([\+]{0,2})g(\([0-9]{0,1}(d|f|d\&#39;|f\&#39;){1,2}\,{0,1}[0-9]{0,1}(p|d|p\&#39;|d\&#39;){0,1}\)){0,1}</span>
+
+<span class="c1">## ccBases</span>
+<span class="c1">## Assumes lowercased, it&#39;s simpler so its not divided</span>
+<span class="n">cc_Basis</span> <span class="o">=</span> <span class="s1">&#39;((sp|d)?t?(aug|jul|jun|may|apr)</span><span class="si">{1}</span><span class="s1">\-)?cc\-pv(d|t|q|5|6)z&#39;</span>
+<span class="c1">#((sp|d){0,1}t{0,1}(aug|jul|jun|may|apr){1}\-){0,1}cc\-pv(d|t|q|5|6)z</span>
+
+<span class="c1"># UGBS</span>
+<span class="n">UGBS_Basis</span> <span class="o">=</span> <span class="s1">&#39;ugbs[1-9](p|v|o)(2?\+{1,2})?&#39;</span>
+
+<span class="c1"># SV Family</span>
+<span class="n">SV_Basis</span> <span class="o">=</span> <span class="s1">&#39;(def2)?(sv|tzv?|qzv?)p{0,2}&#39;</span> <span class="c1">#Requires the usage of match</span>
+
+<span class="c1"># Family that includes indicating the number of core electrons</span>
+<span class="n">core_Basis</span> <span class="o">=</span> <span class="s1">&#39;(sdd|shf|sdf|mhf|mdf|mwb|oldsdd|sddall)[0-9]{1,3}&#39;</span>
+
+<span class="c1"># D95 Family</span>
+<span class="n">D95_Basis</span> <span class="o">=</span> <span class="s1">&#39;d95v?(&#39;</span><span class="o">+</span><span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;polarization&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+
+<span class="c1"># CEP family</span>
+<span class="n">CEP_Basis</span> <span class="o">=</span> <span class="s1">&#39;cep\-?[0-9]{1,3}g(&#39;</span><span class="o">+</span><span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;polarization&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+
+<span class="c1"># SHC Basis</span>
+<span class="n">SHC_Basis</span> <span class="o">=</span> <span class="s1">&#39;shc(&#39;</span><span class="o">+</span><span class="n">Pople</span><span class="p">[</span><span class="s1">&#39;polarization&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+
+<span class="c1"># Or to hardcode all the family</span>
+
+<span class="n">Hardcoded_basis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;sec&#39;</span><span class="p">,</span><span class="s1">&#39;lanl2mb&#39;</span><span class="p">,</span><span class="s1">&#39;lanl2dz&#39;</span><span class="p">,</span><span class="s1">&#39;midix&#39;</span><span class="p">,</span><span class="s1">&#39;epr-ii&#39;</span><span class="p">,</span><span class="s1">&#39;epr-iii&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;mtsmall&#39;</span><span class="p">,</span><span class="s1">&#39;dgdzvp&#39;</span><span class="p">,</span><span class="s1">&#39;dgdzvp2&#39;</span><span class="p">,</span><span class="s1">&#39;dgtzvp&#39;</span><span class="p">,</span><span class="s1">&#39;cbsb7&#39;</span><span class="p">,</span><span class="s1">&#39;gen&#39;</span><span class="p">,</span><span class="s1">&#39;genecp&#39;</span><span class="p">])</span>
+
+<span class="c1"># Construct the full regex</span>
+<span class="n">all_basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">Pople_Basis</span><span class="p">,</span><span class="n">UGBS_Basis</span><span class="p">,</span><span class="n">cc_Basis</span><span class="p">,</span><span class="n">SV_Basis</span><span class="p">,</span><span class="n">core_Basis</span><span class="p">,</span>
+             <span class="n">D95_Basis</span><span class="p">,</span><span class="n">CEP_Basis</span><span class="p">,</span><span class="n">SHC_Basis</span><span class="p">]</span>
+
+<span class="n">basis_expr</span> <span class="o">=</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_basis</span><span class="p">])</span>
+<span class="c1">#print(basis_expr)</span>
+<span class="n">basis_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">basis_expr</span><span class="p">)</span>
+<span class="c1">######################## THE PRETTY FUNCTION ###################################</span>
+<div class="viewcode-block" id="is_basis"><a class="viewcode-back" href="../../pyssian.basismethodutils.html#pyssian.basismethodutils.is_basis">[docs]</a><span class="k">def</span> <span class="nf">is_basis</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tests if a candidate string is a valid basis set recognized by Gaussian.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    candidate : str</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lowercandidate</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">in_hardcoded</span> <span class="o">=</span> <span class="n">lowercandidate</span> <span class="ow">in</span> <span class="n">Hardcoded_basis</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">basis_regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">lowercandidate</span><span class="p">)</span> <span class="c1"># Has to be match and not search</span>
+    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+        <span class="n">in_regex</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">lowercandidate</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">in_regex</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span>  <span class="n">in_hardcoded</span> <span class="ow">or</span> <span class="n">in_regex</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

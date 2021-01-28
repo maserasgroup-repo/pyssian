@@ -1,0 +1,242 @@
+ (Enter /mnt/data/applications/G09/g09/l103.exe)
+
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+ Berny optimization.
+ Initialization pass.
+                           ----------------------------
+                           !    Initial Parameters    !
+                           ! (Angstroms and Degrees)  !
+ --------------------------                            --------------------------
+ ! Name  Definition              Value          Derivative Info.                !
+ --------------------------------------------------------------------------------
+ ! R3    R(1,9)                  1.4205         calculate D2E/DX2 analytically  !
+ ! R76   R(64,69)                1.0863         calculate D2E/DX2 analytically  !
+ ! A7    A(1,2,3)              101.0294         calculate D2E/DX2 analytically  !
+ ! A70   A(33,29,34)           110.1213         calculate D2E/DX2 analytically  !
+ ! A132  A(63,64,69)           120.1371         calculate D2E/DX2 analytically  !
+ ! A136  L(9,10,22,49,-2)      176.4505         calculate D2E/DX2 analytically  !
+ ! D1    D(8,1,2,3)             36.9644         calculate D2E/DX2 analytically  !
+ ! D12   D(11,1,8,4)          -145.3592         calculate D2E/DX2 analytically  !
+ ! D105  D(39,26,30,29)        173.3296         calculate D2E/DX2 analytically  !
+ --------------------------------------------------------------------------------
+ Trust Radius=3.00D-02 FncErr=1.00D-07 GrdErr=1.00D-06
+ Number of steps in this run=    420 maximum allowed number of steps=    420.
+ Search for a saddle point of order  1.
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+
+ Leave Link  103 at Fri Jan 15 08:48:43 2021, MaxMem= 16106127360 cpu:         0.5
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l103.exe)
+
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+ Berny optimization.
+ Red2BG is reusing G-inverse.
+ Internal  Forces:  Max     0.002128659 RMS     0.000172674
+ Search for a saddle point.
+ Step number   1 out of a maximum of  420
+ All quantities printed in internal units (Hartrees-Bohrs-Radians)
+ Swapping is turned off.
+ Second derivative matrix not updated -- analytic derivatives used.
+ ITU=  0
+     Eigenvalues ---   -0.00176   0.00015   0.00057   0.00124   0.00166
+     Eigenvalues ---    0.00235   0.00249   0.00280   0.00349   0.00354
+     Eigenvalues ---    0.61107   0.87844   0.95346   1.01043
+ Eigenvectors required to have negative eigenvalues:
+                          D19       D21       D23       D20       D22
+   1                    0.44466   0.41994   0.41352   0.38197   0.35725
+                          D24       R2        D13       D15       D38
+   1                    0.35083   0.08637  -0.07371  -0.07331  -0.05811
+ RFO step:  Lambda0=1.491992542D-03 Lambda=-1.91127374D-03.
+ Linear search not attempted -- option 19 set.
+ Maximum step size (   0.030) exceeded in Quadratic search.
+    -- Step size scaled by   0.061
+ Iteration  1 RMS(Cart)=  0.01157325 RMS(Int)=  0.00006248
+ Iteration  2 RMS(Cart)=  0.00010569 RMS(Int)=  0.00000226
+ Iteration  3 RMS(Cart)=  0.00000001 RMS(Int)=  0.00000226
+ ITry= 1 IFail=0 DXMaxC= 7.40D-02 DCOld= 1.00D+10 DXMaxT= 3.00D-02 DXLimC= 3.00D+00 Rises=F
+ Variable       Old X    -DE/DX   Delta X   Delta X   Delta X     New X
+                                 (Linear)    (Quad)   (Total)
+    R3        2.68429  -0.00023   0.00000  -0.00379  -0.00379   2.68050
+   R76        2.05286   0.00002   0.00000  -0.00005  -0.00005   2.05281
+    A7        1.76330   0.00028   0.00000   0.00341   0.00341   1.76670
+   A70        1.92198   0.00000   0.00000  -0.00005  -0.00005   1.92193
+   A136       3.07964   0.00015   0.00000   0.00051   0.00051   3.08015
+    D1        0.64515   0.00011   0.00000   0.00366   0.00366   0.64881
+   D12       -2.53700  -0.00003   0.00000  -0.00262  -0.00263  -2.53962
+   D105       3.02517  -0.00001   0.00000  -0.00019  -0.00019   3.02499
+         Item               Value     Threshold  Converged?
+ Maximum Force            0.002129     0.000450     NO
+ RMS     Force            0.000173     0.000300     YES
+ Maximum Displacement     0.074004     0.001800     NO
+ RMS     Displacement     0.011578     0.001200     NO
+ Predicted change in Energy=-2.580194D-05
+ Lowest energy point so far.  Saving SCF results.
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+
+ Leave Link  103 at Fri Jan 15 09:56:34 2021, MaxMem= 16106127360 cpu:         6.1
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l103.exe)
+
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+ Berny optimization.
+ FormGI is forming the generalized inverse of G from B-inverse, IUseBI=4.
+ Internal  Forces:  Max     0.002347929 RMS     0.000184098
+ Search for a saddle point.
+ Step number 420 out of a maximum of  420
+ All quantities printed in internal units (Hartrees-Bohrs-Radians)
+ Swapping is turned off.
+ Update second derivatives using D2CorX and points  323  324  325  326  327
+                                                    328  329  330  331  332
+                                                    418  419  420
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+     Eigenvalues ---   -0.00207  -0.00174  -0.00049   0.00184   0.00254
+     Eigenvalues ---    0.00290   0.00341   0.00448   0.00527   0.00572
+     Eigenvalues ---    0.61134   0.94276   1.01014   1.18595
+ Eigenvectors required to have negative eigenvalues:
+                          R2        R8        D5        D19       D13
+   1                   -0.56947  -0.36369  -0.22096  -0.19268   0.18932
+                          D20       D4        A18       D2        D25
+   1                   -0.18857  -0.17356  -0.16007  -0.13482   0.13162
+ Eigenvalue     2 is  -1.74D-03 should be greater than     0.000000 Eigenvector:
+                          D23       D21       D19       D24       D22
+   1                    0.44746   0.42351   0.40252   0.38516   0.36121
+                          D20       R2        R8        D38       D37
+   1                    0.34021  -0.09276  -0.07055  -0.05806  -0.04821
+ Eigenvalue     3 is  -4.95D-04 should be greater than     0.000000 Eigenvector:
+                         D100       D98      D102      D101       D99
+   1                    0.26668   0.26389   0.25515   0.23100   0.22821
+                         D103       D76       D75       D64       D96
+   1                    0.21948   0.18100   0.17381  -0.15880  -0.15842
+ RFO step:  Lambda0=2.181620228D-03 Lambda=-2.53240383D-03.
+ Linear search not attempted -- option 19 set.
+ Maximum step size (   0.030) exceeded in Quadratic search.
+    -- Step size scaled by   0.056
+ Iteration  1 RMS(Cart)=  0.00590232 RMS(Int)=  0.00001090
+ Iteration  2 RMS(Cart)=  0.00002649 RMS(Int)=  0.00000217
+ Iteration  3 RMS(Cart)=  0.00000000 RMS(Int)=  0.00000217
+ ITry= 1 IFail=0 DXMaxC= 3.17D-02 DCOld= 1.00D+10 DXMaxT= 3.00D-02 DXLimC= 3.00D+00 Rises=F
+ Variable       Old X    -DE/DX   Delta X   Delta X   Delta X     New X
+                                 (Linear)    (Quad)   (Total)
+    R3        2.68191  -0.00023   0.00000   0.00378   0.00378   2.68569
+   R76        2.05274   0.00001   0.00000   0.00004   0.00004   2.05278
+    A7        1.76279   0.00021   0.00000  -0.00332  -0.00333   1.75946
+   A70        1.91932   0.00000   0.00000  -0.00009  -0.00009   1.91923
+   A136       3.09771   0.00018   0.00000  -0.00105  -0.00105   3.09666
+    D1        0.66066   0.00008   0.00000  -0.00442  -0.00442   0.65624
+   D12       -2.56501   0.00014   0.00000   0.00336   0.00336  -2.56165
+   D105       3.08230  -0.00003   0.00000   0.00121   0.00121   3.08351
+         Item               Value     Threshold  Converged?
+ Maximum Force            0.002348     0.000450     NO
+ RMS     Force            0.000184     0.000300     YES
+ Maximum Displacement     0.031749     0.001800     NO
+ RMS     Displacement     0.005897     0.001200     NO
+ Predicted change in Energy= 7.941378D-05
+ Optimization stopped.
+    -- Number of steps exceeded,  NStep= 420
+    -- Flag reset to prevent archiving.
+                           ----------------------------
+                           ! Non-Optimized Parameters !
+                           ! (Angstroms and Degrees)  !
+ --------------------------                            --------------------------
+ ! Name  Definition              Value          Derivative Info.                !
+ --------------------------------------------------------------------------------
+ ! R3    R(1,9)                  1.4212         -DE/DX =   -0.0002              !
+ ! R76   R(64,69)                1.0863         -DE/DX =    0.0                 !
+ ! A7    A(1,2,3)              100.8096         -DE/DX =    0.0002              !
+ ! A70   A(33,29,34)           109.9635         -DE/DX =    0.0                 !
+ ! A136  L(9,10,22,49,-2)      177.4255         -DE/DX =    0.0002              !
+ ! D1    D(8,1,2,3)             37.6            -DE/DX =    0.0001              !
+ ! D12   D(11,1,8,4)          -146.7719         -DE/DX =    0.0001              !
+ ! D105  D(39,26,30,29)        176.6724         -DE/DX =    0.0                 !
+ --------------------------------------------------------------------------------
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+
+ Largest change from initial coordinates is atom   58       0.169 Angstoms.
+ Leave Link  103 at Sat Jan 16 19:33:01 2021, MaxMem= 16106127360 cpu:        16.0
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l103.exe)
+
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+ Berny optimization.
+ Using GEDIIS/GDIIS optimizer.
+ FormGI is forming the generalized inverse of G from B-inverse, IUseBI=4.
+ Internal  Forces:  Max     0.012346380 RMS     0.001203356
+ Search for a local minimum.
+ Step number  66 out of a maximum of  129 on scan point    11 out of    11
+ All quantities printed in internal units (Hartrees-Bohrs-Radians)
+ RMS Force = .27789D-05 SwitMx=.10000D-02 MixMth= 2
+ Mixed Optimization -- En-DIIS/RFO-DIIS
+ Swapping is turned off.
+ Update second derivatives using D2CorX and points    1    2    3    4    5
+                                                      6    8    7   10    9
+                                                     12   11   14   13   16
+ DE= -1.91D-08 DEPred=-2.47D-08 R= 7.75D-01
+ Trust test= 7.75D-01 RLast= 1.51D-02 DXMaxT set to 1.00D-01
+ ITU=  0  0  1 -1  1 -1  1  1  0 -1  0 -1 -1  0 -1 -1  0  0  0  0
+ ITU=  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0 -1  0
+ ITU= -1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+ ITU=  0  0  1  1  1  0
+     Eigenvalues ---    0.00010   0.00176   0.00281   0.00395   0.00482
+     Eigenvalues ---    0.00963   0.01170   0.01667   0.01864   0.01998
+     Eigenvalues --- 1000.000001000.000001000.000001000.000001000.00000
+     Eigenvalues --- 1000.000001000.000001000.000001000.00000
+ En-DIIS/RFO-DIIS IScMMF=        0 using points:    66   65   64   63   62
+ RFO step:  Lambda=-5.44479911D-06.
+ NNeg= 0 NP= 5 Switch=  2.50D-03 Rises=F DC= -5.25D-07 SmlDif=  1.00D-05
+ RMS Error=  0.3982858561D-04 NUsed= 5 EDIIS=F
+ DidBck=T Rises=F RFO-DIIS coefs:    0.73791    0.28329   -0.00526    0.00613   -0.02206
+ Iteration  1 RMS(Cart)=  0.00012010 RMS(Int)=  0.00000668
+ Iteration  2 RMS(Cart)=  0.00000033 RMS(Int)=  0.00000082
+ Iteration  1 RMS(Cart)=  0.00000020 RMS(Int)=  0.00000005
+ ITry= 1 IFail=0 DXMaxC= 4.46D-04 DCOld= 1.00D+10 DXMaxT= 1.00D-01 DXLimC= 3.00D+00 Rises=F
+ Variable       Old X    -DE/DX   Delta X   Delta X   Delta X     New X
+                                 (Linear)    (Quad)   (Total)
+    R1        2.84920   0.00003   0.00000  -0.00002  -0.00002   2.84918
+    R2        4.71106   0.01235   0.00000   0.00000   0.00000   4.71106
+   D54        0.00176   0.00000   0.00002  -0.00001   0.00000   0.00176
+         Item               Value     Threshold  Converged?
+ Maximum Force            0.000015     0.000450     YES
+ RMS     Force            0.000003     0.000300     YES
+ Maximum Displacement     0.000446     0.001800     YES
+ RMS     Displacement     0.000120     0.001200     YES
+ Predicted change in Energy=-1.059754D-08
+ Optimization completed.
+    -- Stationary point found.
+                           ----------------------------
+                           !   Optimized Parameters   !
+                           ! (Angstroms and Degrees)  !
+ --------------------------                            --------------------------
+ ! Name  Definition              Value          Derivative Info.                !
+ --------------------------------------------------------------------------------
+ ! R1    R(1,2)                  1.5077         -DE/DX =    0.0                 !
+ ! R2    R(1,8)                  2.493          -DE/DX =    0.0123              !
+ ! D54   D(20,15,16,21)          0.1006         -DE/DX =    0.0                 !
+ --------------------------------------------------------------------------------
+ Lowest energy point so far.  Saving SCF results.
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+
+ Summary of Optimized Potential Surface Scan
+                           1         2         3         4         5
+     Eigenvalues --  -845.56151-845.56378-845.56598-845.57492-845.58461
+           R1           1.54543   1.53928   1.52953   1.52315   1.52003
+           R2           1.49299   1.59299   1.69299   1.79299   1.89299
+           D54          0.05100   0.04108   0.19711   0.22662   0.06359
+                           6         7         8         9        10
+     Eigenvalues --  -845.59338-845.60128-845.60766-845.61275-845.61666
+           R1           1.51693   1.51400   1.51190   1.51035   1.50921
+           R2           1.99299   2.09299   2.19299   2.29299   2.39299
+           D54          0.10094   0.06121   0.03796   0.01550  -0.00390
+                          11
+     Eigenvalues --  -845.61969
+           R1           1.50773
+           R2           2.49299
+           D54          0.10059
+ Largest change from initial coordinates is atom    5       0.274 Angstoms.
+ Leave Link  103 at Mon Jan 11 18:57:10 2021, MaxMem=  2684354560 cpu:         0.4

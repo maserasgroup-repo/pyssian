@@ -1,0 +1,32 @@
+
+## Split Here ##
+
+## Split Here ##
+                                                             IR Spectrum
+ 
+     3   3   333333 3                               2    2               11  1111111111111111111                                     
+     5   4   222222 1                               2    0               66  5544333222221100000999 887777776665 54444  3322 2111    
+     4   6   332210 5                               3    9               53  5292960643107285210765 708431008328 07542  4195 243077  
+     7   3   927369 0                               8    8               56  3875358039032333874451 292484644797 88300  9555 302753  
+ 
+     X   X   XXXXXX X                               X    X               XX  XXXXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXX XXXXX  XXXX XXXXXX  
+     X   X                                          X    X                         X  XX             X   X   X                       
+     X                                                   X                         X  X                  X   X                       
+     X                                                   X                         X                     X                           
+     X                                                   X                                                                           
+     X                                                   X                                                                           
+     X                                                   X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+                                                         X                                                                           
+ 

@@ -1,0 +1,189 @@
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV=  2621440000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           2 MOrb=             4 LenV=    2621170806
+ LASXX=       346641 LTotXX=      346641 LenRXX=      346641
+ LTotAB=      364846 MaxLAS=      489060 LenRXY=      489060
+ NonZer=      693282 LenScr=     1571840 LnRSAI=           0
+ LnScr1=           0 LExtra=           0 Total=      2407541
+ MaxDsk=          -1 SrtSym=           F ITran=            4
+ DoSDTr:  NPSUse= 12
+ JobTyp=0 Pass  1:  I=   1 to   4.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.7658810551D-02 E2=     -0.3181531056D-01
+     alpha-beta  T2 =       0.4499275999D-01 E2=     -0.1980953540D+00
+     beta-beta   T2 =       0.7658810551D-02 E2=     -0.3181531056D-01
+ ANorm=    0.1029713737D+01
+ E2 =    -0.2617259751D+00 EUMP2 =    -0.76325359399673D+02
+ Leave Link  804 at Wed May 22 18:09:43 2019, MaxMem=  2621440000 cpu:         3.7
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            32 LenV=   16245521510
+ LASXX=   2684351752 LTotXX=  2684351752 LenRXX=  5382947416
+ LTotAB=  2698595664 MaxLAS=  2565853632 LenRXY=           0
+ NonZer=  8067299168 LenScr= 16197871616 LnRSAI=  2565853632
+ LnScr1=  5151832064 LExtra=           0 Total=  29298504728
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  32.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Begin second half transformation for I=  20.
+ Begin second half transformation for I=  30.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.8748285740D-01 E2=     -0.2433273966D+00
+     alpha-beta  T2 =       0.4886448403D+00 E2=     -0.1514644565D+01
+     beta-beta   T2 =       0.8748285740D-01 E2=     -0.2433273966D+00
+ ANorm=    0.1289810279D+01
+ E2 =    -0.2001299358D+01 EUMP2 =    -0.48190361189162D+03
+ Leave Link  804 at Wed May 22 22:19:12 2019, MaxMem= 16252928000 cpu:     58067.2
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            36 LenV=   16243949253
+ LASXX=   4041068715 LTotXX=  4041068715 LenRXX=  8101610811
+ LTotAB=  4060542096 MaxLAS=  3979332900 LenRXY=           0
+ NonZer= 12142679526 LenScr= 24380596224 LnRSAI=  3979332900
+ LnScr1=  7989876736 LExtra=           0 Total=  44451416671
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  36.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Begin second half transformation for I=  20.
+ Begin second half transformation for I=  30.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.9466632943D-01 E2=     -0.2775308244D+00
+     alpha-beta  T2 =       0.5261400673D+00 E2=     -0.1715771941D+01
+     beta-beta   T2 =       0.9466632943D-01 E2=     -0.2775308244D+00
+ ANorm=    0.1309760561D+01
+ E2 =    -0.2270833590D+01 EUMP2 =    -0.55823403356277D+03
+ Leave Link  804 at Wed May 22 22:35:33 2019, MaxMem= 16252928000 cpu:     91976.8
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            20 LenV=   16250308853
+ LASXX=    302951945 LTotXX=   302951945 LenRXX=   608735925
+ LTotAB=   305783980 MaxLAS=   408771280 LenRXY=           0
+ NonZer=   911687870 LenScr=  1372895232 LnRSAI=   408771280
+ LnScr1=   615562240 LExtra=           0 Total=   3005964677
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  20.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Begin second half transformation for I=  20.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.5995348775D-01 E2=     -0.1690532950D+00
+     alpha-beta  T2 =       0.3159712957D+00 E2=     -0.9862608044D+00
+     beta-beta   T2 =       0.5995348775D-01 E2=     -0.1690532950D+00
+ ANorm=    0.1198281382D+01
+ E2 =    -0.1324367394D+01 EUMP2 =    -0.34488465643126D+03
+ Leave Link  804 at Thu May 23 02:07:51 2019, MaxMem= 16252928000 cpu:      2112.7
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            16 LenV=   16250577095
+ LASXX=    206522548 LTotXX=   206522548 LenRXX=   415087140
+ LTotAB=   208564592 MaxLAS=   256403264 LenRXY=           0
+ NonZer=   621609688 LenScr=   936071168 LnRSAI=   256403264
+ LnScr1=   386113536 LExtra=           0 Total=   1993675108
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  16.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.3358403703D-01 E2=     -0.1032012689D+00
+     alpha-beta  T2 =       0.2132199498D+00 E2=     -0.7208289614D+00
+     beta-beta   T2 =       0.3358403703D-01 E2=     -0.1032012689D+00
+ ANorm=    0.1131542321D+01
+ E2 =    -0.9272314992D+00 EUMP2 =    -0.21333458092295D+03
+ Leave Link  804 at Thu May 23 03:10:17 2019, MaxMem= 16252928000 cpu:      1374.2
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            36 LenV=   16243971843
+ LASXX=   4041068715 LTotXX=  4041068715 LenRXX=  8101610811
+ LTotAB=  4060542096 MaxLAS=  3911340960 LenRXY=           0
+ NonZer= 12142679526 LenScr= 24380596224 LnRSAI=  3911340960
+ LnScr1=  7853359616 LExtra=           0 Total=  44246907611
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  36.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Begin second half transformation for I=  20.
+ Begin second half transformation for I=  30.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.9525581434D-01 E2=     -0.2760726853D+00
+     alpha-beta  T2 =       0.5329677649D+00 E2=     -0.1715026375D+01
+     beta-beta   T2 =       0.9525581434D-01 E2=     -0.2760726853D+00
+ ANorm=    0.1312813541D+01
+ E2 =    -0.2267171746D+01 EUMP2 =    -0.55815058522459D+03
+ Leave Link  804 at Thu May 23 11:10:07 2019, MaxMem= 16252928000 cpu:     94781.3
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l804.exe)
+ Closed-shell transformation, MDV= 16252928000 ITran=4 ISComp=1.
+ Semi-Direct transformation.
+ ModeAB=           4 MOrb=            40 LenV=   16242308084
+ LASXX=   5855361150 LTotXX=  5855361150 LenRXX= 11736572350
+ LTotAB=  5881211200 MaxLAS=  5568165120 LenRXY=           0
+ NonZer= 17591933500 LenScr= 35321843200 LnRSAI=  5568165120
+ LnScr1= 11180002304 LExtra=           0 Total=  63806582974
+ MaxDsk=          -1 SrtSym=           T ITran=            4
+ DoSDTr:  NPSUse= 24
+ JobTyp=0 Pass  1:  I=   1 to  40.
+ (rs|ai) integrals will be sorted in core.
+ Complete sort for first half transformation.
+ First half transformation complete.
+ Begin second half transformation for I=  10.
+ Begin second half transformation for I=  20.
+ Begin second half transformation for I=  30.
+ Begin second half transformation for I=  40.
+ Complete sort for second half transformation.
+ Second half transformation complete.
+ Spin components of T(2) and E(2):
+     alpha-alpha T2 =       0.1047272121D+00 E2=     -0.3128922972D+00
+     alpha-beta  T2 =       0.5814512969D+00 E2=     -0.1923937596D+01
+     beta-beta   T2 =       0.1047272121D+00 E2=     -0.3128922972D+00
+ ANorm=    0.1338247257D+01
+ E2 =    -0.2549722190D+01 EUMP2 =    -0.63451950767701D+03
+ Leave Link  804 at Thu May 23 19:18:33 2019, MaxMem= 16252928000 cpu:    167574.1

@@ -1,0 +1,6 @@
+_Doc
+*.egg-info
+__pycache__
+.pytest_cache
+Usefull_Files
+.versionner.rc

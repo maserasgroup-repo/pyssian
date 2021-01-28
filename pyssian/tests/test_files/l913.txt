@@ -1,0 +1,1616 @@
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV=  2621440000.
+ Frozen-core window:  NFC=   1 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Keep R2 and R3 ints in memory in canonical form, NReq=4870548.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=   1711 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ MP4(R+Q)=  0.36919741D-02
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  1.6006576D-01 conv= 1.00D-05.
+ RLE energy=       -0.2619342180
+ E3=       -0.39345898D-02        EUMP3=      -0.76329293990D+02
+ E4(DQ)=   -0.67928030D-03        UMP4(DQ)=   -0.76329973270D+02
+ E4(SDQ)=  -0.21198624D-02        UMP4(SDQ)=  -0.76331413852D+02
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)= -0.26193406     E(Corr)=     -76.325567482
+ NORM(A)=   0.10299089D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  4.3471730D-02 conv= 1.00D-05.
+ RLE energy=       -0.2672240586
+ DE(Corr)= -0.26667191     E(CORR)=     -76.330305339     Delta=-4.74D-03
+ NORM(A)=   0.10317022D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.3072002D-02 conv= 1.00D-05.
+ RLE energy=       -0.2674516220
+ DE(Corr)= -0.26718295     E(CORR)=     -76.330816371     Delta=-5.11D-04
+ NORM(A)=   0.10319931D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.7388069D-03 conv= 1.00D-05.
+ RLE energy=       -0.2674894706
+ DE(Corr)= -0.26747391     E(CORR)=     -76.331107335     Delta=-2.91D-04
+ NORM(A)=   0.10320409D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.3194785D-04 conv= 1.00D-05.
+ RLE energy=       -0.2674926461
+ DE(Corr)= -0.26749004     E(CORR)=     -76.331123467     Delta=-1.61D-05
+ NORM(A)=   0.10320436D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.7057053D-04 conv= 1.00D-05.
+ RLE energy=       -0.2674894126
+ DE(Corr)= -0.26749127     E(CORR)=     -76.331124691     Delta=-1.22D-06
+ NORM(A)=   0.10320432D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  4.8214593D-05 conv= 1.00D-05.
+ RLE energy=       -0.2674916656
+ DE(Corr)= -0.26749131     E(CORR)=     -76.331124737     Delta=-4.63D-08
+ NORM(A)=   0.10320439D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.6977573D-05 conv= 1.00D-05.
+ RLE energy=       -0.2674911116
+ DE(Corr)= -0.26749117     E(CORR)=     -76.331124598     Delta= 1.39D-07
+ NORM(A)=   0.10320439D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=        20
+ NAB=    10 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  5.0609941D-06 conv= 1.00D-05.
+ RLE energy=       -0.2674912897
+ DE(Corr)= -0.26749127     E(CORR)=     -76.331124697     Delta=-9.85D-08
+ NORM(A)=   0.10320440D+01
+ CI/CC converged in    9 iterations to DelEn=-9.85D-08 Conv= 1.00D-07 ErrA1= 5.06D-06 Conv= 1.00D-05
+ Largest amplitude= 4.81D-02
+ T4(AAA)= -0.17332502D-03
+ T4(AAB)= -0.37417268D-02
+ T5(AAA)=  0.57599214D-05
+ T5(AAB)=  0.88481841D-04
+ Time for triples=        2.19 seconds.
+ T4(CCSD)= -0.78301036D-02
+ T5(CCSD)=  0.18848352D-03
+ CCSD(T)= -0.76338766317D+02
+ Discarding MO integrals.
+ Leave Link  913 at Wed May 22 18:09:46 2019, MaxMem=  2621440000 cpu:        24.9
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=  12 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Would need an additional     10364711480 words for in-memory AO integral storage.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ FoFJK:  IHMeth= 1 ICntrl=     200 DoSepK=F KAlg= 0 I1Cent=   0 FoldK=F
+ IRaf= 990000000 NMat=1056 IRICut=    1320 DoRegI=T DoRafI=T ISym2E= 0.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     200 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0= 1056 NMatS0=      0 NMatT0=  528 NMatD0= 1056 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ MP4(R+Q)=  0.60638120D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  4.9147490D+00 conv= 1.00D-05.
+ RLE energy=       -2.0047344174
+ E3=       -0.64567593D-01        EUMP3=      -0.48196817948D+03
+ E4(DQ)=    0.13566857D-01        UMP4(DQ)=   -0.48195461263D+03
+ E4(SDQ)=  -0.28338521D-02        UMP4(SDQ)=  -0.48197101334D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=  -2.0047287     E(Corr)=     -481.90704119
+ NORM(A)=   0.12919630D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  1.6000206D+00 conv= 1.00D-05.
+ RLE energy=       -2.0648499039
+ DE(Corr)=  -2.0612865     E(CORR)=     -481.96359899     Delta=-5.66D-02
+ NORM(A)=   0.13141519D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  4.9549814D-01 conv= 1.00D-05.
+ RLE energy=       -2.0668808357
+ DE(Corr)=  -2.0627859     E(CORR)=     -481.96509848     Delta=-1.50D-03
+ NORM(A)=   0.13178829D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  1.8325161D-01 conv= 1.00D-05.
+ RLE energy=       -2.0674377405
+ DE(Corr)=  -2.0671844     E(CORR)=     -481.96949693     Delta=-4.40D-03
+ NORM(A)=   0.13191591D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  6.0090959D-02 conv= 1.00D-05.
+ RLE energy=       -2.0677494335
+ DE(Corr)=  -2.0676473     E(CORR)=     -481.96995980     Delta=-4.63D-04
+ NORM(A)=   0.13196133D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  2.5900250D-02 conv= 1.00D-05.
+ RLE energy=       -2.0677504260
+ DE(Corr)=  -2.0677107     E(CORR)=     -481.97002322     Delta=-6.34D-05
+ NORM(A)=   0.13196794D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  8.4009417D-03 conv= 1.00D-05.
+ RLE energy=       -2.0676863688
+ DE(Corr)=  -2.0677198     E(CORR)=     -481.97003230     Delta=-9.07D-06
+ NORM(A)=   0.13196763D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  3.9249876D-03 conv= 1.00D-05.
+ RLE energy=       -2.0677189068
+ DE(Corr)=  -2.0677208     E(CORR)=     -481.97003328     Delta=-9.89D-07
+ NORM(A)=   0.13196904D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  1.6190080D-03 conv= 1.00D-05.
+ RLE energy=       -2.0677137773
+ DE(Corr)=  -2.0677153     E(CORR)=     -481.97002787     Delta= 5.42D-06
+ NORM(A)=   0.13196897D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  8.4650684D-04 conv= 1.00D-05.
+ RLE energy=       -2.0677179160
+ DE(Corr)=  -2.0677184     E(CORR)=     -481.97003092     Delta=-3.05D-06
+ NORM(A)=   0.13196919D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  3.5647355D-04 conv= 1.00D-05.
+ RLE energy=       -2.0677186610
+ DE(Corr)=  -2.0677182     E(CORR)=     -481.97003068     Delta= 2.31D-07
+ NORM(A)=   0.13196928D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  1.8692951D-04 conv= 1.00D-05.
+ RLE energy=       -2.0677190093
+ DE(Corr)=  -2.0677189     E(CORR)=     -481.97003146     Delta=-7.75D-07
+ NORM(A)=   0.13196932D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  8.5656315D-05 conv= 1.00D-05.
+ RLE energy=       -2.0677192025
+ DE(Corr)=  -2.0677191     E(CORR)=     -481.97003165     Delta=-1.86D-07
+ NORM(A)=   0.13196935D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  4.4131791D-05 conv= 1.00D-05.
+ RLE energy=       -2.0677192712
+ DE(Corr)=  -2.0677192     E(CORR)=     -481.97003177     Delta=-1.21D-07
+ NORM(A)=   0.13196936D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  2.3224376D-05 conv= 1.00D-05.
+ RLE energy=       -2.0677192813
+ DE(Corr)=  -2.0677193     E(CORR)=     -481.97003180     Delta=-3.11D-08
+ NORM(A)=   0.13196937D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  1.4088544D-05 conv= 1.00D-05.
+ RLE energy=       -2.0677192913
+ DE(Corr)=  -2.0677193     E(CORR)=     -481.97003181     Delta=-1.58D-08
+ NORM(A)=   0.13196937D+01
+ Iteration Nr.  17
+ **********************
+ DD1Dir will call FoFJK   1 times, MxPair=      1056
+ NAB=   528 NAA=     0 NBB=     0 NumPrc= 24.
+ Norm of the A-vectors is  6.9221285D-06 conv= 1.00D-05.
+ RLE energy=       -2.0677192867
+ DE(Corr)=  -2.0677193     E(CORR)=     -481.97003182     Delta=-5.60D-09
+ NORM(A)=   0.13196937D+01
+ CI/CC converged in   17 iterations to DelEn=-5.60D-09 Conv= 1.00D-07 ErrA1= 6.92D-06 Conv= 1.00D-05
+ Largest amplitude= 7.79D-02
+ T4(AAA)= -0.32577863D-02
+ T4(AAB)= -0.49198477D-01
+ T5(AAA)=  0.92046013D-04
+ T5(AAB)=  0.10494117D-02
+ Time for triples=  7116089.75 seconds.
+ T4(CCSD)= -0.10491253D+00
+ T5(CCSD)=  0.22829153D-02
+ CCSD(T)= -0.48207266143D+03
+ Discarding MO integrals.
+ Leave Link  913 at Mon May 27 14:06:28 2019, MaxMem= 16252928000 cpu:   9293967.7
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=  13 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Would need an additional     22935605931 words for in-memory AO integral storage.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ FoFJK:  IHMeth= 1 ICntrl=     200 DoSepK=F KAlg= 0 I1Cent=   0 FoldK=F
+ IRaf= 990000000 NMat= 666 IRICut=     832 DoRegI=T DoRafI=T ISym2E= 0.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     200 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=  666 NMatS0=      0 NMatT0=  333 NMatD0=  666 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ MP4(R+Q)=  0.63505150D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  5.5714615D+00 conv= 1.00D-05.
+ RLE energy=       -2.2759063555
+ E3=       -0.69090570D-01        EUMP3=      -0.55830312413D+03
+ E4(DQ)=    0.13320565D-01        UMP4(DQ)=   -0.55828980357D+03
+ E4(SDQ)=  -0.46632997D-02        UMP4(SDQ)=  -0.55830778743D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=  -2.2758952     E(Corr)=     -558.23909514
+ NORM(A)=   0.13128742D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.8122610D+00 conv= 1.00D-05.
+ RLE energy=       -2.3400000908
+ DE(Corr)=  -2.3359395     E(CORR)=     -558.29913943     Delta=-6.00D-02
+ NORM(A)=   0.13350245D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  5.4217199D-01 conv= 1.00D-05.
+ RLE energy=       -2.3422165030
+ DE(Corr)=  -2.3380175     E(CORR)=     -558.30121749     Delta=-2.08D-03
+ NORM(A)=   0.13385835D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.0324367D-01 conv= 1.00D-05.
+ RLE energy=       -2.3427494604
+ DE(Corr)=  -2.3424912     E(CORR)=     -558.30569116     Delta=-4.47D-03
+ NORM(A)=   0.13397117D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.1150323D-02 conv= 1.00D-05.
+ RLE energy=       -2.3430343033
+ DE(Corr)=  -2.3429384     E(CORR)=     -558.30613839     Delta=-4.47D-04
+ NORM(A)=   0.13400855D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.9304055D-02 conv= 1.00D-05.
+ RLE energy=       -2.3430320995
+ DE(Corr)=  -2.3429954     E(CORR)=     -558.30619534     Delta=-5.69D-05
+ NORM(A)=   0.13401294D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  8.8385495D-03 conv= 1.00D-05.
+ RLE energy=       -2.3429743944
+ DE(Corr)=  -2.3430035     E(CORR)=     -558.30620346     Delta=-8.12D-06
+ NORM(A)=   0.13401265D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  3.8609774D-03 conv= 1.00D-05.
+ RLE energy=       -2.3430030381
+ DE(Corr)=  -2.3430044     E(CORR)=     -558.30620434     Delta=-8.85D-07
+ NORM(A)=   0.13401383D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.3846673D-03 conv= 1.00D-05.
+ RLE energy=       -2.3429994717
+ DE(Corr)=  -2.3430002     E(CORR)=     -558.30620020     Delta= 4.14D-06
+ NORM(A)=   0.13401379D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.7714669D-04 conv= 1.00D-05.
+ RLE energy=       -2.3430023040
+ DE(Corr)=  -2.3430026     E(CORR)=     -558.30620258     Delta=-2.38D-06
+ NORM(A)=   0.13401393D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.8581844D-04 conv= 1.00D-05.
+ RLE energy=       -2.3430026440
+ DE(Corr)=  -2.3430023     E(CORR)=     -558.30620225     Delta= 3.30D-07
+ NORM(A)=   0.13401399D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.6790187D-04 conv= 1.00D-05.
+ RLE energy=       -2.3430028750
+ DE(Corr)=  -2.3430028     E(CORR)=     -558.30620280     Delta=-5.49D-07
+ NORM(A)=   0.13401400D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  7.2140272D-05 conv= 1.00D-05.
+ RLE energy=       -2.3430029451
+ DE(Corr)=  -2.3430029     E(CORR)=     -558.30620289     Delta=-8.20D-08
+ NORM(A)=   0.13401402D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  4.3118893D-05 conv= 1.00D-05.
+ RLE energy=       -2.3430029725
+ DE(Corr)=  -2.3430030     E(CORR)=     -558.30620294     Delta=-5.86D-08
+ NORM(A)=   0.13401402D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.1047725D-05 conv= 1.00D-05.
+ RLE energy=       -2.3430029948
+ DE(Corr)=  -2.3430030     E(CORR)=     -558.30620296     Delta=-1.41D-08
+ NORM(A)=   0.13401403D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.3120116D-05 conv= 1.00D-05.
+ RLE energy=       -2.3430030008
+ DE(Corr)=  -2.3430030     E(CORR)=     -558.30620297     Delta=-1.40D-08
+ NORM(A)=   0.13401403D+01
+ Iteration Nr.  17
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  7.2662412D-06 conv= 1.00D-05.
+ RLE energy=       -2.3430030035
+ DE(Corr)=  -2.3430030     E(CORR)=     -558.30620298     Delta=-3.85D-09
+ NORM(A)=   0.13401403D+01
+ CI/CC converged in   17 iterations to DelEn=-3.85D-09 Conv= 1.00D-07 ErrA1= 7.27D-06 Conv= 1.00D-05
+ Largest amplitude= 5.51D-02
+ T4(AAA)= -0.35400811D-02
+ T4(AAB)= -0.52779509D-01
+ T5(AAA)=  0.10950818D-03
+ T5(AAB)=  0.11639579D-02
+ Time for triples= 21466712.00 seconds.
+ T4(CCSD)= -0.11263918D+00
+ T5(CCSD)=  0.25469323D-02
+ CCSD(T)= -0.55841629522D+03
+ Discarding MO integrals.
+ Leave Link  913 at Tue Jun  4 19:58:26 2019, MaxMem= 16252928000 cpu:  25712383.5
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=   8 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Keep R2 and R3 ints in memory in canonical form, NReq=2797609312.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=  52650 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ MP4(R+Q)=  0.41506213D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  2.6111393D+00 conv= 1.00D-05.
+ RLE energy=       -1.3011723741
+ E3=       -0.18561490D-01        EUMP3=      -0.34490321792D+03
+ E4(DQ)=    0.95810082D-02        UMP4(DQ)=   -0.34489363691D+03
+ E4(SDQ)=  -0.43811313D-02        UMP4(SDQ)=  -0.34490759905D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=  -1.3007592     E(Corr)=     -344.86104826
+ NORM(A)=   0.11922569D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  8.9121154D-01 conv= 1.00D-05.
+ RLE energy=       -1.3432180046
+ DE(Corr)=  -1.3426208     E(CORR)=     -344.90290979     Delta=-4.19D-02
+ NORM(A)=   0.12086404D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.6643245D-01 conv= 1.00D-05.
+ RLE energy=       -1.3449728027
+ DE(Corr)=  -1.3415995     E(CORR)=     -344.90188855     Delta= 1.02D-03
+ NORM(A)=   0.12123659D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.1399905D-01 conv= 1.00D-05.
+ RLE energy=       -1.3452883290
+ DE(Corr)=  -1.3450500     E(CORR)=     -344.90533902     Delta=-3.45D-03
+ NORM(A)=   0.12136783D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  3.6512173D-02 conv= 1.00D-05.
+ RLE energy=       -1.3455888381
+ DE(Corr)=  -1.3454942     E(CORR)=     -344.90578322     Delta=-4.44D-04
+ NORM(A)=   0.12143023D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.8095471D-02 conv= 1.00D-05.
+ RLE energy=       -1.3455978523
+ DE(Corr)=  -1.3455568     E(CORR)=     -344.90584582     Delta=-6.26D-05
+ NORM(A)=   0.12144070D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.1755308D-03 conv= 1.00D-05.
+ RLE energy=       -1.3455258267
+ DE(Corr)=  -1.3455648     E(CORR)=     -344.90585388     Delta=-8.05D-06
+ NORM(A)=   0.12144055D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  3.4835163D-03 conv= 1.00D-05.
+ RLE energy=       -1.3455643829
+ DE(Corr)=  -1.3455676     E(CORR)=     -344.90585665     Delta=-2.77D-06
+ NORM(A)=   0.12144250D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.4641427D-03 conv= 1.00D-05.
+ RLE energy=       -1.3455588348
+ DE(Corr)=  -1.3455602     E(CORR)=     -344.90584923     Delta= 7.42D-06
+ NORM(A)=   0.12144233D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.9694984D-04 conv= 1.00D-05.
+ RLE energy=       -1.3455633653
+ DE(Corr)=  -1.3455642     E(CORR)=     -344.90585326     Delta=-4.03D-06
+ NORM(A)=   0.12144252D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.7699553D-04 conv= 1.00D-05.
+ RLE energy=       -1.3455645447
+ DE(Corr)=  -1.3455640     E(CORR)=     -344.90585308     Delta= 1.84D-07
+ NORM(A)=   0.12144268D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.3229710D-04 conv= 1.00D-05.
+ RLE energy=       -1.3455650340
+ DE(Corr)=  -1.3455649     E(CORR)=     -344.90585397     Delta=-8.94D-07
+ NORM(A)=   0.12144274D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.0680352D-05 conv= 1.00D-05.
+ RLE energy=       -1.3455652846
+ DE(Corr)=  -1.3455652     E(CORR)=     -344.90585421     Delta=-2.39D-07
+ NORM(A)=   0.12144279D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.8035629D-05 conv= 1.00D-05.
+ RLE energy=       -1.3455654158
+ DE(Corr)=  -1.3455653     E(CORR)=     -344.90585439     Delta=-1.77D-07
+ NORM(A)=   0.12144281D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.3640921D-05 conv= 1.00D-05.
+ RLE energy=       -1.3455654097
+ DE(Corr)=  -1.3455654     E(CORR)=     -344.90585443     Delta=-4.61D-08
+ NORM(A)=   0.12144282D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       420
+ NAB=   210 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.8620424D-06 conv= 1.00D-05.
+ RLE energy=       -1.3455654270
+ DE(Corr)=  -1.3455654     E(CORR)=     -344.90585446     Delta=-2.33D-08
+ NORM(A)=   0.12144282D+01
+ CI/CC converged in   16 iterations to DelEn=-2.33D-08 Conv= 1.00D-07 ErrA1= 6.86D-06 Conv= 1.00D-05
+ Largest amplitude= 5.44D-02
+ T4(AAA)= -0.23395804D-02
+ T4(AAB)= -0.34518380D-01
+ T5(AAA)=  0.91281128D-04
+ T5(AAB)=  0.10739699D-02
+ Time for triples=   252964.59 seconds.
+ T4(CCSD)= -0.73715921D-01
+ T5(CCSD)=  0.23305020D-02
+ CCSD(T)= -0.34497723987D+03
+ Discarding MO integrals.
+ Leave Link  913 at Thu May 23 05:48:18 2019, MaxMem= 16252928000 cpu:    299481.6
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=   5 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Keep R2 and R3 ints in memory in canonical form, NReq=2169123602.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=           0 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     600 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=    1 NMatS0=  46360 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ MP4(R+Q)=  0.21377073D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  1.4522692D+00 conv= 1.00D-05.
+ RLE energy=       -0.9580816817
+ E3=       -0.51437280D-01        EUMP3=      -0.21338601820D+03
+ E4(DQ)=    0.18438367D-02        UMP4(DQ)=   -0.21338417437D+03
+ E4(SDQ)=  -0.37999587D-02        UMP4(SDQ)=  -0.21338981816D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)= -0.95708835     E(Corr)=     -213.36443778
+ NORM(A)=   0.11433279D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  4.3740274D-01 conv= 1.00D-05.
+ RLE energy=       -0.9808234543
+ DE(Corr)= -0.97752465     E(CORR)=     -213.38487407     Delta=-2.04D-02
+ NORM(A)=   0.11523763D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.2583324D-01 conv= 1.00D-05.
+ RLE energy=       -0.9816178422
+ DE(Corr)= -0.98043763     E(CORR)=     -213.38778705     Delta=-2.91D-03
+ NORM(A)=   0.11537236D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  3.5197120D-02 conv= 1.00D-05.
+ RLE energy=       -0.9818272711
+ DE(Corr)= -0.98174954     E(CORR)=     -213.38909897     Delta=-1.31D-03
+ NORM(A)=   0.11539739D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  9.6005795D-03 conv= 1.00D-05.
+ RLE energy=       -0.9818678189
+ DE(Corr)= -0.98184647     E(CORR)=     -213.38919590     Delta=-9.69D-05
+ NORM(A)=   0.11540104D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.7107189D-03 conv= 1.00D-05.
+ RLE energy=       -0.9818505400
+ DE(Corr)= -0.98185654     E(CORR)=     -213.38920597     Delta=-1.01D-05
+ NORM(A)=   0.11540058D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  8.3128536D-04 conv= 1.00D-05.
+ RLE energy=       -0.9818542718
+ DE(Corr)= -0.98185656     E(CORR)=     -213.38920598     Delta=-1.58D-08
+ NORM(A)=   0.11540060D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  3.2575033D-04 conv= 1.00D-05.
+ RLE energy=       -0.9818553338
+ DE(Corr)= -0.98185571     E(CORR)=     -213.38920514     Delta= 8.47D-07
+ NORM(A)=   0.11540064D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.4621690D-04 conv= 1.00D-05.
+ RLE energy=       -0.9818558739
+ DE(Corr)= -0.98185598     E(CORR)=     -213.38920541     Delta=-2.71D-07
+ NORM(A)=   0.11540069D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  6.7301763D-05 conv= 1.00D-05.
+ RLE energy=       -0.9818562783
+ DE(Corr)= -0.98185618     E(CORR)=     -213.38920560     Delta=-1.97D-07
+ NORM(A)=   0.11540072D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  2.9937394D-05 conv= 1.00D-05.
+ RLE energy=       -0.9818563609
+ DE(Corr)= -0.98185631     E(CORR)=     -213.38920574     Delta=-1.35D-07
+ NORM(A)=   0.11540073D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  1.3065719D-05 conv= 1.00D-05.
+ RLE energy=       -0.9818564041
+ DE(Corr)= -0.98185639     E(CORR)=     -213.38920581     Delta=-7.08D-08
+ NORM(A)=   0.11540074D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFMem   1 times, MxPair=       272
+ NAB=   136 NAA=     0 NBB=     0.
+ Norm of the A-vectors is  5.2489934D-06 conv= 1.00D-05.
+ RLE energy=       -0.9818564197
+ DE(Corr)= -0.98185641     E(CORR)=     -213.38920583     Delta=-2.50D-08
+ NORM(A)=   0.11540074D+01
+ CI/CC converged in   13 iterations to DelEn=-2.50D-08 Conv= 1.00D-07 ErrA1= 5.25D-06 Conv= 1.00D-05
+ Largest amplitude= 1.37D-02
+ T4(AAA)= -0.10281817D-02
+ T4(AAB)= -0.18212175D-01
+ T5(AAA)=  0.28685278D-04
+ T5(AAB)=  0.38838241D-03
+ Time for triples=    75992.34 seconds.
+ T4(CCSD)= -0.38480714D-01
+ T5(CCSD)=  0.83413538D-03
+ CCSD(T)= -0.21342685241D+03
+ Discarding MO integrals.
+ Leave Link  913 at Thu May 23 04:24:09 2019, MaxMem= 16252928000 cpu:    100967.0
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=  13 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Would need an additional     22935605931 words for in-memory AO integral storage.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ FoFJK:  IHMeth= 1 ICntrl=     200 DoSepK=F KAlg= 0 I1Cent=   0 FoldK=F
+ IRaf= 990000000 NMat= 666 IRICut=     832 DoRegI=T DoRafI=T ISym2E= 0.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     200 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=  666 NMatS0=      0 NMatT0=  333 NMatD0=  666 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ MP4(R+Q)=  0.63931103D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  5.4799256D+00 conv= 1.00D-05.
+ RLE energy=       -2.2685797289
+ E3=       -0.65962017D-01        EUMP3=      -0.55821654724D+03
+ E4(DQ)=    0.12645097D-01        UMP4(DQ)=   -0.55820390215D+03
+ E4(SDQ)=  -0.71316676D-02        UMP4(SDQ)=  -0.55822367891D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=  -2.2685790     E(Corr)=     -558.15199251
+ NORM(A)=   0.13158095D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.9606354D+00 conv= 1.00D-05.
+ RLE energy=       -2.3348102122
+ DE(Corr)=  -2.3314051     E(CORR)=     -558.21481853     Delta=-6.28D-02
+ NORM(A)=   0.13392285D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.2095044D-01 conv= 1.00D-05.
+ RLE energy=       -2.3378203692
+ DE(Corr)=  -2.3326389     E(CORR)=     -558.21605242     Delta=-1.23D-03
+ NORM(A)=   0.13446479D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  3.5350222D-01 conv= 1.00D-05.
+ RLE energy=       -2.3383600626
+ DE(Corr)=  -2.3379026     E(CORR)=     -558.22131611     Delta=-5.26D-03
+ NORM(A)=   0.13464029D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1983024D-01 conv= 1.00D-05.
+ RLE energy=       -2.3388696786
+ DE(Corr)=  -2.3386761     E(CORR)=     -558.22208958     Delta=-7.73D-04
+ NORM(A)=   0.13478073D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  7.2006585D-02 conv= 1.00D-05.
+ RLE energy=       -2.3391777991
+ DE(Corr)=  -2.3388603     E(CORR)=     -558.22227383     Delta=-1.84D-04
+ NORM(A)=   0.13485219D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  4.3842114D-02 conv= 1.00D-05.
+ RLE energy=       -2.3387501253
+ DE(Corr)=  -2.3389003     E(CORR)=     -558.22231375     Delta=-3.99D-05
+ NORM(A)=   0.13486125D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.3469257D-02 conv= 1.00D-05.
+ RLE energy=       -2.3389399592
+ DE(Corr)=  -2.3389493     E(CORR)=     -558.22236276     Delta=-4.90D-05
+ NORM(A)=   0.13488114D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.6464291D-02 conv= 1.00D-05.
+ RLE energy=       -2.3388913293
+ DE(Corr)=  -2.3388898     E(CORR)=     -558.22230325     Delta= 5.95D-05
+ NORM(A)=   0.13488631D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  9.3871083D-03 conv= 1.00D-05.
+ RLE energy=       -2.3389057542
+ DE(Corr)=  -2.3389210     E(CORR)=     -558.22233450     Delta=-3.13D-05
+ NORM(A)=   0.13488538D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.2416922D-03 conv= 1.00D-05.
+ RLE energy=       -2.3389116150
+ DE(Corr)=  -2.3389080     E(CORR)=     -558.22232153     Delta= 1.30D-05
+ NORM(A)=   0.13488823D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  4.3438769D-03 conv= 1.00D-05.
+ RLE energy=       -2.3389137720
+ DE(Corr)=  -2.3389130     E(CORR)=     -558.22232649     Delta=-4.96D-06
+ NORM(A)=   0.13488789D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.9900976D-03 conv= 1.00D-05.
+ RLE energy=       -2.3389121811
+ DE(Corr)=  -2.3389130     E(CORR)=     -558.22232650     Delta=-1.14D-08
+ NORM(A)=   0.13488769D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.3986547D-03 conv= 1.00D-05.
+ RLE energy=       -2.3389137084
+ DE(Corr)=  -2.3389136     E(CORR)=     -558.22232708     Delta=-5.79D-07
+ NORM(A)=   0.13488775D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.9017963D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389134844
+ DE(Corr)=  -2.3389135     E(CORR)=     -558.22232697     Delta= 1.04D-07
+ NORM(A)=   0.13488755D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  4.1945736D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389135195
+ DE(Corr)=  -2.3389135     E(CORR)=     -558.22232702     Delta=-4.43D-08
+ NORM(A)=   0.13488736D+01
+ Iteration Nr.  17
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  3.3816792D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389131491
+ DE(Corr)=  -2.3389131     E(CORR)=     -558.22232661     Delta= 4.09D-07
+ NORM(A)=   0.13488728D+01
+ Iteration Nr.  18
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2413715D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389131680
+ DE(Corr)=  -2.3389133     E(CORR)=     -558.22232676     Delta=-1.50D-07
+ NORM(A)=   0.13488716D+01
+ Iteration Nr.  19
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.3586118D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389129275
+ DE(Corr)=  -2.3389131     E(CORR)=     -558.22232655     Delta= 2.04D-07
+ NORM(A)=   0.13488690D+01
+ Iteration Nr.  20
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.0792431D-04 conv= 1.00D-05.
+ RLE energy=       -2.3389128715
+ DE(Corr)=  -2.3389127     E(CORR)=     -558.22232621     Delta= 3.43D-07
+ NORM(A)=   0.13488697D+01
+ Iteration Nr.  21
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  8.4459809D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128580
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232636     Delta=-1.51D-07
+ NORM(A)=   0.13488695D+01
+ Iteration Nr.  22
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  6.8265303D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128743
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 2.86D-08
+ NORM(A)=   0.13488695D+01
+ Iteration Nr.  23
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  4.6510027D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128359
+ DE(Corr)=  -2.3389128     E(CORR)=     -558.22232633     Delta= 7.09D-09
+ NORM(A)=   0.13488695D+01
+ Iteration Nr.  24
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  3.4902635D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128724
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-2.05D-08
+ NORM(A)=   0.13488695D+01
+ Iteration Nr.  25
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  2.7497779D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128459
+ DE(Corr)=  -2.3389128     E(CORR)=     -558.22232633     Delta= 2.10D-08
+ NORM(A)=   0.13488695D+01
+ Iteration Nr.  26
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.7622317D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128735
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-2.42D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  27
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.8099486D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128524
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.88D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  28
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2460862D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128742
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.84D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  29
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.6330921D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128533
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.72D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  30
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2896124D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128714
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.72D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  31
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.4435745D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128546
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.64D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  32
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1799914D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128698
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.50D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  33
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.3225960D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128545
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.49D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  34
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1598007D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128689
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.40D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  35
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2808982D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128541
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.44D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  36
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1705054D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128684
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.40D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  37
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2687655D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128536
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.45D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  38
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1849200D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128682
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.42D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  39
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2642867D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128531
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.47D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  40
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1953583D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.46D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  41
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2608705D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128528
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.49D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  42
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2011646D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.49D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  43
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2573397D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128526
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.52D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  44
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2035423D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.52D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  45
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2528499D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128524
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.53D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  46
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2031103D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.54D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  47
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2468703D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128522
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.55D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  48
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2001718D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.55D-08
+ NORM(A)=   0.13488693D+01
+ Iteration Nr.  49
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.2404759D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128521
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232633     Delta= 1.56D-08
+ NORM(A)=   0.13488694D+01
+ Iteration Nr.  50
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       666
+ NAB=   666 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ DD1Dir:  Pass   2 NRAB=   333 NRAA=     0 NRBB=     0 NR=   666.
+ Norm of the A-vectors is  1.1959929D-05 conv= 1.00D-05.
+ RLE energy=       -2.3389128681
+ DE(Corr)=  -2.3389129     E(CORR)=     -558.22232635     Delta=-1.56D-08
+ NORM(A)=   0.13488693D+01
+ *************
+ *MAX. CYCLES*
+ *************
+ Largest amplitude= 6.24D-02
+ Error termination via Lnk1e in /mnt/data/applications/G09/g09/l913.exe at Tue May 28 09:40:49 2019.
+ Job cpu time:     116 days 16 hours 57 minutes 46.0 seconds.
+ File lengths (MBytes):  RWF= 358016 Int=      0 D2E=      0 Chk=      7 Scr=      1
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l913.exe)
+ CIDS:  MDV= 16252928000.
+ Frozen-core window:  NFC=  14 NFV=   0.
+ IFCWin=0 IBDFC=1 NFBD=     0     0 NFCmp=     0     0 NFFFC=     0     0
+ Using DD3R+UMP44R for 1st iteration, S=T.
+ Using DD4RQ for 2nd and later iterations.
+ Would need an additional     39507636705 words for in-memory AO integral storage.
+ CCSD(T)
+ =======
+ Iterations=  50 Convergence= 0.100D-06
+ Iteration Nr.   1
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ FoFJK:  IHMeth= 1 ICntrl=     200 DoSepK=F KAlg= 0 I1Cent=   0 FoldK=F
+ IRaf= 990000000 NMat= 820 IRICut=    1025 DoRegI=T DoRafI=T ISym2E= 0.
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=F BraDBF=F KetDBF=F FulRan=T
+         wScrn=  0.000000 ICntrl=     200 IOpCl=  0 I1Cent=           0 NGrid=           0
+         NMat0=  820 NMatS0=      0 NMatT0=  410 NMatD0=  820 NMtDS0=    0 NMtDT0=    0
+ Symmetry not used in FoFCou.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ MP4(R+Q)=  0.69317105D-01
+ Maximum subspace dimension=  5
+ Norm of the A-vectors is  6.3555742D+00 conv= 1.00D-05.
+ RLE energy=       -2.5445357012
+ E3=       -0.64773808D-01        EUMP3=      -0.63458428148D+03
+ E4(DQ)=    0.13150828D-01        UMP4(DQ)=   -0.63457113066D+03
+ E4(SDQ)=  -0.93713970D-02        UMP4(SDQ)=  -0.63459365288D+03
+ VARIATIONAL ENERGIES WITH THE FIRST-ORDER WAVEFUNCTION:
+ DE(Corr)=  -2.5445253     E(Corr)=     -634.51431078
+ NORM(A)=   0.13397941D+01
+ Iteration Nr.   2
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  2.2421600D+00 conv= 1.00D-05.
+ RLE energy=       -2.6174211606
+ DE(Corr)=  -2.6139954     E(CORR)=     -634.58378086     Delta=-6.95D-02
+ NORM(A)=   0.13644667D+01
+ Iteration Nr.   3
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  6.8988656D-01 conv= 1.00D-05.
+ RLE energy=       -2.6207066743
+ DE(Corr)=  -2.6151032     E(CORR)=     -634.58488867     Delta=-1.11D-03
+ NORM(A)=   0.13698653D+01
+ Iteration Nr.   4
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  3.5811589D-01 conv= 1.00D-05.
+ RLE energy=       -2.6212853897
+ DE(Corr)=  -2.6208188     E(CORR)=     -634.59060433     Delta=-5.72D-03
+ NORM(A)=   0.13716756D+01
+ Iteration Nr.   5
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.1745810D-01 conv= 1.00D-05.
+ RLE energy=       -2.6217653161
+ DE(Corr)=  -2.6215852     E(CORR)=     -634.59137066     Delta=-7.66D-04
+ NORM(A)=   0.13727830D+01
+ Iteration Nr.   6
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  6.5168442D-02 conv= 1.00D-05.
+ RLE energy=       -2.6219177869
+ DE(Corr)=  -2.6217349     E(CORR)=     -634.59152040     Delta=-1.50D-04
+ NORM(A)=   0.13731812D+01
+ Iteration Nr.   7
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  3.1156125D-02 conv= 1.00D-05.
+ RLE energy=       -2.6216546239
+ DE(Corr)=  -2.6217612     E(CORR)=     -634.59154666     Delta=-2.63D-05
+ NORM(A)=   0.13732026D+01
+ Iteration Nr.   8
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.6383096D-02 conv= 1.00D-05.
+ RLE energy=       -2.6217719374
+ DE(Corr)=  -2.6217806     E(CORR)=     -634.59156611     Delta=-1.94D-05
+ NORM(A)=   0.13732754D+01
+ Iteration Nr.   9
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  7.9024448D-03 conv= 1.00D-05.
+ RLE energy=       -2.6217482578
+ DE(Corr)=  -2.6217503     E(CORR)=     -634.59153576     Delta= 3.04D-05
+ NORM(A)=   0.13732800D+01
+ Iteration Nr.  10
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  3.7636803D-03 conv= 1.00D-05.
+ RLE energy=       -2.6217608530
+ DE(Corr)=  -2.6217656     E(CORR)=     -634.59155113     Delta=-1.54D-05
+ NORM(A)=   0.13732798D+01
+ Iteration Nr.  11
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  2.1913456D-03 conv= 1.00D-05.
+ RLE energy=       -2.6217630672
+ DE(Corr)=  -2.6217610     E(CORR)=     -634.59154650     Delta= 4.63D-06
+ NORM(A)=   0.13732846D+01
+ Iteration Nr.  12
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.2809999D-03 conv= 1.00D-05.
+ RLE energy=       -2.6217638965
+ DE(Corr)=  -2.6217638     E(CORR)=     -634.59154927     Delta=-2.77D-06
+ NORM(A)=   0.13732842D+01
+ Iteration Nr.  13
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  5.4460660D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217643232
+ DE(Corr)=  -2.6217643     E(CORR)=     -634.59154980     Delta=-5.23D-07
+ NORM(A)=   0.13732846D+01
+ Iteration Nr.  14
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  4.5085302D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217649710
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155014     Delta=-3.48D-07
+ NORM(A)=   0.13732850D+01
+ Iteration Nr.  15
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  2.1760357D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217647372
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155014     Delta= 3.56D-09
+ NORM(A)=   0.13732850D+01
+ Iteration Nr.  16
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.1094741D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217648027
+ DE(Corr)=  -2.6217648     E(CORR)=     -634.59155026     Delta=-1.16D-07
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  17
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  8.7551424D-05 conv= 1.00D-05.
+ RLE energy=       -2.6217646486
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155018     Delta= 7.62D-08
+ NORM(A)=   0.13732850D+01
+ Iteration Nr.  18
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  7.7053088D-05 conv= 1.00D-05.
+ RLE energy=       -2.6217647876
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155023     Delta=-5.45D-08
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  19
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.0407669D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217645806
+ DE(Corr)=  -2.6217646     E(CORR)=     -634.59155012     Delta= 1.15D-07
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  20
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.3239680D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217644438
+ DE(Corr)=  -2.6217648     E(CORR)=     -634.59155026     Delta=-1.41D-07
+ NORM(A)=   0.13732850D+01
+ Iteration Nr.  21
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  2.8158161D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217646239
+ DE(Corr)=  -2.6217649     E(CORR)=     -634.59155036     Delta=-1.03D-07
+ NORM(A)=   0.13732850D+01
+ Iteration Nr.  22
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.1710279D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217647986
+ DE(Corr)=  -2.6217648     E(CORR)=     -634.59155026     Delta= 9.84D-08
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  23
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.0068504D-04 conv= 1.00D-05.
+ RLE energy=       -2.6217646789
+ DE(Corr)=  -2.6217646     E(CORR)=     -634.59155012     Delta= 1.41D-07
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  24
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  2.9478079D-05 conv= 1.00D-05.
+ RLE energy=       -2.6217647054
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155020     Delta=-7.33D-08
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  25
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  1.7693542D-05 conv= 1.00D-05.
+ RLE energy=       -2.6217646871
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155017     Delta= 2.97D-08
+ NORM(A)=   0.13732849D+01
+ Iteration Nr.  26
+ **********************
+ DD1Dir will call FoFJK   2 times, MxPair=       820
+ NAB=   820 NAA=     0 NBB=     0 NumPrc= 24.
+ DD1Dir:  Pass   1 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ DD1Dir:  Pass   2 NRAB=   410 NRAA=     0 NRBB=     0 NR=   820.
+ Norm of the A-vectors is  8.7555719D-06 conv= 1.00D-05.
+ RLE energy=       -2.6217646894
+ DE(Corr)=  -2.6217647     E(CORR)=     -634.59155018     Delta=-9.58D-09
+ NORM(A)=   0.13732848D+01
+ CI/CC converged in   26 iterations to DelEn=-9.58D-09 Conv= 1.00D-07 ErrA1= 8.76D-06 Conv= 1.00D-05
+ Largest amplitude= 7.58D-02
+ T4(AAA)= -0.38722369D-02
+ T4(AAB)= -0.59113074D-01
+ T5(AAA)=  0.13537733D-03
+ T5(AAB)=  0.16905790D-02
+ Time for triples= 41955951.00 seconds.
+ T4(CCSD)= -0.12597062D+00
+ T5(CCSD)=  0.36519126D-02
+ CCSD(T)= -0.63471386889D+03
+ Discarding MO integrals.
+ Leave Link  913 at Wed Jun 19 17:42:27 2019, MaxMem= 16252928000 cpu:  53614892.3

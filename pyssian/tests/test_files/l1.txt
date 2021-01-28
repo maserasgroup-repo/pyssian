@@ -1,0 +1,339 @@
+ Entering Link 1 = /mnt/data/applications/G09/g09/l1.exe PID=     15818.
+
+ Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2013,
+            Gaussian, Inc.  All Rights Reserved.
+
+ This is part of the Gaussian(R) 09 program.  It is based on
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+
+ The following legend is applicable only to US Government
+ contracts under FAR:
+
+                    RESTRICTED RIGHTS LEGEND
+
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+
+
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+
+
+ Cite this work as:
+ Gaussian 09, Revision D.01,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria,
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, B. Mennucci,
+ G. A. Petersson, H. Nakatsuji, M. Caricato, X. Li, H. P. Hratchian,
+ A. F. Izmaylov, J. Bloino, G. Zheng, J. L. Sonnenberg, M. Hada,
+ M. Ehara, K. Toyota, R. Fukuda, J. Hasegawa, M. Ishida, T. Nakajima,
+ Y. Honda, O. Kitao, H. Nakai, T. Vreven, J. A. Montgomery, Jr.,
+ J. E. Peralta, F. Ogliaro, M. Bearpark, J. J. Heyd, E. Brothers,
+ K. N. Kudin, V. N. Staroverov, T. Keith, R. Kobayashi, J. Normand,
+ K. Raghavachari, A. Rendell, J. C. Burant, S. S. Iyengar, J. Tomasi,
+ M. Cossi, N. Rega, J. M. Millam, M. Klene, J. E. Knox, J. B. Cross,
+ V. Bakken, C. Adamo, J. Jaramillo, R. Gomperts, R. E. Stratmann,
+ O. Yazyev, A. J. Austin, R. Cammi, C. Pomelli, J. W. Ochterski,
+ R. L. Martin, K. Morokuma, V. G. Zakrzewski, G. A. Voth,
+ P. Salvador, J. J. Dannenberg, S. Dapprich, A. D. Daniels,
+ O. Farkas, J. B. Foresman, J. V. Ortiz, J. Cioslowski,
+ and D. J. Fox, Gaussian, Inc., Wallingford CT, 2013.
+
+ ******************************************
+ Gaussian 09:  EM64L-G09RevD.01 24-Apr-2013
+                19-Jan-2018
+ ******************************************
+ %nprocshared=8
+ Will use up to    8 processors via shared memory.
+ %mem=18000MB
+ ----------------------------------------------------------------------
+ #p opt=(calcfc,ts,noeigentest) freq b3lyp/6-31+g(d) scrf=(solvent=dich
+ loromethane,smd) nosymm empiricaldispersion=gd3
+ ----------------------------------------------------------------------
+ 1/5=1,10=4,11=1,14=-1,18=20,26=3,38=1/1,3;
+ 2/9=110,12=2,15=1,17=6,18=5,40=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32201,71=2,72=9,74=-5,124=31,140=1/1,2,3;
+ 4//1;
+ 5/5=2,38=5,53=9/2;
+ 8/6=4,10=90,11=11/1;
+ 11/6=1,8=1,9=11,15=111,16=1,31=1/1,2,10;
+ 10/6=1,13=1,31=1/2;
+ 6/7=2,8=2,9=2,10=2,28=1/1;
+ 7/10=1,18=20,25=1,30=1/1,2,3,16;
+ 1/5=1,10=4,11=1,14=-1,18=20,26=3/3(2);
+ 2/9=110,15=1/2;
+ 99//99;
+ 2/9=110,15=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32205,71=1,72=9,74=-5,124=31/1,2,3;
+ 4/5=5,16=3,69=1/1;
+ 5/5=2,38=5,53=9/2;
+ 7/30=1/1,2,3,16;
+ 1/5=1,11=1,14=-1,18=20,26=3/3(-5);
+ 2/9=110,15=1/2;
+ 6/7=2,8=2,9=2,10=2,19=2,28=1/1;
+ 99/9=1/99;
+ Leave Link    1 at Fri Jan 19 16:52:47 2018, MaxMem=  2359296000 cpu:         0.9
+
+## Split Here ##
+ (Enter /mnt/data/applications/G09/g09/l1.exe)
+ Link1:  Proceeding to internal job step number  2.
+ ---------------------------------------------------------------------
+ #P Geom=AllCheck Guess=TCheck SCRF=Check GenChk RB3LYP/6-31+G(d) Freq
+ ---------------------------------------------------------------------
+ 1/5=1,10=4,11=1,29=7,30=1,38=1,40=1/1,3;
+ 2/12=2,15=1,40=1/2;
+ 3/5=1,6=6,7=11,11=2,14=-4,16=1,25=1,30=1,70=2,71=2,72=9,74=-5,116=1,124=31,140=1/1,2,3;
+ 4/5=101/1;
+ 5/5=2,53=9,98=1/2;
+ 8/6=4,10=90,11=11/1;
+ 11/6=1,8=1,9=11,15=111,16=1,31=1/1,2,10;
+ 10/6=1,31=1/2;
+ 6/7=2,8=2,9=2,10=2,18=1,28=1/1;
+ 7/8=1,10=1,25=1,30=1/1,2,3,16;
+ 1/5=1,10=4,11=1,30=1/3;
+ 99//99;
+ Leave Link    1 at Fri Jan 19 22:56:02 2018, MaxMem=  2359296000 cpu:         0.3
+
+## Split Here ##
+ Entering Link 1 = /mnt/data/applications/G09/g09/l1.exe PID=      7485.
+
+ Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2013,
+            Gaussian, Inc.  All Rights Reserved.
+
+ This is part of the Gaussian(R) 09 program.  It is based on
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+
+ The following legend is applicable only to US Government
+ contracts under FAR:
+
+                    RESTRICTED RIGHTS LEGEND
+
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+
+
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+
+
+ Cite this work as:
+ Gaussian 09, Revision D.01,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria,
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, B. Mennucci,
+ G. A. Petersson, H. Nakatsuji, M. Caricato, X. Li, H. P. Hratchian,
+ A. F. Izmaylov, J. Bloino, G. Zheng, J. L. Sonnenberg, M. Hada,
+ M. Ehara, K. Toyota, R. Fukuda, J. Hasegawa, M. Ishida, T. Nakajima,
+ Y. Honda, O. Kitao, H. Nakai, T. Vreven, J. A. Montgomery, Jr.,
+ J. E. Peralta, F. Ogliaro, M. Bearpark, J. J. Heyd, E. Brothers,
+ K. N. Kudin, V. N. Staroverov, T. Keith, R. Kobayashi, J. Normand,
+ K. Raghavachari, A. Rendell, J. C. Burant, S. S. Iyengar, J. Tomasi,
+ M. Cossi, N. Rega, J. M. Millam, M. Klene, J. E. Knox, J. B. Cross,
+ V. Bakken, C. Adamo, J. Jaramillo, R. Gomperts, R. E. Stratmann,
+ O. Yazyev, A. J. Austin, R. Cammi, C. Pomelli, J. W. Ochterski,
+ R. L. Martin, K. Morokuma, V. G. Zakrzewski, G. A. Voth,
+ P. Salvador, J. J. Dannenberg, S. Dapprich, A. D. Daniels,
+ O. Farkas, J. B. Foresman, J. V. Ortiz, J. Cioslowski,
+ and D. J. Fox, Gaussian, Inc., Wallingford CT, 2013.
+
+ ******************************************
+ Gaussian 09:  EM64L-G09RevD.01 24-Apr-2013
+                14-Feb-2018
+ ******************************************
+ %nprocshared=12
+ Will use up to   12 processors via shared memory.
+ %mem=20000MB
+ ----------------------------------------------------------------------
+ #p b3lyp 6-31+g(d) irc=(calcfc,reverse) scrf=(smd,solvent=dichlorometh
+ ane) empiricaldispersion=gd3 nosymm
+ ----------------------------------------------------------------------
+ 1/10=4,14=-1,18=10,22=2,26=3,38=1,44=3/1,23;
+ 2/12=2,15=1,17=6,18=5,29=1,40=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32201,71=2,72=9,74=-5,124=31,140=1/1,2,3;
+ 4//1;
+ 5/5=2,38=5,53=9/2;
+ 8/6=4,10=90,11=11/1;
+ 11/6=1,8=1,9=11,15=111,16=1,31=1/1,2,10;
+ 10/6=1,13=1,31=1/2;
+ 6/7=2,8=2,9=2,10=2,28=1/1;
+ 7/10=1,18=20,25=1,30=1/1,2,3,16;
+ 1/10=4,14=-1,18=10,22=2,26=3,44=3/23(2);
+ 2/15=1,29=1/2;
+ 99/5=20/99;
+ 2/15=1,29=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32205,71=2,72=9,74=-5,124=31,140=1/1,2,3;
+ 4/5=5,16=3,69=1/1;
+ 5/5=2,38=5,53=9/2;
+ 8/6=4,10=90,11=11/1;
+ 11/6=1,8=1,9=11,15=111,16=1,31=1/1,2,10;
+ 10/6=1,13=1,31=1/2;
+ 7/10=1,18=20,25=1,30=1/1,2,3,16;
+ 1/14=-1,18=10,22=2,26=3,44=3/23(-8);
+ 2/15=1,29=1/2;
+ 6/7=2,8=2,9=2,10=2,19=2,28=1/1;
+ 99/5=20,9=1/99;
+ Leave Link    1 at Wed Feb 14 13:21:56 2018, MaxMem=  2621440000 cpu:         1.7
+
+## Split Here ##
+ Entering Link 1 = /mnt/data/applications/G09/g09/l1.exe PID=     14816.
+
+ Copyright (c) 1988,1990,1992,1993,1995,1998,2003,2009,2013,
+            Gaussian, Inc.  All Rights Reserved.
+
+ This is part of the Gaussian(R) 09 program.  It is based on
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+
+ The following legend is applicable only to US Government
+ contracts under FAR:
+
+                    RESTRICTED RIGHTS LEGEND
+
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+
+
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+
+
+ Cite this work as:
+ Gaussian 09, Revision D.01,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria,
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, B. Mennucci,
+ G. A. Petersson, H. Nakatsuji, M. Caricato, X. Li, H. P. Hratchian,
+ A. F. Izmaylov, J. Bloino, G. Zheng, J. L. Sonnenberg, M. Hada,
+ M. Ehara, K. Toyota, R. Fukuda, J. Hasegawa, M. Ishida, T. Nakajima,
+ Y. Honda, O. Kitao, H. Nakai, T. Vreven, J. A. Montgomery, Jr.,
+ J. E. Peralta, F. Ogliaro, M. Bearpark, J. J. Heyd, E. Brothers,
+ K. N. Kudin, V. N. Staroverov, T. Keith, R. Kobayashi, J. Normand,
+ K. Raghavachari, A. Rendell, J. C. Burant, S. S. Iyengar, J. Tomasi,
+ M. Cossi, N. Rega, J. M. Millam, M. Klene, J. E. Knox, J. B. Cross,
+ V. Bakken, C. Adamo, J. Jaramillo, R. Gomperts, R. E. Stratmann,
+ O. Yazyev, A. J. Austin, R. Cammi, C. Pomelli, J. W. Ochterski,
+ R. L. Martin, K. Morokuma, V. G. Zakrzewski, G. A. Voth,
+ P. Salvador, J. J. Dannenberg, S. Dapprich, A. D. Daniels,
+ O. Farkas, J. B. Foresman, J. V. Ortiz, J. Cioslowski,
+ and D. J. Fox, Gaussian, Inc., Wallingford CT, 2013.
+
+ ******************************************
+ Gaussian 09:  EM64L-G09RevD.01 24-Apr-2013
+                22-Jan-2018
+ ******************************************
+ %nprocshared=8
+ Will use up to    8 processors via shared memory.
+ %mem=18000MB
+ ----------------------------------------------------------------------
+ #p opt=modredundant b3lyp/6-31+g(d) scrf=(solvent=dichloromethane,smd)
+  nosymm empiricaldispersion=gd3
+ ----------------------------------------------------------------------
+ 1/14=-1,18=120,19=15,26=3,38=1/1,3;
+ 2/9=110,12=2,15=1,17=6,18=5,40=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32201,71=1,72=9,74=-5,124=31/1,2,3;
+ 4//1;
+ 5/5=2,38=5,53=9/2;
+ 6/7=2,8=2,9=2,10=2,28=1/1;
+ 7/30=1/1,2,3,16;
+ 1/14=-1,18=20,19=15,26=3/3(2);
+ 2/9=110,15=1/2;
+ 99//99;
+ 2/9=110,15=1/2;
+ 3/5=1,6=6,7=11,11=2,16=1,25=1,30=1,70=32205,71=1,72=9,74=-5,124=31/1,2,3;
+ 4/5=5,16=3,69=1/1;
+ 5/5=2,38=5,53=9/2;
+ 7/30=1/1,2,3,16;
+ 1/14=-1,18=20,19=15,26=3/3(-5);
+ 2/9=110,15=1/2;
+ 6/7=2,8=2,9=2,10=2,19=2,28=1/1;
+ 99/9=1/99;
+ Leave Link    1 at Mon Jan 22 15:45:10 2018, MaxMem=  2359296000 cpu:         0.9

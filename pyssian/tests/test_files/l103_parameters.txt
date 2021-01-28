@@ -1,0 +1,33 @@
+!    Initial Parameters    !
+! (Angstroms and Degrees)  !
+! Name  Definition              Value          Derivative Info.                !
+! R3    R(1,9)                  1.4205         calculate D2E/DX2 analytically  !
+! R76   R(64,69)                1.0863         calculate D2E/DX2 analytically  !
+! A7    A(1,2,3)              101.0294         calculate D2E/DX2 analytically  !
+! A70   A(33,29,34)           110.1213         calculate D2E/DX2 analytically  !
+! A132  A(63,64,69)           120.1371         calculate D2E/DX2 analytically  !
+! A136  L(9,10,22,49,-2)      176.4505         calculate D2E/DX2 analytically  !
+! D1    D(8,1,2,3)             36.9644         calculate D2E/DX2 analytically  !
+! D12   D(11,1,8,4)          -145.3592         calculate D2E/DX2 analytically  !
+! D105  D(39,26,30,29)        173.3296         calculate D2E/DX2 analytically  !
+## Split Here ##
+
+## Split Here ##
+! Non-Optimized Parameters !
+! (Angstroms and Degrees)  !
+! Name  Definition              Value          Derivative Info.                !
+! R3    R(1,9)                  1.4212         -DE/DX =   -0.0002              !
+! R76   R(64,69)                1.0863         -DE/DX =    0.0                 !
+! A7    A(1,2,3)              100.8096         -DE/DX =    0.0002              !
+! A70   A(33,29,34)           109.9635         -DE/DX =    0.0                 !
+! A136  L(9,10,22,49,-2)      177.4255         -DE/DX =    0.0002              !
+! D1    D(8,1,2,3)             37.6            -DE/DX =    0.0001              !
+! D12   D(11,1,8,4)          -146.7719         -DE/DX =    0.0001              !
+! D105  D(39,26,30,29)        176.6724         -DE/DX =    0.0                 !
+## Split Here ##
+!   Optimized Parameters   !
+! (Angstroms and Degrees)  !
+! Name  Definition              Value          Derivative Info.                !
+! R1    R(1,2)                  1.5077         -DE/DX =    0.0                 !
+! R2    R(1,8)                  2.493          -DE/DX =    0.0123              !
+! D54   D(20,15,16,21)          0.1006         -DE/DX =    0.0                 !

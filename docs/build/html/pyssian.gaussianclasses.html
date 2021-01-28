@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>gaussianclasses &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="linkjobparsers" href="pyssian.linkjobparsers.html" />
+    <link rel="prev" title="classutils" href="pyssian.classutils.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.linkjobparsers.html" title="linkjobparsers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.classutils.html" title="classutils"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" accesskey="U">pyssian API</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pyssian.gaussianclasses">
+<span id="gaussianclasses"></span><h1>gaussianclasses<a class="headerlink" href="#module-pyssian.gaussianclasses" title="Permalink to this headline">¶</a></h1>
+<p>One of the two core libraries of pyssian. Contains the Classes that represent
+Gaussian Files (input and output).</p>
+<dl class="simple">
+<dt>To do:</dt><dd><ul class="simple">
+<li><p>Create a Class to represent the basis and core electronic pontentials</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="gaussianinfile">
+<h2>GaussianInFile<a class="headerlink" href="#gaussianinfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Accepts a context manager usage similar to 'with open(file) as F:...'</p></li>
+<li><p>Does not parse ONIOM calculation inputs</p></li>
+<li><p>Does not parse MM calculation inputs</p></li>
+</ul>
+<dl class="py class">
+<dt id="pyssian.GaussianInFile">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.</code><code class="sig-name descname">GaussianInFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gaussian 09 .in file parent class, if any special type of input
+requires different processing it should be a subclass of this one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>io.TextIOBase</em><em> or </em><em>str</em>) -- File instance (Result of open(filename,'r')) or valid filename.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.preprocessing">
+<code class="sig-name descname">preprocessing</code><a class="headerlink" href="#pyssian.GaussianInFile.preprocessing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary in which each key corresponds to a certain Link0 keyword</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.commandline">
+<code class="sig-name descname">commandline</code><a class="headerlink" href="#pyssian.GaussianInFile.commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary that contains the information of how the calculation
+will be carried out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.title">
+<code class="sig-name descname">title</code><a class="headerlink" href="#pyssian.GaussianInFile.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>title of the calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.method">
+<code class="sig-name descname">method</code><a class="headerlink" href="#pyssian.GaussianInFile.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>If it cannot be recognized in the command line it will be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.basis">
+<code class="sig-name descname">basis</code><a class="headerlink" href="#pyssian.GaussianInFile.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>If it cannot be recognized in the command line it will be empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.spin">
+<code class="sig-name descname">spin</code><a class="headerlink" href="#pyssian.GaussianInFile.spin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.charge">
+<code class="sig-name descname">charge</code><a class="headerlink" href="#pyssian.GaussianInFile.charge" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.geometry">
+<code class="sig-name descname">geometry</code><a class="headerlink" href="#pyssian.GaussianInFile.geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>It should be able to write the text block of an input file upon calling
+str(geometry)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str-ish</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.tail">
+<code class="sig-name descname">tail</code><a class="headerlink" href="#pyssian.GaussianInFile.tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of str in which each should be separated from the others by a
+single blank line in the input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.structure">
+<code class="sig-name descname">structure</code><a class="headerlink" href="#pyssian.GaussianInFile.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string holding the structure of the input file. Used to write new
+Input files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.add_chk">
+<code class="sig-name descname">add_chk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.add_chk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.add_chk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds the chk to the file, with the specified name. If none is provided
+defaults to the file name ended in .chk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.change_basis">
+<code class="sig-name descname">change_basis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">basis</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.change_basis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.change_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes appropiately the basis of the calculation. Equivalent to
+self.basis = basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>basis</strong> (<em>str</em>) -- A string representation of a valid method if specified in the
+command line.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> -- If the basis is not within the registered basis keywords</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.change_method">
+<code class="sig-name descname">change_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.change_method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.change_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes appropiately the method of the calculation. Equivalent to
+self.method = method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>str</em>) -- A string representation of a valid method</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> -- If the method is not within the registered methods keywords</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias to file.close for consistency with the io.TextIOBase class</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.parse_commandline">
+<code class="sig-name descname">parse_commandline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lines</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.parse_commandline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.parse_commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the lines that contain the calculation commands kewords and
+transforms them into a dictionary representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped. Empty lines will be ignored.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.parse_geometry">
+<code class="sig-name descname">parse_geometry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lines</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.parse_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.parse_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses each line that contains 'Atom x y z' in an appropiate form
+and saves it to self.geometry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped. Should not contain empty lines</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.parse_preprocessing">
+<code class="sig-name descname">parse_preprocessing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lines</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.parse_preprocessing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.parse_preprocessing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the lines that contain the Link 0 keywords and transforms them
+into a dictionary representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped. Empty lines will be ignored.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.parse_tail">
+<code class="sig-name descname">parse_tail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lines</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.parse_tail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.parse_tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chops the set of lines into different blocks of text using as
+reference the emptylines/blank lines</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Description of returned object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ExceptionName</strong> -- Why the exception is raised.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.pop_chk">
+<code class="sig-name descname">pop_chk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.pop_chk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.pop_chk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the chk from the file, returns 'default' if the chk was not
+included already</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the file and populates the appropiate attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianInFile.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the the File object to a File. If a filepath is provided it will
+write to that filepath otherwise it will attempt to write to the path
+provided in the initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) -- A valid filepath.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gaussianoutfile">
+<h2>GaussianOutFile<a class="headerlink" href="#gaussianoutfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Accepts a context manager usage similar to 'with open(file) as F:...'</p></li>
+</ul>
+<dl class="py class">
+<dt id="pyssian.GaussianOutFile">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.</code><code class="sig-name descname">GaussianOutFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">parselist</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gaussian 09 .out file parent class, if any special type of calculation
+requires different processing it should be a subclass of this one. Accepts
+a context manager usage similar to 'with open(file) as F:...'</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>io.TextIOBase</em><em> or </em><em>str</em>) -- File instance (Result of open(filename,'r')) or valid filename.</p></li>
+<li><p><strong>parselist</strong> (<em>list</em>) -- List of integrers that represent which types of Links to parse
+(the default is None).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.GaussianOutFile.InternalJobs">
+<code class="sig-name descname">InternalJobs</code><a class="headerlink" href="#pyssian.GaussianOutFile.InternalJobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of InternalJobs done by gaussian i.e an gaussian calculation with
+the opt freq keywords will run first an InternalJob for the Optimization
+and after an InternalJob for the Frequency calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianOutFile.FileStructure">
+<code class="sig-name descname">FileStructure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile.FileStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile.FileStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the structure of links and internal jobs of the file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianOutFile.GetLinks">
+<code class="sig-name descname">GetLinks</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">LinkIds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile.GetLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile.GetLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper Method to get a list of Links with certain Ids across
+the different Internal Jobs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*LinkIds</strong> (<em>int</em>) -- Integrers that correspond to the type of links to be return.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianOutFile.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes per each InternalJob stored all the EmptyLinkJobs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianOutFile.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias of update for consistency with GaussianInFile class</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianOutFile.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">clean</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">FinalPrint</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.GaussianOutFile.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to fetch new data. If it exists it parses it appropiately
+otherwise it fails silently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clean</strong> (<em>Bool</em>) -- If True removes all the EmptyLinkJobs found (the default is True).</p></li>
+<li><p><strong>FinalPrint</strong> (<em>Bool</em>) -- If True after a normal execution has finished it will print in the
+console a message to notify the user (the default is False).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="internaljob">
+<h2>InternalJob<a class="headerlink" href="#internaljob" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.InternalJob">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.</code><code class="sig-name descname">InternalJob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">number</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#InternalJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.InternalJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gaussian 09 InternalJob parent class, if any special type of Job
+requires different parsing it should be a subclass of this one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) -- ordinal number of the InternalJob (the default is None).</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.InternalJob.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#pyssian.InternalJob.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>string identifier for the job.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.InternalJob.Links">
+<code class="sig-name descname">Links</code><a class="headerlink" href="#pyssian.InternalJob.Links" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of the different Links that belong to the InternalJob.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.InternalJob.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.InternalJob.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.InternalJob.GetLinks">
+<code class="sig-name descname">GetLinks</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">LinkIds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#InternalJob.GetLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.InternalJob.GetLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper Method to get a list of Links with certain Ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*LinkIds</strong> (<em>int</em>) -- Integrers that correspond to the type of links to be return.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of Link Objects ordered by appearance in the file and filtered
+by Link Number.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.InternalJob.GuessInfo">
+<code class="sig-name descname">GuessInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#InternalJob.GuessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.InternalJob.GuessInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Guesses the number and type attributes of itself using the stored
+Links.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.InternalJob.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#InternalJob.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.InternalJob.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all the Empty Link instances within Links.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gaussianclasses</a><ul>
+<li><a class="reference internal" href="#gaussianinfile">GaussianInFile</a></li>
+<li><a class="reference internal" href="#gaussianoutfile">GaussianOutFile</a></li>
+<li><a class="reference internal" href="#internaljob">InternalJob</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pyssian.classutils.html"
+                        title="previous chapter">classutils</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pyssian.linkjobparsers.html"
+                        title="next chapter">linkjobparsers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyssian.gaussianclasses.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.linkjobparsers.html" title="linkjobparsers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.classutils.html" title="classutils"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" >pyssian API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

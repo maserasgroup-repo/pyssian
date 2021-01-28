@@ -1,0 +1,13 @@
+
+## Split Here ##
+
+## Split Here ##
+Zero-point correction=                           0.174490 (Hartree/Particle)
+ Thermal correction to Energy=                    0.186203
+ Thermal correction to Enthalpy=                  0.187148
+ Thermal correction to Gibbs Free Energy=         0.136574
+ Sum of electronic and zero-point Energies=           -649.793106
+ Sum of electronic and thermal Energies=              -649.781393
+ Sum of electronic and thermal Enthalpies=            -649.780449
+ Sum of electronic and thermal Free Energies=         -649.831023
+ 

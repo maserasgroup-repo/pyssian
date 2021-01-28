@@ -1,0 +1,7 @@
+dynamicparse
+============
+
+.. automodule:: pyssian.dynamicparse
+   :members:
+   :undoc-members:
+   :show-inheritance:

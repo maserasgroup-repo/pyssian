@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>dynamicparse &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="functutils" href="pyssian.functutils.html" />
+    <link rel="prev" title="classutils" href="pyssian.classutils.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.functutils.html" title="functutils"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.classutils.html" title="classutils"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" accesskey="U">pyssian API</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pyssian.dynamicparse">
+<span id="dynamicparse"></span><h1>dynamicparse<a class="headerlink" href="#module-pyssian.dynamicparse" title="Permalink to this headline">¶</a></h1>
+<p>Provides specializations of GaussianOutFile to simplify dynamic parsing of
+files. This module is still in development.</p>
+<dl class="function">
+<dt id="pyssian.dynamicparse.BackgroundUpdater">
+<code class="sig-prename descclassname">pyssian.dynamicparse.</code><code class="sig-name descname">BackgroundUpdater</code><span class="sig-paren">(</span><em class="sig-param">GOF</em>, <em class="sig-param">Finisher</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#BackgroundUpdater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.BackgroundUpdater" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="pyssian.dynamicparse.ConvergenceWatcher">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.dynamicparse.</code><code class="sig-name descname">ConvergenceWatcher</code><span class="sig-paren">(</span><em class="sig-param">File</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#ConvergenceWatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.ConvergenceWatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.dynamicparse.RealTimeGOF" title="pyssian.dynamicparse.RealTimeGOF"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.dynamicparse.RealTimeGOF</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyssian.dynamicparse.OptFreqWatcher">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.dynamicparse.</code><code class="sig-name descname">OptFreqWatcher</code><span class="sig-paren">(</span><em class="sig-param">File</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#OptFreqWatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.OptFreqWatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.dynamicparse.RealTimeGOF" title="pyssian.dynamicparse.RealTimeGOF"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.dynamicparse.RealTimeGOF</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyssian.dynamicparse.RealTimeGOF">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.dynamicparse.</code><code class="sig-name descname">RealTimeGOF</code><span class="sig-paren">(</span><em class="sig-param">File</em>, <em class="sig-param">Links</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper for easier console control of a Gaussian output</p>
+<dl class="method">
+<dt id="pyssian.dynamicparse.RealTimeGOF.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.RealTimeGOF.end">
+<code class="sig-name descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF.end"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF.end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.RealTimeGOF.isAlive">
+<code class="sig-name descname">isAlive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF.isAlive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF.isAlive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.RealTimeGOF.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.RealTimeGOF.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#RealTimeGOF.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.RealTimeGOF.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyssian.dynamicparse.Updater">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.dynamicparse.</code><code class="sig-name descname">Updater</code><span class="sig-paren">(</span><em class="sig-param">GOF</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#Updater"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.Updater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyssian.dynamicparse.Updater.isAlive">
+<code class="sig-name descname">isAlive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#Updater.isAlive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.Updater.isAlive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.Updater.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#Updater.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.Updater.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.dynamicparse.Updater.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/dynamicparse.html#Updater.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.dynamicparse.Updater.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pyssian.classutils.html"
+                        title="previous chapter">classutils</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pyssian.functutils.html"
+                        title="next chapter">functutils</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyssian.dynamicparse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.functutils.html" title="functutils"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.classutils.html" title="classutils"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" >pyssian API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

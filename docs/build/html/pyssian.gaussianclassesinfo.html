@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>gaussianclassesinfo &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="linkjobparsers" href="pyssian.linkjobparsers.html" />
+    <link rel="prev" title="gaussianclasses" href="pyssian.gaussianclasses.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.linkjobparsers.html" title="linkjobparsers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.gaussianclasses.html" title="gaussianclasses"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" accesskey="U">pyssian API</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gaussianclassesinfo">
+<h1>gaussianclassesinfo<a class="headerlink" href="#gaussianclassesinfo" title="Permalink to this headline">¶</a></h1>
+<p>Currently in development.</p>
+<span class="target" id="module-pyssian.gaussianclassesinfo"></span><dl class="class">
+<dt id="pyssian.gaussianclassesinfo.GOF_info">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.gaussianclassesinfo.</code><code class="sig-name descname">GOF_info</code><span class="sig-paren">(</span><em class="sig-param">File</em>, <em class="sig-param">ParseList=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.gaussianclasses.GaussianOutFile</span></code></p>
+<p>Gaussian 09 .out file parent class, if any special type of calculation
+requires different processing it should be a subclass of this one</p>
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.BlockFetcher">
+<code class="sig-name descname">BlockFetcher</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.BlockFetcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.BlockFetcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator that yields the text sliced in blocks and their type.</p>
+<p>A block is an iterable of strings and its type refers to how it
+should be parsed, ranges from Link 1 block, to Link 9999 (1,9999),
+something in betweem Link Blocks (-1) or no End was found (-9999)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.BlockHandler">
+<code class="sig-name descname">BlockHandler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.BlockHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.BlockHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coroutine. Receives a block, chooses the parser and parses it</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.FileStructure">
+<code class="sig-name descname">FileStructure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.FileStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.FileStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the structure of links and internal jobs of the file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.Reader">
+<code class="sig-name descname">Reader</code><span class="sig-paren">(</span><em class="sig-param">File</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for line by line reading without stopiteration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes per each InternalJob stored all the EmptyLinkJobs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.GOF_info.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">Clean=True</em>, <em class="sig-param">EndPrint=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#GOF_info.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.GOF_info.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to fetch new content in the File, if the new content exists
+try to update the last added InternalJob, if it was already finished
+and a new InternalJob has started, it creates it and adds it.</p>
+<p>If Clean is set to True it will automatically remove any
+emtpy LinkJob</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyssian.gaussianclassesinfo.IJ_info">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.gaussianclassesinfo.</code><code class="sig-name descname">IJ_info</code><span class="sig-paren">(</span><em class="sig-param">Number=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#IJ_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.IJ_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.gaussianclasses.InternalJob</span></code></p>
+<p>Gaussian 09 InternalJob parent class, if any special type of Job
+requires different parsing it should be a subclass of this one</p>
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.IJ_info.GetLinks">
+<code class="sig-name descname">GetLinks</code><span class="sig-paren">(</span><em class="sig-param">*LinkIds</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#IJ_info.GetLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.IJ_info.GetLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper Method to get a list of Links with certain Ids</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.IJ_info.GuessInfo">
+<code class="sig-name descname">GuessInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#IJ_info.GuessInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.IJ_info.GuessInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Guesses the number and type attributes of itself using the stored
+Links.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.IJ_info.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">Link</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#IJ_info.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.IJ_info.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyssian.gaussianclassesinfo.IJ_info.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#IJ_info.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.IJ_info.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all the Empty Link instances within Links</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyssian.gaussianclassesinfo.LinkJob_info">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.gaussianclassesinfo.</code><code class="sig-name descname">LinkJob_info</code><span class="sig-paren">(</span><em class="sig-param">Text</em>, <em class="sig-param">Num=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclassesinfo.html#LinkJob_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.gaussianclassesinfo.LinkJob_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyssian.linkjobparsers.html#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>LinkJob Base class, should be an ABC</p>
+<dl class="attribute">
+<dt id="pyssian.gaussianclassesinfo.LinkJob_info.Register">
+<code class="sig-name descname">Register</code><em class="property"> = {}</em><a class="headerlink" href="#pyssian.gaussianclassesinfo.LinkJob_info.Register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register is a dict where key corresponds to an int, and value
+corresponds to the class</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pyssian.gaussianclassesinfo.LinkJob_info.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.gaussianclassesinfo.LinkJob_info.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pyssian.gaussianclassesinfo.LinkJob_info.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.gaussianclassesinfo.LinkJob_info.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pyssian.gaussianclasses.html"
+                        title="previous chapter">gaussianclasses</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pyssian.linkjobparsers.html"
+                        title="next chapter">linkjobparsers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyssian.gaussianclassesinfo.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.linkjobparsers.html" title="linkjobparsers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.gaussianclasses.html" title="gaussianclasses"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" >pyssian API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

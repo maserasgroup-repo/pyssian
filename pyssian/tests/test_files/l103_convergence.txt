@@ -1,0 +1,16 @@
+
+## Split Here ##
+Maximum Force,0.002129,0.000450,NO
+RMS     Force,0.000173,0.000300,YES
+Maximum Displacement,0.074004,0.001800,NO
+RMS     Displacement,0.011578,0.001200,NO
+## Split Here ##
+Maximum Force,0.002348,0.000450,NO
+RMS     Force,0.000184,0.000300,YES
+Maximum Displacement,0.031749,0.001800,NO
+RMS     Displacement,0.005897,0.001200,NO
+## Split Here ##
+Maximum Force,0.000015,0.000450,YES
+RMS     Force,0.000003,0.000300,YES
+Maximum Displacement,0.000446,0.001800,YES
+RMS     Displacement,0.000120,0.001200,YES

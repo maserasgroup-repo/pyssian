@@ -1,0 +1,1153 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>linkjobparsers &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="tests" href="pyssian.tests.html" />
+    <link rel="prev" title="gaussianclasses" href="pyssian.gaussianclasses.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.tests.html" title="tests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.gaussianclasses.html" title="gaussianclasses"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" accesskey="U">pyssian API</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pyssian.linkjobparsers">
+<span id="linkjobparsers"></span><h1>linkjobparsers<a class="headerlink" href="#module-pyssian.linkjobparsers" title="Permalink to this headline">¶</a></h1>
+<p>One of the two core modules of pyssian. This module contains the classes and
+parsers for the outputs of the different types of links. Only the classes
+registered with the appropiate decorator are considered for parsing.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#linkjob" id="id1">LinkJob</a></p></li>
+<li><p><a class="reference internal" href="#generallinkjob" id="id2">GeneralLinkJob</a></p></li>
+<li><p><a class="reference internal" href="#link1" id="id3">Link1</a></p></li>
+<li><p><a class="reference internal" href="#link101" id="id4">Link101</a></p></li>
+<li><p><a class="reference internal" href="#link103" id="id5">Link103</a></p></li>
+<li><p><a class="reference internal" href="#link123" id="id6">Link123</a></p></li>
+<li><p><a class="reference internal" href="#link202" id="id7">Link202</a></p></li>
+<li><p><a class="reference internal" href="#link502" id="id8">Link502</a></p></li>
+<li><p><a class="reference internal" href="#link508" id="id9">Link508</a></p></li>
+<li><p><a class="reference internal" href="#link716" id="id10">Link716</a></p></li>
+<li><p><a class="reference internal" href="#link804" id="id11">Link804</a></p></li>
+<li><p><a class="reference internal" href="#link913" id="id12">Link913</a></p></li>
+</ul>
+</div>
+<div class="section" id="linkjob">
+<h2><a class="toc-backref" href="#contents">LinkJob</a><a class="headerlink" href="#linkjob" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.LinkJob">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">LinkJob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#LinkJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.LinkJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>LinkJob Base class. Represents the output of a lxxxx.exe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>list</em>) -- text that corresponds to the output of the lxxxx.exe</p></li>
+<li><p><strong>number</strong> (<em>int</em>) -- Integrer that represents the type of the LinkJob (the default is None).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.LinkJob.Register">
+<code class="sig-name descname">Register</code><a class="headerlink" href="#pyssian.linkjobparsers.LinkJob.Register" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict where key corresponds to an int, and value corresponds to the
+registered subclass class through &#64;RegisterLinkJob</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.LinkJob.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.LinkJob.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.LinkJob.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.LinkJob.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="pyssian.linkjobparsers.RegisterLinkJob">
+<code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">RegisterLinkJob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cls</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#RegisterLinkJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.RegisterLinkJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for the LinkJob subclasses, adds the class to the
+LinkJob.Register dictionary with the _token as key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cls</strong> (<a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><em>LinkJob</em></a>) -- LinkJob subclass identified with the cls._token attribute. Which is
+normally an integrer between 1 and 9999.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="generallinkjob">
+<h2><a class="toc-backref" href="#contents">GeneralLinkJob</a><a class="headerlink" href="#generallinkjob" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.GeneralLinkJob">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">GeneralLinkJob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#GeneralLinkJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.GeneralLinkJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Subclass of Linkjob to store the information of any Link that does not
+have a specific parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the lxxxx.exe</p></li>
+<li><p><strong>number</strong> (<em>int</em>) -- Integrer that represents the type of the LinkJob. (defaults to None)</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.GeneralLinkJob.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.GeneralLinkJob.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.GeneralLinkJob.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.GeneralLinkJob.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link1">
+<h2><a class="toc-backref" href="#contents">Link1</a><a class="headerlink" href="#link1" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link1">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l1.exe,it also holds
+information about the InternalJob setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l1.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.info">
+<code class="sig-name descname">info</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>tuple that contains information needed to instantiate an InternalJob.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>namedtuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.commandline">
+<code class="sig-name descname">commandline</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the information of the gaussian commands
+(defaults to an empty string).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.nprocs">
+<code class="sig-name descname">nprocs</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.nprocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the number of the %nprocshared link0 option</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.mem">
+<code class="sig-name descname">mem</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.mem" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains the right hand side of the %mem link0 option</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.link0">
+<code class="sig-name descname">link0</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.link0" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of lines containing the link0 specifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.IOps">
+<code class="sig-name descname">IOps</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.IOps" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of lines containing the IOps that appear below the command line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link1.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.Link1.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link1._guess_type">
+<code class="sig-name descname">_guess_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1._guess_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1._guess_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Guesses the type of Job depending on the keywords in the
+self.commandline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>{Constrained Optimization, Optimization,
+Frequency Calculation, Unidentified}</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link1._locate_IOps">
+<code class="sig-name descname">_locate_IOps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1._locate_IOps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1._locate_IOps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to search IOps (see
+Gaussian Manual).
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>IOps</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link1._locate_commandline">
+<code class="sig-name descname">_locate_commandline</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1._locate_commandline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1._locate_commandline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to search the
+gaussian commands, which start with a &quot;#&quot;.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>commandline</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link1._locate_internaljob">
+<code class="sig-name descname">_locate_internaljob</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1._locate_internaljob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1._locate_internaljob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to search the number
+of the &quot;current&quot; internal job at the file.</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>info (If none is found defaults to 1)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link1._locate_link0">
+<code class="sig-name descname">_locate_link0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link1._locate_link0"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link1._locate_link0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to search the link0
+options (specified with a % at the start of the option).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>nprocs (Defaults to None)</p></li>
+<li><p>mem (Defaults to None)</p></li>
+<li><p>link0 (If none is found defaults to an empty list)</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link101">
+<h2><a class="toc-backref" href="#contents">Link101</a><a class="headerlink" href="#link101" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link101">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link101</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link101"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link101" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l101.exe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l101.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults is False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link101.charge">
+<code class="sig-name descname">charge</code><a class="headerlink" href="#pyssian.linkjobparsers.Link101.charge" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link101.spin">
+<code class="sig-name descname">spin</code><a class="headerlink" href="#pyssian.linkjobparsers.Link101.spin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link101._locate_charge_spin">
+<code class="sig-name descname">_locate_charge_spin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link101._locate_charge_spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link101._locate_charge_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches the charge and spin.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>charge</p></li>
+<li><p>spin</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link103">
+<h2><a class="toc-backref" href="#contents">Link103</a><a class="headerlink" href="#link103" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link103">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link103</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l103.exe. Corresponds to a
+single step of a Berny optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l103.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.mode">
+<code class="sig-name descname">mode</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>'Init', 'Iteration' or 'End'</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Either 'Optimized', 'Non-optimized' or 'Initial'</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.conversion">
+<code class="sig-name descname">conversion</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.conversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples with fields Item,Value,Threshold,Converged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.parameters">
+<code class="sig-name descname">parameters</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples with fields Name,Definition,Value,Derivative.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.derivatives">
+<code class="sig-name descname">derivatives</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.derivatives" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples with fields Var,old,dEdX,dXl,dXq,dXt,new.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.stepnumber">
+<code class="sig-name descname">stepnumber</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.stepnumber" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.scanpoint">
+<code class="sig-name descname">scanpoint</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.scanpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link103.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.Link103.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link103._locate_convergence">
+<code class="sig-name descname">_locate_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103._locate_convergence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103._locate_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the convergence parameters.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>conversion</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link103._locate_mode">
+<code class="sig-name descname">_locate_mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103._locate_mode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103._locate_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+If the Link corresponds to an (Init)ialization pass, (Iteration)
+or (End) converged or not.</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>mode (Iteration)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link103._locate_numbers">
+<code class="sig-name descname">_locate_numbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103._locate_numbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103._locate_numbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the current step number (of an optimization) and scan number
+(of an scan calculation).
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>stepnumber</p></li>
+<li><p>scanpoint</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link103._locate_parameters">
+<code class="sig-name descname">_locate_parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103._locate_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103._locate_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the parameter table if exists.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>state</p></li>
+<li><p>parameters</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link103.print_convergence">
+<code class="sig-name descname">print_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103.print_convergence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103.print_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the convergence Table formatted</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link123">
+<h2><a class="toc-backref" href="#contents">Link123</a><a class="headerlink" href="#link123" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link123">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link123</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link123"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link123" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l123.exe. Corresponds to irc
+predictor-corrector steps and may hold the orientation (Geometry) at a given
+step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l202.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.orientation">
+<code class="sig-name descname">orientation</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples containing the geometry of the calculated compound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.step">
+<code class="sig-name descname">step</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>step number of along the irc calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.direction">
+<code class="sig-name descname">direction</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>FORWARD or REVERSE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.reactioncoord">
+<code class="sig-name descname">reactioncoord</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.reactioncoord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Value of the reaction coordinate at the current step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link123.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.Link123.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link123._locate_irc_step">
+<code class="sig-name descname">_locate_irc_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link123._locate_irc_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link123._locate_irc_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the current step info of the irc path.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>reactioncoord</p></li>
+<li><p>step</p></li>
+<li><p>direction</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link123._locate_orientation">
+<code class="sig-name descname">_locate_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link123._locate_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link123._locate_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the geometry of the molecule.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>orientation</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link123.print_orientation">
+<code class="sig-name descname">print_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link123.print_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link123.print_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays in console the geometry with a format similar to gaussian.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link202">
+<h2><a class="toc-backref" href="#contents">Link202</a><a class="headerlink" href="#link202" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link202">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link202</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link202"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link202" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l202.exe. Holds the
+orientation (Geometry) at a given step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l202.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link202.orientation">
+<code class="sig-name descname">orientation</code><a class="headerlink" href="#pyssian.linkjobparsers.Link202.orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples containing the geometry of the calculated compound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link202.DistanceMatrix">
+<code class="sig-name descname">DistanceMatrix</code><a class="headerlink" href="#pyssian.linkjobparsers.Link202.DistanceMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each item the postitions 0 and 1 correspond to the Atom ID in the
+structure and the Atomic Number/Symbol respectively. Position 1 holds
+a list with the distances with respect to all previous items.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link202.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#pyssian.linkjobparsers.Link202.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link202.number">
+<code class="sig-name descname">number</code><a class="headerlink" href="#pyssian.linkjobparsers.Link202.number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link202._locate_DistanceMatrix">
+<code class="sig-name descname">_locate_DistanceMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link202._locate_DistanceMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link202._locate_DistanceMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for the keyword 'Distance matrix' and reads the
+Input orientation table that follows
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>DistanceMatrix</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link202._locate_orientation">
+<code class="sig-name descname">_locate_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link202._locate_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link202._locate_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the geometry of the molecule.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>orientation</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link202.get_AtNum2Sym_map">
+<code class="sig-name descname">get_AtNum2Sym_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link202.get_AtNum2Sym_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link202.get_AtNum2Sym_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary that relates the atomic number with the symbol
+based on the information contained in the orientation and distance
+matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary with Atomic Number to Symbol mapping</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Out</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link202.print_orientation">
+<code class="sig-name descname">print_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link202.print_orientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link202.print_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays in console the geometry with a format similar to gaussian.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link502">
+<h2><a class="toc-backref" href="#contents">Link502</a><a class="headerlink" href="#link502" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link502">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link502</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link502" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l502.exe. Corresponds to a
+iterative calculation of the SCF cycles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l502.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link502.energy">
+<code class="sig-name descname">energy</code><a class="headerlink" href="#pyssian.linkjobparsers.Link502.energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Final Potential Energy of the SCF cycles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link502._locate_energy">
+<code class="sig-name descname">_locate_energy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link502._locate_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link502._locate_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find the Energy
+rported as 'SCF Done:' and reads the potential energy.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>energy</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link508">
+<h2><a class="toc-backref" href="#contents">Link508</a><a class="headerlink" href="#link508" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link508">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link508</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link508"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link508" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.Link502" title="pyssian.linkjobparsers.Link502"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.Link502</span></code></a></p>
+<p>Representation and parser for the output of l508.exe. Corresponds to a
+iterative calculation of the SCF using a quadratic convergence algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l508.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link508.energy">
+<code class="sig-name descname">energy</code><a class="headerlink" href="#pyssian.linkjobparsers.Link508.energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Final Potential Energy of the SCF cycles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link716">
+<h2><a class="toc-backref" href="#contents">Link716</a><a class="headerlink" href="#link716" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link716">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link716</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link716"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link716" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l716.exe. Displays
+information about Forces and Frequency Calculations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l716.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.dipole">
+<code class="sig-name descname">dipole</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.dipole" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.units">
+<code class="sig-name descname">units</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.units" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.zeropoint">
+<code class="sig-name descname">zeropoint</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.zeropoint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.thermal_energy">
+<code class="sig-name descname">thermal_energy</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.thermal_energy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.enthalpy">
+<code class="sig-name descname">enthalpy</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.enthalpy" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.gibbs">
+<code class="sig-name descname">gibbs</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.gibbs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.EContribs">
+<code class="sig-name descname">EContribs</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.EContribs" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples with fields Name,Thermal,CV,S .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.IRSpectrum">
+<code class="sig-name descname">IRSpectrum</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.IRSpectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Text that corresponds to the IRSpectrum</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link716.mode">
+<code class="sig-name descname">mode</code><a class="headerlink" href="#pyssian.linkjobparsers.Link716.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Either 'Forces', 'Freq' or 'Other'.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link716._locate_IRSpectrum">
+<code class="sig-name descname">_locate_IRSpectrum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link716._locate_IRSpectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link716._locate_IRSpectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find the IR
+spectrum.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>IRSpectrum</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link716._locate_dipole">
+<code class="sig-name descname">_locate_dipole</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link716._locate_dipole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link716._locate_dipole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find the Dipole
+Vector.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>dipole</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link716._locate_frequencies">
+<code class="sig-name descname">_locate_frequencies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link716._locate_frequencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link716._locate_frequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find the
+frequencies table.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>frequencies</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link716._locate_thermochemistry">
+<code class="sig-name descname">_locate_thermochemistry</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link716._locate_thermochemistry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link716._locate_thermochemistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find the
+thermochemistry computed properties.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>zeropoint</p></li>
+<li><p>thermal_energy</p></li>
+<li><p>enthalpy</p></li>
+<li><p>gibbs</p></li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link804">
+<h2><a class="toc-backref" href="#contents">Link804</a><a class="headerlink" href="#link804" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link804">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link804</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link804"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link804" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l804.exe. Holds the
+information about the MP2 energy calculation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l804.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link804.MP2">
+<code class="sig-name descname">MP2</code><a class="headerlink" href="#pyssian.linkjobparsers.Link804.MP2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Potential energy with MP2 method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link804.SpinComponents">
+<code class="sig-name descname">SpinComponents</code><a class="headerlink" href="#pyssian.linkjobparsers.Link804.SpinComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of namedtuples with the fields Name, T, E.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link804.Get_SCScorr">
+<code class="sig-name descname">Get_SCScorr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link804.Get_SCScorr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link804.Get_SCScorr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates and returns the MP2(SCS) potential energy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link804._locate_MP2">
+<code class="sig-name descname">_locate_MP2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link804._locate_MP2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link804._locate_MP2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for the keyword 'EUMP2=' and reads the MP2 Potential Energy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link804._locate_SpinComponents">
+<code class="sig-name descname">_locate_SpinComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link804._locate_SpinComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link804._locate_SpinComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for the keywords 'Spin Components' and reads
+the Energies of the spin Components</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link913">
+<h2><a class="toc-backref" href="#contents">Link913</a><a class="headerlink" href="#link913" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link913">
+<em class="property">class </em><code class="sig-prename descclassname">pyssian.linkjobparsers.</code><code class="sig-name descname">Link913</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">asEmpty</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link913"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link913" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l913.exe. Holds information
+about CCSD(T) calculations including MP4 Energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l913.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link913.MP4">
+<code class="sig-name descname">MP4</code><a class="headerlink" href="#pyssian.linkjobparsers.Link913.MP4" title="Permalink to this definition">¶</a></dt>
+<dd><p>MP4 potential energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link913.CCSDT">
+<code class="sig-name descname">CCSDT</code><a class="headerlink" href="#pyssian.linkjobparsers.Link913.CCSDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>CCSD(T) potential energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link913._locate_CCSDT">
+<code class="sig-name descname">_locate_CCSDT</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link913._locate_CCSDT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link913._locate_CCSDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for the keywords 'Time for triples' which appears after the
+calculation has converged and reads the CCSD(T) Potential Energy</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link913._locate_MP4">
+<code class="sig-name descname">_locate_MP4</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link913._locate_MP4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link913._locate_MP4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Looks for the First iteration and then looks for the keyword
+'UMP4(SDQ)' and reads the MP4 Potential Energy</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">linkjobparsers</a><ul>
+<li><a class="reference internal" href="#linkjob">LinkJob</a></li>
+<li><a class="reference internal" href="#generallinkjob">GeneralLinkJob</a></li>
+<li><a class="reference internal" href="#link1">Link1</a></li>
+<li><a class="reference internal" href="#link101">Link101</a></li>
+<li><a class="reference internal" href="#link103">Link103</a></li>
+<li><a class="reference internal" href="#link123">Link123</a></li>
+<li><a class="reference internal" href="#link202">Link202</a></li>
+<li><a class="reference internal" href="#link502">Link502</a></li>
+<li><a class="reference internal" href="#link508">Link508</a></li>
+<li><a class="reference internal" href="#link716">Link716</a></li>
+<li><a class="reference internal" href="#link804">Link804</a></li>
+<li><a class="reference internal" href="#link913">Link913</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pyssian.gaussianclasses.html"
+                        title="previous chapter">gaussianclasses</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pyssian.tests.html"
+                        title="next chapter">tests</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyssian.linkjobparsers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pyssian.tests.html" title="tests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pyssian.gaussianclasses.html" title="gaussianclasses"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="pyssian.html" >pyssian API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

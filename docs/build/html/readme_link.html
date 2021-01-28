@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setup &#8212; pyssian  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples_link.html" />
+    <link rel="prev" title="Welcome to pyssian&#39;s API documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples_link.html" title="Examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyssian&#39;s API documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>python &gt;= 3.6</p></li>
+<li><p>python library: setuptools</p></li>
+</ul>
+</div>
+<div class="section" id="installing-the-dependencies">
+<h3>Installing the dependencies<a class="headerlink" href="#installing-the-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>python3.7 installation in Ubuntu 18.04 LTS</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get update
+<span class="gp">$</span> sudo apt-get install python3.7 python3.7-dev
+</pre></div>
+</div>
+<p>If for any reason it is not reachable:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo add-apt-repository ppa:deadsnakes/ppa
+<span class="gp">$</span> sudo apt-get update
+<span class="gp">$</span> sudo apt-get install python3.7 python3.7-dev
+</pre></div>
+</div>
+<p>Now you can skip this if you don't want to set up a virtual environment
+(Remember to change NewFolder for the actual path of the directory where you
+want the virtual environment)</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install python3.7-venv
+<span class="gp">$</span> python3.7 -m venv NewFolder
+<span class="gp">$</span> <span class="nb">source</span> NewFolder/bin/activate
+</pre></div>
+</div>
+<p>Now we install the python default installer pip</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install pip
+<span class="gp">$</span> python -m pip install --upgrade pip
+<span class="gp">$</span> python -m pip install setuptools
+</pre></div>
+</div>
+<p>If it proceeded without any errors (pip and setuptools should already be installed)</p>
+<p>Now to install the optional dependencies (Skip if you don't desire them):</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install numpy
+<span class="gp">$</span> python -m pip install matplotlib
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-pyssian">
+<h3>Installing pyssian<a class="headerlink" href="#installing-pyssian" title="Permalink to this headline">¶</a></h3>
+<p>Get the source code either git or download and unpack it into &quot;pyssian&quot;
+(Currently you need the developer permission to access the code)</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/maserasgroup-repo/pyssian.git pyssian
+</pre></div>
+</div>
+<p>Now install pyssian</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install pyssian
+</pre></div>
+</div>
+<p>Installing with the -e option before NewDir will make that
+all the changes in the source file will have a visible effect when using pyssian</p>
+</div>
+</div>
+<div class="section" id="running-the-tests">
+<h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>To run the tests run the following command:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m unittest pyssian.tests -v
+</pre></div>
+</div>
+</div>
+<div class="section" id="developed-with">
+<h2>Developed with<a class="headerlink" href="#developed-with" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>python 3.7.3</p></li>
+<li><p>Ubuntu 16.04 LTS</p></li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Please open the Examples.rst in github to visualize the basic usage examples
+or read the documentation.</p>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Raúl Pérez-Soto</strong> - [rperezsoto](<a class="reference external" href="https://github.com/rperezsoto">https://github.com/rperezsoto</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>(None currently)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setup</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#installing-the-dependencies">Installing the dependencies</a></li>
+<li><a class="reference internal" href="#installing-pyssian">Installing pyssian</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
+<li><a class="reference internal" href="#developed-with">Developed with</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pyssian's API documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="examples_link.html"
+                        title="next chapter">Examples</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/readme_link.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples_link.html" title="Examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyssian&#39;s API documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pyssian  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, rperezsoto.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>
