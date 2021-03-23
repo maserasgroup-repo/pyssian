@@ -70,6 +70,24 @@ class Geometry(object):
         Geom.atoms = Atoms
         Geom.coordinates = Coords
         return Geom
+    @classmethod
+    def from_xyz(cls,xyzfile):
+        """Generate a Geometry instance from a xyz file."""
+        Geom = cls()
+        Coords = []
+        Atoms = []
+        with open(xyzfile,'r') as F:
+            _iter = F.__iter__()
+            n = next(_iter)
+            _ = next(_iter)
+            for i in range(n): 
+                aux = line.strip().split()
+                Atoms.append(aux[0])
+                B = tuple(map(float,aux[1:]))
+                Coords.append(B)
+        Geom.atoms = Atoms
+        Geom.coordinates = Coords
+        return Geom
 
 class Cube(object):
     """
