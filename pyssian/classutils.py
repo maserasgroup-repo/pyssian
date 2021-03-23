@@ -78,9 +78,10 @@ class Geometry(object):
         Atoms = []
         with open(xyzfile,'r') as F:
             _iter = F.__iter__()
-            n = next(_iter)
+            n = int(next(_iter).strip())
             _ = next(_iter)
-            for i in range(n): 
+            for i in range(n):
+                line = next(_iter)
                 aux = line.strip().split()
                 Atoms.append(aux[0])
                 B = tuple(map(float,aux[1:]))
