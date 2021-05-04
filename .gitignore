@@ -1,6 +1,7 @@
-_Doc
+docs
 *.egg-info
 __pycache__
 .pytest_cache
 Usefull_Files
 .versionner.rc
+.vscode
