@@ -37,7 +37,7 @@ correlationFunctional = ['VWN','VWN5','LYP','PL','P86','PW91','B95','PBE',
                          'TPSS','KCIS','BRC','PKZB','VP86','V5LYP']
 correlationFunctional = '|'.join(correlationFunctional)
 
-methodRegex = '({0})({1})'.format(shellWaveFunctions,methodsRegex)
+methodRegex = f'({shellWaveFunctions})({methodsRegex})'
 compoundMethodRegex = '({0})({1})[0-9]*({2})'.format(shellWaveFunctions,
                                                  exchangeFunctional,
                                                  correlationFunctional)
@@ -62,10 +62,7 @@ def is_method(candidate):
 
     """
     candidate = candidate.upper()
-    methodRegex = '({0})({1})'.format(shellWaveFunctions,methodsRegex)
-    compoundMethodRegex = '({0})({1}).*({2})'.format(shellWaveFunctions,
-                                                     exchangeFunctional,
-                                                     correlationFunctional)
+
     test1 = multiplemethod_re.match(candidate)
     test2 = method_re.match(candidate)
     test3 = compoundmethod_re.match(candidate)
@@ -124,7 +121,7 @@ Hardcoded_basis = set(['sec','lanl2mb','lanl2dz','midix','epr-ii','epr-iii',
 all_basis = [Pople_Basis,UGBS_Basis,cc_Basis,SV_Basis,core_Basis,
              D95_Basis,CEP_Basis,SHC_Basis]
 
-basis_expr = '|'.join(['({})'.format(i) for i in all_basis])
+basis_expr = '|'.join([f'({i})' for i in all_basis])
 #print(basis_expr)
 basis_regex = re.compile(basis_expr)
 ######################## THE PRETTY FUNCTION ###################################

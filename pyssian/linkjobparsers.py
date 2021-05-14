@@ -7,7 +7,6 @@ registered with the appropiate decorator are considered for parsing.
 import warnings
 from collections import namedtuple
 from itertools import cycle
-from abc import abstractmethod
 import re
 
 # Auxiliar Documenting Decorators
@@ -31,16 +30,16 @@ def Populates(*attributes, defaults=None):
 
     if len(attributes) > 0:
         if defaults is None:
-            Out = ['- {}'.format(attr) for attr in attributes]
+            Out = [f'- {attr}' for attr in attributes]
         elif len(defaults) > 1:
-            Out = ['- {} ({})'.format(attr,default)
+            Out = [f'- {attr} ({default})'
                     for attr, default in zip(attributes,defaults)]
         else:
-            Out = ['- {} ({})'.format(attr,defaults[0]) for attr in attributes]
+            Out = [f'- {attr} ({defaults[0]})' for attr in attributes]
         Out.insert(0,'Populates the attributes:')
         Out.append('')
     else:
-        Out = ['Populates the attribute: **{}**'.format(attributes[0]),]
+        Out = [f'Populates the attribute: **{attributes[0]}**',]
     def subdecorator(f):
         match = re.search(r'^[\s]*',f.__doc__)
         lpadding = '\n'
@@ -84,8 +83,7 @@ class LinkJob(object):
         self.text = text
     def __repr__(self):
         cls = type(self).__name__
-        msg = '<Link {number} of class {cls}>'
-        return msg.format(cls=cls,number=self.number)
+        return f'<Link {self.number} of class {cls}>'
     def __str__(self):
         return ''.join(self.text)
 
@@ -526,13 +524,13 @@ class Link103(LinkJob):
 
     def print_convergence(self):
         """ Prints the convergence Table formatted """
-        Format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'
+        Format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'.format
         try:
-            Out = [Format.format(*i) for i in self.conversion]
+            Out = [Format(*i) for i in self.conversion]
         except ValueError as e:
             print("Non numeric value found in the convergence values")
-            Format_str='{0: <22s}\t{1}\t{2}\t{3}'
-            Out = [Format_str.format(*i) for i in self.conversion]
+            Format_str='{0: <22s}\t{1}\t{2}\t{3}'.format
+            Out = [Format_str(*i) for i in self.conversion]
         print('\n'.join(Out))
 
 @RegisterLinkJob
@@ -760,7 +758,7 @@ class Link202(LinkJob):
                 Atom[0] = i[1]
             else:
                 if Atom[0] != i[1]:
-                    raise ParseError('''Two atoms with the same Center number
+                    raise RuntimeError('''Two atoms with the same Center number
                                      and different Symbol have been found ''')
             Atom[1].extend(i[2])
         self.DistanceMatrix = []
@@ -771,12 +769,12 @@ class Link202(LinkJob):
         """
         Displays in console the geometry with a format similar to gaussian.
         """
-        Format = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'
+        Format = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'.format
         Header = 'Center\tAtNum\t{0:^9s}\t{1:^9s}\t{2:^9s}'.format('X','Y','Z')
         print(Header)
-        Out = [Format.format(*i) for i in self.orientation]
+        Out = [Format(*i) for i in self.orientation]
         print(''.join(Out))
-    def get_AtNum2Sym_map(self):
+    def get_atom_mapping(self):
         """
         Returns a dictionary that relates the atomic number with the symbol
         based on the information contained in the orientation and distance

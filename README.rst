@@ -24,6 +24,57 @@ Prerequisites
 
 - python >= 3.6
 - python library: setuptools
+- python library: numpy
+
+Installing pyssian
+..................
+
+(Work In Progress) Installing from PyPI: 
+++++++++++++++++++++++++++++++++++++++++
+
+.. code:: shell-session
+
+   $ python -m pip install pyssian
+
+Installing from source: 
++++++++++++++++++++++++
+
+Check your python version: 
+
+.. code:: shell-session
+
+   $ python --version
+
+If the version is not one of the required substitute in the following commands 
+"python" by the path to the python with the appropiate version. Some systems 
+do not have the python symlink but come with the python3 symlink.
+
+If working within a virtual environment with the appropiate python version, the 
+installation should proceed as normal using "python". 
+
+Get the source code either git or download and unpack it into "pyssian"
+(Currently you need the developer permission to access the code)
+
+.. code:: shell-session
+
+   $ git clone https://github.com/maserasgroup-repo/pyssian.git pyssian
+
+Now install pyssian
+
+.. code:: shell-session
+
+   $ python -m pip install pyssian
+
+*Installing with the -e option before pyssian will make that
+all the changes in the source file will be effective without havin to reinstall*
+
+Or if you prefer you can download the source code in a compressed folder and 
+install directly: 
+
+.. code:: shell-session
+ 
+   $ python -m pip install pyssian.tar.gz
+
 
 Installing the dependencies
 ...........................
@@ -61,37 +112,9 @@ Now we install the python default installer pip
    $ python -m pip install pip
    $ python -m pip install --upgrade pip
    $ python -m pip install setuptools
+   $ python -m pip install numpy
 
 If it proceeded without any errors (pip and setuptools should already be installed)
-
-Now to install the optional dependencies (Skip if you don't desire them):
-
-.. code:: shell-session
-
-   $ python -m pip install numpy
-   $ python -m pip install matplotlib
-
-Installing pyssian
-..................
-
-
-Get the source code either git or download and unpack it into "pyssian"
-(Currently you need the developer permission to access the code)
-
-.. code:: shell-session
-
-   $ git clone https://github.com/maserasgroup-repo/pyssian.git pyssian
-
-Now install pyssian
-
-.. code:: shell-session
-
-   $ python -m pip install pyssian
-
-
-Installing with the -e option before NewDir will make that
-all the changes in the source file will have a visible effect when using pyssian
-
 
 Running the tests
 -----------------
@@ -100,14 +123,14 @@ To run the tests run the following command:
 
 .. code:: shell-session
 
-   $ python -m unittest pyssian.tests -v
+   $ python -m unittest -v pyssian.tests 
 
 
 Developed with
 --------------
 
-- python 3.7.3
-- Ubuntu 16.04 LTS
+- python 3.7
+- Ubuntu 16.04 LTS, 18.04 LTS and 20.04 LTS
 
 .. examples-msg
 
@@ -123,9 +146,10 @@ Authors
 -------
 
 * **Raúl Pérez-Soto** - [rperezsoto](https://github.com/rperezsoto)
-
+* **Maria Besora** - [MaBeBo](https://github.com/MaBeBo)
+* **Feliu Maseras** - [maserasgroup](https://github.com/maserasgroup)
 
 License
 -------
 
-(None currently)
+pyssian is freely available under an [MIT](https://opensource.org/licenses/MIT)

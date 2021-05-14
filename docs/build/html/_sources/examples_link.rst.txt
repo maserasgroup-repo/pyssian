@@ -1,5 +1,0 @@
-Examples
-========
-
-
-.. include:: ../../Examples.rst

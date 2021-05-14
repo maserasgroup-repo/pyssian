@@ -89,7 +89,7 @@ Link1
 .. code:: python
 
    # From the file Get the first Link1
-   Link1 = GOF.GetLinks(1)[0]
+   Link1 = GOF.get_links(1)[0]
    # Attributes of Link1
    Link1.commandline
    Link1.nprocs
@@ -104,11 +104,11 @@ Link101 & Link103
 
 .. code:: python
 
-   Link101 = GOF.GetLinks(101)[0]
+   Link101 = GOF.get_links(101)[0]
    Link101.spin
    Link101.charge
 
-   Link103 = GOF.GetLinks(103)[0]
+   Link103 = GOF.get_links(103)[0]
    Link103.mode
    Link103.state
    Link103.conversion
@@ -123,7 +123,7 @@ Link123
 
 .. code:: python
 
-   Link123 = GOF.GetLinks(123)[0]
+   Link123 = GOF.get_links(123)[0]
    Link123.orientation
    Link123.step
    Link123.reactioncoord
@@ -134,7 +134,7 @@ Link202
 
 .. code:: python
 
-   Link202 = GOF[-1].GetLinks(202)[0]
+   Link202 = GOF[-1].get_links(202)[0]
    Link202.orientation
    Link202.DistanceMatrix
    Link202.print_orientation()
@@ -144,7 +144,7 @@ Link502 & Link508
 
 .. code:: python
 
-   ListOfLinks = GOF.GetLinks(502,508)
+   ListOfLinks = GOF.get_links(502,508)
    Energies = [link.energy for link in ListOfLinks if link.energy is not None]
 
 Link716
@@ -152,7 +152,7 @@ Link716
 
 .. code:: python
 
-   Link716 = GOF[-1].GetLinks(716)[-1]
+   Link716 = GOF[-1].get_links(716)[-1]
    Link716.dipole
    Link716.units
    Link716.zeropoint
@@ -167,12 +167,12 @@ Link804 & Link913
 
 .. code:: python
 
-   Link804 = GOF.GetLinks(804)[-1]
+   Link804 = GOF.get_links(804)[-1]
    Link804.MP2
    Link804.SpinComponents
    scs_corr = Link804.Get_SCScorr()
 
-   Link913 = GOF.GetLinks(913)[-1]
+   Link913 = GOF.get_links(913)[-1]
    Link913.MP4
    Link913.CCSDT
 
@@ -223,10 +223,10 @@ steps.
       GOF.read()
 
    # Get the last geometry of the calculation
-   geom = Geometry.from_l202(GOF.GetLinks(202)[-1])
+   geom = Geometry.from_l202(GOF.get_links(202)[-1])
 
    # Get the Link1 of the GaussianOutFile
-   Link1 = GOF.GetLinks(1)[0]
+   Link1 = GOF.get_links(1)[0]
 
    # Extract the calculation type and commands
    commandline = Link1.commandline
@@ -235,7 +235,7 @@ steps.
    Link0 = Link1.link0
 
    # Get Charge and spin from Link101
-   Link101 = GOF.GetLinks(101)[0]
+   Link101 = GOF.get_links(101)[0]
    charge = Link101.charge
    spin = Link101.spin
 
@@ -266,8 +266,8 @@ Code snippet to extract the last potential energy and geometry
    with GOF(MyFile) as F:
       F.read()
 
-   Final_Geometry = F.GetLinks(202)[-1].orientation
-   Last_Potential_Energy = F.GetLinks(502)[-1]
+   Final_Geometry = F.get_links(202)[-1].orientation
+   Last_Potential_Energy = F.get_links(502)[-1]
    print(Last_Potential_Energy)
    print(str(Final_Geometry))
 
@@ -282,12 +282,11 @@ Code snippet to display 'Filename HF MP2 MP2(SCS)'
    with GOF(MyFile,[1,502,804]) as F:
       F.read()
 
-   HF = F.GetLinks(502)[-1].energy
-   Link804 = F.GetLinks(804)[-1]
+   HF = F.get_links(502)[-1].energy
+   Link804 = F.get_links(804)[-1]
    MP2 = Link804.MP2
    MP2scs = H + Link804.Get_SCScorr()
-   Output ='{filename}\t{HF}\t{MP2}\t{MP2scs}'.format
-   print(Output(filename=MyFile,HF=HF, MP2=MP2, MP2scs=MP2scs))
+   print(f'{MyFile}\t{HF}\t{MP2}\t{MP2scs}')
 
 
 Code Snippet using functutils
@@ -299,7 +298,7 @@ Code Snippet using functutils
 
    with GaussianOutFile(MyFile,[1,502,508,716]) as F:
        F.read()
-   E,Z,H,G = Thermochemistry(F)
+   E,Z,H,G = thermochemistry(F)
    E = Potential(F,method='mp2scs')
 
 

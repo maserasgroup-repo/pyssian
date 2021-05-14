@@ -1,9 +1,0 @@
-gaussianclassesinfo
-===================
-
-Currently in development.
-
-.. automodule:: pyssian.gaussianclassesinfo
-   :members:
-   :undoc-members:
-   :show-inheritance:

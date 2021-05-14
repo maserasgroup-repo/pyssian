@@ -1,23 +1,33 @@
 import setuptools
 
-__version__ = '0.0.0'
+__version__ = '1.0.0'
 
 with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
   name = 'pyssian',
-  packages = setuptools.find_packages(), #['pyssian']
   version = __version__,
   description = 'Parser Library for Gaussian Files',
-  author = 'Raúl Pérez-Soto',
-  author_email = 'rperezsoto.research@gmail.com',
   long_description=long_description,
   long_description_content_type="text/x-rst",
-  url = 'https://github.com/rperezsoto/pyssian',
-  keywords = ['compchem', 'gaussian','parser'],
-  classifiers = ["Programming Language :: Python :: 3",],
+  url = 'https://github.com/maserasgroup-repo/pyssian',
+  author = 'Raúl Pérez-Soto',
+  author_email = 'rperezsoto.research@gmail.com',
+  classifiers = ['License :: OSI Approved :: MIT License',
+                 'Programming Language :: Python :: 3',
+                 'Programming Language :: Python :: 3.6'
+                 'Programming Language :: Python :: 3.7',
+                 'Programming Language :: Python :: 3.8',
+                 'Programming Language :: Python :: 3.9',
+                 ],
+  keywords = ['compchem, gaussian, parser'],
+  packages = setuptools.find_packages(),
+  python_requires='>=3.6, <4',
   install_requires=['setuptools','pathlib','numpy'],
-  python_requires='>=3.7',
-  include_package_data=True
+  include_package_data=True,
+  project_urls={'Bug Reports': 'https://github.com/maserasgroup-repo/pyssian/issues',
+                'Source': 'https://github.com/maserasgroup-repo/pyssian',
+                'Docs' : 'https://pyssian.readthedocs.io/en/latest/'
+               },
 )

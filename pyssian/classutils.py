@@ -7,13 +7,16 @@ from itertools import cycle
 from pathlib import Path
 
 import numpy
+
 from .chemistryutils import PeriodicTable
-
-
 
 class Geometry(object):
     """
-    Geometry Representation
+    This class provides a basic interface and different construction methods 
+    to simplify the extraction of the geometry of a molecule from different 
+    sources 
+    
+    Currently: Link202, GaussianInFile, xyz file
     """
     # classattribute for object naming
     counter = 1
@@ -25,7 +28,7 @@ class Geometry(object):
         self.title = str(cls.counter)
         cls.counter += 1
     def __repr__(self):
-        return '< Geometry {} object >'.format(self.title)
+        return f'< Geometry {self.title} object >'
     def __str__(self):
         linef = " {:<}\t{: 0.09f}\t{: 0.09f}\t{: 0.09f}"
         As = self.atoms
@@ -345,7 +348,6 @@ class Cube(object):
                     for k in range(Nz):
                         matrix[i,j,k] = items[k]
         self.matrix = matrix
-
 
 class DirectoryTree(object):
     """
