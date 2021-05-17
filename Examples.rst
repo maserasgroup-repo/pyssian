@@ -177,6 +177,22 @@ Link804 & Link913
    Link913.CCSDT
 
 
+Link914
++++++++
+
+.. code:: python
+
+   Link914 = GOF.get_links(914)[-1]
+   for es in Link914.excitedstates: 
+       number, energy, wavelen, OStrength, s2, transitions = es
+       for transition in transitions: 
+           donor = transition.donor
+           acceptor = transition.acceptor 
+           contribution = transition.contribution
+           print(f'{donor} -> {acceptor}     {contribution}')
+   # which can be done for the excited states 2,5,6: 
+   Link914.print_excitedstates(2,5,6,show_transitions=True)
+
 GaussianInFile
 ..............
 
@@ -252,6 +268,25 @@ steps.
        GIF.write()
 
 
+Cube
+....
+
+*pyssian.classutils.Cube* class was introduce to simplify the sometimes a bit 
+bothersome usage of cubeman from gaussian to add, substract, multiply... cube 
+files. You can initialize an empty cube and populate it yourself but the class 
+was thought to be used as follows: 
+
+.. code:: python
+
+   from pyssian.classutils import Cube 
+   MO_1 = Cube.from_file('MO_01.cube')
+   MO_2 = Cube.from_file('MO_02.cube')
+   MO_3 = Cube.from_file('MO_03.cube')
+   FinalCube = MO_1*2 + MO_2 - MO_3**2
+   FinalCube.write('Final.cube') 
+
+
+
 
 Usage Examples
 ..............
@@ -287,19 +322,6 @@ Code snippet to display 'Filename HF MP2 MP2(SCS)'
    MP2 = Link804.MP2
    MP2scs = H + Link804.Get_SCScorr()
    print(f'{MyFile}\t{HF}\t{MP2}\t{MP2scs}')
-
-
-Code Snippet using functutils
-
-.. code:: python
-
-   from pyssian import GaussianOutFile
-   from pyssian.functutils import Potential, Thermochemistry
-
-   with GaussianOutFile(MyFile,[1,502,508,716]) as F:
-       F.read()
-   E,Z,H,G = thermochemistry(F)
-   E = Potential(F,method='mp2scs')
 
 
 Code Snippet to follow a file being written by gaussian

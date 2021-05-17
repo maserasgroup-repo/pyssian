@@ -99,6 +99,9 @@ class Cube(object):
     This class facilitates some operations of the cubeman tool allowing
     operations of more than 2 .cube files.
 
+    Files with more than 1 cube are accepted but correct behaviour is not 
+    guaranteed.
+
     Attributes
     ----------
     natoms : int
@@ -174,6 +177,14 @@ class Cube(object):
 
     # Writing functions
     def write(self,OFile):
+        """
+        Writes a cube to a File. 
+
+        Parameters
+        ----------
+        OFile : str
+            A valid path to a file. 
+        """
         # Formats
         atom_format  = '{0: >5}   {1: .6f}   {2: .6f}   {3: .6f}   {4: .6f}\n'.format
         basis_format = '{0: >5}   {1: .6f}   {2: .6f}   {3: .6f}\n'.format
@@ -248,19 +259,32 @@ class Cube(object):
 
     # Constructor methos
     @classmethod
-    def from_file(cls,MyFile):
-        NewCube = cls()
-        with open(MyFile,'r') as F:
+    def from_file(cls,file):
+        """
+        Creates a Cube instance from a cube file.
+
+        Parameters
+        ----------
+        file : str
+            A valid filename to an existing .cube file.
+
+        Returns
+        -------
+        Cube
+            Instantiated cube from the file.
+        """
+        newcube = cls()
+        with open(file,'r') as F:
             lines = F.readlines()
         _iter = lines.__iter__()
-        NewCube.handle_title_lines(_iter)
-        NewCube.read_origin_line(_iter)
-        NewCube.read_basis_lines(_iter)
-        NewCube.read_atoms_lines(_iter)
-        NewCube.read_MO_lines(_iter)
-        NewCube.read_matrix_lines(_iter)
+        newcube.handle_title_lines(_iter)
+        newcube.read_origin_line(_iter)
+        newcube.read_basis_lines(_iter)
+        newcube.read_atoms_lines(_iter)
+        newcube.read_MO_lines(_iter)
+        newcube.read_matrix_lines(_iter)
 
-        return NewCube
+        return newcube
 
     # Parsing functions
     def handle_title_lines(self,iterable):

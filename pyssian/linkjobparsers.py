@@ -1341,7 +1341,21 @@ class Link914(LinkJob):
                 transitions.append(transition)
         return transitions
 
-    def print_excitedstates(self,*ESnumbers,ShowTransitions=False):
+    def print_excitedstates(self,*ESnumbers,show_transitions=False):
+        """
+        Prints in the console the parameters in of the excited states selected 
+        in ascending ordinal order.
+
+        Parameters
+        ----------
+
+        *ESnumbers : int
+            An undefined number of integrers. Only the excited states that are
+            within the provided set will be displayed.
+        show_transitions : bool, optional
+            Allows control over the display of the transitions, by 
+            default False
+        """
         for ES in self.excitedstates:
             if ES.number not in ESnumbers:
                 continue
@@ -1349,7 +1363,7 @@ class Link914(LinkJob):
             print(f'ExcitedState(number={number} energy={energy} ' \
                   f'wavelen={wavelen} OStrenght={OStrenght} ' \
                   f's2={s2} transitions=[...])')
-            if ShowTransitions:
+            if show_transitions:
                 for transition in ES.transitions:
                     print(f'\t{transition.donor} -> {transition.acceptor}'\
                           f'\t {transition.contribution}')
