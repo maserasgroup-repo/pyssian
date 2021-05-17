@@ -258,6 +258,9 @@ steps.
    # Now write the
    with GaussianInFile('New_Calc.in') as GIF:
        GIF.parse_commandline([commandline,])
+       # We can instead set a dict for the variable GIF.commandline
+       # "GIF.commandline = {'opt':'','freq':'NoRamman','b3lyp':''}"
+       # but using parse_commandline is easier in this case.
        GIF.preprocessing = {key:'' for key in Link0}
        GIF.preprocessing['nprocshared'] = nprocs
        GIF.preprocessing['mem'] = mem
