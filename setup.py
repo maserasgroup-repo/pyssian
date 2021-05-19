@@ -26,6 +26,8 @@ setuptools.setup(
   python_requires='>=3.6, <4',
   install_requires=['setuptools','pathlib','numpy'],
   include_package_data=True,
+  package_data = {'test_files': ['pyssian/tests/test_files/*.txt'],
+                  'tests' : ['pyssian/tests/*.py']},
   project_urls={'Bug Reports': 'https://github.com/maserasgroup-repo/pyssian/issues',
                 'Source': 'https://github.com/maserasgroup-repo/pyssian',
                 'Docs' : 'https://pyssian.readthedocs.io/en/latest/'

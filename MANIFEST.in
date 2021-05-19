@@ -1,0 +1,12 @@
+# Setup file and LICENSE
+include setup.py
+include LICENSE
+
+# include the tests and the test files
+include pyssian/tests/*.py
+recursive-include pyssian/tests/test_files *
+
+# Exclude Files
+global-exclude *.pyc
+global-exclude .git
+global-exclude .vscode

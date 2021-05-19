@@ -126,6 +126,20 @@ To run the tests run the following command:
    $ python -m unittest -v pyssian.tests 
 
 
+Building the docs
+-----------------
+
+To build the docs go to the docs folder where you have the source code then run:
+
+.. code:: shell-session
+
+   $ cd docs/
+   $ python -m pip install -r requirements.txt 
+   $ make html
+
+Now if you go to the build/html folder you can open the index.html file in your 
+folder and navigate through the documentation easily. 
+
 Developed with
 --------------
 
