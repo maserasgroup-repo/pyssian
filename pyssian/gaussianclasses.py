@@ -99,11 +99,11 @@ class GaussianOutFile(object):
     def print_file_structure(self):
         """Display the structure of links and internal jobs of the file."""
         indent = "  "
-        Result = f"{self:!r}\n"
+        Result = f"{self.__repr__():}\n"
         for intjob in self:
-            Result += indent + f"{intjob:!r}\n"
+            Result += indent + f"{intjob.__repr__():}\n"
             for link in intjob:
-                Result += indent*2 + f"{link:!r}\n"
+                Result += indent*2 + f"{link.__repr__():}\n"
         print(Result)
     def read(self):
         """Alias of update for consistency with GaussianInFile class"""
