@@ -1,0 +1,4 @@
+# exclude .gitignore and similar from the generated tarball
+.git*           export-ignore
+deploy-instructions.rst           export-ignore
+pyproject.toml           export-ignore

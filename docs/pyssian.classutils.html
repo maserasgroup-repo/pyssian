@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>classutils &mdash; pyssian  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gaussianclasses" href="pyssian.gaussianclasses.html" />
+    <link rel="prev" title="chemistryutils" href="pyssian.chemistryutils.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pyssian
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">Pyssian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_link.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="pyssian.html">pyssian API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pyssian.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pyssian.chemistryutils.html">chemistryutils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">classutils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#geometry">Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cube">Cube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#directorytree">DirectoryTree</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyssian.gaussianclasses.html">gaussianclasses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyssian.linkjobparsers.html">linkjobparsers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyssian.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyssian</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="pyssian.html">pyssian API</a> &raquo;</li>
+        
+      <li>classutils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/pyssian.classutils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pyssian.classutils">
+<span id="classutils"></span><h1>classutils<a class="headerlink" href="#module-pyssian.classutils" title="Permalink to this headline">¶</a></h1>
+<p>Contains auxiliary classes, usefull in combination with the gaussianclasses.</p>
+<div class="section" id="geometry">
+<h2>Geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.classutils.Geometry">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.classutils.</span></code><code class="sig-name descname"><span class="pre">Geometry</span></code><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class provides a basic interface and different construction methods
+to simplify the extraction of the geometry of a molecule from different
+sources</p>
+<p>Currently: Link202, GaussianInFile, xyz file</p>
+<dl class="py method">
+<dt id="pyssian.classutils.Geometry.from_Input">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_Input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InputFile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry.from_Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry.from_Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Geometry instance from a Gaussian Input File instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Geometry.from_L202">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_L202</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L202</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry.from_L202"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry.from_L202" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Geometry instance from a Gaussian file. If it can't find a
+mapping from atomic Number to symbol it will store the string
+representation of the number</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Geometry.from_xyz">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_xyz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xyzfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry.from_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry.from_xyz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Geometry instance from a xyz file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Geometry.update_atoms">
+<code class="sig-name descname"><span class="pre">update_atoms</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry.update_atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry.update_atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the atoms names from a mapping</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Geometry.write">
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">File</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Geometry.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Geometry.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write Geometry to a File</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="cube">
+<h2>Cube<a class="headerlink" href="#cube" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.classutils.Cube">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.classutils.</span></code><code class="sig-name descname"><span class="pre">Cube</span></code><a class="reference internal" href="_modules/pyssian/classutils.html#Cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Representation of a Gaussian .cube File generated with the cubegen tool.
+This class facilitates some operations of the cubeman tool allowing
+operations of more than 2 .cube files.</p>
+<p>Files with more than 1 cube are accepted but correct behaviour is not
+guaranteed.</p>
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.natoms">
+<code class="sig-name descname"><span class="pre">natoms</span></code><a class="headerlink" href="#pyssian.classutils.Cube.natoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>total number of atoms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.type">
+<code class="sig-name descname"><span class="pre">type</span></code><a class="headerlink" href="#pyssian.classutils.Cube.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of cube. Currently only {'MO','other'} are considered</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.isUnrestricted">
+<code class="sig-name descname"><span class="pre">isUnrestricted</span></code><a class="headerlink" href="#pyssian.classutils.Cube.isUnrestricted" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the line that contains the number of atoms has 5 elements
+instead of 4.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.origin">
+<code class="sig-name descname"><span class="pre">origin</span></code><a class="headerlink" href="#pyssian.classutils.Cube.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>origin of the cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.shape">
+<code class="sig-name descname"><span class="pre">shape</span></code><a class="headerlink" href="#pyssian.classutils.Cube.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of points in each of the three directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.basis">
+<code class="sig-name descname"><span class="pre">basis</span></code><a class="headerlink" href="#pyssian.classutils.Cube.basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vectors of the three main directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.atoms">
+<code class="sig-name descname"><span class="pre">atoms</span></code><a class="headerlink" href="#pyssian.classutils.Cube.atoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of the AtNumber, Charge, (x,y,z) per each atom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.nMO">
+<code class="sig-name descname"><span class="pre">nMO</span></code><a class="headerlink" href="#pyssian.classutils.Cube.nMO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of molecular orbitals
+(Current implementation is designed for only one MO per Cube)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.MO_Ids">
+<code class="sig-name descname"><span class="pre">MO_Ids</span></code><a class="headerlink" href="#pyssian.classutils.Cube.MO_Ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ids of the MO orbitals.
+(Current implementation is designed for only one MO per Cube)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.classutils.Cube.matrix">
+<code class="sig-name descname"><span class="pre">matrix</span></code><a class="headerlink" href="#pyssian.classutils.Cube.matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matrix of values of the Cube.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Cube.from_file">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Cube.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Cube.from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a Cube instance from a cube file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) -- A valid filename to an existing .cube file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Instantiated cube from the file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyssian.classutils.Cube" title="pyssian.classutils.Cube">Cube</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Cube.write">
+<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">OFile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Cube.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Cube.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a cube to a File.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>OFile</strong> (<em>str</em>) -- A valid path to a file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.Cube.write_values">
+<code class="sig-name descname"><span class="pre">write_values</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">File</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#Cube.write_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.Cube.write_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the writing in of the values of self.matrix with the fortran77
+format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>File</strong> (<em>_io.TextIOWrapper</em>) -- the output of a open(Filename,'w')</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="directorytree">
+<h2>DirectoryTree<a class="headerlink" href="#directorytree" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.classutils.DirectoryTree">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.classutils.</span></code><code class="sig-name descname"><span class="pre">DirectoryTree</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#DirectoryTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.DirectoryTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that provides recursive file iteration.</p>
+<dl class="py method">
+<dt id="pyssian.classutils.DirectoryTree.RecursiveFileSystemGenerator">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">RecursiveFileSystemGenerator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#DirectoryTree.RecursiveFileSystemGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.DirectoryTree.RecursiveFileSystemGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator that traverses the filesystem in depth first order and yields
+the paths that satisfy the key function condition. If no key function
+is provided, returns all folders and items. The first yield is always
+None, and the second yield is always the path value if it satisfies the
+key condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>Path</em>) -- Path pointing to a directory.</p></li>
+<li><p><strong>key</strong> (<em>function</em>) -- A function that returns a boolean. Used in a similar function as
+the 'sorted' python builtin.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.classutils.DirectoryTree.newpath">
+<code class="sig-name descname"><span class="pre">newpath</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/classutils.html#DirectoryTree.newpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.classutils.DirectoryTree.newpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a path rooted to the previous root and prepares it to be
+rooted in the new root.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="pyssian.gaussianclasses.html" class="btn btn-neutral float-right" title="gaussianclasses" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pyssian.chemistryutils.html" class="btn btn-neutral float-left" title="chemistryutils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

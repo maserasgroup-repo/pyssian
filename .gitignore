@@ -1,6 +1,11 @@
-_Doc
-*.egg-info
-__pycache__
+# General things to ignore
+*.egg-info/
+*.egg
+__pycache__/
+*.pyc 
+
+# Ignore the 
+_docs
+.vscode
 .pytest_cache
-Usefull_Files
-.versionner.rc
+dist/

@@ -7,13 +7,16 @@ from itertools import cycle
 from pathlib import Path
 
 import numpy
+
 from .chemistryutils import PeriodicTable
-
-
 
 class Geometry(object):
     """
-    Geometry Representation
+    This class provides a basic interface and different construction methods 
+    to simplify the extraction of the geometry of a molecule from different 
+    sources 
+    
+    Currently: Link202, GaussianInFile, xyz file
     """
     # classattribute for object naming
     counter = 1
@@ -25,7 +28,7 @@ class Geometry(object):
         self.title = str(cls.counter)
         cls.counter += 1
     def __repr__(self):
-        return '< Geometry {} object >'.format(self.title)
+        return f'< Geometry {self.title} object >'
     def __str__(self):
         linef = " {:<}\t{: 0.09f}\t{: 0.09f}\t{: 0.09f}"
         As = self.atoms
@@ -70,12 +73,34 @@ class Geometry(object):
         Geom.atoms = Atoms
         Geom.coordinates = Coords
         return Geom
+    @classmethod
+    def from_xyz(cls,xyzfile):
+        """Generate a Geometry instance from a xyz file."""
+        Geom = cls()
+        Coords = []
+        Atoms = []
+        with open(xyzfile,'r') as F:
+            _iter = F.__iter__()
+            n = int(next(_iter).strip())
+            _ = next(_iter)
+            for i in range(n):
+                line = next(_iter)
+                aux = line.strip().split()
+                Atoms.append(aux[0])
+                B = tuple(map(float,aux[1:]))
+                Coords.append(B)
+        Geom.atoms = Atoms
+        Geom.coordinates = Coords
+        return Geom
 
 class Cube(object):
     """
     Representation of a Gaussian .cube File generated with the cubegen tool.
     This class facilitates some operations of the cubeman tool allowing
     operations of more than 2 .cube files.
+
+    Files with more than 1 cube are accepted but correct behaviour is not 
+    guaranteed.
 
     Attributes
     ----------
@@ -152,6 +177,14 @@ class Cube(object):
 
     # Writing functions
     def write(self,OFile):
+        """
+        Writes a cube to a File. 
+
+        Parameters
+        ----------
+        OFile : str
+            A valid path to a file. 
+        """
         # Formats
         atom_format  = '{0: >5}   {1: .6f}   {2: .6f}   {3: .6f}   {4: .6f}\n'.format
         basis_format = '{0: >5}   {1: .6f}   {2: .6f}   {3: .6f}\n'.format
@@ -226,19 +259,32 @@ class Cube(object):
 
     # Constructor methos
     @classmethod
-    def from_file(cls,MyFile):
-        NewCube = cls()
-        with open(MyFile,'r') as F:
+    def from_file(cls,file):
+        """
+        Creates a Cube instance from a cube file.
+
+        Parameters
+        ----------
+        file : str
+            A valid filename to an existing .cube file.
+
+        Returns
+        -------
+        Cube
+            Instantiated cube from the file.
+        """
+        newcube = cls()
+        with open(file,'r') as F:
             lines = F.readlines()
         _iter = lines.__iter__()
-        NewCube.handle_title_lines(_iter)
-        NewCube.read_origin_line(_iter)
-        NewCube.read_basis_lines(_iter)
-        NewCube.read_atoms_lines(_iter)
-        NewCube.read_MO_lines(_iter)
-        NewCube.read_matrix_lines(_iter)
+        newcube.handle_title_lines(_iter)
+        newcube.read_origin_line(_iter)
+        newcube.read_basis_lines(_iter)
+        newcube.read_atoms_lines(_iter)
+        newcube.read_MO_lines(_iter)
+        newcube.read_matrix_lines(_iter)
 
-        return NewCube
+        return newcube
 
     # Parsing functions
     def handle_title_lines(self,iterable):
@@ -326,7 +372,6 @@ class Cube(object):
                     for k in range(Nz):
                         matrix[i,j,k] = items[k]
         self.matrix = matrix
-
 
 class DirectoryTree(object):
     """

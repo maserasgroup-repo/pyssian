@@ -1,7 +1,3 @@
 from .gaussianclasses import *
-from .linkjobparsers import *
-#from .functutils import *
-#from .dynamicparse import *
-#from .gaussianclassesinfo import *
 
-__version__ = '0.0.0'
+__version__ = '1.0.0'

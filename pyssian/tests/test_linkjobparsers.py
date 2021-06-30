@@ -1,12 +1,10 @@
-import os
 import unittest
 from pathlib import Path
 from itertools import chain
 
 from pyssian.linkjobparsers import *
 
-TEST_FILEDIR = Path(os.path.dirname(__file__))
-TEST_FILEDIR = TEST_FILEDIR.joinpath('test_files')
+TEST_FILEDIR = Path(__file__).parent.resolve() / 'test_files'
 
 SMARK = '\n## Split Here ##\n'
 
@@ -115,7 +113,6 @@ class TestLink1(unittest.TestCase):
             test = regex.findall(txt)
             self.assertTrue(test == solution,msg)
 
-    #@unittest.skip("Not Implemented")
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link1'
         text = 'Link1:  Proceeding to internal job step number 13.'
@@ -129,7 +126,7 @@ class TestLink1(unittest.TestCase):
         text = 'Link1:  Proceeding to internal job step number 13.'
         obj = Link1(text,asEmpty=True)
         types = {0:'Constrained Optimization',
-                 1: 'Optimization',
+                 1:'Optimization',
                  2:'Frequency Calculation',
                  3:'Unidentified'}
         keywords = ['modredundant','opt','modredundant',
@@ -472,16 +469,16 @@ class TestLink202(unittest.TestCase):
         msg = 'Obtained an unobtainable Mapping'
         Tests = self.objects
         with self.assertRaises(StopIteration,msg=msg):
-            Tests[0].get_AtNum2Sym_map()
+            Tests[0].get_atom_mapping()
         with self.assertRaises(StopIteration,msg=msg):
-            Tests[1].get_AtNum2Sym_map()
+            Tests[1].get_atom_mapping()
         with self.assertRaises(StopIteration,msg=msg):
-            Tests[2].get_AtNum2Sym_map()
+            Tests[2].get_atom_mapping()
 
     def test_AtNum2Sym(self):
         msg = 'Incorrect Mapping Obtained'
         SolDict = {1:'H',8:'O',6:'C',7:'N'}
-        TestDict = self.objects[3].get_AtNum2Sym_map()
+        TestDict = self.objects[3].get_atom_mapping()
         self.assertTrue(TestDict == SolDict,msg)
 
 class TestLink502(unittest.TestCase):
@@ -769,7 +766,7 @@ class TestLink804(unittest.TestCase):
             for i,j in enumerate(item):
                 MockDict['E'] = j
                 MockObject.SpinComponents[i] = SpinComponent(**MockDict)
-            test = MockObject.Get_SCScorr()
+            test = MockObject.get_SCScorr()
             aa,ab,bb = item
             sol = (aa+bb)/3.0 +(6.0*ab)/5.0
             self.assertTrue(test == sol,msg)

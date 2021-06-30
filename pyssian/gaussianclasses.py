@@ -2,7 +2,6 @@
 One of the two core libraries of pyssian. Contains the Classes that represent
 Gaussian Files (input and output).
 """
-import os
 import io
 import re
 from itertools import chain
@@ -17,7 +16,7 @@ for key in LinkJob.Register.keys():
 
 
 class GaussianOutFile(object):
-    """Gaussian 09 .out file parent class, if any special type of calculation
+    """Gaussian 09/16 '.log' file parent class, if any special type of calculation
     requires different processing it should be a subclass of this one. Accepts
     a context manager usage similar to 'with open(file) as F:...'
 
@@ -59,16 +58,16 @@ class GaussianOutFile(object):
         cls = type(self).__name__
         file = self._file.name.split('/')[-1]
         size = len(self)
-        repr = '<{cls}({file})> with {size} InternalJobs'
-        return repr.format(cls=cls,file=file,size=size)
+        return f'<{cls}({file})> with {size} InternalJobs'
     def __str__(self):
         cls = type(self).__name__
         file = self._file.name.split('/')[-1]
-        repr = '<{cls}({file})>\n'.format(cls=cls,file=file)
+        repr = f'<{cls}({file})>\n'
+        indent = '    '
         for InternalJob in self:
-            repr += ' '*4+'{0} type <{0.type}>\n'.format(InternalJob)
+            repr += indent + f'{InternalJob} type <{InternalJob.type}>\n'
             for Link in InternalJob:
-                 repr += ' '*8+'{}\n'.format(Link)
+                 repr += indent*2 + f'{Link}\n'
         return repr
     def __len__(self):
         return len(self.InternalJobs)
@@ -97,14 +96,14 @@ class GaussianOutFile(object):
             pass
         Parsers[interblock] = GeneralLinkJob.as_empty
         self._Parsers = Parsers
-    def FileStructure(self):
+    def print_file_structure(self):
         """Display the structure of links and internal jobs of the file."""
-        spacer = "  "
-        Result = "{!r}\n".format(self)
+        indent = "  "
+        Result = f"{self.__repr__():}\n"
         for intjob in self:
-            Result += spacer*1 + "{!r}\n".format(intjob)
+            Result += indent + f"{intjob.__repr__():}\n"
             for link in intjob:
-                Result += spacer*2 + "{!r}\n".format(link)
+                Result += indent*2 + f"{link.__repr__():}\n"
         print(Result)
     def read(self):
         """Alias of update for consistency with GaussianInFile class"""
@@ -132,16 +131,16 @@ class GaussianOutFile(object):
             BlockHandler.send((BlockType, Block))
             BlockType, Block = next(BlockFetcher)
         if self.InternalJobs[0].number is None:
-            self.InternalJobs[0].GuessInfo()
+            self.InternalJobs[0].guess_info()
         if clean:
             self.clean()
         if FinalPrint:
-            print("{} UPDATED".format(self.__repr__()))
+            print(f"{self:!r} UPDATED")
     def clean(self):
         """Removes per each InternalJob stored all the EmptyLinkJobs."""
         for InternalJob in self.InternalJobs:
             InternalJob.clean()
-    def GetLinks(self,*LinkIds):
+    def get_links(self,*LinkIds):
         """Wrapper Method to get a list of Links with certain Ids across
         the different Internal Jobs.
 
@@ -154,7 +153,7 @@ class GaussianOutFile(object):
         -------
         list
         """
-        LinkLists = [IntJob.GetLinks(*LinkIds) for IntJob in self.InternalJobs]
+        LinkLists = [IntJob.get_links(*LinkIds) for IntJob in self.InternalJobs]
         return list(chain(*LinkLists))
     # Generators and Coroutines for File Parsing
     def Reader(self,file):
@@ -244,13 +243,13 @@ class GaussianOutFile(object):
                 self.InternalJobs.append(New)
                 CurrentJob = self.InternalJobs[-1]
                 CurrentJob.append(Link)
-                CurrentJob.GuessInfo()
+                CurrentJob.guess_info()
             else:
                 CurrentJob.append(Link)
             BlockType, Block = yield
 
 class InternalJob(object):
-    """Gaussian 09 InternalJob parent class, if any special type of Job
+    """Gaussian 09/16 InternalJob parent class, if any special type of Job
     requires different parsing it should be a subclass of this one.
 
     Parameters
@@ -275,11 +274,11 @@ class InternalJob(object):
     def __repr__(self):
         cls = type(self).__name__
         if self.number is None:
-            return '<{cls} Created but Empty>'.format(cls=cls)
+            return f'<{cls} Created but Empty>'
         else:
-            return '<{cls} {number}>'.format(cls=cls,number=self.number)
+            return f'<{cls} {self.number}>'
     def __str__(self):
-        return 'Internal Job {0.number}: {0.type}'.format(self)
+        return f'Internal Job {self.number}: {self.type}'
     def __getitem__(self,index):
         return self.Links[index]
     def __len__(self):
@@ -288,9 +287,9 @@ class InternalJob(object):
     def append(self,Link):
         # Restrict to Link objects
         if not isinstance(Link, LinkJob):
-            raise TypeError('{r} is not of class {r}'.format(Link,LinkJob))
+            raise TypeError(f'{Link:!r} is not of class {LinkJob:!r}')
         self.Links.append(Link)
-    def GuessInfo(self):
+    def guess_info(self):
         """ Guesses the number and type attributes of itself using the stored
         Links."""
         if self.Links:
@@ -313,7 +312,7 @@ class InternalJob(object):
                 Indices2Remove.append(i)
         for index in reversed(Indices2Remove):
             _ = self.Links.pop(index)
-    def GetLinks(self,*LinkIds):
+    def get_links(self,*LinkIds):
         """Wrapper Method to get a list of Links with certain Ids.
 
         Parameters
@@ -331,7 +330,7 @@ class InternalJob(object):
 
 class GaussianInFile(object):
     """
-    Gaussian 09 .in file parent class, if any special type of input
+    Gaussian 09/16 .in file parent class, if any special type of input
     requires different processing it should be a subclass of this one.
 
     Parameters
@@ -363,6 +362,10 @@ class GaussianInFile(object):
     structure : str
         A string holding the structure of the input file. Used to write new
         Input files.
+    nprocs : int
+        property to easily access and change the preprocessing['nprocshared'] value
+    mem : int
+        property to easily access and change the preprocessing['mem'] value
     """
     def __init__(self,file):
         # Do Something
@@ -390,26 +393,25 @@ class GaussianInFile(object):
         cls = type(self).__name__
         file = self._file.name.split("/")[-1]
         size = len(self)
-        repr = '<{cls}({file})>'
-        return repr.format(cls=cls,file=file,size=size)
+        return f'<{cls}({file})>'
     def __str__(self):
         # str repr of the preprocessing
         preprocessing = []
         for key,val in self.preprocessing.items():
             if val:
-                Aux = '%{0}={1}'.format(key,val)
+                Aux = f'%{key}={val}'
             else:
-                Aux = '%{0}'.format(key)
+                Aux = f'%{key}'
             preprocessing.append(Aux)
         # str repr of the commandline
         commandline = ['#p',]
         for key,val in self.commandline.items():
             if val and (len(val) == 1):
-                Aux = '{0}={1}'.format(key,','.join(val))
+                Aux = f"{key}={','.join(val)}"
             elif val:
-                Aux = '{0}=({1})'.format(key,','.join(val))
+                Aux = f"{key}=({','.join(val)})"
             else:
-                Aux = '{0}'.format(key)
+                Aux = f"{key}"
             commandline.append(Aux)
         # Prepare to format as str
         kwargs = dict( preprocessing='\n'.join(preprocessing),
@@ -446,10 +448,10 @@ class GaussianInFile(object):
 
     @property
     def nprocs(self):
-        return self.preprocessing.get('nprocs',None)
+        return self.preprocessing.get('nprocshared',None)
     @nprocs.setter
     def nprocs(self,other):
-        self.preprocessing['nprocs'] = other
+        self.preprocessing['nprocshared'] = other
 
     @property
     def mem(self):
@@ -463,12 +465,16 @@ class GaussianInFile(object):
         Reads the file and populates the appropiate attributes.
         """
         txt = [line.strip() for line in self._file]
+        if not txt: 
+            raise EOFError('Attempting to read an empty or non-existent file')
         if txt[-1]: # If the file ends without a blank line add it
             txt.append('')
         if txt[-2]: # If the file ends without two blank lines add one
             txt.append('')
         self._txt = '\n'.join(txt)
         bins = [i for i,line in enumerate(txt) if not line]
+        # Ensure that the if the title is empty, the bins are not including it
+        bins = [i for i in bins if not set((i-1,i,i+1)).issubset(set(bins))]
         stop = bins[0]
         header = iter(txt[:stop])
         preprocessing = []
@@ -512,7 +518,7 @@ class GaussianInFile(object):
         self._file.close()
     def write(self,filepath=None):
         """
-        Writes the the File object to a File. If a filepath is provided it will
+        Writes the File object to a File. If a filepath is provided it will
         write to that filepath otherwise it will attempt to write to the path
         provided in the initialization.
 
@@ -557,7 +563,7 @@ class GaussianInFile(object):
             self.preprocessing[key] = val
     def parse_commandline(self,lines):
         """
-        Parses the lines that contain the calculation commands kewords and
+        Parses the lines that contain the calculation commands keywords and
         transforms them into a dictionary representation.
 
         Parameters
@@ -581,7 +587,7 @@ class GaussianInFile(object):
                 key,val = item, []
             elif is_basis(item) or is_method(item):
                 print('2 Basis or methods found \n')
-                print('taking {} as a normal keyword'.format(item))
+                print(f'taking {item} as a normal keyword')
                 key,val = item, []
             else:
                 Aux = item.split('=',1)
@@ -681,8 +687,8 @@ class GaussianInFile(object):
                 name = name +'.chk'
         self.preprocessing['chk'] = name
     def change_method(self,method):
-        """Changes appropiately the method of the calculation. Equivalent to
-        self.method = method
+        """Changes appropiately the method of the calculation. Running 
+        self.method = method makes a call to this function.
 
         Parameters
         ----------
@@ -696,14 +702,14 @@ class GaussianInFile(object):
 
         """
         if not is_method(method):
-            raise NotImplementedError('method {} not implemented'.format(method))
+            raise NotImplementedError(f'method {method} not implemented')
         key = self._method
         _ = self.commandline.pop(key,None) # Used to ensure deletion of the key
         self._method = method
         self.commandline[method] = ''
     def change_basis(self,basis):
-        """Changes appropiately the basis of the calculation. Equivalent to
-        self.basis = basis.
+        """Changes appropiately the basis of the calculation. Running 
+        self.basis = basis makes a call to this function.
 
         Parameters
         ----------
@@ -718,13 +724,13 @@ class GaussianInFile(object):
 
         """
         if not is_basis(basis):
-            raise NotImplementedError('basis {} not implemented'.format(basis))
+            raise NotImplementedError(f'basis {basis} not implemented')
         key = self._basis
         _ = self.commandline.pop(key,None) # Used to ensure deletion of the key
         self._basis = basis
         self.commandline[basis] = ''
 
-# Idea: Implement a class to read and manipulate the basis functions in the tail
+# TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
 # that can have a linked input file object, so that modifying the basis of this
 # object will modify the input file basis in certain cases.
