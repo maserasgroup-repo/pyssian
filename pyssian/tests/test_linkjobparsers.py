@@ -766,7 +766,7 @@ class TestLink804(unittest.TestCase):
             for i,j in enumerate(item):
                 MockDict['E'] = j
                 MockObject.SpinComponents[i] = SpinComponent(**MockDict)
-            test = MockObject.Get_SCScorr()
+            test = MockObject.get_SCScorr()
             aa,ab,bb = item
             sol = (aa+bb)/3.0 +(6.0*ab)/5.0
             self.assertTrue(test == sol,msg)

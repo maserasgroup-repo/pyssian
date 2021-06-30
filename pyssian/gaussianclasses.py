@@ -16,7 +16,7 @@ for key in LinkJob.Register.keys():
 
 
 class GaussianOutFile(object):
-    """Gaussian 09 .out file parent class, if any special type of calculation
+    """Gaussian 09/16 '.log' file parent class, if any special type of calculation
     requires different processing it should be a subclass of this one. Accepts
     a context manager usage similar to 'with open(file) as F:...'
 
@@ -512,7 +512,7 @@ class GaussianInFile(object):
         self._file.close()
     def write(self,filepath=None):
         """
-        Writes the the File object to a File. If a filepath is provided it will
+        Writes the File object to a File. If a filepath is provided it will
         write to that filepath otherwise it will attempt to write to the path
         provided in the initialization.
 
@@ -724,7 +724,7 @@ class GaussianInFile(object):
         self._basis = basis
         self.commandline[basis] = ''
 
-# Idea: Implement a class to read and manipulate the basis functions in the tail
+# TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
 # that can have a linked input file object, so that modifying the basis of this
 # object will modify the input file basis in certain cases.

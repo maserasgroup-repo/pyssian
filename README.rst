@@ -8,8 +8,9 @@ A python interface to Gaussian i/o files
 
 .. project-description-start
 
-This project focuses on writing an object oriented library for parsing Gaussian
-io files and provide usefull command line tools for computational chemists.
+This project contains an object oriented library for parsing Gaussian
+io files which aims to facilitate the everyday scripting of computational 
+chemists using Gaussian. 
 
 
 .. setup-instructions
@@ -119,7 +120,7 @@ If it proceeded without any errors (pip and setuptools should already be install
 Running the tests
 -----------------
 
-To run the tests run the following command:
+To run the tests run the following command (after installing pyssian):
 
 .. code:: shell-session
 
@@ -133,11 +134,11 @@ To build the docs go to the docs folder where you have the source code then run:
 
 .. code:: shell-session
 
-   $ cd docs/
-   $ python -m pip install -r requirements.txt 
+   $ cd sphinx/
+   $ python -m pip install -r requirements.txt
    $ make html
 
-Now if you go to the build/html folder you can open the index.html file in your 
+Now if you go to the _docs/html folder you can open the index.html file in your 
 folder and navigate through the documentation easily. 
 
 Developed with
@@ -146,13 +147,6 @@ Developed with
 - python 3.7
 - Ubuntu 16.04 LTS, 18.04 LTS and 20.04 LTS
 
-.. examples-msg
-
-Examples
---------
-
-Please open the Examples.rst in github to visualize the basic usage examples
-or read the documentation.
 
 .. project-author-license
 

@@ -889,10 +889,26 @@ class Link508(Link502):
 @RegisterLinkJob
 class Link601(LinkJob):
     """
-    Parser for the output of l601.exe, each does a population analysis using
-    SCF densities. Holds information about Mulliken Charges, {Dipole,
-    Quadrupole, Traceless Quadrupole, Octapole and Hexadecapole} moments,
-    spin densities... etc. (Currently only Mulliken Charges implemented)
+    Representation and parser for the output of l601.exe, 
+    each does a population analysis using SCF densities. Holds information 
+    about Mulliken Charges, {Dipole, Quadrupole, Traceless Quadrupole, Octapole 
+    and Hexadecapole} moments, spin densities... etc. 
+    (Currently only Mulliken Charges implemented)
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l508.exe
+    asEmpty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    mulliken_heavy : list
+        list of mulliken charges condensed to H atoms. None if not properly parsed.
+    mulliken : list
+        list of mulliken charges. None if not properly parsed.
     """
     re_MullikenAtoms =  r'(?:Mulliken charges( and spin densities)?.*\n.*\n)'# Start
     re_MullikenAtoms += r'([\s\S]*)' # Body
@@ -1168,7 +1184,7 @@ class Link804(LinkJob):
             # Store spin Component
             Name,T,E = line.split()
             self.SpinComponents.append(SpinComponent(Name,float(T),float(E)))
-    def Get_SCScorr(self):
+    def get_SCScorr(self):
         """ Calculates and returns the MP2(SCS) potential energy"""
         aa = self.SpinComponents[0].E
         ab = self.SpinComponents[1].E

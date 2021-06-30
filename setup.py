@@ -23,7 +23,7 @@ setuptools.setup(
                  ],
   keywords = ['compchem, gaussian, parser'],
   packages = setuptools.find_packages(),
-  python_requires='>=3.6, <4',
+  python_requires='>=3.6',
   install_requires=['setuptools','pathlib','numpy'],
   include_package_data=True,
   package_data = {'test_files': ['pyssian/tests/test_files/*.txt'],

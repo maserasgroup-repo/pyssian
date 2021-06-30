@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="python" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Pyssian &mdash; pyssian  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples_link.html" />
+    <link rel="prev" title="Welcome to pyssian&#39;s API documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> pyssian
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pyssian</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-pyssian">Installing pyssian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#work-in-progress-installing-from-pypi">(Work In Progress) Installing from PyPI:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-from-source">Installing from source:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-dependencies">Installing the dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-docs">Building the docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developed-with">Developed with</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples_link.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyssian.html">pyssian API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyssian</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Pyssian</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/readme_link.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pyssian">
+<h1>Pyssian<a class="headerlink" href="#pyssian" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>python &gt;= 3.6</p></li>
+<li><p>python library: setuptools</p></li>
+<li><p>python library: numpy</p></li>
+</ul>
+</div>
+<div class="section" id="installing-pyssian">
+<h3>Installing pyssian<a class="headerlink" href="#installing-pyssian" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="work-in-progress-installing-from-pypi">
+<h4>(Work In Progress) Installing from PyPI:<a class="headerlink" href="#work-in-progress-installing-from-pypi" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install pyssian
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-from-source">
+<h4>Installing from source:<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h4>
+<p>Check your python version:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python --version
+</pre></div>
+</div>
+<p>If the version is not one of the required substitute in the following commands
+&quot;python&quot; by the path to the python with the appropiate version. Some systems
+do not have the python symlink but come with the python3 symlink.</p>
+<p>If working within a virtual environment with the appropiate python version, the
+installation should proceed as normal using &quot;python&quot;.</p>
+<p>Get the source code either git or download and unpack it into &quot;pyssian&quot;
+(Currently you need the developer permission to access the code)</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/maserasgroup-repo/pyssian.git pyssian
+</pre></div>
+</div>
+<p>Now install pyssian</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install pyssian
+</pre></div>
+</div>
+<p><em>Installing with the -e option before pyssian will make that
+all the changes in the source file will be effective without havin to reinstall</em></p>
+<p>Or if you prefer you can download the source code in a compressed folder and
+install directly:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install pyssian.tar.gz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-the-dependencies">
+<h3>Installing the dependencies<a class="headerlink" href="#installing-the-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>python3.7 installation in Ubuntu 18.04 LTS</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get update
+<span class="gp">$ </span>sudo apt-get install python3.7 python3.7-dev
+</pre></div>
+</div>
+<p>If for any reason it is not reachable:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo add-apt-repository ppa:deadsnakes/ppa
+<span class="gp">$ </span>sudo apt-get update
+<span class="gp">$ </span>sudo apt-get install python3.7 python3.7-dev
+</pre></div>
+</div>
+<p>Now you can skip this if you don't want to set up a virtual environment
+(Remember to change NewFolder for the actual path of the directory where you
+want the virtual environment)</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install python3.7-venv
+<span class="gp">$ </span>python3.7 -m venv NewFolder
+<span class="gp">$ </span><span class="nb">source</span> NewFolder/bin/activate
+</pre></div>
+</div>
+<p>Now we install the python default installer pip</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install pip
+<span class="gp">$ </span>python -m pip install --upgrade pip
+<span class="gp">$ </span>python -m pip install setuptools
+<span class="gp">$ </span>python -m pip install numpy
+</pre></div>
+</div>
+<p>If it proceeded without any errors (pip and setuptools should already be installed)</p>
+</div>
+</div>
+<div class="section" id="running-the-tests">
+<h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>To run the tests run the following command (after installing pyssian):</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m unittest -v pyssian.tests
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-docs">
+<h2>Building the docs<a class="headerlink" href="#building-the-docs" title="Permalink to this headline">¶</a></h2>
+<p>To build the docs go to the docs folder where you have the source code then run:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> sphinx/
+<span class="gp">$ </span>python -m pip install -r requirements.txt
+<span class="gp">$ </span>make html
+</pre></div>
+</div>
+<p>Now if you go to the _docs/html folder you can open the index.html file in your
+folder and navigate through the documentation easily.</p>
+</div>
+<div class="section" id="developed-with">
+<h2>Developed with<a class="headerlink" href="#developed-with" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>python 3.7</p></li>
+<li><p>Ubuntu 16.04 LTS, 18.04 LTS and 20.04 LTS</p></li>
+</ul>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Raúl Pérez-Soto</strong> - [rperezsoto](<a class="reference external" href="https://github.com/rperezsoto">https://github.com/rperezsoto</a>)</p></li>
+<li><p><strong>Maria Besora</strong> - [MaBeBo](<a class="reference external" href="https://github.com/MaBeBo">https://github.com/MaBeBo</a>)</p></li>
+<li><p><strong>Feliu Maseras</strong> - [maserasgroup](<a class="reference external" href="https://github.com/maserasgroup">https://github.com/maserasgroup</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>pyssian is freely available under an [MIT](<a class="reference external" href="https://opensource.org/licenses/MIT">https://opensource.org/licenses/MIT</a>)</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="examples_link.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to pyssian&#39;s API documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
