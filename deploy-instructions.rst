@@ -4,7 +4,7 @@ Updating the version
 Places where the version has to be updated: 
 
 - ./setup.py
-- ./pyssian/pyssian.py
+- ./pyssian/__init__.py
 
 Notes: 
 
