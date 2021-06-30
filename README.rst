@@ -2,6 +2,9 @@
 pyssian
 ==============
 
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.5048335.svg
+   :target: https://doi.org/10.5281/zenodo.5048335
+
 ----------------------------------------
 A python interface to Gaussian i/o files
 ----------------------------------------
