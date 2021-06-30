@@ -473,6 +473,8 @@ class GaussianInFile(object):
             txt.append('')
         self._txt = '\n'.join(txt)
         bins = [i for i,line in enumerate(txt) if not line]
+        # Ensure that the if the title is empty, the bins are not including it
+        bins = [i for i in bins if not set((i-1,i,i+1)).issubset(set(bins))]
         stop = bins[0]
         header = iter(txt[:stop])
         preprocessing = []
