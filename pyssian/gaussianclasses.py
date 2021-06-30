@@ -249,7 +249,7 @@ class GaussianOutFile(object):
             BlockType, Block = yield
 
 class InternalJob(object):
-    """Gaussian 09 InternalJob parent class, if any special type of Job
+    """Gaussian 09/16 InternalJob parent class, if any special type of Job
     requires different parsing it should be a subclass of this one.
 
     Parameters
@@ -330,7 +330,7 @@ class InternalJob(object):
 
 class GaussianInFile(object):
     """
-    Gaussian 09 .in file parent class, if any special type of input
+    Gaussian 09/16 .in file parent class, if any special type of input
     requires different processing it should be a subclass of this one.
 
     Parameters
@@ -362,6 +362,10 @@ class GaussianInFile(object):
     structure : str
         A string holding the structure of the input file. Used to write new
         Input files.
+    nprocs : int
+        property to easily access and change the preprocessing['nprocshared'] value
+    mem : int
+        property to easily access and change the preprocessing['mem'] value
     """
     def __init__(self,file):
         # Do Something

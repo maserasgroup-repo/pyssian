@@ -193,7 +193,7 @@ Gaussian Files (input and output).</p>
 <dl class="py class">
 <dt id="pyssian.GaussianInFile">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.</span></code><code class="sig-name descname"><span class="pre">GaussianInFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gaussian 09 .in file parent class, if any special type of input
+<dd><p>Gaussian 09/16 .in file parent class, if any special type of input
 requires different processing it should be a subclass of this one.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -308,6 +308,28 @@ Input files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.nprocs">
+<code class="sig-name descname"><span class="pre">nprocs</span></code><a class="headerlink" href="#pyssian.GaussianInFile.nprocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>property to easily access and change the preprocessing['nprocshared'] value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.mem">
+<code class="sig-name descname"><span class="pre">mem</span></code><a class="headerlink" href="#pyssian.GaussianInFile.mem" title="Permalink to this definition">¶</a></dt>
+<dd><p>property to easily access and change the preprocessing['mem'] value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -531,7 +553,7 @@ console a message to notify the user (the default is False).</p></li>
 <dl class="py class">
 <dt id="pyssian.InternalJob">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.</span></code><code class="sig-name descname"><span class="pre">InternalJob</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#InternalJob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.InternalJob" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gaussian 09 InternalJob parent class, if any special type of Job
+<dd><p>Gaussian 09/16 InternalJob parent class, if any special type of Job
 requires different parsing it should be a subclass of this one.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

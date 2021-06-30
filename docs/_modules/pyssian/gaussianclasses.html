@@ -403,7 +403,7 @@
             <span class="n">BlockType</span><span class="p">,</span> <span class="n">Block</span> <span class="o">=</span> <span class="k">yield</span></div>
 
 <div class="viewcode-block" id="InternalJob"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob">[docs]</a><span class="k">class</span> <span class="nc">InternalJob</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gaussian 09 InternalJob parent class, if any special type of Job</span>
+    <span class="sd">&quot;&quot;&quot;Gaussian 09/16 InternalJob parent class, if any special type of Job</span>
 <span class="sd">    requires different parsing it should be a subclass of this one.</span>
 
 <span class="sd">    Parameters</span>
@@ -484,7 +484,7 @@
 
 <div class="viewcode-block" id="GaussianInFile"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile">[docs]</a><span class="k">class</span> <span class="nc">GaussianInFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gaussian 09 .in file parent class, if any special type of input</span>
+<span class="sd">    Gaussian 09/16 .in file parent class, if any special type of input</span>
 <span class="sd">    requires different processing it should be a subclass of this one.</span>
 
 <span class="sd">    Parameters</span>
@@ -516,6 +516,10 @@
 <span class="sd">    structure : str</span>
 <span class="sd">        A string holding the structure of the input file. Used to write new</span>
 <span class="sd">        Input files.</span>
+<span class="sd">    nprocs : int</span>
+<span class="sd">        property to easily access and change the preprocessing[&#39;nprocshared&#39;] value</span>
+<span class="sd">    mem : int</span>
+<span class="sd">        property to easily access and change the preprocessing[&#39;mem&#39;] value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
         <span class="c1"># Do Something</span>
@@ -598,10 +602,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nprocs&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nprocshared&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
     <span class="nd">@nprocs</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;nprocs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;nprocshared&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -30,6 +30,6 @@ setuptools.setup(
                   'tests' : ['pyssian/tests/*.py']},
   project_urls={'Bug Reports': 'https://github.com/maserasgroup-repo/pyssian/issues',
                 'Source': 'https://github.com/maserasgroup-repo/pyssian',
-                'Docs' : 'https://pyssian.readthedocs.io/en/latest/'
+                'Docs' : 'https://maserasgroup-repo.github.io/pyssian/'
                },
 )
