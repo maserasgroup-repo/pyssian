@@ -444,10 +444,10 @@ class GaussianInFile(object):
 
     @property
     def nprocs(self):
-        return self.preprocessing.get('nprocs',None)
+        return self.preprocessing.get('nprocshared',None)
     @nprocs.setter
     def nprocs(self,other):
-        self.preprocessing['nprocs'] = other
+        self.preprocessing['nprocshared'] = other
 
     @property
     def mem(self):
