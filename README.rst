@@ -2,8 +2,8 @@
 pyssian
 ==============
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.5048335.svg
-   :target: https://doi.org/10.5281/zenodo.5048335
+.. image:: https://zenodo.org/badge/333841133.svg
+   :target: https://zenodo.org/badge/latestdoi/333841133
 
 ----------------------------------------
 A python interface to Gaussian i/o files
@@ -33,8 +33,8 @@ Prerequisites
 Installing pyssian
 ..................
 
-(Work In Progress) Installing from PyPI: 
-++++++++++++++++++++++++++++++++++++++++
+Installing from PyPI: 
++++++++++++++++++++++
 
 .. code:: shell-session
 
