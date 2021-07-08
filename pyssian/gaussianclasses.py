@@ -19,6 +19,8 @@ class GaussianOutFile(object):
     """Gaussian 09/16 '.log' file parent class, if any special type of calculation
     requires different processing it should be a subclass of this one. Accepts
     a context manager usage similar to 'with open(file) as F:...'
+    *For a Gaussian .log file to be parsable it requires that its corresponding 
+    input has the additional printout enabled (#p)* 
 
     Parameters
     ----------
@@ -569,7 +571,8 @@ class GaussianInFile(object):
         Parameters
         ----------
         lines : list
-            list of strings previously stripped. Empty lines will be ignored.
+            list of strings previously stripped and split. Empty lines will be 
+            ignored.
         """
         # the first line contains the "#p", remove it
         start = lines[0][1:]
