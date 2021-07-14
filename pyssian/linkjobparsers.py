@@ -678,7 +678,7 @@ class Link202(LinkJob):
 
     _token = 202
 
-    re_orientation = r'(?:.*Input\sorientation\:.*\n'
+    re_orientation = r'(?:.*(?:Standard|Input)\sorientation\:.*\n'
     re_orientation += r'\s?\-+\n.*\n.*\n\s?\-+\n)'
     re_orientation += r'[\s\S]*?'
     re_orientation += r'(?:\s?\-+\n)'
@@ -709,7 +709,9 @@ class Link202(LinkJob):
         AtomCoords = cls._AtomCoords
         match = cls.re_orientation.findall(self.text)
         if match:
-            lines = [i for i in match[0].split('\n') if i.strip()]
+            # If Input and Standard orientation coexist
+            # take the last one (Standard, generally)
+            lines = [i for i in match[-1].split('\n') if i.strip()]
             _ = lines.pop(0) # Discard "Input orientation" line
             # Discard "Header"
             for i in range(4):

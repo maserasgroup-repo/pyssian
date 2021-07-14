@@ -7,6 +7,7 @@ from pyssian.linkjobparsers import *
 TEST_FILEDIR = Path(__file__).parent.resolve() / 'test_files'
 
 SMARK = '\n## Split Here ##\n'
+MMARK = '\n## Match ##\n'
 
 class TestGeneralLinkJob(unittest.TestCase):
 
@@ -401,10 +402,6 @@ class TestLink202(unittest.TestCase):
         with open(cls.orifile,'r') as F:
             txt = F.read()
         cls.orientations = txt.split(SMARK)
-        # Read and store the Solutions to the dmatrix tests
-        with open(cls.orifile,'r') as F:
-            txt = F.read()
-        cls.dmatrices = txt.split(SMARK)
 
     def test_init(self):
         msg = 'Incorrect parsing of Link202'
@@ -418,11 +415,13 @@ class TestLink202(unittest.TestCase):
         regex = Link202.re_orientation
         with open(self.refile) as F:
             txt = F.read()
-        items = [i for i in txt.split(SMARK)]
-        for obj,solution in zip(self.objects,items):
-            txt = obj.text
-            test = regex.findall(txt)[0]
-            self.assertTrue(test == solution,msg)
+        items = [i.split(MMARK) for i in txt.split(SMARK)]
+        for i,(obj,solutions) in enumerate(zip(self.objects,items)):
+            text = obj.text
+            tests = regex.findall(text)
+            for j,(test,sol) in enumerate(zip(tests,solutions)):
+                with self.subTest(text=i,match=j):
+                    self.assertEqual(test,sol,msg)
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link202'
@@ -447,9 +446,10 @@ class TestLink202(unittest.TestCase):
                     d, e, f = float(values[3]),float(values[4]),float(values[5])
                     mat.append(AtomCoords(a,b,c,d,e,f))
             items.append(mat)
-        for obj,solution in zip(self.objects,items):
+        for i,(obj,solution) in enumerate(zip(self.objects,items)):
             test = obj.orientation
-            self.assertTrue(test == solution)
+            with self.subTest(text=i):
+                self.assertEqual(test,solution,msg)
 
     def test_DistanceMatrix(self):
         msg = 'DistanceMatrix not properly parsed'
