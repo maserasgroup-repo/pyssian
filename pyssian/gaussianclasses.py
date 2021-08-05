@@ -368,6 +368,9 @@ class GaussianInFile(object):
         property to easily access and change the preprocessing['nprocshared'] value
     mem : int
         property to easily access and change the preprocessing['mem'] value
+    extra_printout : bool
+        Controls the behaviour of the command line's "#" or "#p". If True 
+        the command line will appear with the "#p". It is True by default.
     """
     def __init__(self,file):
         # Do Something
@@ -387,6 +390,7 @@ class GaussianInFile(object):
         self.charge = 0
         self.geometry = '' # In the G16 Manual "Molecule Specification"
         self.tail = [] # In the G16 Manual "Optional additional sections"
+        self.extra_printout = True
         self.structure = '{preprocessing}\n{commandline}\n\n'
         self.structure += '{title}\n\n'
         self.structure += '{charge} {spin}\n{geometry}\n\n'
@@ -397,27 +401,8 @@ class GaussianInFile(object):
         size = len(self)
         return f'<{cls}({file})>'
     def __str__(self):
-        # str repr of the preprocessing
-        preprocessing = []
-        for key,val in self.preprocessing.items():
-            if val:
-                Aux = f'%{key}={val}'
-            else:
-                Aux = f'%{key}'
-            preprocessing.append(Aux)
-        # str repr of the commandline
-        commandline = ['#p',]
-        for key,val in self.commandline.items():
-            if val and (len(val) == 1):
-                Aux = f"{key}={','.join(val)}"
-            elif val:
-                Aux = f"{key}=({','.join(val)})"
-            else:
-                Aux = f"{key}"
-            commandline.append(Aux)
-        # Prepare to format as str
-        kwargs = dict( preprocessing='\n'.join(preprocessing),
-                       commandline=' '.join(commandline),
+        kwargs = dict( preprocessing=self.preprocessing_as_str(),
+                       commandline=self.commandline_as_str(),
                        title=self.title,
                        charge=self.charge,
                        spin=self.spin,
@@ -574,7 +559,9 @@ class GaussianInFile(object):
             list of strings previously stripped and split. Empty lines will be 
             ignored.
         """
-        # the first line contains the "#p", remove it
+        # the first line contains the "#p"
+        self.extra_printout = lines[0][0] == '#p'
+        # parse all the keywords
         start = lines[0][1:]
         others = [i for i in chain(*lines[1:])]
         method_found = False
@@ -670,8 +657,50 @@ class GaussianInFile(object):
                 self.tail.append('\n'.join(Aux))
                 print('Parsed an input file withouth blank line ending')
 
+    # Helper functions for writing
+    def preprocessing_as_str(self):
+        """
+        Transforms the preprocessing attribute to a suitable string 
+        representation.
 
-    # Modifying functions
+        Returns
+        -------
+        str
+            string corresponding to the preprocessing part of the input file. 
+        """
+        preprocessing = []
+        for key,val in self.preprocessing.items():
+            if val:
+                Aux = f'%{key}={val}'
+            else:
+                Aux = f'%{key}'
+            preprocessing.append(Aux)
+        return '\n'.join(preprocessing)
+    def commandline_as_str(self): 
+        """
+        Transforms the commandline attribute to a suitable string 
+        representation.
+
+        Returns
+        -------
+        str
+            string corresponding to the commandline of the input file. 
+        """
+        if self.extra_printout: 
+            commandline = ['#p',]
+        else:
+            commandline = ['#',]
+        for key,val in self.commandline.items():
+            if val and (len(val) == 1):
+                Aux = f"{key}={','.join(val)}"
+            elif val:
+                Aux = f"{key}=({','.join(val)})"
+            else:
+                Aux = f"{key}"
+            commandline.append(Aux)
+        return ' '.join(commandline)
+    
+    # Attribute modifying functions
     def pop_chk(self,default=None):
         """
         Removes the chk from the file, returns 'default' if the chk was not
@@ -740,6 +769,18 @@ class GaussianInFile(object):
         _ = self.commandline.pop(key,None) # Used to ensure deletion of the key
         self._basis = basis
         self.commandline[basis] = ''
+    def disable_extra_printout(self):
+        """
+        When used, the string representation of the object will not include the 
+        #p in the command line.
+        """
+        self.extra_printout = False
+    def enable_extra_printout(self):
+        """
+        When used, the string representation of the object will include the 
+        #p in the command line.
+        """
+        self.extra_printout = True
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
