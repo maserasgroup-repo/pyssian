@@ -873,6 +873,56 @@ class GaussianInFile(object):
         #p in the command line.
         """
         self.extra_printout = True
+    def pop_kwd(self,keyword,where=None):
+        """
+        Removes a keyword from the command line and returns it. 
+
+        Parameters
+        ----------
+        keyword : str
+            keyword to remove from the command line.
+        where : str, optional
+            if provided it searches the keyword as a suboption of the "where" 
+            keyword i.e. pop_kwd('smd',where='scrf') or 
+            pop_kwd('cartesian',where='opt')
+
+        Returns
+        -------
+        str or None
+            Returns the removed keyword (or None when the keyword was not in the
+            command line)  
+        """
+        if where is None:
+            return self.commandline.pop(keyword)
+        
+        items = self.commandline.get(where,[])
+        if keyword in items:
+            kwd = items.pop(items.index(keyword)) 
+            self.commandline[where] = items
+            return kwd
+        return None
+    def add_kwd(self,keyword,where=None):
+        """
+        Adds a keyword to the command line. 
+
+        Parameters
+        ----------
+        keyword : str
+            keyword to add to the command line.
+        where : str, optional
+            if provided it adds the keyword as a suboption of the "where" 
+            keyword i.e. add_kwd('smd',where='scrf') or 
+            add_kwd('cartesian',where='opt')
+
+        """
+        if where is None:
+            self.commandline[keyword] = []
+        
+        items = self.commandline.get(where,[])
+        if keyword in items:
+            return
+        items.append(keyword)
+        self.commandline[where] = items
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
