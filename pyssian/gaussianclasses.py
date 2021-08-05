@@ -371,6 +371,16 @@ class GaussianInFile(object):
     extra_printout : bool
         Controls the behaviour of the command line's "#" or "#p". If True 
         the command line will appear with the "#p". It is True by default.
+    solvent : str or None
+        When set to None the solvation is still active but no solvent has been
+        specified. When set to 'gas' the solvation is completely removed and 
+        when set to a different string, the string is assumed to be a valid name
+        for the solvent in gaussian.
+    solvent_model : str or None
+        This property controls the keyword scrf and has three possible values: 
+        None -> the scrf keyword is not included
+        'pcm' -> the 'pcm' suboption within scrf is included
+        'smd' -> the 'smd' suboption within the scrf is included.  
     """
     def __init__(self,file):
         # Do Something
@@ -446,6 +456,42 @@ class GaussianInFile(object):
     @mem.setter
     def mem(self,other):
         self.preprocessing['mem'] = other
+    
+    @property
+    def solvent(self):
+        if 'scrf' not in self.commandline: 
+            return 'gas'
+        items = self.commandline.get('scrf',[])
+        for item in items: 
+            if 'solvent=' in item:
+                return item.split('=')[1]
+        return None
+    
+    @solvent.setter
+    def solvent(self,other):
+        if other is None: 
+            self._remove_solvent(remove_solvation=False)
+        elif other.lower() == 'gas':
+            self._remove_solvent(remove_solvation=True)
+        else:
+            self._set_solvent(other)
+    
+    @property
+    def solvent_model(self):
+        items = self.commandline.get('scrf',[])
+        for item in items: 
+            if item.lower() in ['pcm','smd']:
+                return item
+        return None
+    
+    @solvent_model.setter
+    def solvent_model(self,other):
+        if other is None: 
+            self._remove_solvent_model()
+        elif other.lower() in ['pcm','smd']: 
+            self._set_solvent_model(other.lower())
+        else:
+            raise ValueError(f'solvent model "{other}" is not smd/pcm/None')
 
     def read(self):
         """
@@ -700,6 +746,52 @@ class GaussianInFile(object):
             commandline.append(Aux)
         return ' '.join(commandline)
     
+    # Private functions for properties management
+    def _remove_solvent(self,remove_solvation=False):
+        if remove_solvation: 
+            _ = self.commandline.pop('scrf')
+            return
+
+        items = self.commandline.get('scrf',[])
+        for i,item in enumerate(items): 
+            if 'solvent=' in item:
+                break
+        else:
+            return
+        _ = items.pop(i)
+        self.commandline['scrf'] = items
+    def _set_solvent(self,other): 
+        items = self.commandline.get('scrf',[])
+        for i,item in enumerate(items): 
+            if 'solvent=' in item:
+                items[i] = f'solvent={other}'
+        self.commandline['scrf'] = items
+    def _remove_solvent_model(self):
+        # If scrf does not exist
+        current = self.solvent_model 
+        if current is None: 
+            return
+        
+        # Otherwise assume existence
+        items = self.commandline.get('scrf',[])
+        for i,item in enumerate(items):
+            if item == current: 
+                break
+        _ = items.pop(i)
+        self.commandline['scrf'] = items
+    def _set_solvent_model(self,other):
+        # If scrf does not exist
+        current = self.solvent_model 
+        items = self.commandline.get('scrf',[])
+        if current is None: 
+            items.append(other)
+        else:
+            for i,item in enumerate(items):
+                if item == current: 
+                    items[i] = other
+        
+        self.commandline['scrf'] = items
+        
     # Attribute modifying functions
     def pop_chk(self,default=None):
         """
