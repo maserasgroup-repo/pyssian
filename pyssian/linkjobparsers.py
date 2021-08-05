@@ -16,10 +16,11 @@ def Populates(*attributes, defaults=None):
 
     Parameters
     ----------
-    *attributes : type
-        Description of parameter `*attributes`.
-    default : type
-        Description of parameter `default` (the default is None).
+    *attributes : str
+        names of the attributes populated by the method.
+    default : list
+        list of default values in the same order as the attributes. If none
+        provided no "default message" is added.
 
     Returns
     -------
