@@ -535,6 +535,63 @@ class Link103(LinkJob):
         print('\n'.join(Out))
 
 @RegisterLinkJob
+class Link120(LinkJob):
+    """
+    Representation and parser for the output of l120.exe. Corresponds to a
+    the energy calculations when using ONIOM.
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l103.exe
+    asEmpty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    energy
+    energy_partitions
+
+    """
+    __slots__ = ('energy', 'energy_partitions')
+
+    _token = 120
+
+    re_energy = r'extrapolated energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_energy = re.compile(re_energy)
+    re_energy_partitions = r'gridpoint\s*([0-9]*)\smethod:\s*([a-zA-Z]*)\s*system:\s*([a-zA-Z]*)\s*energy:\s*(-?[0-9]*\.[0-9]*)'
+    re_energy_partitions = re.compile(re_energy_partitions)
+    _EnergyPartition = namedtuple('EnergyPartition','gridpoint level model energy')
+
+    def __init__(self,text,asEmpty=False):
+        self.energy = None
+        self.energy_partitions = []
+        if asEmpty:
+            super().__init__('',120)
+        else:
+            super().__init__(text,120)
+            self._locate_energies()
+
+    @Populates('energy','energy_partitions',defaults=['None','[]'])
+    @SilentFail
+    def _locate_energies(self):
+        """
+        Uses regex expressions compiled as class attributes to find
+        the energy and the different energy_partitions.
+        """
+        cls = self.__class__
+        match = cls.re_energy.findall(self.text)
+        if match:
+            self.energy = match[0]
+
+        EnergyPartition = cls._EnergyPartition
+        match = cls.re_energy_partitions.findall(self.text)
+        if match:
+            self.energy_partitions = [EnergyPartition(grid_p,level,model,energy)
+                                      for grid_p,level,model,energy in match]
+
+@RegisterLinkJob
 class Link123(LinkJob):
     """
     Representation and parser for the output of l123.exe. Corresponds to irc
