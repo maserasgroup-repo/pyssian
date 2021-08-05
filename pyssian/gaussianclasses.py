@@ -557,7 +557,7 @@ class GaussianInFile(object):
         for line in lines:
             Aux = line.split('=')
             if len(Aux) == 1:
-                key,val = Aux,''
+                key,val = Aux[0],''
             elif len(Aux) == 2:
                 key,val = Aux
             else:
