@@ -98,6 +98,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#link1">Link1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link101">Link101</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link103">Link103</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#link120">Link120</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link123">Link123</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link202">Link202</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link502">Link502</a></li>
@@ -195,15 +196,16 @@ registered with the appropiate decorator are considered for parsing.</p>
 <li><p><a class="reference internal" href="#link1" id="id3">Link1</a></p></li>
 <li><p><a class="reference internal" href="#link101" id="id4">Link101</a></p></li>
 <li><p><a class="reference internal" href="#link103" id="id5">Link103</a></p></li>
-<li><p><a class="reference internal" href="#link123" id="id6">Link123</a></p></li>
-<li><p><a class="reference internal" href="#link202" id="id7">Link202</a></p></li>
-<li><p><a class="reference internal" href="#link502" id="id8">Link502</a></p></li>
-<li><p><a class="reference internal" href="#link508" id="id9">Link508</a></p></li>
-<li><p><a class="reference internal" href="#link601" id="id10">Link601</a></p></li>
-<li><p><a class="reference internal" href="#link716" id="id11">Link716</a></p></li>
-<li><p><a class="reference internal" href="#link804" id="id12">Link804</a></p></li>
-<li><p><a class="reference internal" href="#link913" id="id13">Link913</a></p></li>
-<li><p><a class="reference internal" href="#link914" id="id14">Link914</a></p></li>
+<li><p><a class="reference internal" href="#link120" id="id6">Link120</a></p></li>
+<li><p><a class="reference internal" href="#link123" id="id7">Link123</a></p></li>
+<li><p><a class="reference internal" href="#link202" id="id8">Link202</a></p></li>
+<li><p><a class="reference internal" href="#link502" id="id9">Link502</a></p></li>
+<li><p><a class="reference internal" href="#link508" id="id10">Link508</a></p></li>
+<li><p><a class="reference internal" href="#link601" id="id11">Link601</a></p></li>
+<li><p><a class="reference internal" href="#link716" id="id12">Link716</a></p></li>
+<li><p><a class="reference internal" href="#link804" id="id13">Link804</a></p></li>
+<li><p><a class="reference internal" href="#link913" id="id14">Link913</a></p></li>
+<li><p><a class="reference internal" href="#link914" id="id15">Link914</a></p></li>
 </ul>
 </div>
 <div class="section" id="linkjob">
@@ -648,6 +650,49 @@ the parameter table if exists.
 <dt id="pyssian.linkjobparsers.Link103.print_convergence">
 <code class="sig-name descname"><span class="pre">print_convergence</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link103.print_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link103.print_convergence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the convergence Table formatted</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="link120">
+<h2><a class="toc-backref" href="#contents">Link120</a><a class="headerlink" href="#link120" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pyssian.linkjobparsers.Link120">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.linkjobparsers.</span></code><code class="sig-name descname"><span class="pre">Link120</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asEmpty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link120" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyssian.linkjobparsers.LinkJob" title="pyssian.linkjobparsers.LinkJob"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyssian.linkjobparsers.LinkJob</span></code></a></p>
+<p>Representation and parser for the output of l120.exe. Corresponds to a
+the energy calculations when using ONIOM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) -- text that corresponds to the output of the l103.exe</p></li>
+<li><p><strong>asEmpty</strong> (<em>bool</em>) -- Flag to not parse and store the information of the text.
+(defaults to False)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link120.energy">
+<code class="sig-name descname"><span class="pre">energy</span></code><a class="headerlink" href="#pyssian.linkjobparsers.Link120.energy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.linkjobparsers.Link120.energy_partitions">
+<code class="sig-name descname"><span class="pre">energy_partitions</span></code><a class="headerlink" href="#pyssian.linkjobparsers.Link120.energy_partitions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.linkjobparsers.Link120._locate_energies">
+<code class="sig-name descname"><span class="pre">_locate_energies</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/linkjobparsers.html#Link120._locate_energies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.linkjobparsers.Link120._locate_energies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses regex expressions compiled as class attributes to find
+the energy and the different energy_partitions.
+(Fails Silently).</p>
+<p>Populates the attributes:</p>
+<ul class="simple">
+<li><p>energy (None)</p></li>
+<li><p>energy_partitions ([])</p></li>
+</ul>
 </dd></dl>
 
 </dd></dl>

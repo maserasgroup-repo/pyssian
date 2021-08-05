@@ -173,6 +173,8 @@
     <span class="sd">&quot;&quot;&quot;Gaussian 09/16 &#39;.log&#39; file parent class, if any special type of calculation</span>
 <span class="sd">    requires different processing it should be a subclass of this one. Accepts</span>
 <span class="sd">    a context manager usage similar to &#39;with open(file) as F:...&#39;</span>
+<span class="sd">    *For a Gaussian .log file to be parsable it requires that its corresponding </span>
+<span class="sd">    input has the additional printout enabled (#p)* </span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -520,6 +522,19 @@
 <span class="sd">        property to easily access and change the preprocessing[&#39;nprocshared&#39;] value</span>
 <span class="sd">    mem : int</span>
 <span class="sd">        property to easily access and change the preprocessing[&#39;mem&#39;] value</span>
+<span class="sd">    extra_printout : bool</span>
+<span class="sd">        Controls the behaviour of the command line&#39;s &quot;#&quot; or &quot;#p&quot;. If True </span>
+<span class="sd">        the command line will appear with the &quot;#p&quot;. It is True by default.</span>
+<span class="sd">    solvent : str or None</span>
+<span class="sd">        When set to None the solvation is still active but no solvent has been</span>
+<span class="sd">        specified. When set to &#39;gas&#39; the solvation is completely removed and </span>
+<span class="sd">        when set to a different string, the string is assumed to be a valid name</span>
+<span class="sd">        for the solvent in gaussian.</span>
+<span class="sd">    solvent_model : str or None</span>
+<span class="sd">        This property controls the keyword scrf and has three possible values: </span>
+<span class="sd">        None -&gt; the scrf keyword is not included</span>
+<span class="sd">        &#39;pcm&#39; -&gt; the &#39;pcm&#39; suboption within scrf is included</span>
+<span class="sd">        &#39;smd&#39; -&gt; the &#39;smd&#39; suboption within the scrf is included.  </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
         <span class="c1"># Do Something</span>
@@ -539,6 +554,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># In the G16 Manual &quot;Molecule Specification&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># In the G16 Manual &quot;Optional additional sections&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{preprocessing}</span><span class="se">\n</span><span class="si">{commandline}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{title}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{charge}</span><span class="s1"> </span><span class="si">{spin}</span><span class="se">\n</span><span class="si">{geometry}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
@@ -549,27 +565,8 @@
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># str repr of the preprocessing</span>
-        <span class="n">preprocessing</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="n">preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
-        <span class="c1"># str repr of the commandline</span>
-        <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#p&#39;</span><span class="p">,]</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">val</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">elif</span> <span class="n">val</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=(</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">commandline</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
-        <span class="c1"># Prepare to format as str</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">preprocessing</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">),</span>
-                       <span class="n">commandline</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commandline</span><span class="p">),</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">preprocessing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessing_as_str</span><span class="p">(),</span>
+                       <span class="n">commandline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">commandline_as_str</span><span class="p">(),</span>
                        <span class="n">title</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
                        <span class="n">charge</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span>
                        <span class="n">spin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spin</span><span class="p">,</span>
@@ -613,6 +610,42 @@
     <span class="nd">@mem</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;scrf&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s1">&#39;gas&#39;</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="nd">@solvent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent</span><span class="p">(</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;gas&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent</span><span class="p">(</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_solvent</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pcm&#39;</span><span class="p">,</span><span class="s1">&#39;smd&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="nd">@solvent_model</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent_model</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pcm&#39;</span><span class="p">,</span><span class="s1">&#39;smd&#39;</span><span class="p">]:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_solvent_model</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solvent model &quot;</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&quot; is not smd/pcm/None&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GaussianInFile.read"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -709,7 +742,7 @@
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
             <span class="n">Aux</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span><span class="p">,</span><span class="s1">&#39;&#39;</span>
+                <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;&#39;</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span>
             <span class="k">else</span><span class="p">:</span>
@@ -723,15 +756,26 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        lines : list</span>
-<span class="sd">            list of strings previously stripped. Empty lines will be ignored.</span>
+<span class="sd">            list of strings previously stripped and split. Empty lines will be </span>
+<span class="sd">            ignored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># the first line contains the &quot;#p&quot;, remove it</span>
+        <span class="c1"># the first line contains the &quot;#p&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#p&#39;</span>
+        <span class="c1"># parse all the keywords</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">others</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
         <span class="n">method_found</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">basis_found</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">others</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">is_method</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">method_found</span><span class="p">:</span>
+            <span class="n">dummy</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">is_method</span><span class="p">(</span><span class="n">dummy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">is_basis</span><span class="p">(</span><span class="n">dummy</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">method_found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">basis_found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">method</span><span class="p">,</span><span class="n">basis</span> <span class="o">=</span> <span class="n">dummy</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">is_method</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">method_found</span><span class="p">:</span>
                 <span class="n">method_found</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">item</span>
                 <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">item</span><span class="p">,</span> <span class="p">[]</span>
@@ -813,8 +857,96 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Aux</span><span class="p">))</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsed an input file withouth blank line ending&#39;</span><span class="p">)</span></div>
 
+    <span class="c1"># Helper functions for writing</span>
+<div class="viewcode-block" id="GaussianInFile.preprocessing_as_str"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.preprocessing_as_str">[docs]</a>    <span class="k">def</span> <span class="nf">preprocessing_as_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the preprocessing attribute to a suitable string </span>
+<span class="sd">        representation.</span>
 
-    <span class="c1"># Modifying functions</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            string corresponding to the preprocessing part of the input file. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preprocessing</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">)</span></div>
+<div class="viewcode-block" id="GaussianInFile.commandline_as_str"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.commandline_as_str">[docs]</a>    <span class="k">def</span> <span class="nf">commandline_as_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the commandline attribute to a suitable string </span>
+<span class="sd">        representation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            string corresponding to the commandline of the input file. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span><span class="p">:</span> 
+            <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#p&#39;</span><span class="p">,]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#&#39;</span><span class="p">,]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">elif</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=(</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">commandline</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commandline</span><span class="p">)</span></div>
+    
+    <span class="c1"># Private functions for properties management</span>
+    <span class="k">def</span> <span class="nf">_remove_solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">remove_solvation</span><span class="p">:</span> 
+            <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span> <span class="nf">_set_solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span> 
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;solvent=</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span> <span class="nf">_remove_solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># If scrf does not exist</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent_model</span> 
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="k">return</span>
+        
+        <span class="c1"># Otherwise assume existence</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">current</span><span class="p">:</span> 
+                <span class="k">break</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span> <span class="nf">_set_solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="c1"># If scrf does not exist</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent_model</span> 
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">current</span><span class="p">:</span> 
+                    <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+        
+    <span class="c1"># Attribute modifying functions</span>
 <div class="viewcode-block" id="GaussianInFile.pop_chk"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_chk">[docs]</a>    <span class="k">def</span> <span class="nf">pop_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes the chk from the file, returns &#39;default&#39; if the chk was not</span>
@@ -882,7 +1014,69 @@
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span>
         <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># Used to ensure deletion of the key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span> <span class="o">=</span> <span class="n">basis</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">basis</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">basis</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+<div class="viewcode-block" id="GaussianInFile.disable_extra_printout"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.disable_extra_printout">[docs]</a>    <span class="k">def</span> <span class="nf">disable_extra_printout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When used, the string representation of the object will not include the </span>
+<span class="sd">        #p in the command line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">False</span></div>
+<div class="viewcode-block" id="GaussianInFile.enable_extra_printout"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.enable_extra_printout">[docs]</a>    <span class="k">def</span> <span class="nf">enable_extra_printout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When used, the string representation of the object will include the </span>
+<span class="sd">        #p in the command line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">True</span></div>
+<div class="viewcode-block" id="GaussianInFile.pop_kwd"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_kwd">[docs]</a>    <span class="k">def</span> <span class="nf">pop_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a keyword from the command line and returns it. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to remove from the command line.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it searches the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. pop_kwd(&#39;smd&#39;,where=&#39;scrf&#39;) or </span>
+<span class="sd">            pop_kwd(&#39;cartesian&#39;,where=&#39;opt&#39;)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str or None</span>
+<span class="sd">            Returns the removed keyword (or None when the keyword was not in the</span>
+<span class="sd">            command line)  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+        
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">kwd</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">keyword</span><span class="p">))</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+            <span class="k">return</span> <span class="n">kwd</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+<div class="viewcode-block" id="GaussianInFile.add_kwd"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.add_kwd">[docs]</a>    <span class="k">def</span> <span class="nf">add_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a keyword to the command line. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to add to the command line.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it adds the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. add_kwd(&#39;smd&#39;,where=&#39;scrf&#39;) or </span>
+<span class="sd">            add_kwd(&#39;cartesian&#39;,where=&#39;opt&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span></div></div>
 
 <span class="c1"># TODO: Implement a class to read and manipulate the basis functions in the tail</span>
 <span class="c1"># class BasisTail(object), whose str function returns things as it should and</span>

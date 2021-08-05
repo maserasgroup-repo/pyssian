@@ -334,11 +334,67 @@ Input files.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.extra_printout">
+<code class="sig-name descname"><span class="pre">extra_printout</span></code><a class="headerlink" href="#pyssian.GaussianInFile.extra_printout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls the behaviour of the command line's &quot;#&quot; or &quot;#p&quot;. If True
+the command line will appear with the &quot;#p&quot;. It is True by default.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.solvent">
+<code class="sig-name descname"><span class="pre">solvent</span></code><a class="headerlink" href="#pyssian.GaussianInFile.solvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>When set to None the solvation is still active but no solvent has been
+specified. When set to 'gas' the solvation is completely removed and
+when set to a different string, the string is assumed to be a valid name
+for the solvent in gaussian.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pyssian.GaussianInFile.solvent_model">
+<code class="sig-name descname"><span class="pre">solvent_model</span></code><a class="headerlink" href="#pyssian.GaussianInFile.solvent_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property controls the keyword scrf and has three possible values:
+None -&gt; the scrf keyword is not included
+'pcm' -&gt; the 'pcm' suboption within scrf is included
+'smd' -&gt; the 'smd' suboption within the scrf is included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="pyssian.GaussianInFile.add_chk">
 <code class="sig-name descname"><span class="pre">add_chk</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.add_chk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.add_chk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds the chk to the file, with the specified name. If none is provided
 defaults to the file name ended in .chk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.add_kwd">
+<code class="sig-name descname"><span class="pre">add_kwd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyword</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.add_kwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.add_kwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a keyword to the command line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyword</strong> (<em>str</em>) -- keyword to add to the command line.</p></li>
+<li><p><strong>where</strong> (<em>str</em><em>, </em><em>optional</em>) -- if provided it adds the keyword as a suboption of the &quot;where&quot;
+keyword i.e. add_kwd('smd',where='scrf') or
+add_kwd('cartesian',where='opt')</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -379,13 +435,43 @@ self.method = method makes a call to this function.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="pyssian.GaussianInFile.commandline_as_str">
+<code class="sig-name descname"><span class="pre">commandline_as_str</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.commandline_as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.commandline_as_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the commandline attribute to a suitable string
+representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>string corresponding to the commandline of the input file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.disable_extra_printout">
+<code class="sig-name descname"><span class="pre">disable_extra_printout</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.disable_extra_printout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.disable_extra_printout" title="Permalink to this definition">¶</a></dt>
+<dd><p>When used, the string representation of the object will not include the
+#p in the command line.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.enable_extra_printout">
+<code class="sig-name descname"><span class="pre">enable_extra_printout</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.enable_extra_printout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.enable_extra_printout" title="Permalink to this definition">¶</a></dt>
+<dd><p>When used, the string representation of the object will include the
+#p in the command line.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="pyssian.GaussianInFile.parse_commandline">
 <code class="sig-name descname"><span class="pre">parse_commandline</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.parse_commandline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.parse_commandline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the lines that contain the calculation commands keywords and
 transforms them into a dictionary representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped. Empty lines will be ignored.</p>
+<dd class="field-odd"><p><strong>lines</strong> (<em>list</em>) -- list of strings previously stripped and split. Empty lines will be
+ignored.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -443,6 +529,44 @@ included already</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="pyssian.GaussianInFile.pop_kwd">
+<code class="sig-name descname"><span class="pre">pop_kwd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keyword</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.pop_kwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.pop_kwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a keyword from the command line and returns it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyword</strong> (<em>str</em>) -- keyword to remove from the command line.</p></li>
+<li><p><strong>where</strong> (<em>str</em><em>, </em><em>optional</em>) -- if provided it searches the keyword as a suboption of the &quot;where&quot;
+keyword i.e. pop_kwd('smd',where='scrf') or
+pop_kwd('cartesian',where='opt')</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the removed keyword (or None when the keyword was not in the
+command line)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pyssian.GaussianInFile.preprocessing_as_str">
+<code class="sig-name descname"><span class="pre">preprocessing_as_str</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.preprocessing_as_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.preprocessing_as_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the preprocessing attribute to a suitable string
+representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>string corresponding to the preprocessing part of the input file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="pyssian.GaussianInFile.read">
 <code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianInFile.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianInFile.read" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the file and populates the appropiate attributes.</p>
@@ -475,7 +599,9 @@ provided in the initialization.</p>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pyssian.</span></code><code class="sig-name descname"><span class="pre">GaussianOutFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parselist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyssian/gaussianclasses.html#GaussianOutFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyssian.GaussianOutFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian 09/16 '.log' file parent class, if any special type of calculation
 requires different processing it should be a subclass of this one. Accepts
-a context manager usage similar to 'with open(file) as F:...'</p>
+a context manager usage similar to 'with open(file) as F:...'
+<em>For a Gaussian .log file to be parsable it requires that its corresponding
+input has the additional printout enabled (#p)</em></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#linkjob">LinkJob</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#link1">Link1</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link101-link103">Link101 &amp; Link103</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#link120">Link120</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link123">Link123</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link202">Link202</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#link502-link508">Link502 &amp; Link508</a></li>
@@ -190,16 +191,17 @@
 <ul>
 <li><p><a class="reference internal" href="#link1" id="id5">Link1</a></p></li>
 <li><p><a class="reference internal" href="#link101-link103" id="id6">Link101 &amp; Link103</a></p></li>
-<li><p><a class="reference internal" href="#link123" id="id7">Link123</a></p></li>
-<li><p><a class="reference internal" href="#link202" id="id8">Link202</a></p></li>
-<li><p><a class="reference internal" href="#link502-link508" id="id9">Link502 &amp; Link508</a></p></li>
-<li><p><a class="reference internal" href="#link601" id="id10">Link601</a></p></li>
-<li><p><a class="reference internal" href="#link716" id="id11">Link716</a></p></li>
-<li><p><a class="reference internal" href="#link804-link913" id="id12">Link804 &amp; Link913</a></p></li>
-<li><p><a class="reference internal" href="#link914" id="id13">Link914</a></p></li>
+<li><p><a class="reference internal" href="#link120" id="id7">Link120</a></p></li>
+<li><p><a class="reference internal" href="#link123" id="id8">Link123</a></p></li>
+<li><p><a class="reference internal" href="#link202" id="id9">Link202</a></p></li>
+<li><p><a class="reference internal" href="#link502-link508" id="id10">Link502 &amp; Link508</a></p></li>
+<li><p><a class="reference internal" href="#link601" id="id11">Link601</a></p></li>
+<li><p><a class="reference internal" href="#link716" id="id12">Link716</a></p></li>
+<li><p><a class="reference internal" href="#link804-link913" id="id13">Link804 &amp; Link913</a></p></li>
+<li><p><a class="reference internal" href="#link914" id="id14">Link914</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#usage-examples" id="id14">Usage Examples</a></p></li>
+<li><p><a class="reference internal" href="#usage-examples" id="id15">Usage Examples</a></p></li>
 </ul>
 </div>
 <div class="section" id="gaussianoutfile">
@@ -335,6 +337,7 @@ Currently the specific parsers implemented are:</p>
 <li><p>Link1</p></li>
 <li><p>Link101</p></li>
 <li><p>Link103</p></li>
+<li><p>Link120</p></li>
 <li><p>Link123</p></li>
 <li><p>Link202</p></li>
 <li><p>Link502</p></li>
@@ -382,6 +385,14 @@ Currently the specific parsers implemented are:</p>
 <span class="n">Link103</span><span class="o">.</span><span class="n">scanpoint</span>
 <span class="k">if</span> <span class="n">Link103</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;Iteration&#39;</span><span class="p">:</span>
     <span class="n">Link103</span><span class="o">.</span><span class="n">print_convergence</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="link120">
+<h4>Link120<a class="headerlink" href="#link120" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Link120</span> <span class="o">=</span> <span class="n">GOF</span><span class="o">.</span><span class="n">get_links</span><span class="p">(</span><span class="mi">120</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Link120</span><span class="o">.</span><span class="n">energy</span>
+<span class="n">Link120</span><span class="o">.</span><span class="n">energy_partitions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>

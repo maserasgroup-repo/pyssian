@@ -221,6 +221,7 @@ Link120
 +++++++
 
 .. code:: python
+   
    Link120 = GOF.get_links(120)[0]
    Link120.energy
    Link120.energy_partitions[0]
