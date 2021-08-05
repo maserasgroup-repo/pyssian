@@ -583,13 +583,14 @@ class Link120(LinkJob):
         cls = self.__class__
         match = cls.re_energy.findall(self.text)
         if match:
-            self.energy = match[0]
+            self.energy = float(match[0])
 
         EnergyPartition = cls._EnergyPartition
         match = cls.re_energy_partitions.findall(self.text)
-        if match:
-            self.energy_partitions = [EnergyPartition(grid_p,level,model,energy)
-                                      for grid_p,level,model,energy in match]
+        if not match:
+            return 
+        self.energy_partitions = [EnergyPartition(int(p),level,model,float(energy))
+                                  for p,level,model,energy in match]
 
 @RegisterLinkJob
 class Link123(LinkJob):

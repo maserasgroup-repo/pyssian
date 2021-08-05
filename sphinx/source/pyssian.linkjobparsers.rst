@@ -41,6 +41,14 @@ Link103
    :members: print_convergence, _locate_mode, _locate_parameters, _locate_convergence, _locate_numbers
    :show-inheritance:
 
+Link120
+-------
+
+.. autoclass:: pyssian.linkjobparsers.Link120
+   :members: _locate_energies,   
+   :show-inheritance:
+
+
 Link123
 -------
 

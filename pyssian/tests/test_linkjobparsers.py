@@ -317,6 +317,84 @@ class TestLink103(unittest.TestCase):
             with self.subTest(Test_Object=i,scanpoint=solution):
                 self.assertEqual(obj.scanpoint,solution,msg(solution))
 
+class TestLink120(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.testfile = TEST_FILEDIR.joinpath('l120.txt')
+        cls.re_energy_solutions = ['',
+                                   '',
+                                   '',
+                                   '-2572.457446471110']
+        cls.re_energy_partition_solutions = [[],
+                                             [],
+                                             [],
+                                             [['1', 'low','model','0.403686133797'],
+                                              ['2','high','model','-2573.050183259390'],
+                                              ['3', 'low', 'real','0.996422922077']]]
+        # Read and store the Examples
+        with open(cls.testfile,'r') as F:
+            txt = F.read()
+        cls.objects = [Link120(i) for i in txt.split(SMARK)]
+
+    def test_init(self):
+        msg = 'Incorrect parsing of Link120'
+        for obj in self.objects:
+            self.assertTrue(bool(obj.text),msg)
+            self.assertEqual(obj.number,120,msg)
+            self.assertTrue(obj.energy is None or bool(obj.energy),msg)
+
+    def test_regex_energy(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link120.re_energy
+        solutions = self.re_energy_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match: 
+                self.assertEqual(match[0],solution,msg)
+    
+    def test_regex_energy_partitions(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link120.re_energy_partitions
+        solutions = self.re_energy_partition_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match:
+                for (p,lev,model,energy),sol in zip(match,solution):
+                    self.assertEqual([p,lev,model,energy],sol) 
+            
+    def test_init_empty(self):
+        msg = 'Incorrect empty initialization of Link120'
+        obj = Link120('Some Text',asEmpty=True)
+        self.assertFalse(bool(obj.text),msg)
+        self.assertEqual(obj.number,120)
+
+    def test_energy(self):
+        msg = 'Energy value not properly read'
+        solutions = self.re_energy_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.energy
+            self.assertEqual(bool(test),bool(solution),msg)
+            if solution: 
+                self.assertEqual(test,float(solution),msg)
+    
+    def test_energy_partition(self):
+        msg = 'Energy partitions not properly read'
+        solutions = self.re_energy_partition_solutions
+        EnergyPartition = Link120._EnergyPartition
+        for obj,solution in zip(self.objects,solutions):
+            match = obj.energy_partitions
+            self.assertEqual(bool(match),bool(solution),msg)
+            if not match:
+                continue
+            for (p,level,model,energy),sol in zip(match,solution):
+                p,l,m,e = sol
+                sol = EnergyPartition(int(p),l,m,float(e))
+                test = EnergyPartition(int(p),level,model,float(energy))
+                self.assertEqual(test,sol,msg)
+    
 class TestLink123(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

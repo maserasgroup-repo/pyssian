@@ -1,0 +1,117 @@
+ (Enter /mnt/data/applications/G16/g16/l120.exe)
+ ONIOM: Cut between C /H    12 and C     9 factor= 0.723886 0.723886
+ ONIOM: Cut between C /H    14 and C    11 factor= 0.723886 0.723886
+ ONIOM: Cut between N /H    38 and P   101 factor= 0.826858 0.826858
+ ONIOM: Cut between N /H    39 and P   101 factor= 0.826858 0.826858
+ ONIOM: Cut between O /H   102 and P   101 factor= 0.856464 0.856464
+ ONIOM: Cut between C /H   202 and C   199 factor= 0.723886 0.723886
+ ONIOM: Cut between C /H   204 and C   201 factor= 0.723886 0.723886
+ ONIOM: Cut between N /H   228 and P   291 factor= 0.826858 0.826858
+ ONIOM: Cut between N /H   229 and P   291 factor= 0.826858 0.826858
+ ONIOM: Cut between O /H   292 and P   291 factor= 0.856464 0.856464
+ ONIOM: saving gridpoint 17
+ ONIOM: generating point  3 -- low level on real system.
+ Leave Link  120 at Wed Jun 30 00:13:20 2021, MaxMem= 16106127360 cpu:               0.7 elap:               0.1
+
+## Split Here ##
+ (Enter /mnt/data/applications/G16/g16/l120.exe)
+ ONIOM: saving gridpoint  3
+ ONIOM: restoring gridpoint 17
+ ONIOM: generating point  2 -- high level on model system.
+ Leave Link  120 at Wed Jun 30 00:13:20 2021, MaxMem= 16106127360 cpu:               0.7 elap:               0.0
+
+## Split Here ##
+ (Enter /mnt/data/applications/G16/g16/l120.exe)
+ SvSCFP is copying densities from files   528 and   530 to   603.
+ ONIOM: saving gridpoint  2
+ ONIOM: restoring gridpoint 17
+ ONIOM: generating point  1 -- low level on model system.
+ Generating MM parameters for model system.
+ I=    1 IAn=  8 Valence= 3.
+          JB=  1 J=    2 IAn=  6 IBT=12 Dist= 1.34D+00
+          JB=  2 J=   37 IAn=  1 IBT= 1 Dist= 9.74D-01
+ I=    2 IAn=  6 Valence= 5.
+          JB=  1 J=    1 IAn=  8 IBT=12 Dist= 1.34D+00
+          JB=  2 J=    3 IAn=  8 IBT=12 Dist= 1.32D+00
+          JB=  3 J=    7 IAn=  6 IBT= 2 Dist= 1.37D+00
+ I=    3 IAn=  8 Valence= 3.
+          JB=  1 J=    2 IAn=  6 IBT=12 Dist= 1.32D+00
+          JB=  2 J=    4 IAn=  6 IBT= 1 Dist= 1.45D+00
+ I=    9 IAn=  6 Valence= 5.
+          JB=  1 J=    8 IAn=  6 IBT=12 Dist= 1.42D+00
+          JB=  2 J=   11 IAn=  6 IBT= 2 Dist= 1.38D+00
+          JB=  3 J=   12 IAn=  1 IBT=12 Dist= 1.04D+00
+ I=   11 IAn=  6 Valence= 5.
+          JB=  1 J=    9 IAn=  6 IBT= 2 Dist= 1.38D+00
+          JB=  2 J=   14 IAn=  1 IBT=12 Dist= 1.04D+00
+          JB=  3 J=   32 IAn=  7 IBT=12 Dist= 1.34D+00
+ I=   12 IAn=  1 Valence= 2.
+          JB=  1 J=    9 IAn=  6 IBT=12 Dist= 1.04D+00
+ I=   14 IAn=  1 Valence= 2.
+          JB=  1 J=   11 IAn=  6 IBT=12 Dist= 1.04D+00
+ I=   32 IAn=  7 Valence= 4.
+          JB=  1 J=   10 IAn=  6 IBT= 1 Dist= 1.40D+00
+          JB=  2 J=   11 IAn=  6 IBT=12 Dist= 1.34D+00
+          JB=  3 J=  381 IAn=  1 IBT= 1 Dist= 1.01D+00
+ I=  101 IAn= 15 Valence= 4.
+          JB=  1 J=   38 IAn=  1 IBT= 1 Dist= 1.47D+00
+          JB=  2 J=   39 IAn=  1 IBT= 1 Dist= 1.48D+00
+          JB=  3 J=  102 IAn=  1 IBT= 1 Dist= 1.48D+00
+          JB=  4 J=  105 IAn= 29 IBT= 1 Dist= 2.33D+00
+ I=  199 IAn=  6 Valence= 5.
+          JB=  1 J=  198 IAn=  6 IBT=12 Dist= 1.43D+00
+          JB=  2 J=  201 IAn=  6 IBT= 2 Dist= 1.36D+00
+          JB=  3 J=  202 IAn=  1 IBT=12 Dist= 1.04D+00
+ I=  201 IAn=  6 Valence= 5.
+          JB=  1 J=  199 IAn=  6 IBT= 2 Dist= 1.36D+00
+          JB=  2 J=  204 IAn=  1 IBT=12 Dist= 1.04D+00
+          JB=  3 J=  222 IAn=  7 IBT=12 Dist= 1.36D+00
+ I=  202 IAn=  1 Valence= 2.
+          JB=  1 J=  199 IAn=  6 IBT=12 Dist= 1.04D+00
+ I=  204 IAn=  1 Valence= 2.
+          JB=  1 J=  201 IAn=  6 IBT=12 Dist= 1.04D+00
+ I=  214 IAn=  6 Valence= 5.
+          JB=  1 J=  212 IAn=  6 IBT=12 Dist= 1.40D+00
+          JB=  2 J=  218 IAn=  6 IBT= 2 Dist= 1.39D+00
+          JB=  3 J=  219 IAn=  1 IBT= 1 Dist= 1.08D+00
+ I=  218 IAn=  6 Valence= 5.
+          JB=  1 J=  214 IAn=  6 IBT= 2 Dist= 1.39D+00
+          JB=  2 J=  216 IAn=  6 IBT=12 Dist= 1.40D+00
+          JB=  3 J=  221 IAn=  1 IBT= 1 Dist= 1.08D+00
+ I=  222 IAn=  7 Valence= 4.
+          JB=  1 J=  200 IAn=  6 IBT=12 Dist= 1.37D+00
+          JB=  2 J=  201 IAn=  6 IBT=12 Dist= 1.36D+00
+          JB=  3 J=  382 IAn=  1 IBT= 1 Dist= 1.01D+00
+ I=  291 IAn= 15 Valence= 4.
+          JB=  1 J=  228 IAn=  1 IBT= 1 Dist= 1.48D+00
+          JB=  2 J=  229 IAn=  1 IBT= 1 Dist= 1.48D+00
+          JB=  3 J=  292 IAn=  1 IBT= 1 Dist= 1.49D+00
+          JB=  4 J=  295 IAn= 29 IBT= 1 Dist= 2.31D+00
+ Include all MM classes
+
+ MM sanity checks:
+ All charges sum to:                0.00000000
+ Charges of atoms sum to:           0.00000000
+ MMInit generated parameter data with length LenPar=       15675.
+ Leave Link  120 at Wed Jun 30 00:25:24 2021, MaxMem= 16106127360 cpu:               2.3 elap:               0.1
+
+## Split Here ##
+ (Enter /mnt/data/applications/G16/g16/l120.exe)
+ ONIOM: saving gridpoint  1
+ ONIOM: restoring gridpoint  3
+ ONIOM: calculating energy.
+ ONIOM: gridpoint  1 method:  low   system:  model energy:     0.403686133797
+ ONIOM: gridpoint  2 method:  high  system:  model energy: -2573.050183259390
+ ONIOM: gridpoint  3 method:  low   system:  real  energy:     0.996422922077
+ ONIOM: extrapolated energy =   -2572.457446471110
+ ONIOM: calculating first derivatives.
+ Integrate derivatives for file   810.
+ Integrate derivatives for file   584.
+ ONIOM: calculating electric field derivatives.
+ ONIOM: Integrating ONIOM file  4 number   619
+ ONIOM: Dipole        =-6.31516836D+01-1.30461854D+01 6.41937844D+01
+ ONIOM: Dipole moment (Debye):
+    X=  -160.5156    Y=   -33.1601    Z=   163.1643  Tot=   231.2735
+ ONIOM: Integrating ONIOM file  5 number   695
+ Saving ESP charges from gridpoint 2
+ Leave Link  120 at Wed Jun 30 00:25:24 2021, MaxMem= 16106127360 cpu:               0.7 elap:               0.0

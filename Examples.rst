@@ -161,6 +161,7 @@ Currently the specific parsers implemented are:
 - Link1
 - Link101
 - Link103
+- Link120
 - Link123
 - Link202
 - Link502
@@ -215,6 +216,14 @@ Link101 & Link103
    Link103.scanpoint
    if Link103.mode == 'Iteration':
        Link103.print_convergence()
+
+Link120
++++++++
+
+.. code:: python
+   Link120 = GOF.get_links(120)[0]
+   Link120.energy
+   Link120.energy_partitions[0]
 
 Link123
 +++++++
