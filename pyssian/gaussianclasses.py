@@ -580,7 +580,15 @@ class GaussianInFile(object):
         method_found = False
         basis_found = False
         for item in chain(start,others):
-            if is_method(item) and not method_found:
+            dummy = item.split('/')
+            if '/' in item and is_method(dummy[0]) and is_basis(dummy[1]):
+                method_found = True
+                basis_found = True
+                method,basis = dummy
+                self.method = method
+                self.basis = basis
+                continue
+            elif is_method(item) and not method_found:
                 method_found = True
                 self._method = item
                 key,val = item, []
