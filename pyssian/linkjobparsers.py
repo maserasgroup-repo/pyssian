@@ -979,9 +979,11 @@ class Link601(LinkJob):
     re_MullikenHeavy += r'([\s\S]*?)'
     re_MullikenHeavy += r'(?:\n.[a-zA-Z].*\n)'
     re_MullikenHeavy = re.compile(re_MullikenHeavy)
+    
     _token = 601
 
     def __init__(self,text,asEmpty=False):
+        self._Atom = namedtuple('Atom','number symbol charge spin')
         self.mulliken_heavy = None
         self.mulliken = None
         if asEmpty:
@@ -996,18 +998,19 @@ class Link601(LinkJob):
     def _locate_MullikenHeavy(self):
         """
         Uses regex expressions compiled as class attributes to find the
-        Mulliken charges condensed to heavy atoms.
+        Mulliken charges and spin condensed to heavy atoms.
         """
         cls = self.__class__
         Match = cls.re_MullikenHeavy.findall(self.text)
         if Match:
             lines =  Match[0][1].split('\n')
             if Match[0][0]:
-                self.mulliken_heavy = ['\t'.join(line.strip().split()[:3])
-                                            for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
             else:
-                self.mulliken_heavy = ['\t'.join(line.strip().split())
-                                            for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            self.mulliken_heavy = [Atom(line.strip().split())
+                                    for line in lines if line.strip()]
+
     @Populates('mulliken')
     @SilentFail
     def _locate_MullikenAtoms(self):
@@ -1020,11 +1023,12 @@ class Link601(LinkJob):
         if Match:
             lines =  Match[0][1].split('\n')
             if Match[0][0]:
-                self.mulliken = ['\t'.join(line.strip().split()[:3])
-                                    for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
             else:
-                self.mulliken = ['\t'.join(line.strip().split())
-                                    for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            
+            self.mulliken = [Atom(line.strip().split())
+                             for line in lines if line.strip()]
 
 @RegisterLinkJob
 class Link716(LinkJob):
