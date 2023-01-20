@@ -408,7 +408,7 @@ class GaussianInFile(object):
     def __repr__(self):
         cls = type(self).__name__
         file = self._file.name.split("/")[-1]
-        size = len(self)
+        #size = len(self)
         return f'<{cls}({file})>'
     def __str__(self):
         kwargs = dict( preprocessing=self.preprocessing_as_str(),
@@ -418,7 +418,13 @@ class GaussianInFile(object):
                        spin=self.spin,
                        geometry=str(self.geometry),
                        tail='\n\n'.join(self.tail))
-        return self.structure.format(**kwargs)
+        str_repr = self.structure.format(**kwargs)
+        # It is better to enfoce the condition here than for every 
+        # possible case of reading a file or adding the tail
+        if not str_repr.endswith('\n\n\n'):
+            n = 3 - str_repr[-3:].count('\n') 
+            str_repr += '\n'*n
+        return str_repr
     def __len__(self):
         return len(str(self))
 
