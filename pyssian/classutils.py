@@ -93,6 +93,11 @@ class Geometry(object):
         Geom.coordinates = Coords
         return Geom
 
+    def to_xyz(self,title=None):
+        if title is None: 
+            title = f'{self.title}'
+        return f'{len(self.atoms)}\n{title}\n{self}\n'
+
 class Cube(object):
     """
     Representation of a Gaussian .cube File generated with the cubegen tool.
