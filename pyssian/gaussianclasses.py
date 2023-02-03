@@ -412,20 +412,28 @@ class GaussianInFile(object):
         self.extra_printout = True
         self.structure = '{preprocessing}\n{commandline}\n\n'
         self.structure += '{title}\n\n'
-        self.structure += '{charge} {spin}\n{geometry}\n\n'
+        self.structure += '{charge} {spin}\n{geometry}\n'
         self.structure += '{tail}\n\n'
     def __repr__(self):
         cls = type(self).__name__
-        file = self._file.name.split("/")[-1]
+        name = 'unnamed'
+        if hasattr(self._file,'name'): 
+            name = self._file.name.split("/")[-1]
         #size = len(self)
-        return f'<{cls}({file})>'
+        return f'<{cls}({name})>'
     def __str__(self):
+        geometry = str(self.geometry)
+        if geometry:
+            geometry += '\n'
+        else:
+            geometry = ''
+        
         kwargs = dict( preprocessing=self.preprocessing_as_str(),
                        commandline=self.commandline_as_str(),
                        title=self.title,
                        charge=self.charge,
                        spin=self.spin,
-                       geometry=str(self.geometry),
+                       geometry=geometry,
                        tail='\n\n'.join(self.tail))
         str_repr = self.structure.format(**kwargs)
         # It is better to enfoce the condition here than for every 
@@ -517,7 +525,7 @@ class GaussianInFile(object):
         """
         Reads the file and populates the appropiate attributes.
         """
-        txt = [line.strip() for line in self._file]
+        txt = [line.rstrip() for line in self._file]
         if not txt: 
             raise EOFError('Attempting to read an empty or non-existent file')
         if txt[-1]: # If the file ends without a blank line add it
@@ -989,6 +997,195 @@ class GaussianInFile(object):
         else:
             self.preprocessing[where] = keyword
 
+    @classmethod
+    def from_str(cls,text):
+        """
+        Creates a GaussianInFile object from a gaussian input file read as a 
+        string, parses it and populates the attributes of the class.  
+
+        Parameters
+        ----------
+        text : str
+            Contents of a Gaussian input file as a string. i.e. 
+            .. code:: python
+               
+               with open('somefile.com','r') as F: 
+                   text = F.read()
+        name : str
+            Name to represent the GaussianInFile 
+        Returns
+        -------
+        GaussianInFile
+            A populated GaussianInFile object
+        """
+        new = cls()
+        new._file = text.split('\n')
+        new.read()
+        return new
+
+class MultiGaussianInFile(object): 
+    """
+    Container class of multiple GausianInFiles linked together in a single 
+    gaussian input calculation. 
+
+    Parameters
+    ----------
+    file : io.TextIOBase or str (the default is None)
+        File instance (Result of open(filename,'r')) or valid filename.
+
+    Attributes
+    ----------
+    jobs : list
+        List providing access to each one of the individual GaussianInFile
+        objects representing each one of the linked calculations. 
+    """
+    def __init__(self,file=None):
+        # Do Something
+        if isinstance(file,io.TextIOBase):
+            self._file = file
+        elif file is None: 
+            self._file = None
+        else:
+            self._file = open(file,'a+')
+            if self._file.tell() != 0:
+                self._file.seek(0)
+        self.jobs = []
+
+    def __repr__(self):
+        cls = type(self).__name__
+        file = self._file.name.split("/")[-1]
+        #size = len(self)
+        return f'<{cls}({file} with njobs={len(self.jobs)})>'
+    def __str__(self):
+        str_repr = '\n\n--Link1--\n'.join([str(job).rstrip() for job in self.jobs])
+        # It is better to enfoce the condition here than for every 
+        # possible case of reading a file or adding the tail
+        if not str_repr.endswith('\n\n\n'):
+            n = 3 - str_repr[-3:].count('\n') 
+            str_repr += '\n'*n
+        return str_repr
+    def __len__(self):
+        return len(str(self))
+
+    def __enter__(self):
+        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        return self
+    def __exit__(self, exc_type, exc_value, traceback):
+        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        return self._file.__exit__(exc_type, exc_value, traceback)
+
+    def read(self):
+        """
+        Reads the file and populates the appropiate attributes.
+        """
+        if self._file is None: 
+            return
+        txt = self._file.read()
+        self.jobs = [GaussianInFile.from_str(job.lstrip()) for job in txt.split('--Link1--')] 
+    def write(self,filepath=None):
+        """
+        Writes the File object to a File. If a filepath is provided it will
+        write to that filepath otherwise it will attempt to write to the path
+        provided in the initialization.
+
+        Parameters
+        ----------
+        filepath : str
+            A valid filepath.
+        """
+        self._txt = str(self)
+        if filepath is None:
+            # Write to self._file
+            self._file.write(self._txt)
+        else:
+            # open the file write and close the file
+            with open(filepath,'w') as F:
+                F.write(self._txt)
+
+    def enforce_same_chk(self,chk=None): 
+        """
+        Enforces the same chk file in all jobs. 
+
+        Parameters
+        ----------
+        chk : str, optional
+            filename of the chk to use, if none is provided it defaults to the 
+            one of the first job. 
+        """
+        if chk is None: 
+            chk = self.jobs[0].preprocessing['chk']
+        for job in self.jobs: 
+            job.add_l0_kwd(chk,where='chk')
+    def enforce_continuous_chk(self,basename=None):
+        """
+        Enforces that the chk of job i-1 is retained and a copy of it is used 
+        at the start of job i. For an example with two jobs, the first link0 
+        section  will look like:
+
+        ..
+        
+           %chk=basename_job0.chk
+        
+        Then the link0 of the second job will look like: 
+        
+        .. 
+           %oldchk=basename_job1.chk
+           %chk=basename_job1.chk
+
+        Parameters
+        ----------
+        basename : str, optional
+            basename of the chk to use, if none is provided it defaults to the 
+            one of the first job. 
+        """
+        if basename is None: 
+            basename = self.jobs[0].preprocessing['chk'].rsplit('.',maxsplit=1)[0]
+        for (i,job) in enumerate(self.jobs):
+            job.add_l0_kwd(f'{basename}_job{i}.chk',where='chk')
+            if i-1 > 0: 
+                job.add_l0_kwd(f'{basename}_job{i-1}.chk',where='oldchk')
+    def enforce_same_nprocs(self,nprocs=None):
+        """
+        Enforces the same nprocs in all jobs. 
+
+        Parameters
+        ----------
+        nprocs : int, optional
+            number of processors to use in a calculation, if none is provided it 
+            defaults to the value of the nprocs of the first job. 
+        """
+        if nprocs is None: 
+            nprocs = self.jobs[0].nprocs
+        for job in self.jobs: 
+            job.nprocs = nprocs
+    def enforce_same_mem(self,mem=None):
+        """
+        Enforces the same memory in all jobs. 
+
+        Parameters
+        ----------
+        mem : int, optional
+            Memory to use in a calculation, if none is provided it 
+            defaults to the value of the mem of the first job. 
+        """
+        if mem is None: 
+            mem = self.jobs[0].mem
+        for job in self.jobs: 
+            job.mem = mem
+    def enforce_same_method(self,method):
+        """
+        Enforces the same method in all jobs. 
+
+        Parameters
+        ----------
+        method : str, optional
+            method to use in a calculation, if none is provided it 
+            defaults to the value of the first job's method. 
+        """
+        if method is None: 
+            method = self.jobs[0].method
+        for job in self.jobs: 
+            job.method = method
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
