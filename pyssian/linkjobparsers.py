@@ -289,8 +289,8 @@ class Link1(LinkJob):
         Returns
         -------
         str
-            {Constrained Optimization, Optimization,
-            Frequency Calculation, Unidentified}
+            {Constrained Optimization, Optimization,Frequency Calculation, 
+            Unidentified, Linked} the Linked type is only assigned externally
         """
         target = self.commandline.lower()
         if 'modredundant' in target:

@@ -222,7 +222,8 @@ class GaussianOutFile(object):
                     else:
                         yield EOF, ''
                 else:
-                    end = re_exit.findall(line)
+                    end = bool(re_exit.findall(line))
+                    end = end or bool(re_termination.findall(line))
                 Block.append(line)
             # when end found, do return type token and yield the block
             yield number, ''.join(Block)
@@ -231,23 +232,29 @@ class GaussianOutFile(object):
         # Initialization
         Parsers = self._Parsers
         CurrentJob = self.InternalJobs[-1]
+        first_link = True
         BlockType, Block = yield 'Initialization done'
         while True:
             #Parser = Parsers.get(BlockType,Parsers[ignore])
             Parser = Parsers[BlockType]
             Link =  Parser(Block)
-            if Link.number == 1:
-                new_InternalJob = Link.info.new_InternalJob
-            else:
-                new_InternalJob = False
-            if new_InternalJob:
-                New = InternalJob()
-                self.InternalJobs.append(New)
-                CurrentJob = self.InternalJobs[-1]
+            if Link.number != 1:
                 CurrentJob.append(Link)
-                CurrentJob.guess_info()
             else:
-                CurrentJob.append(Link)
+                if first_link:
+                    CurrentJob.append(Link)
+                    CurrentJob.guess_info()
+                    first_link = False
+                else:
+                    is_explicit = Link.info.new_InternalJob
+                    if not is_explicit:
+                        info = Link.InternalJobInfo(self.InternalJobs[-1].number+1,'Linked',True)
+                        Link.info = info
+                    New = InternalJob()
+                    self.InternalJobs.append(New)
+                    CurrentJob = self.InternalJobs[-1]
+                    CurrentJob.append(Link)
+                    CurrentJob.guess_info()
             BlockType, Block = yield
 
 class InternalJob(object):
@@ -382,10 +389,12 @@ class GaussianInFile(object):
         'pcm' -> the 'pcm' suboption within scrf is included
         'smd' -> the 'smd' suboption within the scrf is included.  
     """
-    def __init__(self,file):
+    def __init__(self,file=None):
         # Do Something
         if isinstance(file,io.TextIOBase):
             self._file = file
+        elif file is None: 
+            self._file = None
         else:
             self._file = open(file,'a+')
             if self._file.tell() != 0:
@@ -451,10 +460,15 @@ class GaussianInFile(object):
 
     @property
     def nprocs(self):
+        if 'nprocs' in self.preprocessing: 
+            return self.preprocessing.get('nprocs',None)
         return self.preprocessing.get('nprocshared',None)
     @nprocs.setter
     def nprocs(self,other):
-        self.preprocessing['nprocshared'] = other
+        if 'nprocs' in self.preprocessing: 
+            self.preprocessing['nprocs'] = other
+        else:
+            self.preprocessing['nprocshared'] = other
 
     @property
     def mem(self):
@@ -929,6 +943,52 @@ class GaussianInFile(object):
             return
         items.append(keyword)
         self.commandline[where] = items
+    def pop_l0_kwd(self,keyword,where=None):
+        """
+        Removes a keyword from the preprocessing and returns it. 
+
+        Parameters
+        ----------
+        keyword : str
+            keyword to remove from the preprocessing.
+        where : str, optional
+            if provided it searches the keyword as a suboption of the "where" 
+            keyword i.e. pop_l0_kwd('job1.chk',where='oldchk')
+
+        Returns
+        -------
+        str or None
+            Returns the removed keyword (or None when the keyword was not in the
+            preprocessing)  
+        """
+        if where is None:
+            return self.preprocessing.pop(keyword)
+        kwd = self.preprocessing.get(where,None)
+        self.preprocessing[where] = ''
+        return kwd
+    def add_l0_kwd(self,keyword,where=None):
+        """
+        Adds a keyword to the preprocessing. 
+
+        Parameters
+        ----------
+        keyword : str
+            keyword to add to the preprocessing.
+        where : str, optional
+            if provided it adds the keyword as a suboption of the "where" 
+            keyword i.e. add_l0_kwd('job1.chk',where='chk') or 
+            add_kwd('40GB',where='mem')
+
+        """
+        if where is None:
+            self.preprocessing[keyword] = ''
+        elif 'nproc' in where: 
+            self.nprocs = keyword
+        elif 'mem' in where: 
+            self.mem = keyword
+        else:
+            self.preprocessing[where] = keyword
+
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
