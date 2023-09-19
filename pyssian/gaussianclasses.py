@@ -1146,7 +1146,7 @@ class MultiGaussianInFile(object):
             basename = self.jobs[0].preprocessing['chk'].rsplit('.',maxsplit=1)[0]
         for (i,job) in enumerate(self.jobs):
             job.add_l0_kwd(f'{basename}_job{i}.chk',where='chk')
-            if i-1 > 0: 
+            if i-1 >= 0: 
                 job.add_l0_kwd(f'{basename}_job{i-1}.chk',where='oldchk')
     def enforce_same_nprocs(self,nprocs=None):
         """
