@@ -945,6 +945,7 @@ class GaussianInFile(object):
         """
         if where is None:
             self.commandline[keyword] = []
+            return
         
         items = self.commandline.get(where,[])
         if keyword in items:
