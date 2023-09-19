@@ -793,6 +793,9 @@ class GaussianInFile(object):
         for i,item in enumerate(items): 
             if 'solvent=' in item:
                 items[i] = f'solvent={other}'
+                break
+        else:
+            items.append(f'solvent={other}')
         self.commandline['scrf'] = items
     def _remove_solvent_model(self):
         # If scrf does not exist
