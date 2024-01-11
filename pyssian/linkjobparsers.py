@@ -892,13 +892,15 @@ class Link502(LinkJob):
     ----------
     energy : float
         Final Potential Energy of the SCF cycles.
-
+    spin : tuple[float,float]
+        S**2 (before, after) annihiliation
     """
-    __slots__ = ('energy',)
+    __slots__ = ('energy','spin')
 
     _token = 502
 
     re_EDone = re.compile(r'SCF\sDone\:\s*E\(.*\).*=\s*(\-?[0-9]*\.[0-9]+)')
+    re_spin = re.compile('S\*\*2 before annihilation\s*(-?[0-9]*\.[0-9]*),\s*after\s*(-?[0-9]*\.[0-9]*)')
 
     def __init__(self,text,asEmpty=False):
         self.energy = None
@@ -907,6 +909,7 @@ class Link502(LinkJob):
         else:
             super().__init__(text,502)
             self._locate_energy()
+            self._locate_spin()
 
     @Populates('energy')
     @SilentFail
@@ -919,6 +922,20 @@ class Link502(LinkJob):
         Match = cls.re_EDone.findall(self.text)
         if Match:
             self.energy = float(Match[0])
+
+    @Populates('spin')
+    @SilentFail
+    def _locate_spin(self):
+        """
+        Uses regex expressions compiled as class attributes to find the Energy
+        rported as 'SCF Done:' and reads the potential energy.
+        """
+        cls = self.__class__
+        Match = cls.re_spin.findall(self.text)
+        if Match:
+            before,after = Match[0]
+            self.spin = float(before),float(after)
+    
 
 @RegisterLinkJob
 class Link508(Link502):
@@ -938,8 +955,10 @@ class Link508(Link502):
     ----------
     energy : float
         Final Potential Energy of the SCF cycles.
+    spin : tuple[float,float]
+        S**2 (before, after) annihiliation
     """
-    __slots__ = ('energy',)
+    __slots__ = ('energy','spin')
 
     _token = 508
 

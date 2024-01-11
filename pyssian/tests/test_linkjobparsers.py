@@ -570,6 +570,18 @@ class TestLink502(unittest.TestCase):
                                      '-2847.30072337','-2847.30086336',
                                      '-2847.30091754','-2847.30086384',
                                      '-2847.30093740']
+        cls.re_spin_solutions = [('0.7531', '0.7500'),
+                                 ('0.7530', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500')]
+        
         # Read and store the Examples
         with open(cls.testfile,'r') as F:
             txt = F.read()
@@ -590,6 +602,14 @@ class TestLink502(unittest.TestCase):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
+    def test_regex_spin(self):
+        msg = 're_spin regex does not match properly'
+        regex = Link502.re_spin
+        solutions = self.re_spin_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = regex.findall(obj.text)[0]
+            self.assertTrue(test == solution,msg)
+
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link502'
         obj = Link502('Some Text',asEmpty=True)
@@ -601,6 +621,12 @@ class TestLink502(unittest.TestCase):
         solutions = [float(i) for i in self.re_energies_solutions]
         for obj,solution in zip(self.objects,solutions):
             test = obj.energy
+            self.assertTrue(test == solution,msg)
+    def test_spin(self):
+        msg = 'S**2 values not properly read'
+        solutions = [(float(i[0]),float(i[1])) for i in self.re_spin_solutions]
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.spin
             self.assertTrue(test == solution,msg)
 
 class TestLink601(unittest.TestCase):
