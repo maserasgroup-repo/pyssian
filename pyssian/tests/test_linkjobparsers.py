@@ -768,8 +768,8 @@ class TestLink716(unittest.TestCase):
         {}
         )""".format
         msg2 = 'Frequency slice does not match. \n{}\n!=\n{}'.format
-        regex = Link716.re_dipole
-        with open(self.dipolefile,'r') as F:
+        regex = Link716.re_Frequencies
+        with open(self.Frequenciesfile,'r') as F:
             txt = F.read()
         samples = txt.split(SMARK)
         solutions = []
@@ -781,7 +781,7 @@ class TestLink716(unittest.TestCase):
                     Aux.append(tuple(match.split('\n')))
                 solutions.append(Aux)
             else:
-                solutions.append(['',])
+                solutions.append([])
         for obj,solution in zip(self.objects,solutions):
             test = regex.findall(obj.text)
             self.assertTrue(bool(test) == bool(solution),msg(test,solution))
