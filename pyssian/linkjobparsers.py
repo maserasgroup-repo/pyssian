@@ -1077,10 +1077,12 @@ class Link716(LinkJob):
         Text that corresponds to the IRSpectrum
     mode : str
         Either 'Forces', 'Freq' or 'Other'.
-
+    frequencies : list
+    freq_displacements : list
     """
     __slots__ = ('dipole', 'units','frequencies','EContribs', 'IRSpectrum',
-                  'zeropoint','thermal_energy', 'enthalpy', 'gibbs', 'mode')
+                  'zeropoint','thermal_energy', 'enthalpy', 'gibbs', 'mode',
+                  'freq_displacements')
 
     _token = 716
 
@@ -1096,10 +1098,17 @@ class Link716(LinkJob):
     re_Frequencies += r'(?:.*Frc\sconsts\s*\-\-)(.*)\n'
     re_Frequencies += r'(?:.*IR\sInten\s*\-\-)(.*)'
     re_Frequencies = re.compile(re_Frequencies)
+    re_freq_text = re.compile(r'  Atom[\s\S]*\n\n')
+    re_freq_displacements = r'^ {3,5}'
+    re_freq_displacements += r'[0-9]{1,3}\s*'*2
+    re_freq_displacements += r'-?[0-9]*\.[0-9]*\s*'*3
+    re_freq_displacements += r'[^\n]*\n'
+    re_freq_displacements = re.compile(re_freq_displacements,re.MULTILINE)
     re_dipole = r'(?:Dipole.*\=)'+r'(.?[0-9]\.[0-9]*D[\-|\+][0-9]{2,})'*3
     re_dipole = re.compile(re_dipole)
 
     _Frequency = namedtuple('Frequency','freq redmass forcek IRint')
+    _Displacement = namedtuple('FreqDisplacements','atomids atoms xyz')
     _EContrib = namedtuple('EContrib','Name Thermal CV S')
 
     def __init__(self,text,asEmpty=False):
@@ -1111,6 +1120,7 @@ class Link716(LinkJob):
         self.gibbs = []
         self.EContribs = []
         self.frequencies = []
+        self.freq_displacements = []
         self.IRSpectrum = ''
         self.mode = ''
         if asEmpty:
@@ -1125,6 +1135,7 @@ class Link716(LinkJob):
             self._locate_thermochemistry()
             self._locate_IRSpectrum()
             self._locate_frequencies()
+            self._locate_freq_displacements()
 
     @Populates('dipole')
     @SilentFail
@@ -1158,6 +1169,39 @@ class Link716(LinkJob):
                     frequencies.append(Frequency(*items))
             self.frequencies = frequencies
             self.mode = 'Freq'
+
+    @Populates('freq_displacements')
+    @SilentFail
+    def _locate_freq_displacements(self): 
+        """
+        Uses regex expressions compiled as class attributes to find the
+        cartesian displacements of the frequencies.
+        """
+        cls = self.__class__
+        Displacement = cls._Displacement
+        match = cls.re_freq_text.findall(self.text)
+        if match:
+            displacements = []
+            for text in match[0].split('Atom'):
+                if not text.strip(): 
+                    continue
+                lines = cls.re_freq_displacements.findall(text)
+                atomlines = []
+                for line in lines:
+                    atomline = []
+                    if not line.strip():
+                        continue
+                    atid,atnum,xyz = line.strip().split(maxsplit=2)
+                    atomline.append(int(atid))
+                    atomline.append(int(atnum))
+                    xyz = [float(i) for i in xyz.split()]
+                    for x,y,z in zip(xyz[0::3],xyz[1::3],xyz[2::3]): 
+                        atomline.append((x,y,z))
+                    atomlines.append(atomline)
+                atomids,atomnums,*matrices = zip(*atomlines)
+                for matrix in matrices: 
+                    displacements.append(Displacement(atomids,atomnums,matrix))
+            self.freq_displacements = displacements
 
     @Populates('zeropoint','thermal_energy','enthalpy','gibbs')
     @SilentFail

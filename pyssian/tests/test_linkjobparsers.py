@@ -703,6 +703,8 @@ class TestLink716(unittest.TestCase):
         cls.EContribfile    = TEST_FILEDIR.joinpath('l716_reEContrib.txt')
         cls.IRSpectrumfile  = TEST_FILEDIR.joinpath('l716_reIRSpectrum.txt')
         cls.Frequenciesfile = TEST_FILEDIR.joinpath('l716_reFrequencies.txt')
+        cls.freqtextfile    = TEST_FILEDIR.joinpath('l716_refreqtxt.txt')
+        cls.freqdispfile    = TEST_FILEDIR.joinpath('l716_refreqdisplacements.txt')
         # Read and store the Examples
         with open(cls.testfile,'r') as F:
             txt = F.read()
@@ -787,6 +789,37 @@ class TestLink716(unittest.TestCase):
             self.assertTrue(bool(test) == bool(solution),msg(test,solution))
             for t,s in zip(test,solution):
                 self.assertTrue(t == s, msg2(t,s))
+    def test_regex_freq_text(self):
+        msg = 'the text block does not match'
+        regex = Link716.re_freq_text
+        with open(self.freqtextfile,'r') as F:
+            txt = F.read()
+        solutions = txt.split(SMARK)
+        for obj,solution in zip(self.objects,solutions):
+            test = regex.findall(obj.text)[0]
+            self.assertTrue(test == solution,msg)
+    def test_regex_freq_text(self):
+        msg = 'the displacement: \n{} does not match:\n{}'.format
+        regex = Link716.re_freq_displacements
+        regex_txt = Link716.re_freq_text
+        with open(self.freqdispfile,'r') as F:
+            txt = F.read()
+        items = txt.split(SMARK)
+        solutions = []
+        for item in items: 
+            if item:
+                solutions.append([s+'\n' for s in item.split('\n')])
+            else:
+                solutions.append([])
+        for obj,solution in zip(self.objects,solutions):
+            test = regex_txt.findall(obj.text)
+            if test:
+                subtests = regex.findall(test[0])
+                for t,s in zip(subtests,solution): 
+                    self.assertEqual(t,s,msg(test,solution))
+            else:
+                self.assertTrue(test == solution,msg(test,solution))
+
     def test_regex_dipole(self):
         msg = 're_dipole does not match. \n{}\n!=\n{}'
         msg = msg.format
@@ -802,10 +835,10 @@ class TestLink716(unittest.TestCase):
             self.assertTrue(test == solution,msg(test,solution))
 
     def test_init_empty(self):
-        msg = 'Incorrect empty initialization of Link502'
-        obj = Link601('Some Text',asEmpty=True)
+        msg = 'Incorrect empty initialization of Link716'
+        obj = Link716('Some Text',asEmpty=True)
         self.assertFalse(bool(obj.text),msg)
-        self.assertEqual(obj.number,601)
+        self.assertEqual(obj.number,716)
 
 class TestLink804(unittest.TestCase):
 
