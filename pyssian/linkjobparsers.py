@@ -1221,7 +1221,6 @@ class Link716(LinkJob):
                                 self.gibbs])
             for line,Property in zip(lines,Properties):
                 Aux = line.split("=")[-1].strip().split()
-                Property.append(float(Aux[0]))
                 if len(Aux) == 2:
                     self.units.append(Aux[-1][1:-1])
                 Property.append(float(Aux[0]))
