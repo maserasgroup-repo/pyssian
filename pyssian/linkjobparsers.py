@@ -370,7 +370,7 @@ class Link103(LinkJob):
         'Init', 'Iteration' or 'End'
     state : str
         Either 'Optimized', 'Non-optimized' or 'Initial'
-    conversion : list
+    convergence : list
         List of namedtuples with fields Item,Value,Threshold,Converged.
     parameters : list
         List of namedtuples with fields Name,Definition,Value,Derivative.
@@ -383,7 +383,7 @@ class Link103(LinkJob):
 
     """
 
-    __slots__ = ('mode','state','conversion','parameters','derivatives',
+    __slots__ = ('mode','state','convergence','parameters','derivatives',
                 'stepnumber','scanpoint')
 
     _token = 103
@@ -406,7 +406,7 @@ class Link103(LinkJob):
     def __init__(self,text,asEmpty=False):
         self.mode = None
         self.state = None
-        self.conversion = []
+        self.convergence = []
         self.parameters = []
         self.derivatives = []
         self.stepnumber = None
@@ -485,7 +485,7 @@ class Link103(LinkJob):
                 items.append(item)
             self.derivatives = items
 
-    @Populates('conversion')
+    @Populates('convergence')
     @SilentFail
     def _locate_convergence(self):
         """
@@ -503,7 +503,7 @@ class Link103(LinkJob):
                 isConverged = m[3] == "YES"
                 item = cls._ConverItem(Name,val,threshold,isConverged)
                 items.append(item)
-            self.conversion = items
+            self.convergence = items
 
     @Populates('stepnumber','scanpoint')
     @SilentFail
@@ -527,11 +527,11 @@ class Link103(LinkJob):
         """ Prints the convergence Table formatted """
         Format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'.format
         try:
-            Out = [Format(*i) for i in self.conversion]
+            Out = [Format(*i) for i in self.convergence]
         except ValueError as e:
             print("Non numeric value found in the convergence values")
             Format_str='{0: <22s}\t{1}\t{2}\t{3}'.format
-            Out = [Format_str(*i) for i in self.conversion]
+            Out = [Format_str(*i) for i in self.convergence]
         print('\n'.join(Out))
 
 @RegisterLinkJob
