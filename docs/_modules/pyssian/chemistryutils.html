@@ -1,156 +1,74 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="python" >
+<html class="writer-html5" lang="python" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>pyssian.chemistryutils &mdash; pyssian  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b085c10e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d048f138"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> pyssian
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            pyssian
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../readme_link.html">Pyssian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples_link.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pyssian.html">pyssian API</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">pyssian</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>pyssian.chemistryutils</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyssian.chemistryutils</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for pyssian.chemistryutils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Contains all the hardcoded basis and functionals as well as the neccesary</span>
@@ -159,7 +77,7 @@
 <span class="sd">Number and vice versa.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1">######################## METHODS SECTION #####################################</span>
 <span class="n">shellWaveFunctions</span> <span class="o">=</span> <span class="s1">&#39;RO|U|R|&#39;</span>
@@ -202,8 +120,10 @@
 
 
 <span class="c1">###################### THE PRETTY FUNCTION ######################</span>
-<div class="viewcode-block" id="is_method"><a class="viewcode-back" href="../../pyssian.chemistryutils.html#pyssian.chemistryutils.is_method">[docs]</a><span class="k">def</span> <span class="nf">is_method</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="is_method">
+<a class="viewcode-back" href="../../pyssian.chemistryutils.html#pyssian.chemistryutils.is_method">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_method</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if a candidate string is a valid method recognized by Gaussian.</span>
 
 <span class="sd">    Parameters</span>
@@ -227,6 +147,7 @@
     <span class="k">if</span> <span class="n">test3</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">test3</span> <span class="o">=</span> <span class="n">test3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">candidate</span>
     <span class="k">return</span> <span class="n">test1</span> <span class="ow">or</span> <span class="n">test2</span> <span class="ow">or</span> <span class="n">test3</span></div>
+
 
 <span class="c1">######################## BASIS SECTION #########################################</span>
 <span class="c1">## Pople Bases require lowercasing for design reasons.</span>
@@ -279,8 +200,10 @@
 <span class="c1">#print(basis_expr)</span>
 <span class="n">basis_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">basis_expr</span><span class="p">)</span>
 <span class="c1">######################## THE PRETTY FUNCTION ###################################</span>
-<div class="viewcode-block" id="is_basis"><a class="viewcode-back" href="../../pyssian.chemistryutils.html#pyssian.chemistryutils.is_basis">[docs]</a><span class="k">def</span> <span class="nf">is_basis</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="is_basis">
+<a class="viewcode-back" href="../../pyssian.chemistryutils.html#pyssian.chemistryutils.is_basis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_basis</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests if a candidate string is a valid basis set recognized by Gaussian.</span>
 
 <span class="sd">    Parameters</span>
@@ -300,6 +223,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">in_regex</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">return</span>  <span class="n">in_hardcoded</span> <span class="ow">or</span> <span class="n">in_regex</span></div>
+
 <span class="c1">######################### PERIODIC TABLE #######################################</span>
 <span class="c1"># It is important that X appears the first one (enumeration starts in 0)</span>
 <span class="c1"># here X stands for a dummy atom</span>
@@ -321,46 +245,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..
-
-    </p>
+    <p>&#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -16,10 +16,11 @@ def Populates(*attributes, defaults=None):
 
     Parameters
     ----------
-    *attributes : type
-        Description of parameter `*attributes`.
-    default : type
-        Description of parameter `default` (the default is None).
+    *attributes : str
+        names of the attributes populated by the method.
+    default : list
+        list of default values in the same order as the attributes. If none
+        provided no "default message" is added.
 
     Returns
     -------
@@ -288,8 +289,8 @@ class Link1(LinkJob):
         Returns
         -------
         str
-            {Constrained Optimization, Optimization,
-            Frequency Calculation, Unidentified}
+            {Constrained Optimization, Optimization,Frequency Calculation, 
+            Unidentified, Linked} the Linked type is only assigned externally
         """
         target = self.commandline.lower()
         if 'modredundant' in target:
@@ -369,7 +370,7 @@ class Link103(LinkJob):
         'Init', 'Iteration' or 'End'
     state : str
         Either 'Optimized', 'Non-optimized' or 'Initial'
-    conversion : list
+    convergence : list
         List of namedtuples with fields Item,Value,Threshold,Converged.
     parameters : list
         List of namedtuples with fields Name,Definition,Value,Derivative.
@@ -382,7 +383,7 @@ class Link103(LinkJob):
 
     """
 
-    __slots__ = ('mode','state','conversion','parameters','derivatives',
+    __slots__ = ('mode','state','convergence','parameters','derivatives',
                 'stepnumber','scanpoint')
 
     _token = 103
@@ -405,7 +406,7 @@ class Link103(LinkJob):
     def __init__(self,text,asEmpty=False):
         self.mode = None
         self.state = None
-        self.conversion = []
+        self.convergence = []
         self.parameters = []
         self.derivatives = []
         self.stepnumber = None
@@ -484,7 +485,7 @@ class Link103(LinkJob):
                 items.append(item)
             self.derivatives = items
 
-    @Populates('conversion')
+    @Populates('convergence')
     @SilentFail
     def _locate_convergence(self):
         """
@@ -502,7 +503,7 @@ class Link103(LinkJob):
                 isConverged = m[3] == "YES"
                 item = cls._ConverItem(Name,val,threshold,isConverged)
                 items.append(item)
-            self.conversion = items
+            self.convergence = items
 
     @Populates('stepnumber','scanpoint')
     @SilentFail
@@ -526,12 +527,70 @@ class Link103(LinkJob):
         """ Prints the convergence Table formatted """
         Format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'.format
         try:
-            Out = [Format(*i) for i in self.conversion]
+            Out = [Format(*i) for i in self.convergence]
         except ValueError as e:
             print("Non numeric value found in the convergence values")
             Format_str='{0: <22s}\t{1}\t{2}\t{3}'.format
-            Out = [Format_str(*i) for i in self.conversion]
+            Out = [Format_str(*i) for i in self.convergence]
         print('\n'.join(Out))
+
+@RegisterLinkJob
+class Link120(LinkJob):
+    """
+    Representation and parser for the output of l120.exe. Corresponds to a
+    the energy calculations when using ONIOM.
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l103.exe
+    asEmpty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    energy
+    energy_partitions
+
+    """
+    __slots__ = ('energy', 'energy_partitions')
+
+    _token = 120
+
+    re_energy = r'extrapolated energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_energy = re.compile(re_energy)
+    re_energy_partitions = r'gridpoint\s*([0-9]*)\smethod:\s*([a-zA-Z]*)\s*system:\s*([a-zA-Z]*)\s*energy:\s*(-?[0-9]*\.[0-9]*)'
+    re_energy_partitions = re.compile(re_energy_partitions)
+    _EnergyPartition = namedtuple('EnergyPartition','gridpoint level model energy')
+
+    def __init__(self,text,asEmpty=False):
+        self.energy = None
+        self.energy_partitions = []
+        if asEmpty:
+            super().__init__('',120)
+        else:
+            super().__init__(text,120)
+            self._locate_energies()
+
+    @Populates('energy','energy_partitions',defaults=['None','[]'])
+    @SilentFail
+    def _locate_energies(self):
+        """
+        Uses regex expressions compiled as class attributes to find
+        the energy and the different energy_partitions.
+        """
+        cls = self.__class__
+        match = cls.re_energy.findall(self.text)
+        if match:
+            self.energy = float(match[0])
+
+        EnergyPartition = cls._EnergyPartition
+        match = cls.re_energy_partitions.findall(self.text)
+        if not match:
+            return 
+        self.energy_partitions = [EnergyPartition(int(p),level,model,float(energy))
+                                  for p,level,model,energy in match]
 
 @RegisterLinkJob
 class Link123(LinkJob):
@@ -678,7 +737,7 @@ class Link202(LinkJob):
 
     _token = 202
 
-    re_orientation = r'(?:.*Input\sorientation\:.*\n'
+    re_orientation = r'(?:.*(?:Standard|Input)\sorientation\:.*\n'
     re_orientation += r'\s?\-+\n.*\n.*\n\s?\-+\n)'
     re_orientation += r'[\s\S]*?'
     re_orientation += r'(?:\s?\-+\n)'
@@ -709,7 +768,9 @@ class Link202(LinkJob):
         AtomCoords = cls._AtomCoords
         match = cls.re_orientation.findall(self.text)
         if match:
-            lines = [i for i in match[0].split('\n') if i.strip()]
+            # If Input and Standard orientation coexist
+            # take the last one (Standard, generally)
+            lines = [i for i in match[-1].split('\n') if i.strip()]
             _ = lines.pop(0) # Discard "Input orientation" line
             # Discard "Header"
             for i in range(4):
@@ -831,13 +892,15 @@ class Link502(LinkJob):
     ----------
     energy : float
         Final Potential Energy of the SCF cycles.
-
+    spin : tuple[float,float]
+        S**2 (before, after) annihiliation
     """
-    __slots__ = ('energy',)
+    __slots__ = ('energy','spin')
 
     _token = 502
 
     re_EDone = re.compile(r'SCF\sDone\:\s*E\(.*\).*=\s*(\-?[0-9]*\.[0-9]+)')
+    re_spin = re.compile('S\*\*2 before annihilation\s*(-?[0-9]*\.[0-9]*),\s*after\s*(-?[0-9]*\.[0-9]*)')
 
     def __init__(self,text,asEmpty=False):
         self.energy = None
@@ -846,6 +909,7 @@ class Link502(LinkJob):
         else:
             super().__init__(text,502)
             self._locate_energy()
+            self._locate_spin()
 
     @Populates('energy')
     @SilentFail
@@ -858,6 +922,20 @@ class Link502(LinkJob):
         Match = cls.re_EDone.findall(self.text)
         if Match:
             self.energy = float(Match[0])
+
+    @Populates('spin')
+    @SilentFail
+    def _locate_spin(self):
+        """
+        Uses regex expressions compiled as class attributes to find the Energy
+        rported as 'SCF Done:' and reads the potential energy.
+        """
+        cls = self.__class__
+        Match = cls.re_spin.findall(self.text)
+        if Match:
+            before,after = Match[0]
+            self.spin = float(before),float(after)
+    
 
 @RegisterLinkJob
 class Link508(Link502):
@@ -877,8 +955,10 @@ class Link508(Link502):
     ----------
     energy : float
         Final Potential Energy of the SCF cycles.
+    spin : tuple[float,float]
+        S**2 (before, after) annihiliation
     """
-    __slots__ = ('energy',)
+    __slots__ = ('energy','spin')
 
     _token = 508
 
@@ -918,9 +998,11 @@ class Link601(LinkJob):
     re_MullikenHeavy += r'([\s\S]*?)'
     re_MullikenHeavy += r'(?:\n.[a-zA-Z].*\n)'
     re_MullikenHeavy = re.compile(re_MullikenHeavy)
+    
     _token = 601
 
     def __init__(self,text,asEmpty=False):
+        self._Atom = namedtuple('Atom','number symbol charge spin')
         self.mulliken_heavy = None
         self.mulliken = None
         if asEmpty:
@@ -935,18 +1017,19 @@ class Link601(LinkJob):
     def _locate_MullikenHeavy(self):
         """
         Uses regex expressions compiled as class attributes to find the
-        Mulliken charges condensed to heavy atoms.
+        Mulliken charges and spin condensed to heavy atoms.
         """
         cls = self.__class__
         Match = cls.re_MullikenHeavy.findall(self.text)
         if Match:
             lines =  Match[0][1].split('\n')
             if Match[0][0]:
-                self.mulliken_heavy = ['\t'.join(line.strip().split()[:3])
-                                            for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
             else:
-                self.mulliken_heavy = ['\t'.join(line.strip().split())
-                                            for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            self.mulliken_heavy = [Atom(line.strip().split())
+                                    for line in lines if line.strip()]
+
     @Populates('mulliken')
     @SilentFail
     def _locate_MullikenAtoms(self):
@@ -959,11 +1042,12 @@ class Link601(LinkJob):
         if Match:
             lines =  Match[0][1].split('\n')
             if Match[0][0]:
-                self.mulliken = ['\t'.join(line.strip().split()[:3])
-                                    for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
             else:
-                self.mulliken = ['\t'.join(line.strip().split())
-                                    for line in lines if line.strip()]
+                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            
+            self.mulliken = [Atom(line.strip().split())
+                             for line in lines if line.strip()]
 
 @RegisterLinkJob
 class Link716(LinkJob):
@@ -993,10 +1077,12 @@ class Link716(LinkJob):
         Text that corresponds to the IRSpectrum
     mode : str
         Either 'Forces', 'Freq' or 'Other'.
-
+    frequencies : list
+    freq_displacements : list
     """
     __slots__ = ('dipole', 'units','frequencies','EContribs', 'IRSpectrum',
-                  'zeropoint','thermal_energy', 'enthalpy', 'gibbs', 'mode')
+                  'zeropoint','thermal_energy', 'enthalpy', 'gibbs', 'mode',
+                  'freq_displacements')
 
     _token = 716
 
@@ -1012,10 +1098,17 @@ class Link716(LinkJob):
     re_Frequencies += r'(?:.*Frc\sconsts\s*\-\-)(.*)\n'
     re_Frequencies += r'(?:.*IR\sInten\s*\-\-)(.*)'
     re_Frequencies = re.compile(re_Frequencies)
+    re_freq_text = re.compile(r'  Atom[\s\S]*\n\n')
+    re_freq_displacements = r'^ {3,5}'
+    re_freq_displacements += r'[0-9]{1,3}\s*'*2
+    re_freq_displacements += r'-?[0-9]*\.[0-9]*\s*'*3
+    re_freq_displacements += r'[^\n]*\n'
+    re_freq_displacements = re.compile(re_freq_displacements,re.MULTILINE)
     re_dipole = r'(?:Dipole.*\=)'+r'(.?[0-9]\.[0-9]*D[\-|\+][0-9]{2,})'*3
     re_dipole = re.compile(re_dipole)
 
     _Frequency = namedtuple('Frequency','freq redmass forcek IRint')
+    _Displacement = namedtuple('FreqDisplacements','atomids atoms xyz')
     _EContrib = namedtuple('EContrib','Name Thermal CV S')
 
     def __init__(self,text,asEmpty=False):
@@ -1027,6 +1120,7 @@ class Link716(LinkJob):
         self.gibbs = []
         self.EContribs = []
         self.frequencies = []
+        self.freq_displacements = []
         self.IRSpectrum = ''
         self.mode = ''
         if asEmpty:
@@ -1041,6 +1135,7 @@ class Link716(LinkJob):
             self._locate_thermochemistry()
             self._locate_IRSpectrum()
             self._locate_frequencies()
+            self._locate_freq_displacements()
 
     @Populates('dipole')
     @SilentFail
@@ -1075,6 +1170,39 @@ class Link716(LinkJob):
             self.frequencies = frequencies
             self.mode = 'Freq'
 
+    @Populates('freq_displacements')
+    @SilentFail
+    def _locate_freq_displacements(self): 
+        """
+        Uses regex expressions compiled as class attributes to find the
+        cartesian displacements of the frequencies.
+        """
+        cls = self.__class__
+        Displacement = cls._Displacement
+        match = cls.re_freq_text.findall(self.text)
+        if match:
+            displacements = []
+            for text in match[0].split('Atom'):
+                if not text.strip(): 
+                    continue
+                lines = cls.re_freq_displacements.findall(text)
+                atomlines = []
+                for line in lines:
+                    atomline = []
+                    if not line.strip():
+                        continue
+                    atid,atnum,xyz = line.strip().split(maxsplit=2)
+                    atomline.append(int(atid))
+                    atomline.append(int(atnum))
+                    xyz = [float(i) for i in xyz.split()]
+                    for x,y,z in zip(xyz[0::3],xyz[1::3],xyz[2::3]): 
+                        atomline.append((x,y,z))
+                    atomlines.append(atomline)
+                atomids,atomnums,*matrices = zip(*atomlines)
+                for matrix in matrices: 
+                    displacements.append(Displacement(atomids,atomnums,matrix))
+            self.freq_displacements = displacements
+
     @Populates('zeropoint','thermal_energy','enthalpy','gibbs')
     @SilentFail
     def _locate_thermochemistry(self):
@@ -1093,7 +1221,6 @@ class Link716(LinkJob):
                                 self.gibbs])
             for line,Property in zip(lines,Properties):
                 Aux = line.split("=")[-1].strip().split()
-                Property.append(float(Aux[0]))
                 if len(Aux) == 2:
                     self.units.append(Aux[-1][1:-1])
                 Property.append(float(Aux[0]))

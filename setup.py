@@ -1,6 +1,6 @@
 import setuptools
 
-__version__ = '1.0.2'
+__version__ = '1.1.0'
 
 with open("README.rst", "r") as fh:
     long_description = fh.read()
@@ -20,6 +20,7 @@ setuptools.setup(
                  'Programming Language :: Python :: 3.7',
                  'Programming Language :: Python :: 3.8',
                  'Programming Language :: Python :: 3.9',
+                 'Programming Language :: Python :: 3.10',
                  ],
   keywords = ['compchem, gaussian, parser'],
   packages = setuptools.find_packages(),

@@ -1,167 +1,85 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="python" >
+<html class="writer-html5" lang="python" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>pyssian.gaussianclasses &mdash; pyssian  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b085c10e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d048f138"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> pyssian
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            pyssian
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../readme_link.html">Pyssian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples_link.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pyssian.html">pyssian API</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">pyssian</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>pyssian.gaussianclasses</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyssian.gaussianclasses</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for pyssian.gaussianclasses</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">One of the two core libraries of pyssian. Contains the Classes that represent</span>
 <span class="sd">Gaussian Files (input and output).</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span>
 
-<span class="kn">from</span> <span class="nn">.chemistryutils</span> <span class="kn">import</span> <span class="n">is_method</span><span class="p">,</span> <span class="n">is_basis</span>
-<span class="kn">from</span> <span class="nn">.linkjobparsers</span> <span class="kn">import</span> <span class="n">LinkJob</span><span class="p">,</span> <span class="n">GeneralLinkJob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.chemistryutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_method</span><span class="p">,</span> <span class="n">is_basis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.linkjobparsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinkJob</span><span class="p">,</span> <span class="n">GeneralLinkJob</span>
 
 <span class="c1"># Pre-Initialized dictionary for the GaussianOutFile.Parse</span>
 <span class="n">Available_Linkjobs</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="n">GeneralLinkJob</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">)}</span>
@@ -169,10 +87,14 @@
     <span class="n">Available_Linkjobs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">LinkJob</span><span class="o">.</span><span class="n">Register</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="GaussianOutFile"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile">[docs]</a><span class="k">class</span> <span class="nc">GaussianOutFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gaussian 09/16 &#39;.log&#39; file parent class, if any special type of calculation</span>
+<div class="viewcode-block" id="GaussianOutFile">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GaussianOutFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gaussian 09/16 &#39;.log&#39; file parent class, if any special type of calculation</span>
 <span class="sd">    requires different processing it should be a subclass of this one. Accepts</span>
 <span class="sd">    a context manager usage similar to &#39;with open(file) as F:...&#39;</span>
+<span class="sd">    *For a Gaussian .log file to be parsable it requires that its corresponding </span>
+<span class="sd">    input has the additional printout enabled (#p)* </span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -192,7 +114,7 @@
     <span class="n">_interblock</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>        <span class="c1"># interblock token</span>
     <span class="n">_EOF</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span>            <span class="c1"># EOF token</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">parselist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">parselist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">InternalJob</span><span class="p">(),]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">):</span>
@@ -208,12 +130,12 @@
         <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BlockFetcher</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_BlockHandler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">BlockHandler</span><span class="p">()</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BlockHandler</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">)&gt; with </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s1"> InternalJobs&#39;</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="nb">repr</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">)&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -223,19 +145,19 @@
             <span class="k">for</span> <span class="n">Link</span> <span class="ow">in</span> <span class="n">InternalJob</span><span class="p">:</span>
                  <span class="nb">repr</span> <span class="o">+=</span> <span class="n">indent</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Link</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="nb">repr</span>
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span>
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_SetParsers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ParseList</span><span class="p">,</span><span class="n">interblock</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_SetParsers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ParseList</span><span class="p">,</span><span class="n">interblock</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">Parsers</span> <span class="o">=</span> <span class="n">Available_Linkjobs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">assert</span> <span class="n">interblock</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Parsers</span>
         <span class="k">if</span> <span class="n">ParseList</span><span class="p">:</span>
@@ -250,8 +172,10 @@
             <span class="k">pass</span>
         <span class="n">Parsers</span><span class="p">[</span><span class="n">interblock</span><span class="p">]</span> <span class="o">=</span> <span class="n">GeneralLinkJob</span><span class="o">.</span><span class="n">as_empty</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_Parsers</span> <span class="o">=</span> <span class="n">Parsers</span>
-<div class="viewcode-block" id="GaussianOutFile.print_file_structure"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.print_file_structure">[docs]</a>    <span class="k">def</span> <span class="nf">print_file_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Display the structure of links and internal jobs of the file.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GaussianOutFile.print_file_structure">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.print_file_structure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_file_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Display the structure of links and internal jobs of the file.&quot;&quot;&quot;</span>
         <span class="n">indent</span> <span class="o">=</span> <span class="s2">&quot;  &quot;</span>
         <span class="n">Result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">:}</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">for</span> <span class="n">intjob</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
@@ -259,14 +183,20 @@
             <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">intjob</span><span class="p">:</span>
                 <span class="n">Result</span> <span class="o">+=</span> <span class="n">indent</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">link</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span><span class="si">:}</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">Result</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianOutFile.read"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Alias of update for consistency with GaussianInFile class&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianOutFile.read">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias of update for consistency with GaussianInFile class&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span></div>
-    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Alias to file.close for consistency with the io.TextIOBase class&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias to file.close for consistency with the io.TextIOBase class&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<div class="viewcode-block" id="GaussianOutFile.update"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">FinalPrint</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tries to fetch new data. If it exists it parses it appropiately</span>
+<div class="viewcode-block" id="GaussianOutFile.update">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">FinalPrint</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tries to fetch new data. If it exists it parses it appropiately</span>
 <span class="sd">        otherwise it fails silently.</span>
 
 <span class="sd">        Parameters</span>
@@ -290,12 +220,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">FinalPrint</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="si">:</span><span class="s2">!r</span><span class="si">}</span><span class="s2"> UPDATED&quot;</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianOutFile.clean"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Removes per each InternalJob stored all the EmptyLinkJobs.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianOutFile.clean">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.clean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes per each InternalJob stored all the EmptyLinkJobs.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">InternalJob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">:</span>
             <span class="n">InternalJob</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span></div>
-<div class="viewcode-block" id="GaussianOutFile.get_links"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.get_links">[docs]</a>    <span class="k">def</span> <span class="nf">get_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">LinkIds</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wrapper Method to get a list of Links with certain Ids across</span>
+
+<div class="viewcode-block" id="GaussianOutFile.get_links">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianOutFile.get_links">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">LinkIds</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper Method to get a list of Links with certain Ids across</span>
 <span class="sd">        the different Internal Jobs.</span>
 
 <span class="sd">        Parameters</span>
@@ -309,17 +245,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">LinkLists</span> <span class="o">=</span> <span class="p">[</span><span class="n">IntJob</span><span class="o">.</span><span class="n">get_links</span><span class="p">(</span><span class="o">*</span><span class="n">LinkIds</span><span class="p">)</span> <span class="k">for</span> <span class="n">IntJob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">LinkLists</span><span class="p">))</span></div>
+
     <span class="c1"># Generators and Coroutines for File Parsing</span>
-    <span class="k">def</span> <span class="nf">Reader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Generator for line by line reading without stopiteration &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Reader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Generator for line by line reading without stopiteration &quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">Pos_old</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
             <span class="n">Pos_new</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span>
             <span class="n">ReachedEOF</span> <span class="o">=</span> <span class="n">Pos_old</span> <span class="o">==</span> <span class="n">Pos_new</span>
             <span class="k">yield</span> <span class="n">ReachedEOF</span><span class="p">,</span><span class="n">line</span>
-    <span class="k">def</span> <span class="nf">BlockFetcher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">EOF</span><span class="o">=-</span><span class="mi">9999</span><span class="p">,</span><span class="n">interblock</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BlockFetcher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">EOF</span><span class="o">=-</span><span class="mi">9999</span><span class="p">,</span><span class="n">interblock</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generator that yields the text sliced in blocks and their type.</span>
 
 <span class="sd">        A block is an iterable of strings and its type refers to a token that</span>
@@ -374,36 +311,46 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">yield</span> <span class="n">EOF</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">end</span> <span class="o">=</span> <span class="n">re_exit</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="n">end</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_exit</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+                    <span class="n">end</span> <span class="o">=</span> <span class="n">end</span> <span class="ow">or</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re_termination</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
                 <span class="n">Block</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
             <span class="c1"># when end found, do return type token and yield the block</span>
             <span class="k">yield</span> <span class="n">number</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Block</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">BlockHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Coroutine. Receives a block, chooses the parser and parses it &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">BlockHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Coroutine. Receives a block, chooses the parser and parses it &quot;&quot;&quot;</span>
         <span class="c1"># Initialization</span>
         <span class="n">Parsers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Parsers</span>
         <span class="n">CurrentJob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">first_link</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">BlockType</span><span class="p">,</span> <span class="n">Block</span> <span class="o">=</span> <span class="k">yield</span> <span class="s1">&#39;Initialization done&#39;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="c1">#Parser = Parsers.get(BlockType,Parsers[ignore])</span>
             <span class="n">Parser</span> <span class="o">=</span> <span class="n">Parsers</span><span class="p">[</span><span class="n">BlockType</span><span class="p">]</span>
             <span class="n">Link</span> <span class="o">=</span>  <span class="n">Parser</span><span class="p">(</span><span class="n">Block</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Link</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">new_InternalJob</span> <span class="o">=</span> <span class="n">Link</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">new_InternalJob</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_InternalJob</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="n">new_InternalJob</span><span class="p">:</span>
-                <span class="n">New</span> <span class="o">=</span> <span class="n">InternalJob</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">New</span><span class="p">)</span>
-                <span class="n">CurrentJob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Link</span><span class="o">.</span><span class="n">number</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">CurrentJob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Link</span><span class="p">)</span>
-                <span class="n">CurrentJob</span><span class="o">.</span><span class="n">guess_info</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">CurrentJob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Link</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">first_link</span><span class="p">:</span>
+                    <span class="n">CurrentJob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Link</span><span class="p">)</span>
+                    <span class="n">CurrentJob</span><span class="o">.</span><span class="n">guess_info</span><span class="p">()</span>
+                    <span class="n">first_link</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">is_explicit</span> <span class="o">=</span> <span class="n">Link</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">new_InternalJob</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_explicit</span><span class="p">:</span>
+                        <span class="n">info</span> <span class="o">=</span> <span class="n">Link</span><span class="o">.</span><span class="n">InternalJobInfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">number</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Linked&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="n">Link</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">info</span>
+                    <span class="n">New</span> <span class="o">=</span> <span class="n">InternalJob</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">New</span><span class="p">)</span>
+                    <span class="n">CurrentJob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InternalJobs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">CurrentJob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Link</span><span class="p">)</span>
+                    <span class="n">CurrentJob</span><span class="o">.</span><span class="n">guess_info</span><span class="p">()</span>
             <span class="n">BlockType</span><span class="p">,</span> <span class="n">Block</span> <span class="o">=</span> <span class="k">yield</span></div>
 
-<div class="viewcode-block" id="InternalJob"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob">[docs]</a><span class="k">class</span> <span class="nc">InternalJob</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gaussian 09/16 InternalJob parent class, if any special type of Job</span>
+
+<div class="viewcode-block" id="InternalJob">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InternalJob</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gaussian 09/16 InternalJob parent class, if any special type of Job</span>
 <span class="sd">    requires different parsing it should be a subclass of this one.</span>
 
 <span class="sd">    Parameters</span>
@@ -421,30 +368,32 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">number</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Links</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1"> Created but Empty&gt;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Internal Job </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s1">&#39;</span>
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Link</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Link</span><span class="p">):</span>
         <span class="c1"># Restrict to Link objects</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Link</span><span class="p">,</span> <span class="n">LinkJob</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">Link</span><span class="si">:</span><span class="s1">!r</span><span class="si">}</span><span class="s1"> is not of class </span><span class="si">{</span><span class="n">LinkJob</span><span class="si">:</span><span class="s1">!r</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Link</span><span class="p">)</span>
-<div class="viewcode-block" id="InternalJob.guess_info"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.guess_info">[docs]</a>    <span class="k">def</span> <span class="nf">guess_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Guesses the number and type attributes of itself using the stored</span>
+<div class="viewcode-block" id="InternalJob.guess_info">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.guess_info">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">guess_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Guesses the number and type attributes of itself using the stored</span>
 <span class="sd">        Links.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="p">:</span>
             <span class="n">Links</span> <span class="o">=</span> <span class="p">(</span><span class="n">Link</span> <span class="k">for</span> <span class="n">Link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span> <span class="k">if</span> <span class="n">Link</span><span class="o">.</span><span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
@@ -458,16 +407,22 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">number</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">type</span></div>
-<div class="viewcode-block" id="InternalJob.clean"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.clean">[docs]</a>    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Removes all the Empty Link instances within Links.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="InternalJob.clean">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.clean">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes all the Empty Link instances within Links.&quot;&quot;&quot;</span>
         <span class="n">Indices2Remove</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">Link</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">Link</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
                 <span class="n">Indices2Remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">Indices2Remove</span><span class="p">):</span>
             <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
-<div class="viewcode-block" id="InternalJob.get_links"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.get_links">[docs]</a>    <span class="k">def</span> <span class="nf">get_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">LinkIds</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Wrapper Method to get a list of Links with certain Ids.</span>
+
+<div class="viewcode-block" id="InternalJob.get_links">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.InternalJob.get_links">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">LinkIds</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper Method to get a list of Links with certain Ids.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -480,10 +435,14 @@
 <span class="sd">            List of Link Objects ordered by appearance in the file and filtered</span>
 <span class="sd">            by Link Number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">Link</span> <span class="k">for</span> <span class="n">Link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span> <span class="k">if</span> <span class="n">Link</span><span class="o">.</span><span class="n">number</span> <span class="ow">in</span> <span class="n">LinkIds</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Link</span> <span class="k">for</span> <span class="n">Link</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">Links</span> <span class="k">if</span> <span class="n">Link</span><span class="o">.</span><span class="n">number</span> <span class="ow">in</span> <span class="n">LinkIds</span><span class="p">]</span></div>
+</div>
 
-<div class="viewcode-block" id="GaussianInFile"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile">[docs]</a><span class="k">class</span> <span class="nc">GaussianInFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianInFile">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GaussianInFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gaussian 09/16 .in file parent class, if any special type of input</span>
 <span class="sd">    requires different processing it should be a subclass of this one.</span>
 
@@ -520,11 +479,26 @@
 <span class="sd">        property to easily access and change the preprocessing[&#39;nprocshared&#39;] value</span>
 <span class="sd">    mem : int</span>
 <span class="sd">        property to easily access and change the preprocessing[&#39;mem&#39;] value</span>
+<span class="sd">    extra_printout : bool</span>
+<span class="sd">        Controls the behaviour of the command line&#39;s &quot;#&quot; or &quot;#p&quot;. If True </span>
+<span class="sd">        the command line will appear with the &quot;#p&quot;. It is True by default.</span>
+<span class="sd">    solvent : str or None</span>
+<span class="sd">        When set to None the solvation is still active but no solvent has been</span>
+<span class="sd">        specified. When set to &#39;gas&#39; the solvation is completely removed and </span>
+<span class="sd">        when set to a different string, the string is assumed to be a valid name</span>
+<span class="sd">        for the solvent in gaussian.</span>
+<span class="sd">    solvent_model : str or None</span>
+<span class="sd">        This property controls the keyword scrf and has three possible values: </span>
+<span class="sd">        None -&gt; the scrf keyword is not included</span>
+<span class="sd">        &#39;pcm&#39; -&gt; the &#39;pcm&#39; suboption within scrf is included</span>
+<span class="sd">        &#39;smd&#39; -&gt; the &#39;smd&#39; suboption within the scrf is included.  </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># Do Something</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="k">elif</span> <span class="n">file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;a+&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -539,86 +513,125 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">charge</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># In the G16 Manual &quot;Molecule Specification&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tail</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># In the G16 Manual &quot;Optional additional sections&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{preprocessing}</span><span class="se">\n</span><span class="si">{commandline}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{title}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{charge}</span><span class="s1"> </span><span class="si">{spin}</span><span class="se">\n</span><span class="si">{geometry}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{charge}</span><span class="s1"> </span><span class="si">{spin}</span><span class="se">\n</span><span class="si">{geometry}</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{tail}</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># str repr of the preprocessing</span>
-        <span class="n">preprocessing</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="n">preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
-        <span class="c1"># str repr of the commandline</span>
-        <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#p&#39;</span><span class="p">,]</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">val</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">elif</span> <span class="n">val</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=(</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="n">commandline</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
-        <span class="c1"># Prepare to format as str</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">preprocessing</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">),</span>
-                       <span class="n">commandline</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commandline</span><span class="p">),</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;unnamed&#39;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">):</span> 
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1">#size = len(self)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">geometry</span><span class="p">:</span>
+            <span class="n">geometry</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">preprocessing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocessing_as_str</span><span class="p">(),</span>
+                       <span class="n">commandline</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">commandline_as_str</span><span class="p">(),</span>
                        <span class="n">title</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
                        <span class="n">charge</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">,</span>
                        <span class="n">spin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spin</span><span class="p">,</span>
-                       <span class="n">geometry</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">),</span>
+                       <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
                        <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tail</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">str_repr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># It is better to enfoce the condition here than for every </span>
+        <span class="c1"># possible case of reading a file or adding the tail</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">str_repr</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">str_repr</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
+            <span class="n">str_repr</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="n">n</span>
+        <span class="k">return</span> <span class="n">str_repr</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span>
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span>
     <span class="nd">@method</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">change_method</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span>
     <span class="nd">@basis</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">change_basis</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;nprocs&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nprocs&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nprocshared&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
     <span class="nd">@nprocs</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;nprocshared&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;nprocs&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;nprocs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;nprocshared&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mem&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
     <span class="nd">@mem</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;scrf&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="s1">&#39;gas&#39;</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="nd">@solvent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent</span><span class="p">(</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;gas&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent</span><span class="p">(</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_solvent</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pcm&#39;</span><span class="p">,</span><span class="s1">&#39;smd&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="nd">@solvent_model</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">other</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_solvent_model</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pcm&#39;</span><span class="p">,</span><span class="s1">&#39;smd&#39;</span><span class="p">]:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_solvent_model</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solvent model &quot;</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&quot; is not smd/pcm/None&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GaussianInFile.read"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GaussianInFile.read">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the file and populates the appropiate attributes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">txt</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">]</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">txt</span><span class="p">:</span> 
             <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="s1">&#39;Attempting to read an empty or non-existent file&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">txt</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span> <span class="c1"># If the file ends without a blank line add it</span>
@@ -667,11 +680,17 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">stop</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># if it exists</span>
             <span class="n">tail</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">stop</span><span class="p">:]]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parse_tail</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianInFile.close"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Alias to file.close for consistency with the io.TextIOBase class&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianInFile.close">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias to file.close for consistency with the io.TextIOBase class&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
-<div class="viewcode-block" id="GaussianInFile.write"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianInFile.write">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes the File object to a File. If a filepath is provided it will</span>
 <span class="sd">        write to that filepath otherwise it will attempt to write to the path</span>
 <span class="sd">        provided in the initialization.</span>
@@ -690,9 +709,12 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
                 <span class="n">F</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_txt</span><span class="p">)</span></div>
 
+
     <span class="c1"># Helper Functions for the read function to encapsulate different behaviours</span>
-<div class="viewcode-block" id="GaussianInFile.parse_preprocessing"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_preprocessing">[docs]</a>    <span class="k">def</span> <span class="nf">parse_preprocessing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GaussianInFile.parse_preprocessing">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_preprocessing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_preprocessing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parses the lines that contain the Link 0 keywords and transforms them</span>
 <span class="sd">        into a dictionary representation.</span>
 
@@ -709,29 +731,43 @@
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
             <span class="n">Aux</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span><span class="p">,</span><span class="s1">&#39;&#39;</span>
+                <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;&#39;</span>
             <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">Aux</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
-<div class="viewcode-block" id="GaussianInFile.parse_commandline"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_commandline">[docs]</a>    <span class="k">def</span> <span class="nf">parse_commandline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianInFile.parse_commandline">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_commandline">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_commandline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parses the lines that contain the calculation commands keywords and</span>
 <span class="sd">        transforms them into a dictionary representation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        lines : list</span>
-<span class="sd">            list of strings previously stripped. Empty lines will be ignored.</span>
+<span class="sd">            list of strings previously stripped and split. Empty lines will be </span>
+<span class="sd">            ignored.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># the first line contains the &quot;#p&quot;, remove it</span>
+        <span class="c1"># the first line contains the &quot;#p&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#p&#39;</span>
+        <span class="c1"># parse all the keywords</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">others</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
         <span class="n">method_found</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">basis_found</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">others</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">is_method</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">method_found</span><span class="p">:</span>
+            <span class="n">dummy</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">is_method</span><span class="p">(</span><span class="n">dummy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">is_basis</span><span class="p">(</span><span class="n">dummy</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">method_found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">basis_found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">method</span><span class="p">,</span><span class="n">basis</span> <span class="o">=</span> <span class="n">dummy</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="n">basis</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">is_method</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">method_found</span><span class="p">:</span>
                 <span class="n">method_found</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">item</span>
                 <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="o">=</span> <span class="n">item</span><span class="p">,</span> <span class="p">[]</span>
@@ -762,10 +798,13 @@
             <span class="k">elif</span> <span class="ow">not</span> <span class="n">has_suboptions</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">Aux3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">+</span> <span class="nb">set</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">Aux3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Aux3</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianInFile.parse_geometry"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_geometry">[docs]</a>    <span class="k">def</span> <span class="nf">parse_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parses each line that contains &#39;Atom x y z&#39; in an appropiate form</span>
+
+<div class="viewcode-block" id="GaussianInFile.parse_geometry">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_geometry">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parses each line that contains &#39;Atom x y z&#39; in an appropiate form</span>
 <span class="sd">        and saves it to self.geometry</span>
 
 <span class="sd">        Parameters</span>
@@ -778,8 +817,11 @@
         <span class="c1"># coordinate specifications  (zmatrix,xyz,internal) to enforce a certain</span>
         <span class="c1"># geometry or geometry class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianInFile.parse_tail"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_tail">[docs]</a>    <span class="k">def</span> <span class="nf">parse_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Chops the set of lines into different blocks of text using as</span>
+
+<div class="viewcode-block" id="GaussianInFile.parse_tail">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.parse_tail">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_tail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lines</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Chops the set of lines into different blocks of text using as</span>
 <span class="sd">        reference the emptylines/blank lines</span>
 
 <span class="sd">        Parameters</span>
@@ -814,9 +856,109 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Parsed an input file withouth blank line ending&#39;</span><span class="p">)</span></div>
 
 
-    <span class="c1"># Modifying functions</span>
-<div class="viewcode-block" id="GaussianInFile.pop_chk"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_chk">[docs]</a>    <span class="k">def</span> <span class="nf">pop_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="c1"># Helper functions for writing</span>
+<div class="viewcode-block" id="GaussianInFile.preprocessing_as_str">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.preprocessing_as_str">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">preprocessing_as_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the preprocessing attribute to a suitable string </span>
+<span class="sd">        representation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            string corresponding to the preprocessing part of the input file. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preprocessing</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preprocessing</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.commandline_as_str">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.commandline_as_str">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">commandline_as_str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the commandline attribute to a suitable string </span>
+<span class="sd">        representation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            string corresponding to the commandline of the input file. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span><span class="p">:</span> 
+            <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#p&#39;</span><span class="p">,]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">commandline</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#&#39;</span><span class="p">,]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">val</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">elif</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">=(</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Aux</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">commandline</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Aux</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commandline</span><span class="p">)</span></div>
+
+    
+    <span class="c1"># Private functions for properties management</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">remove_solvation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">remove_solvation</span><span class="p">:</span> 
+            <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_solvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span> 
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span> 
+            <span class="k">if</span> <span class="s1">&#39;solvent=&#39;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;solvent=</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solvent=</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_remove_solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># If scrf does not exist</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent_model</span> 
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="k">return</span>
+        
+        <span class="c1"># Otherwise assume existence</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">current</span><span class="p">:</span> 
+                <span class="k">break</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_solvent_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="c1"># If scrf does not exist</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvent_model</span> 
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;scrf&#39;</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="n">current</span><span class="p">:</span> 
+                    <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">other</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="s1">&#39;scrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+        
+    <span class="c1"># Attribute modifying functions</span>
+<div class="viewcode-block" id="GaussianInFile.pop_chk">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_chk">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pop_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes the chk from the file, returns &#39;default&#39; if the chk was not</span>
 <span class="sd">        included already</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -824,8 +966,11 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;chk&#39;</span><span class="p">,</span><span class="n">default</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;chk&#39;</span><span class="p">)</span></div>
-<div class="viewcode-block" id="GaussianInFile.add_chk"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.add_chk">[docs]</a>    <span class="k">def</span> <span class="nf">add_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GaussianInFile.add_chk">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.add_chk">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds the chk to the file, with the specified name. If none is provided</span>
 <span class="sd">        defaults to the file name ended in .chk</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -840,8 +985,11 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.chk&#39;</span><span class="p">):</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span><span class="s1">&#39;.chk&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;chk&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span></div>
-<div class="viewcode-block" id="GaussianInFile.change_method"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.change_method">[docs]</a>    <span class="k">def</span> <span class="nf">change_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Changes appropiately the method of the calculation. Running </span>
+
+<div class="viewcode-block" id="GaussianInFile.change_method">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.change_method">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Changes appropiately the method of the calculation. Running </span>
 <span class="sd">        self.method = method makes a call to this function.</span>
 
 <span class="sd">        Parameters</span>
@@ -861,8 +1009,11 @@
         <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># Used to ensure deletion of the key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
-<div class="viewcode-block" id="GaussianInFile.change_basis"><a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.change_basis">[docs]</a>    <span class="k">def</span> <span class="nf">change_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">basis</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Changes appropiately the basis of the calculation. Running </span>
+
+<div class="viewcode-block" id="GaussianInFile.change_basis">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.change_basis">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">basis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Changes appropiately the basis of the calculation. Running </span>
 <span class="sd">        self.basis = basis makes a call to this function.</span>
 
 <span class="sd">        Parameters</span>
@@ -882,7 +1033,352 @@
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span>
         <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># Used to ensure deletion of the key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span> <span class="o">=</span> <span class="n">basis</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">basis</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">basis</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.disable_extra_printout">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.disable_extra_printout">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable_extra_printout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When used, the string representation of the object will not include the </span>
+<span class="sd">        #p in the command line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.enable_extra_printout">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.enable_extra_printout">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable_extra_printout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        When used, the string representation of the object will include the </span>
+<span class="sd">        #p in the command line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_printout</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.pop_kwd">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_kwd">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pop_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a keyword from the command line and returns it. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to remove from the command line.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it searches the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. pop_kwd(&#39;smd&#39;,where=&#39;scrf&#39;) or </span>
+<span class="sd">            pop_kwd(&#39;cartesian&#39;,where=&#39;opt&#39;)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str or None</span>
+<span class="sd">            Returns the removed keyword (or None when the keyword was not in the</span>
+<span class="sd">            command line)  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+        
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">kwd</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">keyword</span><span class="p">))</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
+            <span class="k">return</span> <span class="n">kwd</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.add_kwd">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.add_kwd">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a keyword to the command line. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to add to the command line.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it adds the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. add_kwd(&#39;smd&#39;,where=&#39;scrf&#39;) or </span>
+<span class="sd">            add_kwd(&#39;cartesian&#39;,where=&#39;opt&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">return</span>
+        
+        <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="p">,[])</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commandline</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.pop_l0_kwd">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.pop_l0_kwd">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pop_l0_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a keyword from the preprocessing and returns it. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to remove from the preprocessing.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it searches the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. pop_l0_kwd(&#39;job1.chk&#39;,where=&#39;oldchk&#39;)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str or None</span>
+<span class="sd">            Returns the removed keyword (or None when the keyword was not in the</span>
+<span class="sd">            preprocessing)  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+        <span class="n">kwd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">kwd</span></div>
+
+<div class="viewcode-block" id="GaussianInFile.add_l0_kwd">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.add_l0_kwd">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_l0_kwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyword</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a keyword to the preprocessing. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        keyword : str</span>
+<span class="sd">            keyword to add to the preprocessing.</span>
+<span class="sd">        where : str, optional</span>
+<span class="sd">            if provided it adds the keyword as a suboption of the &quot;where&quot; </span>
+<span class="sd">            keyword i.e. add_l0_kwd(&#39;job1.chk&#39;,where=&#39;chk&#39;) or </span>
+<span class="sd">            add_kwd(&#39;40GB&#39;,where=&#39;mem&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">where</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;nproc&#39;</span> <span class="ow">in</span> <span class="n">where</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">nprocs</span> <span class="o">=</span> <span class="n">keyword</span>
+        <span class="k">elif</span> <span class="s1">&#39;mem&#39;</span> <span class="ow">in</span> <span class="n">where</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">mem</span> <span class="o">=</span> <span class="n">keyword</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="n">where</span><span class="p">]</span> <span class="o">=</span> <span class="n">keyword</span></div>
+
+
+<div class="viewcode-block" id="GaussianInFile.from_str">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.GaussianInFile.from_str">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a GaussianInFile object from a gaussian input file read as a </span>
+<span class="sd">        string, parses it and populates the attributes of the class.  </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str</span>
+<span class="sd">            Contents of a Gaussian input file as a string. i.e. </span>
+<span class="sd">            .. code:: python</span>
+<span class="sd">               </span>
+<span class="sd">               with open(&#39;somefile.com&#39;,&#39;r&#39;) as F: </span>
+<span class="sd">                   text = F.read()</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Name to represent the GaussianInFile </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        GaussianInFile</span>
+<span class="sd">            A populated GaussianInFile object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span></div>
+</div>
+
+
+<div class="viewcode-block" id="MultiGaussianInFile">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiGaussianInFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Container class of multiple GausianInFiles linked together in a single </span>
+<span class="sd">    gaussian input calculation. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file : io.TextIOBase or str (the default is None)</span>
+<span class="sd">        File instance (Result of open(filename,&#39;r&#39;)) or valid filename.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    jobs : list</span>
+<span class="sd">        List providing access to each one of the individual GaussianInFile</span>
+<span class="sd">        objects representing each one of the linked calculations. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Do Something</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="n">file</span>
+        <span class="k">elif</span> <span class="n">file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;a+&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1">#size = len(self)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1"> with njobs=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">)</span><span class="si">}</span><span class="s1">)&gt;&#39;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">str_repr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">--Link1--</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">job</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">])</span>
+        <span class="c1"># It is better to enfoce the condition here than for every </span>
+        <span class="c1"># possible case of reading a file or adding the tail</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">str_repr</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">str_repr</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
+            <span class="n">str_repr</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="n">n</span>
+        <span class="k">return</span> <span class="n">str_repr</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Wrapper to have similar behaviour to &quot;_io.TextIOWrapper&quot; &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MultiGaussianInFile.read">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.read">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the file and populates the appropiate attributes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="k">return</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">GaussianInFile</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span> <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;--Link1--&#39;</span><span class="p">)]</span> </div>
+
+<div class="viewcode-block" id="MultiGaussianInFile.write">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes the File object to a File. If a filepath is provided it will</span>
+<span class="sd">        write to that filepath otherwise it will attempt to write to the path</span>
+<span class="sd">        provided in the initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            A valid filepath.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_txt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Write to self._file</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_txt</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># open the file write and close the file</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
+                <span class="n">F</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_txt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MultiGaussianInFile.enforce_same_chk">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.enforce_same_chk">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enforce_same_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enforces the same chk file in all jobs. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chk : str, optional</span>
+<span class="sd">            filename of the chk to use, if none is provided it defaults to the </span>
+<span class="sd">            one of the first job. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">chk</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">chk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;chk&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span> 
+            <span class="n">job</span><span class="o">.</span><span class="n">add_l0_kwd</span><span class="p">(</span><span class="n">chk</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="s1">&#39;chk&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGaussianInFile.enforce_continuous_chk">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.enforce_continuous_chk">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enforce_continuous_chk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">basename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enforces that the chk of job i-1 is retained and a copy of it is used </span>
+<span class="sd">        at the start of job i. For an example with two jobs, the first link0 </span>
+<span class="sd">        section  will look like:</span>
+
+<span class="sd">        ..</span>
+<span class="sd">        </span>
+<span class="sd">           %chk=basename_job0.chk</span>
+<span class="sd">        </span>
+<span class="sd">        Then the link0 of the second job will look like: </span>
+<span class="sd">        </span>
+<span class="sd">        .. </span>
+<span class="sd">           %oldchk=basename_job1.chk</span>
+<span class="sd">           %chk=basename_job1.chk</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        basename : str, optional</span>
+<span class="sd">            basename of the chk to use, if none is provided it defaults to the </span>
+<span class="sd">            one of the first job. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">basename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">basename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">[</span><span class="s1">&#39;chk&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">job</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">):</span>
+            <span class="n">job</span><span class="o">.</span><span class="n">add_l0_kwd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">basename</span><span class="si">}</span><span class="s1">_job</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.chk&#39;</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="s1">&#39;chk&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span> 
+                <span class="n">job</span><span class="o">.</span><span class="n">add_l0_kwd</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">basename</span><span class="si">}</span><span class="s1">_job</span><span class="si">{</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s1">.chk&#39;</span><span class="p">,</span><span class="n">where</span><span class="o">=</span><span class="s1">&#39;oldchk&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MultiGaussianInFile.enforce_same_nprocs">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.enforce_same_nprocs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enforce_same_nprocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nprocs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enforces the same nprocs in all jobs. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nprocs : int, optional</span>
+<span class="sd">            number of processors to use in a calculation, if none is provided it </span>
+<span class="sd">            defaults to the value of the nprocs of the first job. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">nprocs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">nprocs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nprocs</span>
+        <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span> 
+            <span class="n">job</span><span class="o">.</span><span class="n">nprocs</span> <span class="o">=</span> <span class="n">nprocs</span></div>
+
+<div class="viewcode-block" id="MultiGaussianInFile.enforce_same_mem">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.enforce_same_mem">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enforce_same_mem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mem</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enforces the same memory in all jobs. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mem : int, optional</span>
+<span class="sd">            Memory to use in a calculation, if none is provided it </span>
+<span class="sd">            defaults to the value of the mem of the first job. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">mem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mem</span>
+        <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span> 
+            <span class="n">job</span><span class="o">.</span><span class="n">mem</span> <span class="o">=</span> <span class="n">mem</span></div>
+
+<div class="viewcode-block" id="MultiGaussianInFile.enforce_same_method">
+<a class="viewcode-back" href="../../pyssian.gaussianclasses.html#pyssian.MultiGaussianInFile.enforce_same_method">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enforce_same_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enforces the same method in all jobs. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : str, optional</span>
+<span class="sd">            method to use in a calculation, if none is provided it </span>
+<span class="sd">            defaults to the value of the first job&#39;s method. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">method</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">method</span>
+        <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">jobs</span><span class="p">:</span> 
+            <span class="n">job</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">method</span></div>
+</div>
+
 
 <span class="c1"># TODO: Implement a class to read and manipulate the basis functions in the tail</span>
 <span class="c1"># class BasisTail(object), whose str function returns things as it should and</span>
@@ -891,46 +1387,30 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..
-
-    </p>
+    <p>&#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

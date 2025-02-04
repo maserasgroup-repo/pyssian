@@ -1,171 +1,91 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="python" >
+<html class="writer-html5" lang="python" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>pyssian.classutils &mdash; pyssian  documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b085c10e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d048f138"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> pyssian
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            pyssian
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../readme_link.html">Pyssian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples_link.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../pyssian.html">pyssian API</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">pyssian</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-      <li>pyssian.classutils</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyssian.classutils</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for pyssian.classutils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Contains auxiliary classes, usefull in combination with the gaussianclasses.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">ceil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cycle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">.chemistryutils</span> <span class="kn">import</span> <span class="n">PeriodicTable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.chemistryutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">PeriodicTable</span>
 
-<div class="viewcode-block" id="Geometry"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry">[docs]</a><span class="k">class</span> <span class="nc">Geometry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Geometry">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Geometry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class provides a basic interface and different construction methods </span>
 <span class="sd">    to simplify the extraction of the geometry of a molecule from different </span>
 <span class="sd">    sources </span>
@@ -174,33 +94,41 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># classattribute for object naming</span>
     <span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Initialize an empty geometry with generic title &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Initialize an empty geometry with generic title &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt; Geometry </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s1"> object &gt;&#39;</span>
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">linef</span> <span class="o">=</span> <span class="s2">&quot; </span><span class="si">{:&lt;}</span><span class="se">\t</span><span class="si">{: 0.09f}</span><span class="se">\t</span><span class="si">{: 0.09f}</span><span class="se">\t</span><span class="si">{: 0.09f}</span><span class="s2">&quot;</span>
         <span class="n">As</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span>
         <span class="n">XYZ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coordinates</span>
         <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">linef</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="p">),</span><span class="o">*</span><span class="n">xyz</span><span class="p">)</span>
                                         <span class="k">for</span> <span class="n">atom</span><span class="p">,</span><span class="n">xyz</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">As</span><span class="p">,</span><span class="n">XYZ</span><span class="p">)])</span>
         <span class="k">return</span> <span class="n">text</span>
-<div class="viewcode-block" id="Geometry.write"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">File</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Write Geometry to a File &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Geometry.write">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">File</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Write Geometry to a File &quot;&quot;&quot;</span>
         <span class="n">File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Geometry.update_atoms"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.update_atoms">[docs]</a>    <span class="k">def</span> <span class="nf">update_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Updates the atoms names from a mapping &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Geometry.update_atoms">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.update_atoms">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Updates the atoms names from a mapping &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Geometry.from_L202"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_L202">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_L202</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">L202</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a Gaussian file. If it can&#39;t find a</span>
+
+<div class="viewcode-block" id="Geometry.from_L202">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_L202">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_L202</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">L202</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a Gaussian file. If it can&#39;t find a</span>
 <span class="sd">        mapping from atomic Number to symbol it will store the string</span>
 <span class="sd">        representation of the number &quot;&quot;&quot;</span>
         <span class="n">Geom</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
@@ -213,9 +141,12 @@
         <span class="n">Geom</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span>
         <span class="n">Geom</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">Coords</span>
         <span class="k">return</span> <span class="n">Geom</span></div>
-<div class="viewcode-block" id="Geometry.from_Input"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_Input">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_Input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">InputFile</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a Gaussian Input File instance.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Geometry.from_Input">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_Input">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_Input</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">InputFile</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a Gaussian Input File instance.&quot;&quot;&quot;</span>
         <span class="n">Geom</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
         <span class="n">Coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">Atoms</span> <span class="o">=</span> <span class="p">[]</span>
@@ -227,9 +158,12 @@
         <span class="n">Geom</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span>
         <span class="n">Geom</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">Coords</span>
         <span class="k">return</span> <span class="n">Geom</span></div>
-<div class="viewcode-block" id="Geometry.from_xyz"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_xyz">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_xyz</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">xyzfile</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a xyz file.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Geometry.from_xyz">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Geometry.from_xyz">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_xyz</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">xyzfile</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a Geometry instance from a xyz file.&quot;&quot;&quot;</span>
         <span class="n">Geom</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
         <span class="n">Coords</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">Atoms</span> <span class="o">=</span> <span class="p">[]</span>
@@ -245,10 +179,19 @@
                 <span class="n">Coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         <span class="n">Geom</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">Atoms</span>
         <span class="n">Geom</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">Coords</span>
-        <span class="k">return</span> <span class="n">Geom</span></div></div>
+        <span class="k">return</span> <span class="n">Geom</span></div>
 
-<div class="viewcode-block" id="Cube"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube">[docs]</a><span class="k">class</span> <span class="nc">Cube</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+            <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span></div>
+
+
+<div class="viewcode-block" id="Cube">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cube</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Representation of a Gaussian .cube File generated with the cubegen tool.</span>
 <span class="sd">    This class facilitates some operations of the cubeman tool allowing</span>
 <span class="sd">    operations of more than 2 .cube files.</span>
@@ -283,7 +226,7 @@
 <span class="sd">        Matrix of values of the Cube.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;empty&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isUnrestricted</span> <span class="o">=</span> <span class="kc">False</span>
@@ -296,10 +239,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nMO</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">MO_Ids</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="n">New</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="s1">&#39;natoms type origin shape basis atoms nMO&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr</span><span class="p">):</span>
@@ -308,21 +251,21 @@
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">New</span><span class="p">,</span><span class="n">attr</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr</span><span class="p">))</span>
             <span class="n">New</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">matrix</span>
         <span class="k">return</span> <span class="n">New</span>
-    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="n">other</span>
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="n">New</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="s1">&#39;natoms type origin shape basis atoms nMO&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">New</span><span class="p">,</span><span class="n">attr</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr</span><span class="p">))</span>
         <span class="n">New</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="o">*</span><span class="n">other</span>
         <span class="k">return</span> <span class="n">New</span>
-    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="n">other</span>
-    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
-    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="n">New</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="s1">&#39;natoms type origin shape basis atoms nMO&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">New</span><span class="p">,</span><span class="n">attr</span><span class="p">,</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr</span><span class="p">))</span>
@@ -330,8 +273,10 @@
         <span class="k">return</span> <span class="n">New</span>
 
     <span class="c1"># Writing functions</span>
-<div class="viewcode-block" id="Cube.write"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">OFile</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Cube.write">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">OFile</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes a cube to a File. </span>
 
 <span class="sd">        Parameters</span>
@@ -371,8 +316,11 @@
                 <span class="n">F</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">atom_format</span><span class="p">(</span><span class="o">*</span><span class="n">atom</span><span class="p">))</span>
             <span class="n">F</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">n_MO_line</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write_values</span><span class="p">(</span><span class="n">F</span><span class="p">)</span></div>
-<div class="viewcode-block" id="Cube.write_values"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.write_values">[docs]</a>    <span class="k">def</span> <span class="nf">write_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">File</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Cube.write_values">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.write_values">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">File</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handles the writing in of the values of self.matrix with the fortran77</span>
 <span class="sd">        format</span>
 
@@ -411,10 +359,13 @@
                         <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
                         <span class="n">File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
+
     <span class="c1"># Constructor methos</span>
-<div class="viewcode-block" id="Cube.from_file"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.from_file">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Cube.from_file">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.Cube.from_file">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a Cube instance from a cube file.</span>
 
 <span class="sd">        Parameters</span>
@@ -440,12 +391,13 @@
 
         <span class="k">return</span> <span class="n">newcube</span></div>
 
+
     <span class="c1"># Parsing functions</span>
-    <span class="k">def</span> <span class="nf">handle_title_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_title_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="c1"># Discard first two lines</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>    <span class="c1"># {Title1} MO={1} || {Title2} MO={2}</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>    <span class="c1"># MO coeffic + MO coeffic</span>
-    <span class="k">def</span> <span class="nf">read_origin_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_origin_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="c1"># Read origin and number of atoms</span>
         <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="c1"># -{Natoms} {xorigin} {yorigin} {zorigin}</span>
         <span class="n">Aux</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -460,7 +412,7 @@
         <span class="n">natoms</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">natoms</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">natoms</span> <span class="o">=</span> <span class="n">natoms</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">origin</span> <span class="o">=</span> <span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">z0</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">read_basis_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_basis_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="c1"># Read number of points and directions of the basis</span>
         <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="c1"># {Nx} {ix} {jx} {kx}</span>
         <span class="n">Nx</span><span class="p">,</span> <span class="n">ix</span><span class="p">,</span><span class="n">jx</span><span class="p">,</span><span class="n">kx</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -474,7 +426,7 @@
         <span class="n">Nx</span><span class="p">,</span><span class="n">Ny</span><span class="p">,</span><span class="n">Nz</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,(</span><span class="n">Nx</span><span class="p">,</span><span class="n">Ny</span><span class="p">,</span><span class="n">Nz</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nx</span><span class="p">,</span><span class="n">Ny</span><span class="p">,</span><span class="n">Nz</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ix</span><span class="p">,</span><span class="n">jx</span><span class="p">,</span><span class="n">kx</span><span class="p">),(</span><span class="n">iy</span><span class="p">,</span><span class="n">jy</span><span class="p">,</span><span class="n">ky</span><span class="p">),(</span><span class="n">iz</span><span class="p">,</span><span class="n">jz</span><span class="p">,</span><span class="n">kz</span><span class="p">)]</span>
-    <span class="k">def</span> <span class="nf">read_atoms_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_atoms_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="c1"># Read the atoms, charges, and coordinates</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">natoms</span><span class="p">):</span>
@@ -484,14 +436,14 @@
             <span class="n">Chrg</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,(</span><span class="n">Chrg</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">))</span>
             <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">AtN</span><span class="p">,</span><span class="n">Chrg</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms</span>
-    <span class="k">def</span> <span class="nf">read_MO_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_MO_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="c1">## For now I&#39;m gonna treat it as a single line</span>
         <span class="c1"># Now I guess this is the &quot;nMO&quot; and &quot;Ids...&quot; line/s</span>
         <span class="n">line</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
         <span class="n">nMO</span><span class="p">,</span><span class="o">*</span><span class="n">MO_Ids</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">MO_Ids</span> <span class="o">=</span> <span class="n">MO_Ids</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nMO</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nMO</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">read_matrix_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_matrix_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">iterable</span><span class="p">):</span>
         <span class="n">Nx</span><span class="p">,</span><span class="n">Ny</span><span class="p">,</span><span class="n">Nz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">nMO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nMO</span>
         <span class="n">nEntries</span> <span class="o">=</span> <span class="n">Nx</span><span class="o">*</span><span class="n">Ny</span>
@@ -527,19 +479,24 @@
                         <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix</span></div>
 
-<div class="viewcode-block" id="DirectoryTree"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree">[docs]</a><span class="k">class</span> <span class="nc">DirectoryTree</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DirectoryTree">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DirectoryTree</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class that provides recursive file iteration.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cwd</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">newroot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
-    <span class="k">def</span> <span class="nf">set_newroot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newroot</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_newroot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newroot</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">newroot</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">newroot</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DirectoryTree.newpath"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree.newpath">[docs]</a>    <span class="k">def</span> <span class="nf">newpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DirectoryTree.newpath">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree.newpath">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">newpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Takes a path rooted to the previous root and prepares it to be</span>
 <span class="sd">        rooted in the new root.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -547,9 +504,12 @@
         <span class="c1"># so it is usefull this behaviour encapsulated in a function</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">newroot</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DirectoryTree.RecursiveFileSystemGenerator"><a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree.RecursiveFileSystemGenerator">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">RecursiveFileSystemGenerator</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DirectoryTree.RecursiveFileSystemGenerator">
+<a class="viewcode-back" href="../../pyssian.classutils.html#pyssian.classutils.DirectoryTree.RecursiveFileSystemGenerator">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">RecursiveFileSystemGenerator</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generator that traverses the filesystem in depth first order and yields</span>
 <span class="sd">        the paths that satisfy the key function condition. If no key function</span>
 <span class="sd">        is provided, returns all folders and items. The first yield is always</span>
@@ -577,16 +537,17 @@
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">subgen</span><span class="p">:</span>
                     <span class="k">yield</span> <span class="n">i</span></div>
 
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">folders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">folders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">RecursiveFileSystemGenerator</span>
         <span class="n">_iter</span> <span class="o">=</span> <span class="n">generator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_dir</span><span class="p">())</span>
         <span class="n">_</span>  <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">_iter</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_iter</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">infiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">f_in</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">infiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">f_in</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="n">Out</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;.in&#39;</span><span class="p">:</span>
                 <span class="n">Out</span> <span class="o">=</span> <span class="kc">True</span>
@@ -596,8 +557,8 @@
         <span class="k">return</span> <span class="n">_iter</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">outfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">f_out</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">outfiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">f_out</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="n">Out</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;.out&#39;</span><span class="p">:</span>
                 <span class="n">Out</span> <span class="o">=</span> <span class="kc">True</span>
@@ -606,53 +567,38 @@
         <span class="n">_</span>  <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">_iter</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_iter</span>
 
-    <span class="k">def</span> <span class="nf">create_folders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_folders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">folders</span><span class="p">:</span>
             <span class="n">newpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">newpath</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
             <span class="n">newpath</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..
-
-    </p>
+    <p>&#169; Copyright 2021, Pérez-Soto, R.; Besora, M.; Maseras, F..</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

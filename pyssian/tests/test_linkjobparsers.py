@@ -7,6 +7,7 @@ from pyssian.linkjobparsers import *
 TEST_FILEDIR = Path(__file__).parent.resolve() / 'test_files'
 
 SMARK = '\n## Split Here ##\n'
+MMARK = '\n## Match ##\n'
 
 class TestGeneralLinkJob(unittest.TestCase):
 
@@ -231,7 +232,7 @@ class TestLink103(unittest.TestCase):
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link101'
         obj = Link103('-> Input Text',asEmpty=True)
-        attrs = ['mode','state','conversion', 'parameters', 'derivatives',
+        attrs = ['mode','state','convergence', 'parameters', 'derivatives',
                  'stepnumber', 'scanpoint']
         for attr in attrs:
             test = getattr(obj,attr)
@@ -316,6 +317,84 @@ class TestLink103(unittest.TestCase):
             with self.subTest(Test_Object=i,scanpoint=solution):
                 self.assertEqual(obj.scanpoint,solution,msg(solution))
 
+class TestLink120(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.testfile = TEST_FILEDIR.joinpath('l120.txt')
+        cls.re_energy_solutions = ['',
+                                   '',
+                                   '',
+                                   '-2572.457446471110']
+        cls.re_energy_partition_solutions = [[],
+                                             [],
+                                             [],
+                                             [['1', 'low','model','0.403686133797'],
+                                              ['2','high','model','-2573.050183259390'],
+                                              ['3', 'low', 'real','0.996422922077']]]
+        # Read and store the Examples
+        with open(cls.testfile,'r') as F:
+            txt = F.read()
+        cls.objects = [Link120(i) for i in txt.split(SMARK)]
+
+    def test_init(self):
+        msg = 'Incorrect parsing of Link120'
+        for obj in self.objects:
+            self.assertTrue(bool(obj.text),msg)
+            self.assertEqual(obj.number,120,msg)
+            self.assertTrue(obj.energy is None or bool(obj.energy),msg)
+
+    def test_regex_energy(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link120.re_energy
+        solutions = self.re_energy_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match: 
+                self.assertEqual(match[0],solution,msg)
+    
+    def test_regex_energy_partitions(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link120.re_energy_partitions
+        solutions = self.re_energy_partition_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match:
+                for (p,lev,model,energy),sol in zip(match,solution):
+                    self.assertEqual([p,lev,model,energy],sol) 
+            
+    def test_init_empty(self):
+        msg = 'Incorrect empty initialization of Link120'
+        obj = Link120('Some Text',asEmpty=True)
+        self.assertFalse(bool(obj.text),msg)
+        self.assertEqual(obj.number,120)
+
+    def test_energy(self):
+        msg = 'Energy value not properly read'
+        solutions = self.re_energy_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.energy
+            self.assertEqual(bool(test),bool(solution),msg)
+            if solution: 
+                self.assertEqual(test,float(solution),msg)
+    
+    def test_energy_partition(self):
+        msg = 'Energy partitions not properly read'
+        solutions = self.re_energy_partition_solutions
+        EnergyPartition = Link120._EnergyPartition
+        for obj,solution in zip(self.objects,solutions):
+            match = obj.energy_partitions
+            self.assertEqual(bool(match),bool(solution),msg)
+            if not match:
+                continue
+            for (p,level,model,energy),sol in zip(match,solution):
+                p,l,m,e = sol
+                sol = EnergyPartition(int(p),l,m,float(e))
+                test = EnergyPartition(int(p),level,model,float(energy))
+                self.assertEqual(test,sol,msg)
+    
 class TestLink123(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -401,10 +480,6 @@ class TestLink202(unittest.TestCase):
         with open(cls.orifile,'r') as F:
             txt = F.read()
         cls.orientations = txt.split(SMARK)
-        # Read and store the Solutions to the dmatrix tests
-        with open(cls.orifile,'r') as F:
-            txt = F.read()
-        cls.dmatrices = txt.split(SMARK)
 
     def test_init(self):
         msg = 'Incorrect parsing of Link202'
@@ -418,11 +493,13 @@ class TestLink202(unittest.TestCase):
         regex = Link202.re_orientation
         with open(self.refile) as F:
             txt = F.read()
-        items = [i for i in txt.split(SMARK)]
-        for obj,solution in zip(self.objects,items):
-            txt = obj.text
-            test = regex.findall(txt)[0]
-            self.assertTrue(test == solution,msg)
+        items = [i.split(MMARK) for i in txt.split(SMARK)]
+        for i,(obj,solutions) in enumerate(zip(self.objects,items)):
+            text = obj.text
+            tests = regex.findall(text)
+            for j,(test,sol) in enumerate(zip(tests,solutions)):
+                with self.subTest(text=i,match=j):
+                    self.assertEqual(test,sol,msg)
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link202'
@@ -447,9 +524,10 @@ class TestLink202(unittest.TestCase):
                     d, e, f = float(values[3]),float(values[4]),float(values[5])
                     mat.append(AtomCoords(a,b,c,d,e,f))
             items.append(mat)
-        for obj,solution in zip(self.objects,items):
+        for i,(obj,solution) in enumerate(zip(self.objects,items)):
             test = obj.orientation
-            self.assertTrue(test == solution)
+            with self.subTest(text=i):
+                self.assertEqual(test,solution,msg)
 
     def test_DistanceMatrix(self):
         msg = 'DistanceMatrix not properly parsed'
@@ -492,6 +570,18 @@ class TestLink502(unittest.TestCase):
                                      '-2847.30072337','-2847.30086336',
                                      '-2847.30091754','-2847.30086384',
                                      '-2847.30093740']
+        cls.re_spin_solutions = [('0.7531', '0.7500'),
+                                 ('0.7530', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500'),
+                                 ('0.7529', '0.7500')]
+        
         # Read and store the Examples
         with open(cls.testfile,'r') as F:
             txt = F.read()
@@ -512,6 +602,14 @@ class TestLink502(unittest.TestCase):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
+    def test_regex_spin(self):
+        msg = 're_spin regex does not match properly'
+        regex = Link502.re_spin
+        solutions = self.re_spin_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = regex.findall(obj.text)[0]
+            self.assertTrue(test == solution,msg)
+
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link502'
         obj = Link502('Some Text',asEmpty=True)
@@ -523,6 +621,12 @@ class TestLink502(unittest.TestCase):
         solutions = [float(i) for i in self.re_energies_solutions]
         for obj,solution in zip(self.objects,solutions):
             test = obj.energy
+            self.assertTrue(test == solution,msg)
+    def test_spin(self):
+        msg = 'S**2 values not properly read'
+        solutions = [(float(i[0]),float(i[1])) for i in self.re_spin_solutions]
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.spin
             self.assertTrue(test == solution,msg)
 
 class TestLink601(unittest.TestCase):
@@ -599,6 +703,8 @@ class TestLink716(unittest.TestCase):
         cls.EContribfile    = TEST_FILEDIR.joinpath('l716_reEContrib.txt')
         cls.IRSpectrumfile  = TEST_FILEDIR.joinpath('l716_reIRSpectrum.txt')
         cls.Frequenciesfile = TEST_FILEDIR.joinpath('l716_reFrequencies.txt')
+        cls.freqtextfile    = TEST_FILEDIR.joinpath('l716_refreqtxt.txt')
+        cls.freqdispfile    = TEST_FILEDIR.joinpath('l716_refreqdisplacements.txt')
         # Read and store the Examples
         with open(cls.testfile,'r') as F:
             txt = F.read()
@@ -664,8 +770,8 @@ class TestLink716(unittest.TestCase):
         {}
         )""".format
         msg2 = 'Frequency slice does not match. \n{}\n!=\n{}'.format
-        regex = Link716.re_dipole
-        with open(self.dipolefile,'r') as F:
+        regex = Link716.re_Frequencies
+        with open(self.Frequenciesfile,'r') as F:
             txt = F.read()
         samples = txt.split(SMARK)
         solutions = []
@@ -677,12 +783,43 @@ class TestLink716(unittest.TestCase):
                     Aux.append(tuple(match.split('\n')))
                 solutions.append(Aux)
             else:
-                solutions.append(['',])
+                solutions.append([])
         for obj,solution in zip(self.objects,solutions):
             test = regex.findall(obj.text)
             self.assertTrue(bool(test) == bool(solution),msg(test,solution))
             for t,s in zip(test,solution):
                 self.assertTrue(t == s, msg2(t,s))
+    def test_regex_freq_text(self):
+        msg = 'the text block does not match'
+        regex = Link716.re_freq_text
+        with open(self.freqtextfile,'r') as F:
+            txt = F.read()
+        solutions = txt.split(SMARK)
+        for obj,solution in zip(self.objects,solutions):
+            test = regex.findall(obj.text)[0]
+            self.assertTrue(test == solution,msg)
+    def test_regex_freq_text(self):
+        msg = 'the displacement: \n{} does not match:\n{}'.format
+        regex = Link716.re_freq_displacements
+        regex_txt = Link716.re_freq_text
+        with open(self.freqdispfile,'r') as F:
+            txt = F.read()
+        items = txt.split(SMARK)
+        solutions = []
+        for item in items: 
+            if item:
+                solutions.append([s+'\n' for s in item.split('\n')])
+            else:
+                solutions.append([])
+        for obj,solution in zip(self.objects,solutions):
+            test = regex_txt.findall(obj.text)
+            if test:
+                subtests = regex.findall(test[0])
+                for t,s in zip(subtests,solution): 
+                    self.assertEqual(t,s,msg(test,solution))
+            else:
+                self.assertTrue(test == solution,msg(test,solution))
+
     def test_regex_dipole(self):
         msg = 're_dipole does not match. \n{}\n!=\n{}'
         msg = msg.format
@@ -698,10 +835,10 @@ class TestLink716(unittest.TestCase):
             self.assertTrue(test == solution,msg(test,solution))
 
     def test_init_empty(self):
-        msg = 'Incorrect empty initialization of Link502'
-        obj = Link601('Some Text',asEmpty=True)
+        msg = 'Incorrect empty initialization of Link716'
+        obj = Link716('Some Text',asEmpty=True)
         self.assertFalse(bool(obj.text),msg)
-        self.assertEqual(obj.number,601)
+        self.assertEqual(obj.number,716)
 
 class TestLink804(unittest.TestCase):
 
