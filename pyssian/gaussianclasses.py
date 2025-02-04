@@ -680,7 +680,7 @@ class GaussianInFile(object):
             elif not has_suboptions:
                 self.commandline[key].extend(val)
             else:
-                Aux3 = set(self.commandline[key]) + set(val)
+                Aux3 = set(self.commandline[key]).union(set(val))
                 self.commandline[key] = list(Aux3)
     def parse_geometry(self,lines):
         """Parses each line that contains 'Atom x y z' in an appropiate form
