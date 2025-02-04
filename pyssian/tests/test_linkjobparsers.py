@@ -232,7 +232,7 @@ class TestLink103(unittest.TestCase):
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link101'
         obj = Link103('-> Input Text',asEmpty=True)
-        attrs = ['mode','state','conversion', 'parameters', 'derivatives',
+        attrs = ['mode','state','convergence', 'parameters', 'derivatives',
                  'stepnumber', 'scanpoint']
         for attr in attrs:
             test = getattr(obj,attr)
