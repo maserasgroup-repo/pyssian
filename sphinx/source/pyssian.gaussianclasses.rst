@@ -19,6 +19,20 @@ GaussianInFile
 .. autoclass:: pyssian.GaussianInFile
    :members:
 
+MultiGaussianInFile
+-------------------
+
+*  Allows the concatenation of multiple GaussianInFile instances to create 
+   a linked (--Link1--) gaussian input.
+*  Provides some convenience methods to enforce same resources across each 
+   concatenated job
+*  It was conceived for writing gaussian input files rather than reading 
+   gaussian input files with linked calculations, so no much testing was 
+   put into this task.
+
+.. autoclass:: pyssian.MultiGaussianInFile
+   :members:
+
 GaussianOutFile
 ---------------
 
