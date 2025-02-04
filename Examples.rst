@@ -101,7 +101,7 @@ steps.
       GOF.read()
 
    # Get the last geometry of the calculation
-   geom = Geometry.from_l202(GOF.get_links(202)[-1])
+   geom = Geometry.from_L202(GOF.get_links(202)[-1])
 
    # Get the Link1 of the GaussianOutFile
    Link1 = GOF.get_links(1)[0]
@@ -119,7 +119,7 @@ steps.
 
    # Now write the new input file
    with GaussianInFile('New_Calc.in') as GIF:
-       GIF.parse_commandline([commandline,])
+       GIF.parse_commandline([commandline.split(),])
        # We can instead set a dict for the variable GIF.commandline
        # "GIF.commandline = {'opt':'','freq':'NoRamman','b3lyp':''}"
        # but using parse_commandline is easier in this case.
@@ -172,6 +172,11 @@ Currently the specific parsers implemented are:
 - Link913
 - Link914
 
+.. note::
+
+   For an up to date list of parsers and properties please check the pyssian
+   API documentation
+
 .. code:: python
 
    with GaussianOutFile(File) as GOF:
@@ -210,7 +215,7 @@ Link101 & Link103
    Link103 = GOF.get_links(103)[0]
    Link103.mode
    Link103.state
-   Link103.conversion
+   Link103.convergence
    Link103.parameters
    Link103.stepnumber
    Link103.scanpoint
