@@ -924,7 +924,7 @@ class GaussianInFile(object):
             command line)  
         """
         if where is None:
-            return self.commandline.pop(keyword)
+            return self.commandline.pop(keyword,None)
         
         items = self.commandline.get(where,[])
         if keyword in items:
@@ -974,7 +974,7 @@ class GaussianInFile(object):
             preprocessing)  
         """
         if where is None:
-            return self.preprocessing.pop(keyword)
+            return self.preprocessing.pop(keyword,None)
         kwd = self.preprocessing.get(where,None)
         self.preprocessing[where] = ''
         return kwd
