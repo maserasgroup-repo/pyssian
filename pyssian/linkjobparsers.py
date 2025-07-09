@@ -543,7 +543,7 @@ class Link120(LinkJob):
     Parameters
     ----------
     text : str
-        text that corresponds to the output of the l103.exe
+        text that corresponds to the output of the l120.exe
     asEmpty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
@@ -592,6 +592,68 @@ class Link120(LinkJob):
         self.energy_partitions = [EnergyPartition(int(p),level,model,float(energy))
                                   for p,level,model,energy in match]
 
+@RegisterLinkJob
+class Link122(LinkJob):
+    """
+    Representation and parser for the output of l122.exe. Contains the output of
+    Counterpoise calculations.
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l122.exe
+    asEmpty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    energy_complex
+    total_energy_fragments
+    bsse_correction
+
+    """
+    __slots__ = ('energy_complex', 'total_energy_fragments', 'bsse_correction')
+
+    _token = 122
+
+    re_bsse = r'BSSE energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_bsse = re.compile(re_bsse)
+    re_complex_energy = r'Counterpoise corrected energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_complex_energy = re.compile(re_complex_energy)
+    re_fragments_energy = r'sum of fragments\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_fragments_energy = re.compile(re_fragments_energy)
+
+    def __init__(self,text,asEmpty=False):
+        self.energy_complex = None
+        self.total_energy_fragments = None
+        self.bsse_correction = None
+        if asEmpty:
+            super().__init__('',122)
+        else:
+            super().__init__(text,122)
+            self._locate_energies()
+
+    @Populates('energy_complex', 'total_energy_fragments', 'bsse_correction')
+    @SilentFail
+    def _locate_energies(self):
+        """
+        Uses regex expressions compiled as class attributes to find
+        the energy and the different energy_partitions.
+        """
+        cls = self.__class__
+        match = cls.re_bsse.findall(self.text)
+        if match:
+            self.bsse_correction = float(match[0])
+
+        match = cls.re_complex_energy.findall(self.text)
+        if match:
+            self.energy_complex = float(match[0])
+
+        match = cls.re_fragments_energy.findall(self.text)
+        if match:
+            self.total_energy_fragments = float(match[0])
+        
 @RegisterLinkJob
 class Link123(LinkJob):
     """

@@ -1,0 +1,23 @@
+ (Enter /lustre/opt/campus/0.3/software/gaussian/16.gaussian/gaussian/g16_legacy/l122.exe)
+ CPIOFr:  IOpCl= 0 IRwI=-1 IRwCP=  731 ICalc=  4 LCPTot=        5899 Len1MO=       15988 IndFrg=       85839
+ Restoring MOs from calculation   1 to rwf.
+ CPIOFr:  IOpCl= 0 IRwI=-2 IRwCP=  731 ICalc=  0 LCPTot=        5899 Len1MO=       15988 IndFrg=       21887
+ Counterpoise corrected energy =    -622.598617397384
+                   BSSE energy =       0.000785012282
+              sum of fragments =    -622.391294173148
+           complexation energy =    -130.59 kcal/mole (raw)
+           complexation energy =    -130.10 kcal/mole (corrected)
+ Leave Link  122 at Wed Jul  9 15:54:22 2025, MaxMem=   536870912 cpu:               0.0 elap:               0.0
+
+## Split Here ##
+ (Enter /lustre/opt/campus/0.3/software/gaussian/16.gaussian/gaussian/g16_legacy/l122.exe)
+ CPIOFr:  IOpCl= 0 IRwI=-1 IRwCP=  731 ICalc=  4 LCPTot=       37220 Len1MO=       97820 IndFrg=      526320
+ Restoring MOs from calculation   1 to rwf.
+ CPIOFr:  IOpCl= 0 IRwI=-2 IRwCP=  731 ICalc=  0 LCPTot=       37220 Len1MO=       97820 IndFrg=      135040
+ Counterpoise corrected energy =    -554.437959704946
+                   BSSE energy =       0.023214737127
+              sum of fragments =    -553.667179856454
+           complexation energy =    -498.24 kcal/mole (raw)
+           complexation energy =    -483.67 kcal/mole (corrected)
+ Leave Link  122 at Wed Jul  9 15:54:54 2025, MaxMem=  2147483648 cpu:               0.1 elap:               0.0
+

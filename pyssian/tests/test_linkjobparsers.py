@@ -395,6 +395,102 @@ class TestLink120(unittest.TestCase):
                 test = EnergyPartition(int(p),level,model,float(energy))
                 self.assertEqual(test,sol,msg)
     
+class TestLink122(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.testfile = TEST_FILEDIR.joinpath('l122.txt')
+        
+        cls.re_complex_solutions = [
+                                 '-622.598617397384',
+                                 '-554.437959704946'
+        ]
+        cls.re_bsse_solutions = [
+                                 '0.000785012282',
+                                 '0.023214737127'
+        ]
+        cls.re_fragments_solutions = [
+                                 '-622.391294173148',
+                                 '-553.667179856454'
+        ]
+        # Read and store the Examples
+        with open(cls.testfile,'r') as F:
+            txt = F.read()
+        cls.objects = [Link122(i) for i in txt.split(SMARK)]
+
+    def test_init(self):
+        msg = 'Incorrect parsing of Link122'
+        for obj in self.objects:
+            self.assertTrue(bool(obj.text),msg)
+            self.assertEqual(obj.number,122,msg)
+            self.assertTrue(obj.energy_complex is None or bool(obj.energy_complex),msg)
+            self.assertTrue(obj.total_energy_fragments is None or bool(obj.total_energy_fragments),msg)
+            self.assertTrue(obj.bsse_correction is None or bool(obj.bsse_correction),msg)
+
+    def test_regex_complex(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link122.re_complex_energy
+        solutions = self.re_complex_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match: 
+                self.assertEqual(match[0],solution,msg)
+
+    def test_regex_bsse(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link122.re_bsse
+        solutions = self.re_bsse_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match: 
+                self.assertEqual(match[0],solution,msg)
+
+    def test_regex_fragments(self):
+        msg = 're_energy regex does not match properly'
+        regex = Link122.re_fragments_energy
+        solutions = self.re_fragments_solutions
+        for obj,solution in zip(self.objects,solutions):
+            match = regex.findall(obj.text)
+            self.assertEqual(bool(match),bool(solution),msg)
+            if match: 
+                self.assertEqual(match[0],solution,msg)
+
+    def test_init_empty(self):
+        msg = 'Incorrect empty initialization of Link122'
+        obj = Link122('Some Text',asEmpty=True)
+        self.assertFalse(bool(obj.text),msg)
+        self.assertEqual(obj.number,122)
+
+    def test_energy_complex(self):
+        msg = 'Energy value not properly read'
+        solutions = self.re_complex_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.energy_complex
+            self.assertEqual(bool(test),bool(solution),msg)
+            if solution: 
+                self.assertEqual(test,float(solution),msg)
+
+    def test_total_energy_fragments(self):
+        msg = 'Energy value not properly read'
+        solutions = self.re_fragments_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.total_energy_fragments
+            self.assertEqual(bool(test),bool(solution),msg)
+            if solution: 
+                self.assertEqual(test,float(solution),msg)
+
+    def test_bsse_correction(self):
+        msg = 'Energy value not properly read'
+        solutions = self.re_bsse_solutions
+        for obj,solution in zip(self.objects,solutions):
+            test = obj.bsse_correction
+            self.assertEqual(bool(test),bool(solution),msg)
+            if solution: 
+                self.assertEqual(test,float(solution),msg)
+
+
 class TestLink123(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
