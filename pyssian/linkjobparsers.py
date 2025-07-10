@@ -1058,8 +1058,8 @@ class Link601(LinkJob):
     re_MullikenAtoms = re.compile(re_MullikenAtoms)
     re_MullikenHeavy =  r'(?:Mulliken charges( and spin densities)? with hydrogens.*\n.*\n)'
     re_MullikenHeavy += r'([\s\S]*?)'
-    re_MullikenHeavy += r'(?:\n.[a-zA-Z].*\n)'
-    re_MullikenHeavy = re.compile(re_MullikenHeavy)
+    re_MullikenHeavy += r'(?:\n.[^0-9]+\n)'
+    re_MullikenHeavy = re.compile(re_MullikenHeavy,re.MULTILINE)
     
     _token = 601
 
