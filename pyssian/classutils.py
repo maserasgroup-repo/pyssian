@@ -2,6 +2,7 @@
 Contains auxiliary classes, usefull in combination with the gaussianclasses.
 """
 import os
+from warnings import warn
 from math import ceil
 from itertools import cycle
 from pathlib import Path
@@ -383,6 +384,7 @@ class DirectoryTree(object):
     Class that provides recursive file iteration.
     """
     def __init__(self,path,in_suffix='.in',out_suffix='.out'):
+        warn("This class will be removed in the next release as it was moved to the pyssianutils project", DeprecationWarning, 2)
         self.root = Path(path)
         self.cwd = Path(os.getcwd())
         self.newroot = self.root
