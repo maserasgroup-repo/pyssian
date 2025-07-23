@@ -11,7 +11,7 @@ SPHINXSOURCE = './source'
 def build_doc(version, tag):
     os.environ['current_version'] = version
     # checkout to the tagged commit
-    subprocess.run(f'git checkout {tag}', shell=True)
+    subprocess.run(f'git checkout -f {tag}', shell=True)
     # Recover the latest conf.py and latest versions.yaml
     subprocess.run(f'git checkout {MAINBRANCH} -- {SPHINXSOURCE}/conf.py', shell=True)
     subprocess.run(f'git checkout {MAINBRANCH} -- {SPHINXSOURCE}/versions.ini', shell=True)
