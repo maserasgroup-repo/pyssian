@@ -1,6 +1,8 @@
 import setuptools
+import re
 
-__version__ = '1.1.0'
+with open('pyssian/__init__.py','r') as F: 
+    __version__ = re.search(r'(__version__)\s*=[^0-9]*?([0-9]*\.[0-9]*\.[0-9])',F.read()).group(2)
 
 with open("README.rst", "r") as fh:
     long_description = fh.read()
