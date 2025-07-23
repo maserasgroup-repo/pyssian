@@ -7,6 +7,7 @@ __pycache__/
 # Ignore the 
 _docs
 docs
+pages/
 .vscode
 .pytest_cache
 dist/
