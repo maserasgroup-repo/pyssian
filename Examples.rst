@@ -18,18 +18,22 @@ the file is as example 2 or 3.
 .. code:: python
 
    from pyssian import GaussianOutFile
+
+   outputfile = 'myfile.log'
+
    # Example 1
-   with GaussianOutFile(FilePath) as GOF1:
-      GOF1.read()
+   with GaussianOutFile(outputfile) as GOF1:
+       GOF1.read()
+
    # Example 2
-   GOF2 = GaussianOutFile(FilePath)
+   GOF2 = GaussianOutFile(outputfile)
    GOF2.read()
    GOF2.close()
+
    # Example 3
-   File = open(FilePath,'r')
-   GOF3 = GaussianOutFile(File)
-   GOF3.read()
-   File.close()
+   with open(outputfile,'r') as F: 
+       GOF3 = GaussianOutFile(F)
+       GOF3.read()
 
 
 It also accepts another parameter that indicates which Links are of interest.
@@ -40,18 +44,17 @@ storing any information of each link is to pass -1 as the first value:
 
 .. code:: python
 
-   File = open(FilePath,'r')
-   with GaussianOutFile(File,parselist=[-1,]) as GOF:
+   outputfile = 'myfile.log'
+   with GaussianOutFile(outputfile,parselist=[-1,]) as GOF:
        GOF.update(clean=False) # read is an alias for update(clean=True)
-
 
 If you specify the numbers of the links to the GOF only those will be parsed and
 will not be cleaned afterwards.
 
 .. code:: python
 
-   File = open(FilePath,'r')
-   with GaussianOutFile(File,[1,103,202,502,9999]) as GOF:
+   outputfile = 'myfile.log'
+   with GaussianOutFile(outputfile,[1,103,202,502,9999]) as GOF:
        GOF.read()
 
 
