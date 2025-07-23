@@ -1573,7 +1573,7 @@ class Link914(LinkJob):
                     print(f'\t{transition.donor} -> {transition.acceptor}'\
                           f'\t {transition.contribution}')
 
-#@RegisterLinkJob
+@RegisterLinkJob
 class Link9999(LinkJob):
     """
     parser for the output of l9999.exe. This Link has 2 termination modes:
@@ -1583,3 +1583,18 @@ class Link9999(LinkJob):
     (before printing the resume string). In development.
     """
     _token = 9999
+
+    __slots__ = ('termination',)
+
+    re_termination = re.compile(r'\s?([a-zA-Z]*)\stermination')
+    
+    @Populates('termination')
+    @SilentFail
+    def _locate_termination(self): 
+        """ Looks for the type of termination at the end of the text """
+        cls = self.__class__
+        re_match = cls.re_termination.search(self.text)
+        if re_match:
+            self.termination = re_match.group(1)
+        else:
+            self.termination = 'unfinished'
