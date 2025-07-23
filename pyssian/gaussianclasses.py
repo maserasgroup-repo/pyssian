@@ -548,9 +548,9 @@ class GaussianInFile(object):
 
         # Read the command line assuming that the keywords cannot be in a
         # 'chopped in half' version between lines
-        commandline = [line.split(),]
+        commandline = [line.strip(),]
         for line in header:
-            commandline.append(line.split())
+            commandline.append(line.strip())
         self.parse_commandline(commandline)
 
         # Read the Title Section
@@ -622,17 +622,17 @@ class GaussianInFile(object):
             else:
                 pass
             self.preprocessing[key] = val
-    def parse_commandline(self,lines):
+    def parse_commandline(self,lines:list[str]):
         """
         Parses the lines that contain the calculation commands keywords and
         transforms them into a dictionary representation.
 
         Parameters
         ----------
-        lines : list
-            list of strings previously stripped and split. Empty lines will be 
-            ignored.
+        lines : list[str]
+            list of strings. Empty lines will be ignored.
         """
+        lines = [line.split() for line in lines]
         # the first line contains the "#p"
         self.extra_printout = lines[0][0] == '#p'
         # parse all the keywords
