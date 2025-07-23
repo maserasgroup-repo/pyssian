@@ -24,7 +24,7 @@ setuptools.setup(
                  'Programming Language :: Python :: 3.9',
                  'Programming Language :: Python :: 3.10',
                  ],
-  keywords = ['compchem, gaussian, parser'],
+  keywords = ['compchem', 'gaussian', 'parser'],
   packages = setuptools.find_packages(),
   python_requires='>=3.6',
   install_requires=['setuptools','pathlib','numpy'],

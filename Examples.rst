@@ -8,7 +8,7 @@ pyssian examples
 
 
 GaussianOutFile
-...............
+---------------
 
 *pyssian.GaussianOutFile* can be opened as a file object. When reading an
 already finished calculation file it is recommended to use the with statement as
@@ -18,18 +18,22 @@ the file is as example 2 or 3.
 .. code:: python
 
    from pyssian import GaussianOutFile
+
+   outputfile = 'myfile.log'
+
    # Example 1
-   with GaussianOutFile(FilePath) as GOF1:
-      GOF1.read()
+   with GaussianOutFile(outputfile) as GOF1:
+       GOF1.read()
+
    # Example 2
-   GOF2 = GaussianOutFile(FilePath)
+   GOF2 = GaussianOutFile(outputfile)
    GOF2.read()
    GOF2.close()
+
    # Example 3
-   File = open(FilePath,'r')
-   GOF3 = GaussianOutFile(File)
-   GOF3.read()
-   File.close()
+   with open(outputfile,'r') as F: 
+       GOF3 = GaussianOutFile(F)
+       GOF3.read()
 
 
 It also accepts another parameter that indicates which Links are of interest.
@@ -40,31 +44,30 @@ storing any information of each link is to pass -1 as the first value:
 
 .. code:: python
 
-   File = open(FilePath,'r')
-   with GaussianOutFile(File,parselist=[-1,]) as GOF:
+   outputfile = 'myfile.log'
+   with GaussianOutFile(outputfile,parselist=[-1,]) as GOF:
        GOF.update(clean=False) # read is an alias for update(clean=True)
-
 
 If you specify the numbers of the links to the GOF only those will be parsed and
 will not be cleaned afterwards.
 
 .. code:: python
 
-   File = open(FilePath,'r')
-   with GaussianOutFile(File,[1,103,202,502,9999]) as GOF:
+   outputfile = 'myfile.log'
+   with GaussianOutFile(outputfile,[1,103,202,502,9999]) as GOF:
        GOF.read()
 
 
 GaussianInFile
-..............
+--------------
 
 *pyssian.GaussianInFile* can be instantiated either from an existing input file
 or to create a new file.
 
 .. note::
 
-   Currently it is in an early stage as proper support for method-basis
-   management as well as oniom and zmatrix support require special attention.
+   Please be aware that proper support for method-basis management as well as 
+   for oniom and zmatrix geometries is not yet fully implemented.
 
 The following Code snippet shows how to create a new input from an existing
 one changing the geometry and method but retaining the rest of the options
@@ -73,18 +76,22 @@ one changing the geometry and method but retaining the rest of the options
 
    from pyssian import GaussianInFile
 
-   initial_theory_file = 'InitialTheory.in'
-   initial_geometry_file = 'InitialGeometry.in'
-   output_file = 'Output.in'
+   initial_theory_file = 'InitialTheory.com'
+   initial_geometry_file = 'InitialGeometry.com'
+   output_file = 'generated.com'
+
    with GaussianInFile(initial_theory_file) as theory_file:
        theory_file.read()
+      
    with GaussianInFile(initial_geometry_file) as geometry_file:
        geometry_file.read()
+      
    old_geometry = theory_file.geometry # In case we want to use it somewhere else
+   
    theory_file.geometry = geometry_file.geometry
    theory_file.method = 'b3lyp'
-   with open(output_file,'w') as F:
-       theory_file.write(F)
+   
+   theory_file.write(filepath=output_file)
 
 
 It combines fairly well with pyssian.classutils.Geometry to create inputs from
@@ -97,20 +104,20 @@ steps.
    from pyssian import GaussianInFile, GaussianOutFile
    from pyssian.classutils import Geometry
 
-   with GaussianOutFile('Old_Calc.out') as GOF:
+   with GaussianOutFile('old_calculation.log') as GOF:
       GOF.read()
 
    # Get the last geometry of the calculation
    geom = Geometry.from_L202(GOF.get_links(202)[-1])
 
    # Get the Link1 of the GaussianOutFile
-   Link1 = GOF.get_links(1)[0]
+   l1 = GOF.get_links(1)[0]
 
    # Extract the calculation type and commands
-   commandline = Link1.commandline
-   nprocs = Link1.nprocs
-   mem = Link1.mem
-   Link0 = Link1.link0
+   commandline = l1.commandline
+   nprocs = l1.nprocs
+   mem = l1.mem
+   preprocessing = l1.link0
 
    # Get Charge and spin from Link101
    Link101 = GOF.get_links(101)[0]
@@ -118,11 +125,15 @@ steps.
    spin = Link101.spin
 
    # Now write the new input file
-   with GaussianInFile('New_Calc.in') as GIF:
-       GIF.parse_commandline([commandline.split(),])
+   with GaussianInFile('new_calculation.com') as GIF:
+       GIF.parse_commandline([commandline,])
        # We can instead set a dict for the variable GIF.commandline
        # "GIF.commandline = {'opt':'','freq':'NoRamman','b3lyp':''}"
        # but using parse_commandline is easier in this case.
+       # we can also add keywords to the command line either directly
+       # GIF.commandline['keyword'] = ''
+       # or with a method
+       # GIF.add_kwd('keyword')
        GIF.preprocessing = {key:'' for key in Link0}
        GIF.preprocessing['nprocshared'] = nprocs
        GIF.preprocessing['mem'] = mem
@@ -134,25 +145,33 @@ steps.
 
 
 Cube
-....
+----
 
 *pyssian.classutils.Cube* class was introduce to simplify the sometimes a bit 
 bothersome usage of cubeman from gaussian to add, substract, multiply... cube 
-files. You can initialize an empty cube and populate it yourself but the class 
+files. You can initialize an empty cube and populate it yourself, but the class 
 was thought to be used as follows: 
 
 .. code:: python
 
    from pyssian.classutils import Cube 
+
    MO_1 = Cube.from_file('MO_01.cube')
    MO_2 = Cube.from_file('MO_02.cube')
    MO_3 = Cube.from_file('MO_03.cube')
+   
    FinalCube = MO_1*2 + MO_2 - MO_3**2
+   
    FinalCube.write('Final.cube') 
+
+.. warning:: 
+
+   Current implementation works for Molecular Orbital Cubes, other cubes may 
+   fail to be read. 
 
 
 LinkJob
-.......
+-------
 
 The *pyssian.LinkJob* class is the base class for all the LinkJob subclasses
 And implements the two basic attributes of all Links, *.number* and *.text*.
@@ -181,10 +200,10 @@ Currently the specific parsers implemented are:
 
    with GaussianOutFile(File) as GOF:
        GOF.read()
-   Link = GOF[0][RandomPosition]
+   link = GOF[0][RandomPosition]
    # General Attributes of all LinkJob classes
-   print(Link.number)
-   print(Link.text)
+   print(link.number)
+   print(link.text)
 
 
 Link1
@@ -193,14 +212,15 @@ Link1
 .. code:: python
 
    # From the file Get the first Link1
-   Link1 = GOF.get_links(1)[0]
+   l1 = GOF.get_links(1)[0]
+
    # Attributes of Link1
-   Link1.commandline
-   Link1.nprocs
-   Link1.mem
-   Link1.link0
-   Link1.IOps
-   Link1.info # Will be deprecated in the future
+   l1.commandline
+   l1.nprocs
+   l1.mem
+   l1.link0
+   l1.IOps
+   l1.info # Will be deprecated in the future
 
 
 Link101 & Link103
@@ -208,39 +228,39 @@ Link101 & Link103
 
 .. code:: python
 
-   Link101 = GOF.get_links(101)[0]
-   Link101.spin
-   Link101.charge
+   l101 = GOF.get_links(101)[0]
+   l101.spin
+   l101.charge
 
-   Link103 = GOF.get_links(103)[0]
-   Link103.mode
-   Link103.state
-   Link103.convergence
-   Link103.parameters
-   Link103.stepnumber
-   Link103.scanpoint
-   if Link103.mode == 'Iteration':
-       Link103.print_convergence()
+   l103 = GOF.get_links(103)[0]
+   l103.mode
+   l103.state
+   l103.convergence
+   l103.parameters
+   l103.stepnumber
+   l103.scanpoint
+   if l103.mode == 'Iteration':
+       l103.print_convergence()
 
 Link120
 +++++++
 
 .. code:: python
    
-   Link120 = GOF.get_links(120)[0]
-   Link120.energy
-   Link120.energy_partitions[0]
+   l120 = GOF.get_links(120)[0]
+   l120.energy
+   l120.energy_partitions[0]
 
 Link123
 +++++++
 
 .. code:: python
 
-   Link123 = GOF.get_links(123)[0]
-   Link123.orientation
-   Link123.step
-   Link123.direction
-   Link123.reactioncoord
+   l123 = GOF.get_links(123)[0]
+   l123.orientation
+   l123.step
+   l123.direction
+   l123.reactioncoord
 
 
 Link202
@@ -248,11 +268,11 @@ Link202
 
 .. code:: python
 
-   Link202 = GOF[-1].get_links(202)[0]
-   Link202.orientation
-   Link202.DistanceMatrix
-   Link202.print_orientation()
-   Link202.get_atom_mapping()
+   l202 = GOF[-1].get_links(202)[0]
+   l202.orientation
+   l202.DistanceMatrix
+   l202.print_orientation()
+   l202.get_atom_mapping()
 
 Link502 & Link508
 +++++++++++++++++
@@ -267,41 +287,41 @@ Link601
 
 .. code:: python
 
-   Link601 = GOF[-1].get_links(601)[-1]
-   Link601.mulliken
-   Link601.mulliken_heavy
+   lk601 = GOF[-1].get_links(601)[-1]
+   lk601.mulliken
+   lk601.mulliken_heavy
 
 Link716
 +++++++
 
 .. code:: python
 
-   Link716 = GOF[-1].get_links(716)[-1]
-   Link716.mode
-   Link716.dipole
-   Link716.units
-   Link716.zeropoint
-   Link716.thermal_energy
-   Link716.enthalpy
-   Link716.gibbs
-   Link716.EContribs
-   Link716.IRSpectrum
+   l716 = GOF[-1].get_links(716)[-1]
+   l716.mode
+   l716.dipole
+   l716.units
+   l716.zeropoint
+   l716.thermal_energy
+   l716.enthalpy
+   l716.gibbs
+   l716.EContribs
+   l716.IRSpectrum
 
 Link804 & Link913
 +++++++++++++++++
 
 .. code:: python
 
-   Link804 = GOF.get_links(804)[-1]
-   Link804.MP2
-   Link804.SpinComponents
+   l804 = GOF.get_links(804)[-1]
+   l804.MP2
+   l804.SpinComponents
    scs_corr = Link804.get_SCScorr()
    HF_energy = GOF.get_links(502)[-1].energy 
    scs_energy = HF_energy + scs_corr
 
-   Link913 = GOF.get_links(913)[-1]
-   Link913.MP4
-   Link913.CCSDT
+   l913 = GOF.get_links(913)[-1]
+   l913.MP4
+   l913.CCSDT
 
 
 Link914
@@ -309,8 +329,8 @@ Link914
 
 .. code:: python
 
-   Link914 = GOF.get_links(914)[-1]
-   for es in Link914.excitedstates: 
+   l914 = GOF.get_links(914)[-1]
+   for es in l914.excitedstates: 
        number, energy, wavelen, OStrength, s2, transitions = es
        for transition in transitions: 
            donor = transition.donor
@@ -318,11 +338,11 @@ Link914
            contribution = transition.contribution
            print(f'{donor} -> {acceptor}     {contribution}')
    # which can be done for the excited states 2,5,6: 
-   Link914.print_excitedstates(2,5,6,show_transitions=True)
+   l914.print_excitedstates(2,5,6,show_transitions=True)
 
 
 Usage Examples
-..............
+--------------
 
 Code snippet to extract the last potential energy and geometry
 
@@ -330,8 +350,8 @@ Code snippet to extract the last potential energy and geometry
 
    from pyssian import GaussianOutFile
 
-   MyFile = 'path-to-file'
-   with GaussianOutFile(MyFile) as GOF:
+   myfile = 'myoutput.log'
+   with GaussianOutFile(myfile) as GOF:
       GOF.read()
 
    final_geometry = GOF.get_links(202)[-1].orientation
@@ -346,18 +366,18 @@ Code snippet to display 'Filename HF MP2 MP2(SCS)'
 
    from pyssian import GaussianOutFile
 
-   MyFile = 'path-to-file'
-   with GaussianOutFile(MyFile,[1,502,804]) as GOF:
+   myfile = 'myoutput.log'
+   with GaussianOutFile(myfile,[1,502,804]) as GOF:
       GOF.read()
 
    HF = GOF.get_links(502)[-1].energy
-   Link804 = GOF.get_links(804)[-1]
-   MP2 = Link804.MP2
-   MP2scs = HF + Link804.get_SCScorr()
+   l804 = GOF.get_links(804)[-1]
+   MP2 = l804.MP2
+   MP2scs = HF + l804.get_SCScorr()
    print(f'{MyFile}\t{HF}\t{MP2}\t{MP2scs}')
 
 
-Code Snippet to follow a file being written by gaussian
+Code Snippet to follow an ongoing gaussian calculation
 
 .. code:: python
 
@@ -365,7 +385,7 @@ Code Snippet to follow a file being written by gaussian
 
    from pyssian import GaussianOutFile
 
-   GOF = GaussianOutFile(MyFile,[-1,])
+   GOF = GaussianOutFile('myoutput.log',[-1,])
    GOF.update(clean=False)
    print(GOF[-1][-1])
    sleep(10)
