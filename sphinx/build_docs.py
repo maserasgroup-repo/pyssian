@@ -14,17 +14,17 @@ def build_doc(version, tag):
     subprocess.run(f'git checkout {tag}', shell=True)
     # Recover the latest conf.py and latest versions.yaml
     subprocess.run(f'git checkout {MAINBRANCH} -- {SPHINXSOURCE}/conf.py', shell=True)
-    subprocess.run(f'git checkout {MAINBRANCH} -- {SPHINXSOURCE}/versions.yaml', shell=True)
+    subprocess.run(f'git checkout {MAINBRANCH} -- {SPHINXSOURCE}/versions.ini', shell=True)
     # build the docs
     subprocess.run("make html", shell=True)
 
 def move_dir(src, dst):
-    Path(dst).mkdir(exist_ok=True)
+    Path(dst).mkdir(exist_ok=True,parents=True)
     if not src.endswith('/'):
         src = f'{src}/'
     subprocess.run(f'mv {src}* {dst}', shell=True)
 
-os.environ['build_all_docs'] = str(True)
+os.environ['build_all_docs'] = str(False)
 os.environ['pages_root'] = 'https://maserasgroup-repo.github.io/pyssian' 
 
 build_doc('latest', MAINBRANCH)
