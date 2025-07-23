@@ -1374,7 +1374,8 @@ class Link804(LinkJob):
             Name,T,E = line.split()
             self.SpinComponents.append(SpinComponent(Name,float(T),float(E)))
     def get_SCScorr(self):
-        """ Calculates and returns the MP2(SCS) potential energy"""
+        """ Calculates and returns the MP2(SCS) potential energy, 
+        see 'S. Grimme (2003) J. Chem. Phys. 118, pp. 9095'"""
         aa = self.SpinComponents[0].E
         ab = self.SpinComponents[1].E
         bb = self.SpinComponents[2].E
