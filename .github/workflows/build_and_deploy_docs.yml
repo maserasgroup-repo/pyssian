@@ -40,9 +40,10 @@ jobs:
           python -m pip install ./
           cd sphinx
           python -m pip install -r requirements.txt
-          git fetch --tags
       - name: Build Documentation
         run: |
+          git fetch --tags
+          cd sphinx
           python3 build_docs.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
