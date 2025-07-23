@@ -107,5 +107,5 @@ if build_all_docs is not None:
     versions = configparser.ConfigParser(allow_no_value=True)
     versions.read(['versions.ini'])
 
-    for version, details in versions.options('versions'):
+    for version in versions.options('versions'):
         html_context['versions'].append([version, f'{pages_root}/{version}'])
