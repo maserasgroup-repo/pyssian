@@ -78,3 +78,4 @@ htmlhelp_basename = 'pyssian-doc'
 
 
 # -- Extension configuration -------------------------------------------------
+copybutton_prompt_text = "$ "
