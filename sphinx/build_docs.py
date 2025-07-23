@@ -19,9 +19,11 @@ def build_doc(version, tag):
     subprocess.run("make html", shell=True)
 
 def move_dir(src, dst):
+    print(f'    Creating: {Path(dst)}')
     Path(dst).mkdir(exist_ok=True,parents=True)
     if not src.endswith('/'):
         src = f'{src}/'
+    print(f'    Running: mv{src}* {dst}')
     subprocess.run(f'mv {src}* {dst}', shell=True)
 
 os.environ['build_all_docs'] = str(False)
