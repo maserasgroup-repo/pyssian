@@ -47,7 +47,7 @@ jobs:
         with:
           path: docs/
   deploy:
-    if: github.repository == 'maserasgroup-repo/pyssian-utils'
+    if: github.repository == 'maserasgroup-repo/pyssian'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
