@@ -3,10 +3,8 @@ gaussianclasses
 
 .. automodule:: pyssian.gaussianclasses
 
-
-To do:
-   * Create a Class to represent the basis and core electronic pontentials
-
+.. contents::
+   :local:
 
 GaussianInFile
 --------------
@@ -36,7 +34,7 @@ MultiGaussianInFile
 GaussianOutFile
 ---------------
 
-*   Accepts a context manager usage similar to 'with open(file) as F:...'
+*   Accepts a context manager usage similar to :code:`with open(file) as F:...`
 *   Will only parse a Gaussian Output File that has the "#p". 
 
 .. autoclass:: pyssian.GaussianOutFile
