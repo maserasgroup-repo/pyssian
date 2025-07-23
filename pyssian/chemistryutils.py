@@ -72,7 +72,7 @@ def is_method(candidate):
         test2 = test2[0] == candidate
     if test3 is not None:
         test3 = test3[0] == candidate
-    return test1 or test2 or test3
+    return bool(test1 or test2 or test3)
 
 ######################## BASIS SECTION #########################################
 ## Pople Bases require lowercasing for design reasons.
@@ -145,7 +145,7 @@ def is_basis(candidate):
         in_regex = match[0] == lowercandidate
     else:
         in_regex = False
-    return  in_hardcoded or in_regex
+    return  bool(in_hardcoded or in_regex)
 ######################### PERIODIC TABLE #######################################
 # It is important that X appears the first one (enumeration starts in 0)
 # here X stands for a dummy atom

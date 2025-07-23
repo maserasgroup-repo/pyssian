@@ -543,7 +543,7 @@ class Link120(LinkJob):
     Parameters
     ----------
     text : str
-        text that corresponds to the output of the l103.exe
+        text that corresponds to the output of the l120.exe
     asEmpty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
@@ -592,6 +592,68 @@ class Link120(LinkJob):
         self.energy_partitions = [EnergyPartition(int(p),level,model,float(energy))
                                   for p,level,model,energy in match]
 
+@RegisterLinkJob
+class Link122(LinkJob):
+    """
+    Representation and parser for the output of l122.exe. Contains the output of
+    Counterpoise calculations.
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l122.exe
+    asEmpty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    energy_complex
+    total_energy_fragments
+    bsse_correction
+
+    """
+    __slots__ = ('energy_complex', 'total_energy_fragments', 'bsse_correction')
+
+    _token = 122
+
+    re_bsse = r'BSSE energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_bsse = re.compile(re_bsse)
+    re_complex_energy = r'Counterpoise corrected energy\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_complex_energy = re.compile(re_complex_energy)
+    re_fragments_energy = r'sum of fragments\s=\s*(-?[0-9]*\.[0-9]*)'
+    re_fragments_energy = re.compile(re_fragments_energy)
+
+    def __init__(self,text,asEmpty=False):
+        self.energy_complex = None
+        self.total_energy_fragments = None
+        self.bsse_correction = None
+        if asEmpty:
+            super().__init__('',122)
+        else:
+            super().__init__(text,122)
+            self._locate_energies()
+
+    @Populates('energy_complex', 'total_energy_fragments', 'bsse_correction')
+    @SilentFail
+    def _locate_energies(self):
+        """
+        Uses regex expressions compiled as class attributes to find
+        the energy and the different energy_partitions.
+        """
+        cls = self.__class__
+        match = cls.re_bsse.findall(self.text)
+        if match:
+            self.bsse_correction = float(match[0])
+
+        match = cls.re_complex_energy.findall(self.text)
+        if match:
+            self.energy_complex = float(match[0])
+
+        match = cls.re_fragments_energy.findall(self.text)
+        if match:
+            self.total_energy_fragments = float(match[0])
+        
 @RegisterLinkJob
 class Link123(LinkJob):
     """
@@ -996,8 +1058,8 @@ class Link601(LinkJob):
     re_MullikenAtoms = re.compile(re_MullikenAtoms)
     re_MullikenHeavy =  r'(?:Mulliken charges( and spin densities)? with hydrogens.*\n.*\n)'
     re_MullikenHeavy += r'([\s\S]*?)'
-    re_MullikenHeavy += r'(?:\n.[a-zA-Z].*\n)'
-    re_MullikenHeavy = re.compile(re_MullikenHeavy)
+    re_MullikenHeavy += r'(?:\n^\s*[a-zA-Z])'
+    re_MullikenHeavy = re.compile(re_MullikenHeavy,re.MULTILINE)
     
     _token = 601
 
@@ -1312,7 +1374,8 @@ class Link804(LinkJob):
             Name,T,E = line.split()
             self.SpinComponents.append(SpinComponent(Name,float(T),float(E)))
     def get_SCScorr(self):
-        """ Calculates and returns the MP2(SCS) potential energy"""
+        """ Calculates and returns the MP2(SCS) potential energy, 
+        see 'S. Grimme (2003) J. Chem. Phys. 118, pp. 9095'"""
         aa = self.SpinComponents[0].E
         ab = self.SpinComponents[1].E
         bb = self.SpinComponents[2].E
@@ -1511,7 +1574,7 @@ class Link914(LinkJob):
                     print(f'\t{transition.donor} -> {transition.acceptor}'\
                           f'\t {transition.contribution}')
 
-#@RegisterLinkJob
+@RegisterLinkJob
 class Link9999(LinkJob):
     """
     parser for the output of l9999.exe. This Link has 2 termination modes:
@@ -1521,3 +1584,18 @@ class Link9999(LinkJob):
     (before printing the resume string). In development.
     """
     _token = 9999
+
+    __slots__ = ('termination',)
+
+    re_termination = re.compile(r'\s?([a-zA-Z]*)\stermination')
+    
+    @Populates('termination')
+    @SilentFail
+    def _locate_termination(self): 
+        """ Looks for the type of termination at the end of the text """
+        cls = self.__class__
+        re_match = cls.re_termination.search(self.text)
+        if re_match:
+            self.termination = re_match.group(1)
+        else:
+            self.termination = 'unfinished'

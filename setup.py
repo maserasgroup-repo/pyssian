@@ -1,6 +1,8 @@
 import setuptools
+import re
 
-__version__ = '1.1.0'
+with open('pyssian/__init__.py','r') as F: 
+    __version__ = re.search(r'(__version__)\s*=[^0-9]*?([0-9]*\.[0-9]*\.[0-9])',F.read()).group(2)
 
 with open("README.rst", "r") as fh:
     long_description = fh.read()
@@ -22,7 +24,7 @@ setuptools.setup(
                  'Programming Language :: Python :: 3.9',
                  'Programming Language :: Python :: 3.10',
                  ],
-  keywords = ['compchem, gaussian, parser'],
+  keywords = ['compchem', 'gaussian', 'parser'],
   packages = setuptools.find_packages(),
   python_requires='>=3.6',
   install_requires=['setuptools','pathlib','numpy'],

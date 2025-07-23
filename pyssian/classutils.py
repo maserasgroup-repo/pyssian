@@ -2,6 +2,7 @@
 Contains auxiliary classes, usefull in combination with the gaussianclasses.
 """
 import os
+from warnings import warn
 from math import ceil
 from itertools import cycle
 from pathlib import Path
@@ -382,10 +383,13 @@ class DirectoryTree(object):
     """
     Class that provides recursive file iteration.
     """
-    def __init__(self,path):
+    def __init__(self,path,in_suffix='.in',out_suffix='.out'):
+        warn("This class will be removed in the next release as it was moved to the pyssianutils project", DeprecationWarning, 2)
         self.root = Path(path)
         self.cwd = Path(os.getcwd())
         self.newroot = self.root
+        self.in_suffix = in_suffix
+        self.out_suffix = out_suffix
     def set_newroot(self,newroot):
         self.newroot = Path(newroot)
 
@@ -439,7 +443,7 @@ class DirectoryTree(object):
     def infiles(self):
         def f_in(x):
             Out = False
-            if x.exists() and x.suffix == '.in':
+            if x.exists() and x.suffix == self.in_suffix:
                 Out = True
             return Out
         _iter = self.RecursiveFileSystemGenerator(self.root,key=f_in)
@@ -450,7 +454,7 @@ class DirectoryTree(object):
     def outfiles(self):
         def f_out(x):
             Out = False
-            if x.exists() and x.suffix == '.out':
+            if x.exists() and x.suffix == self.out_suffix:
                 Out = True
             return Out
         _iter = self.RecursiveFileSystemGenerator(self.root,key=f_out)
