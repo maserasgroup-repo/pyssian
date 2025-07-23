@@ -2,8 +2,7 @@ name: PyPi_build_and_upload
 
 on:
   release:
-    types:
-      [released]
+    types: [released]
   workflow_dispatch:
 
 jobs:
