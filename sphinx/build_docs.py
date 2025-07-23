@@ -5,7 +5,7 @@ from pathlib import Path
 
 MAINBRANCH = 'master'
 BUILD_DIR = '../_docs'
-PAGES_DIR = '../docs'
+PAGES_DIR = '../pages'
 SPHINXSOURCE = './source'
 
 def build_doc(version, tag):
