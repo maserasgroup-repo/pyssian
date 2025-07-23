@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import configparser
 sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
@@ -76,6 +77,35 @@ pygments_style = 'one-dark' # 'paraiso-dark' #'default', 'emacs', 'friendly', 'c
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'pyssian-doc'
 
-
 # -- Extension configuration -------------------------------------------------
 copybutton_prompt_text = "$ "
+
+# ---Multi version support ---------------------------------------------------
+# get the environment variable build_all_docs and pages_root
+build_all_docs = os.environ.get("build_all_docs")
+pages_root = os.environ.get("pages_root", "")
+
+# if not there, we dont call this
+if build_all_docs is not None:
+    # we get the current language and version
+    current_version = os.environ.get("current_version")
+
+    # we set the html_context with current version 
+    html_context = {
+        'current_version' : current_version,
+        'versions' : [],
+    }
+
+    # and we append all versions accordingly 
+    # we treat the master branch as latest 
+
+    html_context['versions'].append(['latest', pages_root])
+
+    # and loop over all other versions from our versions.ini file
+    # to set versions
+
+    versions = configparser.ConfigParser(allow_no_value=True)
+    versions.read(['versions.ini'])
+
+    for version, details in versions.options('versions'):
+        html_context['versions'].append([version, f'{pages_root}/{version}'])
