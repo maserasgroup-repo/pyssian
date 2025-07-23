@@ -20,10 +20,9 @@ def build_doc(version, tag):
 
 def move_dir(src, dst):
     print(f'    Creating: {Path(dst)}')
-    Path(dst).mkdir(exist_ok=True,parents=True)
+    Path(dst).mkdir(exist_ok=True)
     if not src.endswith('/'):
         src = f'{src}/'
-    print(f'    Running: mv{src}* {dst}')
     subprocess.run(f'mv {src}* {dst}', shell=True)
 
 os.environ['build_all_docs'] = str(False)
@@ -38,4 +37,4 @@ versions.read([f'{SPHINXSOURCE}/versions.ini'])
 for version in versions.options('versions'):
     tag = versions['versions'][version]
     build_doc(version, tag)
-    move_dir(f'./{BUILD_DIR}/html/', f'../{PAGES_DIR}/{version}/')
+    move_dir(f'{BUILD_DIR}/html/', f'{PAGES_DIR}/{version}/')
