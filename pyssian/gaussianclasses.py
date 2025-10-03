@@ -5,6 +5,7 @@ Gaussian Files (input and output).
 import io
 import re
 from itertools import chain
+import warnings
 
 from .chemistryutils import is_method, is_basis
 from .linkjobparsers import LinkJob, GeneralLinkJob
@@ -658,8 +659,8 @@ class GaussianInFile(object):
                 self._basis = item
                 key,val = item, []
             elif is_basis(item) or is_method(item):
-                print('2 Basis or methods found \n')
-                print(f'taking {item} as a normal keyword')
+                warnings.warn('2 Basis or methods found \n')
+                warnings.warn(f'taking {item} as a normal keyword')
                 key,val = item, []
             else:
                 Aux = item.split('=',1)
@@ -729,7 +730,6 @@ class GaussianInFile(object):
         else:
             if Aux:
                 self.tail.append('\n'.join(Aux))
-                print('Parsed an input file withouth blank line ending')
 
     # Helper functions for writing
     def preprocessing_as_str(self):
