@@ -26,7 +26,7 @@ class TestGeneralLinkJob(unittest.TestCase):
         with open(self.refile,'r') as F:
             txt = F.read()
         items = [i.strip() for i in txt.split(SMARK)]
-        for obj,solution in zip(self.objects,items):
+        for obj,solution in zip_longest(self.objects,items):
             txt = obj.text
             test = regex.findall(txt)[0]
             self.assertTrue(test == solution,msg)
@@ -244,8 +244,8 @@ class TestLink103(unittest.TestCase):
 
     def test_locate_mode(self):
         msg = 'Mode {} not properly recognized'.format
-        solutions = ['Init','Iteration','End','End']
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        solutions = ['Init','Iteration','End','End','Iteration']
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             with self.subTest(Test_Object=i,mode=solution):
                 self.assertTrue(obj.mode == solution,msg(solution))
 
@@ -306,8 +306,6 @@ class TestLink103(unittest.TestCase):
                 with self.subTest(object=i,parameter='None'):
                     self.assertFalse(bool(test))
             for j,(t,s) in enumerate(zip_longest(test,solution,fillvalue='')):
-                print(f'subtest {i} parameter={j}')
-                print(t,s)
                 with self.subTest(object=i,parameter=j):
                     self.assertEqual(t,s,msg)
 
@@ -368,7 +366,7 @@ class TestLink120(unittest.TestCase):
             match = regex.findall(obj.text)
             self.assertEqual(bool(match),bool(solution),msg)
             if match:
-                for (p,lev,model,energy),sol in zip(match,solution):
+                for (p,lev,model,energy),sol in zip_longest(match,solution):
                     self.assertEqual([p,lev,model,energy],sol) 
             
     def test_init_empty(self):
@@ -496,7 +494,6 @@ class TestLink122(unittest.TestCase):
             if solution: 
                 self.assertEqual(test,float(solution),msg)
 
-
 class TestLink123(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -596,10 +593,10 @@ class TestLink202(unittest.TestCase):
         with open(self.refile) as F:
             txt = F.read()
         items = [i.split(MMARK) for i in txt.split(SMARK)]
-        for i,(obj,solutions) in enumerate(zip(self.objects,items)):
+        for i,(obj,solutions) in enumerate(zip_longest(self.objects,items)):
             text = obj.text
             tests = regex.findall(text)
-            for j,(test,sol) in enumerate(zip(tests,solutions)):
+            for j,(test,sol) in enumerate(zip_longest(tests,solutions,fillvalue='')):
                 with self.subTest(text=i,match=j):
                     self.assertEqual(test,sol,msg)
 
@@ -626,7 +623,7 @@ class TestLink202(unittest.TestCase):
                     d, e, f = float(values[3]),float(values[4]),float(values[5])
                     mat.append(AtomCoords(a,b,c,d,e,f))
             items.append(mat)
-        for i,(obj,solution) in enumerate(zip(self.objects,items)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,items)):
             test = obj.orientation
             with self.subTest(text=i):
                 self.assertEqual(test,solution,msg)
@@ -700,7 +697,7 @@ class TestLink502(unittest.TestCase):
         msg = 're_EDone regex does not match properly'
         regex = Link502.re_EDone
         solutions = self.re_energies_solutions
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
@@ -708,7 +705,7 @@ class TestLink502(unittest.TestCase):
         msg = 're_spin regex does not match properly'
         regex = Link502.re_spin
         solutions = self.re_spin_solutions
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
@@ -721,13 +718,13 @@ class TestLink502(unittest.TestCase):
     def test_energy(self):
         msg = 'Energy value not properly read'
         solutions = [float(i) for i in self.re_energies_solutions]
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = obj.energy
             self.assertTrue(test == solution,msg)
     def test_spin(self):
         msg = 'S**2 values not properly read'
         solutions = [(float(i[0]),float(i[1])) for i in self.re_spin_solutions]
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = obj.spin
             self.assertTrue(test == solution,msg)
 
@@ -765,7 +762,7 @@ class TestLink601(unittest.TestCase):
             match0,match1 = Aux.split('\n## Match1 ##\n')
             match0 = match0.split('## Match0 ##\n')[-1]
             solutions.append((match0,match1))
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test[0] == solution[0],msg(test[0],solution[0]))
             self.assertTrue(test[1] == solution[1],msg2(test[1],solution[1]))
@@ -784,7 +781,7 @@ class TestLink601(unittest.TestCase):
             match0,match1 = Aux.split('\n## Match1 ##\n')
             match0 = match0.split('## Match0 ##\n')[-1]
             solutions.append((match0,match1))
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test[0] == solution[0],msg(test[0],solution[0]))
             self.assertTrue(test[1] == solution[1],msg2(test[1],solution[1]))
@@ -828,7 +825,7 @@ class TestLink716(unittest.TestCase):
         with open(self.Thermofile,'r') as F:
             txt = F.read()
         solutions = txt.split(SMARK)
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)
             if solution != '':
                 test = test[0]
@@ -842,7 +839,7 @@ class TestLink716(unittest.TestCase):
         with open(self.EContribfile,'r') as F:
             txt = F.read()
         solutions = txt.split(SMARK)
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)
             if solution != '':
                 test = test[0]
@@ -856,7 +853,7 @@ class TestLink716(unittest.TestCase):
         with open(self.IRSpectrumfile,'r') as F:
             txt = F.read()
         solutions = txt.split(SMARK)
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)
             if solution != '':
                 test = test[0]
@@ -886,21 +883,24 @@ class TestLink716(unittest.TestCase):
                 solutions.append(Aux)
             else:
                 solutions.append([])
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)
             self.assertTrue(bool(test) == bool(solution),msg(test,solution))
-            for t,s in zip(test,solution):
+            for t,s in zip_longest(test,solution):
                 self.assertTrue(t == s, msg2(t,s))
     def test_regex_freq_text(self):
-        msg = 'the text block does not match'
         regex = Link716.re_freq_text
         with open(self.freqtextfile,'r') as F:
             txt = F.read()
         solutions = txt.split(SMARK)
-        for obj,solution in zip(self.objects,solutions):
-            test = regex.findall(obj.text)[0]
-            self.assertTrue(test == solution,msg)
-    def test_regex_freq_text(self):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
+            with self.subTest(test=i):
+                test = regex.findall(obj.text)
+                if test:
+                    self.assertTrue(test[0] == solution,'the text block does not match')
+                else:
+                    self.assertTrue('' == solution,'No match was found when expected to match')
+    def test_regex_freq_disp(self):
         msg = 'the displacement: \n{} does not match:\n{}'.format
         regex = Link716.re_freq_displacements
         regex_txt = Link716.re_freq_text
@@ -913,11 +913,11 @@ class TestLink716(unittest.TestCase):
                 solutions.append([s+'\n' for s in item.split('\n')])
             else:
                 solutions.append([])
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex_txt.findall(obj.text)
             if test:
                 subtests = regex.findall(test[0])
-                for t,s in zip(subtests,solution): 
+                for t,s in zip_longest(subtests,solution,fillvalue='\n'): 
                     self.assertEqual(t,s,msg(test,solution))
             else:
                 self.assertTrue(test == solution,msg(test,solution))
@@ -932,7 +932,7 @@ class TestLink716(unittest.TestCase):
         solutions = []
         for sample in samples:
             solutions.append(tuple(sample.split('\n')))
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg(test,solution))
 
@@ -968,7 +968,7 @@ class TestLink804(unittest.TestCase):
             txt = F.read()
         solutions = [lines.split('\n')[0] for lines in txt.split(SMARK)]
         items = [obj.text for obj in self.objects]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)[0]
             self.assertTrue(test == solution,msg)
 
@@ -987,7 +987,7 @@ class TestLink804(unittest.TestCase):
         with open(self.propfile,'r') as F:
             txt = F.read().replace('D','E')
         items = [lines for lines in txt.split(SMARK)]
-        for item,obj in zip(items,self.objects):
+        for item,obj in zip_longest(items,self.objects):
             sol = []
             lines = item.split('\n')[1:]
             for line in lines:
@@ -1015,7 +1015,7 @@ class TestLink804(unittest.TestCase):
         with open(self.propfile,'r') as F:
             txt = F.read().replace('D','E')
         solutions = [float(lines.split('\n')[0]) for lines in txt.split(SMARK)]
-        for sol,obj in zip(solutions,self.objects):
+        for sol,obj in zip_longest(solutions,self.objects):
             self.assertTrue(obj.MP2 == sol,msg)
 
 class TestLink913(unittest.TestCase):
@@ -1043,7 +1043,7 @@ class TestLink913(unittest.TestCase):
             txt = F.read()
         solutions = [i.split('\n') for i in txt.split(SMARK)]
         items = [obj.text for obj in self.objects]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             # Test only for the last match as it is the only one stored
             self.assertTrue(test[-1] == solution[-1],msg)
@@ -1056,7 +1056,7 @@ class TestLink913(unittest.TestCase):
             txt = F.read()
         solutions = [i for i in txt.split(SMARK)]
         items = [obj.text for obj in self.objects]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             if test: # Test matches
                 self.assertTrue(test[0] == solution,msg_match.format(test[0],solution))
@@ -1075,7 +1075,7 @@ class TestLink913(unittest.TestCase):
             txt = F.read().replace('D','E')
         solutions = [float(lines.split('\n')[-1].split()[-1])
                                         for lines in txt.split(SMARK)]
-        for sol,obj in zip(solutions,self.objects):
+        for sol,obj in zip_longest(solutions,self.objects):
             self.assertTrue(obj.MP4 == sol,msg)
 
     def test_CCSDT(self):
@@ -1084,7 +1084,7 @@ class TestLink913(unittest.TestCase):
             txt = F.read().replace('D','E')
         solutions = [float(lines.strip()) if lines.strip() else None
                                         for lines in txt.split(SMARK)]
-        for sol,obj in zip(solutions,self.objects):
+        for sol,obj in zip_longest(solutions,self.objects):
             self.assertTrue(obj.CCSDT == sol,msg)
 
 class TestLink914(unittest.TestCase):
@@ -1118,7 +1118,8 @@ class TestLink914(unittest.TestCase):
                 aux.append(tuple(ES.split('\n')[0].strip().split()))
             solutions.append(aux)
         items = [obj.text for obj in self.objects]
-        for txt,solution in zip(items,solutions):
+        import pprint
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             # Test only for the last match as it is the only one stored
             self.assertTrue(tuple(test) == tuple(solution),msg(test,solution))
@@ -1140,9 +1141,9 @@ class TestLink914(unittest.TestCase):
                 aux.append(transitions)
             solutions.append(aux)
         items = [obj.text for obj in self.objects]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             tests = regex.findall(txt)
-            for test,sol in zip(tests,list(chain.from_iterable(solution))):
+            for test,sol in zip_longest(tests,list(chain.from_iterable(solution))):
                 self.assertTrue(test == sol,msg(test,sol))
 
     def test_init_empty(self):
@@ -1162,10 +1163,11 @@ class TestLink914(unittest.TestCase):
                 b,c,d,e = tuple(map(float,(b,c,d,e)))
                 aux.append((a,b,c,d,e))
             solutions.append(aux)
-        for solution,obj in zip(solutions,self.objects):
-            for sol,ES in zip(solution,obj.excitedstates):
-                test = tuple(ES[:-1])
-                self.assertTrue(sol == test ,msg(sol,test))
+        for solution,obj in zip_longest(solutions,self.objects):
+            for i,(sol,ES) in enumerate(zip_longest(solution,obj.excitedstates)):
+                with self.subTest(excited_state_idx=i):
+                    test = tuple(ES[:-1])
+                    self.assertTrue(sol == test ,msg(sol,test))
 
     def test_extract_transitions(self):
         msg = 'Wrong Transition Extraction: {1} does not match {0}'.format
@@ -1185,9 +1187,20 @@ class TestLink914(unittest.TestCase):
                       ('166B','126B',float('-0.01650'),True)],
                      [( '165', '167',float('0.02444' ),False),
                       ( '166', '126',float('-0.01650'),True)]]
-        for sol,intxt in zip(solutions,txt.split(SMARK)):
-            transitions = L914._extract_transitions(intxt)
-            for sol,test in zip(sol,transitions):
+        unrestricted,restricted = txt.split(SMARK.strip())
+        unrestricted = unrestricted.rstrip()
+        restricted = restricted.lstrip()
+
+        with self.subTest('unrestricted'): 
+            transitions = L914._extract_transitions(unrestricted)
+            sol = solutions[0]
+            for sol,test in zip_longest(sol,transitions):
+                self.assertEqual(tuple(test),sol,msg(test,sol))
+
+        with self.subTest('restricted'): 
+            transitions = L914._extract_transitions(restricted)
+            sol = solutions[1]
+            for sol,test in zip_longest(sol,transitions):
                 self.assertEqual(tuple(test),sol,msg(test,sol))
 
 
