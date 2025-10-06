@@ -354,7 +354,7 @@ class TestLink120(unittest.TestCase):
         msg = 're_energy regex does not match properly'
         regex = Link120.re_energy
         solutions = self.re_energy_solutions
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             match = regex.findall(obj.text)
             self.assertEqual(bool(match),bool(solution),msg)
             if match: 
@@ -364,7 +364,7 @@ class TestLink120(unittest.TestCase):
         msg = 're_energy regex does not match properly'
         regex = Link120.re_energy_partitions
         solutions = self.re_energy_partition_solutions
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             match = regex.findall(obj.text)
             self.assertEqual(bool(match),bool(solution),msg)
             if match:
@@ -380,7 +380,7 @@ class TestLink120(unittest.TestCase):
     def test_energy(self):
         msg = 'Energy value not properly read'
         solutions = self.re_energy_solutions
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = obj.energy
             self.assertEqual(bool(test),bool(solution),msg)
             if solution: 
@@ -390,12 +390,12 @@ class TestLink120(unittest.TestCase):
         msg = 'Energy partitions not properly read'
         solutions = self.re_energy_partition_solutions
         EnergyPartition = Link120._EnergyPartition
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             match = obj.energy_partitions
             self.assertEqual(bool(match),bool(solution),msg)
             if not match:
                 continue
-            for (p,level,model,energy),sol in zip(match,solution):
+            for (p,level,model,energy),sol in zip_longest(match,solution):
                 p,l,m,e = sol
                 sol = EnergyPartition(int(p),l,m,float(e))
                 test = EnergyPartition(int(p),level,model,float(energy))
