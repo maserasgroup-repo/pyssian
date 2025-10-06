@@ -1,6 +1,6 @@
 import unittest
 from pathlib import Path
-from itertools import chain
+from itertools import chain, zip_longest
 
 from pyssian.linkjobparsers import *
 
@@ -250,12 +250,12 @@ class TestLink103(unittest.TestCase):
         regex = Link103.re_parameters
         with open(self.parametersfile,'r') as F:
             solutions = [sample.split('\n') for sample in F.read().split(SMARK)]
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             test = regex.findall(obj.text)
             if not solution:
                 with self.subTest(object=i,parameter='None'):
                     self.assertFalse(bool(test))
-            for j,(t,s) in enumerate(zip(test,solution)):
+            for j,(t,s) in enumerate(zip_longest(test,solution,fillvalue='')):
                 with self.subTest(object=i,parameter=j):
                     self.assertEqual(t,s,msg)
 
@@ -273,12 +273,12 @@ class TestLink103(unittest.TestCase):
                 solutions.append(Aux)
             else:
                 solutions.append([])
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             test = regex.findall(obj.text)
             if not solution:
                 with self.subTest(object=i,parameter='None'):
                     self.assertFalse(bool(test))
-            for j,(t,s) in enumerate(zip(test,solution)):
+            for j,(t,s) in enumerate(zip_longest(test,solution,fillvalue='')):
                 with self.subTest(object=i,parameter=j):
                     self.assertEqual(t,s,msg)
 
@@ -296,24 +296,26 @@ class TestLink103(unittest.TestCase):
                 solutions.append(Aux)
             else:
                 solutions.append([])
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             test = regex.findall(obj.text)
             if not solution:
                 with self.subTest(object=i,parameter='None'):
                     self.assertFalse(bool(test))
-            for j,(t,s) in enumerate(zip(test,solution)):
+            for j,(t,s) in enumerate(zip_longest(test,solution,fillvalue='')):
+                print(f'subtest {i} parameter={j}')
+                print(t,s)
                 with self.subTest(object=i,parameter=j):
                     self.assertEqual(t,s,msg)
 
     def test_locate_numbers(self):
         msg = 'stepnumber {} not properly recognized'.format
-        solutions = [0,1,420,66]
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        solutions = [0,1,420,66,31]
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             with self.subTest(Test_Object=i,stepnumber=solution):
                 self.assertEqual(obj.stepnumber,solution,msg(solution))
         msg = 'scanpoint {} not properly recognized'.format
-        solutions = [None,None,None,11]
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        solutions = [None,None,None,11,None]
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             with self.subTest(Test_Object=i,scanpoint=solution):
                 self.assertEqual(obj.scanpoint,solution,msg(solution))
 
