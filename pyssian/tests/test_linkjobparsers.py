@@ -67,8 +67,9 @@ class TestLink1(unittest.TestCase):
         with open(self.refile) as F:
             txt = F.read()
         items = [i for i in txt.split(SMARK)]
-        solutions = [['%nprocshared=8','%mem=18000MB'],[]]
-        for txt,solution in zip(items,solutions):
+        solutions = [['%nprocshared=8','%mem=18000MB'],
+                     []]
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             self.assertTrue(test == solution,msg)
 
@@ -80,7 +81,7 @@ class TestLink1(unittest.TestCase):
         items = [i for i in txt.split(SMARK)]
         solutions = [['#p opt=(calcfc,ts,noeigentest) freq b3lyp/6-31+g(d) scrf=(solvent=dich\nloromethane,smd) nosymm empiricaldispersion=gd3\n'],
                      ['#P Geom=AllCheck Guess=TCheck SCRF=Check GenChk RB3LYP/6-31+G(d) Freq\n']]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             self.assertTrue(test == solution,msg)
 
@@ -99,7 +100,7 @@ class TestLink1(unittest.TestCase):
                       '5/5=2,53=9,98=1/2;',
                       '8/6=4,10=90,11=11/1;',
                       '99//99;']]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             self.assertTrue(test == solution,msg)
 
@@ -110,7 +111,7 @@ class TestLink1(unittest.TestCase):
             txt = F.read()
         items = [i for i in txt.split(SMARK)]
         solutions = [[],['2',]]
-        for txt,solution in zip(items,solutions):
+        for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             self.assertTrue(test == solution,msg)
 
@@ -146,7 +147,7 @@ class TestLink1(unittest.TestCase):
         with open(self.propfile) as F:
             txt = F.read()
         items = [i.rstrip('\n').split('\n') for i in txt.split(SMARK)]
-        for item,obj in zip(items,self.objects):
+        for item,obj in zip_longest(items,self.objects):
             _ , sol = item
             self.assertTrue(obj.commandline == sol,msg)
 
@@ -156,7 +157,7 @@ class TestLink1(unittest.TestCase):
         with open(self.propfile) as F:
             txt = F.read()
         items = [i.rstrip('\n').split('\n') for i in txt.split(SMARK)]
-        for item,obj in zip(items,self.objects):
+        for item,obj in zip_longest(items,self.objects):
             Aux = item[0].split(',')
             sol = InternalJobInfo(int(Aux[0]),Aux[1],Aux[2]=='1')
             self.assertTrue(obj.info == sol,msg)
@@ -166,7 +167,10 @@ class TestLink101(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.testfile = TEST_FILEDIR.joinpath('l101.txt')
-        cls.charge_spin_solutions = [(-1,2),(0,2),(2,2),(2,2)]
+        cls.charge_spin_solutions = [(-1,2),
+                                     (0,2),
+                                     (2,2),
+                                     (2,2)]
         # Read and store the Examples
         with open(cls.testfile,'r') as F:
             txt = F.read()
@@ -184,7 +188,7 @@ class TestLink101(unittest.TestCase):
         msg = 're_charge regex does not match properly'
         regex = Link101.re_charge
         solutions = [str(i) for i,_ in self.charge_spin_solutions]
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
@@ -192,7 +196,7 @@ class TestLink101(unittest.TestCase):
         msg = 're_spin regex does not match properly'
         regex = Link101.re_spin
         solutions = [str(i) for _,i in self.charge_spin_solutions]
-        for obj,solution in zip(self.objects,solutions):
+        for obj,solution in zip_longest(self.objects,solutions):
             test = regex.findall(obj.text)[0]
             self.assertTrue(test == solution,msg)
 
@@ -204,7 +208,7 @@ class TestLink101(unittest.TestCase):
 
     def test_charge_spin(self):
         msg = '{} is not properly parsed'.format
-        for item,obj in zip(self.charge_spin_solutions,self.objects):
+        for item,obj in zip_longest(self.charge_spin_solutions,self.objects):
             charge, spin = item
             self.assertTrue(obj.charge == charge ,msg('charge'))
             self.assertTrue(obj.spin == spin, msg('spin'))
