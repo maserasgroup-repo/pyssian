@@ -535,12 +535,12 @@ class TestLink123(unittest.TestCase):
                 solutions.append(Aux)
             else:
                 solutions.append([])
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             test = regex.findall(obj.text)
             if not solution:
                 with self.subTest(object=i,atom='None'):
                     self.assertFalse(bool(test))
-            for j,(t,s) in enumerate(zip(test,solution)):
+            for j,(t,s) in enumerate(zip_longest(test,solution,fillvalue='')):
                 with self.subTest(object=i,atom=j):
                     self.assertEqual(t,s,msg)
 
@@ -552,7 +552,7 @@ class TestLink123(unittest.TestCase):
                      (0,'FORWARD',1),
                      (0.04224,'FORWARD',2),
                      (9.58567,'FORWARD',228)]
-        for i,(obj,solution) in enumerate(zip(self.objects,solutions)):
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             with self.subTest(Test_Object=i,reactioncoord=solution[0]):
                 test = obj.reactioncoord
                 sol = solution[0]
