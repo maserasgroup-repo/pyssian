@@ -394,7 +394,7 @@ class Link103(LinkJob):
     re_derivatives = r'([R|D|X|A][0-9]*)'+r'\s*([-]?[0-9]*\.[0-9]{0,5})'*6
     re_derivatives = re.compile(re_derivatives)
     re_convergence = r'((?:Maximum|RMS)\s*(?:Force|Displacement))'
-    re_convergence += r'\s*([0-9]{0,3}\.[0-9]*)\s*([0-9]{0,3}\.[0-9]*)\s*(YES|NO)'
+    re_convergence += r'\s*([0-9]{0,3}\.[0-9]*|\*{8})\s*([0-9]{0,3}\.[0-9]*)\s*(YES|NO)'
     re_convergence = re.compile(re_convergence)
     re_stepnum = re.compile(r'Step\s*number\s*([0-9]*)\s*out\s*of')
     re_scanpoint = re.compile(r'scan\spoint\s*([0-9]*)\s*out\s*of')
@@ -498,7 +498,10 @@ class Link103(LinkJob):
         if Match:
             for m in Match:
                 Name = ' '.join(m[0].split())
-                val = float(m[1])
+                if m[1] == '********':
+                    val = None
+                else:
+                    val = float(m[1])
                 threshold = float(m[2])
                 isConverged = m[3] == "YES"
                 item = cls._ConverItem(Name,val,threshold,isConverged)
