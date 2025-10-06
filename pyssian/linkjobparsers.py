@@ -1511,6 +1511,17 @@ class Link914(LinkJob):
                                               float(OStrenght),
                                               float(s2),
                                               transitions))
+        else: # Ensure the last excited state is parsed
+            text = self.text[stop:]
+            if text.strip(): 
+                number,_,energy,wavelen,OStrenght,s2 = matches[-1].groups()
+                transitions = self._extract_transitions(text)
+                excitedstates.append(ExcitedState(int(number),
+                                                float(energy),
+                                                float(wavelen),
+                                                float(OStrenght),
+                                                float(s2),
+                                                transitions))
         self.excitedstates = excitedstates
 
     def _extract_transitions(self,text):
