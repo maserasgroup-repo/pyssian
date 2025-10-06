@@ -14,3 +14,8 @@ Maximum Force,0.000015,0.000450,YES
 RMS     Force,0.000003,0.000300,YES
 Maximum Displacement,0.000446,0.001800,YES
 RMS     Displacement,0.000120,0.001200,YES
+## Split Here ##
+Maximum Force,********,0.000450,NO
+RMS     Force,4.138104,0.000300,NO
+Maximum Displacement,0.196700,0.001800,NO
+RMS     Displacement,0.047678,0.001200,NO

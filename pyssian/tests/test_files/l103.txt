@@ -240,3 +240,55 @@
            D54          0.10059
  Largest change from initial coordinates is atom    5       0.274 Angstoms.
  Leave Link  103 at Mon Jan 11 18:57:10 2021, MaxMem=  2684354560 cpu:         0.4
+
+## Split Here ##
+ (Enter /mnt/data/applications/gaussian/G16/l103.exe)
+
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+ Berny optimization.
+ Using GEDIIS/GDIIS optimizer.
+ FormGI is forming the generalized inverse of G from B-inverse, IUseBI=4.
+ Internal  Forces:  Max    33.338695764 RMS     4.138103655
+ Search for a local minimum.
+ Step number  31 out of a maximum of  347
+ All quantities printed in internal units (Hartrees-Bohrs-Radians)
+ RMS Force = .41381D+01 SwitMx=.10000D-02 MixMth= 1
+ Mixed Optimization -- RFO/linear search
+ Update second derivatives using D2CorX and points   11   12   13   16   17
+                                                     14   19   20   18   22
+                                                     21   24   25   26   27
+                                                     28   29   30   31
+ ITU=  0  0  0  0  0  0 -1 -1  0 -1  0 -1 -1  0  0 -1  0  1  0  0
+ ITU=  0  1  0  0  1  0 -1 -1  1 -1  0
+ Use linear search instead of GDIIS.
+     Eigenvalues ---    0.00000   0.00001   0.00057   0.00360   0.00636
+     Eigenvalues ---    0.00637   0.00684   0.00709   0.00871   0.00946
+     Eigenvalues ---    0.44819   0.45055   0.45490   0.45544   0.45702
+     Eigenvalues ---    0.45763   0.45860   0.45881   0.45976   0.46010
+     Eigenvalues ---    0.46187   0.46245   0.46294   0.46581   0.64994
+     Eigenvalues ---    0.73785   2.14110   4.33288**********
+ RFO step:  Lambda=-2.31122609D-01 EMin= 1.23334803D-06
+ Skip linear search -- no minimum in search direction.
+ Iteration  1 RMS(Cart)=  0.04748543 RMS(Int)=  0.00013631
+ Iteration  2 RMS(Cart)=  0.00038938 RMS(Int)=  0.00000080
+ Iteration  3 RMS(Cart)=  0.00000003 RMS(Int)=  0.00000080
+ ITry= 1 IFail=0 DXMaxC= 1.97D-01 DCOld= 1.00D+10 DXMaxT= 5.00D-02 DXLimC= 3.00D+00 Rises=F
+ Variable       Old X    -DE/DX   Delta X   Delta X   Delta X     New X
+                                 (Linear)    (Quad)   (Total)
+    R1        4.33088  -0.00337   0.00000   0.00065   0.00065   4.33153
+   A10        2.09435   0.20166   0.00000   0.00044   0.00044   2.09479
+   A122       3.15088  -1.44439   0.00000  -0.00085  -0.00085   3.15003
+    D1       -2.30097   3.30999   0.00000   0.00111   0.00111  -2.29986
+   D50        0.24956   4.69489   0.00000   0.00012   0.00012   0.24968
+   D147      -2.47407  -3.81813   0.00000  -0.00066  -0.00066  -2.47472
+         Item               Value     Threshold  Converged?
+ Maximum Force            ********     0.000450     NO 
+ RMS     Force            4.138104     0.000300     NO 
+ Maximum Displacement     0.196700     0.001800     NO 
+ RMS     Displacement     0.047678     0.001200     NO 
+ Predicted change in Energy=-1.157025D-01
+ Lowest energy point so far.  Saving SCF results.
+ GradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGradGrad
+
+ Leave Link  103 at Fri Oct  3 19:53:38 2025, MaxMem=  6442450944 cpu:               4.4 elap:               0.2
+
