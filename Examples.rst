@@ -270,7 +270,7 @@ Link202
 
    l202 = GOF[-1].get_links(202)[0]
    l202.orientation
-   l202.DistanceMatrix
+   l202.distance_matrix
    l202.print_orientation()
    l202.get_atom_mapping()
 

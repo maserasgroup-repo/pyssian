@@ -367,15 +367,15 @@ class Link103(LinkJob):
     Attributes
     ----------
     mode : str
-        'Init', 'Iteration' or 'End'
+        'init', 'iteration' or 'end'
     state : str
-        Either 'Optimized', 'Non-optimized' or 'Initial'
+        Either 'optimized', 'non-optimized' or 'initial'
     convergence : list
-        List of namedtuples with fields Item,Value,Threshold,Converged.
+        List of namedtuples with fields item,value,threshold,converged.
     parameters : list
-        List of namedtuples with fields Name,Definition,Value,Derivative.
+        List of namedtuples with fields name,definition,value,derivative.
     derivatives : list
-        List of namedtuples with fields Var,old,dEdX,dXl,dXq,dXt,new.
+        List of namedtuples with fields var,old,dEdX,dXl,dXq,dXt,new.
     stepnumber
     scanpoint
     text
@@ -399,9 +399,9 @@ class Link103(LinkJob):
     re_stepnum = re.compile(r'Step\s*number\s*([0-9]*)\s*out\s*of')
     re_scanpoint = re.compile(r'scan\spoint\s*([0-9]*)\s*out\s*of')
 
-    _Parameter = namedtuple("Parameter", "Name Definition Value Derivative")
-    _ConverItem = namedtuple("ConverItem", "Item Value Threshold Converged")
-    _Derivative = namedtuple("Derivative", "Var old dEdX dXl dXq dXt new")
+    _Parameter = namedtuple("Parameter", "name definition value derivative")
+    _ConverItem = namedtuple("ConverItem", "item value threshold converged")
+    _Derivative = namedtuple("Derivative", "var old dEdX dXl dXq dXt new")
 
     def __init__(self,text,asEmpty=False):
         self.mode = None
@@ -421,22 +421,22 @@ class Link103(LinkJob):
             self._locate_convergence()
             self._locate_numbers()
 
-    @Populates('mode',defaults=['Iteration'])
+    @Populates('mode',defaults=['iteration'])
     def _locate_mode(self):
         """
         Uses regex expressions compiled as class attributes to find
-        If the Link corresponds to an (Init)ialization pass, (Iteration)
-        or (End) converged or not.
+        If the Link corresponds to an (init)ialization pass, (iteration)
+        or (end) converged or not.
         """
         cls = self.__class__ # Alias
-        IsInit = cls.re_init.findall(self.text)
-        IsEnd  = cls.re_end.findall(self.text)
-        if IsInit:
-            self.mode = 'Init'
-        elif IsEnd:
-            self.mode = 'End'
+        is_init = cls.re_init.findall(self.text)
+        is_end  = cls.re_end.findall(self.text)
+        if is_init:
+            self.mode = 'init'
+        elif is_end:
+            self.mode = 'end'
         else:
-            self.mode = 'Iteration'
+            self.mode = 'iteration'
 
     @Populates('state','parameters')
     @SilentFail
@@ -446,27 +446,29 @@ class Link103(LinkJob):
         the parameter table if exists.
         """
         cls = self.__class__
-        Match = cls.re_parameters.findall(self.text)
-        Parameters = []
-        if Match:
-            state = Match.pop(0)
-            # '! {Initial/Optimized/Non-Optimized} Parameters !'
-            self.state = state.replace('!','').strip().split()[0]
-            _ = Match.pop(0) # Discard Units
-            _ = Match.pop(0) # Discard Table Headings
-            for line in Match:
-                Columns = line.strip().split()
-                Name = Columns[1]
-                Definition = Columns[2]
-                Value = Columns[3]
-                if self.mode == "Init":
-                    Derivative = Columns[-2]
-                else:
-                    Derivative = float(Columns[-2])
-                Par = cls._Parameter(Name, Definition,
-                                    Value, Derivative)
-                Parameters.append(Par)
-            self.parameters = Parameters
+        text_match = cls.re_parameters.findall(self.text)
+        parameters = []
+        if not text_match: 
+            return
+
+        state = text_match.pop(0)
+        # '! {Initial/Optimized/Non-Optimized} Parameters !'
+        self.state = state.replace('!','').strip().split()[0].lower()
+        _ = text_match.pop(0) # Discard Units
+        _ = text_match.pop(0) # Discard Table Headings
+        for line in text_match:
+            columns = line.strip().split()
+            name = columns[1]
+            definition = columns[2]
+            value = columns[3]
+            if self.mode == 'init':
+                derivative = columns[-2]
+            else:
+                derivative = float(columns[-2])
+            par = cls._Parameter(name, definition,
+                                 value, derivative)
+            parameters.append(par)
+        self.parameters = parameters
 
     @Populates('state','derivatives')
     @SilentFail
@@ -476,14 +478,16 @@ class Link103(LinkJob):
         the derivatives table if exists.
         """
         cls = self.__class__
-        Match = cls.re_derivatives.findall(self.text)
+        text_match = cls.re_derivatives.findall(self.text)
         items = []
-        if Match:
-            for m in Match:
-                Var, old, dEdX, dXl, dXq, dX, new = m
-                item = cls._Derivative(Var, old, dEdX, dXl, dXq, dX, new)
-                items.append(item)
-            self.derivatives = items
+        if not text_match: 
+            return
+        
+        for m in text_match:
+            Var, old, dEdX, dXl, dXq, dX, new = m
+            item = cls._Derivative(Var, old, dEdX, dXl, dXq, dX, new)
+            items.append(item)
+        self.derivatives = items
 
     @Populates('convergence')
     @SilentFail
@@ -493,20 +497,22 @@ class Link103(LinkJob):
         the convergence parameters.
         """
         cls = self.__class__
-        Match = cls.re_convergence.findall(self.text)
+        text_match = cls.re_convergence.findall(self.text)
         items = []
-        if Match:
-            for m in Match:
-                Name = ' '.join(m[0].split())
-                if m[1] == '********':
-                    val = None
-                else:
-                    val = float(m[1])
-                threshold = float(m[2])
-                isConverged = m[3] == "YES"
-                item = cls._ConverItem(Name,val,threshold,isConverged)
-                items.append(item)
-            self.convergence = items
+        if not text_match: 
+            return
+        
+        for m in text_match:
+            name = ' '.join(m[0].split())
+            if m[1] == '********':
+                val = None
+            else:
+                val = float(m[1])
+            threshold = float(m[2])
+            is_converged = m[3] == "YES"
+            item = cls._ConverItem(name,val,threshold,is_converged)
+            items.append(item)
+        self.convergence = items
 
     @Populates('stepnumber','scanpoint')
     @SilentFail
@@ -517,25 +523,26 @@ class Link103(LinkJob):
         (of an scan calculation).
         """
         cls = self.__class__
-        Match = cls.re_stepnum.findall(self.text)
-        if Match:
-            self.stepnumber = int(Match[0])
-        elif self.mode == 'Init':
+        stepnumber = cls.re_stepnum.findall(self.text)
+        if stepnumber:
+            self.stepnumber = int(stepnumber[0])
+        elif self.mode == 'init':
             self.stepnumber = 0
-        Match = cls.re_scanpoint.findall(self.text)
-        if Match:
-            self.scanpoint = int(Match[0])
+
+        scanpoint = cls.re_scanpoint.findall(self.text)
+        if scanpoint:
+            self.scanpoint = int(scanpoint[0])
 
     def print_convergence(self):
         """ Prints the convergence Table formatted """
-        Format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'.format
+        format = '{0: <22s}\t{1:.6f}\t{2:.6f}\t{3}'.format
         try:
-            Out = [Format(*i) for i in self.convergence]
+            out = [format(*i) for i in self.convergence]
         except ValueError as e:
             print("Non numeric value found in the convergence values")
-            Format_str='{0: <22s}\t{1}\t{2}\t{3}'.format
-            Out = [Format_str(*i) for i in self.convergence]
-        print('\n'.join(Out))
+            format_str='{0: <22s}\t{1}\t{2}\t{3}'.format
+            out = [format_str(*i) for i in self.convergence]
+        print('\n'.join(out))
 
 @RegisterLinkJob
 class Link120(LinkJob):
@@ -584,16 +591,16 @@ class Link120(LinkJob):
         the energy and the different energy_partitions.
         """
         cls = self.__class__
-        match = cls.re_energy.findall(self.text)
-        if match:
-            self.energy = float(match[0])
+        text_match = cls.re_energy.findall(self.text)
+        if text_match:
+            self.energy = float(text_match[0])
 
         EnergyPartition = cls._EnergyPartition
-        match = cls.re_energy_partitions.findall(self.text)
-        if not match:
+        text_match = cls.re_energy_partitions.findall(self.text)
+        if not text_match:
             return 
         self.energy_partitions = [EnergyPartition(int(p),level,model,float(energy))
-                                  for p,level,model,energy in match]
+                                  for p,level,model,energy in text_match]
 
 @RegisterLinkJob
 class Link122(LinkJob):
@@ -645,17 +652,17 @@ class Link122(LinkJob):
         the energy and the different energy_partitions.
         """
         cls = self.__class__
-        match = cls.re_bsse.findall(self.text)
-        if match:
-            self.bsse_correction = float(match[0])
+        bsse = cls.re_bsse.findall(self.text)
+        if bsse:
+            self.bsse_correction = float(bsse[0])
 
-        match = cls.re_complex_energy.findall(self.text)
-        if match:
-            self.energy_complex = float(match[0])
+        complex_energy = cls.re_complex_energy.findall(self.text)
+        if complex_energy:
+            self.energy_complex = float(complex_energy[0])
 
-        match = cls.re_fragments_energy.findall(self.text)
-        if match:
-            self.total_energy_fragments = float(match[0])
+        fragments_energy = cls.re_fragments_energy.findall(self.text)
+        if fragments_energy:
+            self.total_energy_fragments = float(fragments_energy[0])
         
 @RegisterLinkJob
 class Link123(LinkJob):
@@ -733,12 +740,14 @@ class Link123(LinkJob):
         """
         cls = self.__class__
         AtomCoords = cls._AtomCoords
-        match = cls.re_orientation.findall(self.text)
-        if match:
-            for line in match:
-                Atom = [int(line[0]),int(line[1]),None]
-                Atom.extend([float(i) for i in line[2:]])
-                self.orientation.append(AtomCoords(*Atom))
+        orientation_lines = cls.re_orientation.findall(self.text)
+        if not orientation_lines: 
+            return
+        
+        for line in orientation_lines:
+            atom = [int(line[0]),int(line[1]),None]
+            atom.extend([float(i) for i in line[2:]])
+            self.orientation.append(AtomCoords(*atom))
 
     @Populates('reactioncoord','step','direction')
     @SilentFail
@@ -748,13 +757,14 @@ class Link123(LinkJob):
         the current step info of the irc path.
         """
         cls = self.__class__
-        match = cls.re_reactioncoord.findall(self.text)
-        if match:
-            self.reactioncoord = float(match[0])
-        match = cls.re_step.findall(self.text)
-        if match:
-            self.step = int(match[0][0])
-            self.direction = match[0][1]
+        reactioncoord = cls.re_reactioncoord.findall(self.text)
+        if reactioncoord:
+            self.reactioncoord = float(reactioncoord[0])
+
+        step = cls.re_step.findall(self.text)
+        if step:
+            self.step = int(step[0][0])
+            self.direction = step[0][1]
         else:
             iscomplete = cls.re_iscomplete.findall(self.text)
             if iscomplete:
@@ -766,11 +776,11 @@ class Link123(LinkJob):
         """
         Displays in console the geometry with a format similar to gaussian.
         """
-        Format = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'
-        Header = 'Center\tAtNum\t{0:^9s}\t{1:^9s}\t{2:^9s}'.format('X','Y','Z')
-        print(Header)
-        Out = [Format.format(*i) for i in self.orientation]
-        print(''.join(Out))
+        linefmt = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'
+        header = 'Center\tAtNum\t{0:^9s}\t{1:^9s}\t{2:^9s}'.format('X','Y','Z')
+        print(header)
+        lines = [linefmt.format(*i) for i in self.orientation]
+        print(''.join(lines))
 
 @RegisterLinkJob
 class Link202(LinkJob):
@@ -790,7 +800,7 @@ class Link202(LinkJob):
     ----------
     orientation : list
         List of namedtuples containing the geometry of the calculated compound.
-    DistanceMatrix : list
+    distance_matrix : list
         For each item the postitions 0 and 1 correspond to the Atom ID in the
         structure and the Atomic Number/Symbol respectively. Position 1 holds
         a list with the distances with respect to all previous items.
@@ -798,7 +808,7 @@ class Link202(LinkJob):
     number
 
     """
-    __slots__ = ('orientation', 'DistanceMatrix')
+    __slots__ = ('orientation', 'distance_matrix')
 
     _token = 202
 
@@ -814,13 +824,13 @@ class Link202(LinkJob):
 
     def __init__(self,text,asEmpty=False):
         self.orientation = []
-        self.DistanceMatrix = []
+        self.distance_matrix = []
         if asEmpty:
             super().__init__('',202)
         else:
             super().__init__(text,202)
             self._locate_orientation()
-            self._locate_DistanceMatrix()
+            self._locate_distance_matrix()
 
     @Populates('orientation')
     @SilentFail
@@ -831,75 +841,84 @@ class Link202(LinkJob):
         """
         cls = self.__class__
         AtomCoords = cls._AtomCoords
-        match = cls.re_orientation.findall(self.text)
-        if match:
-            # If Input and Standard orientation coexist
-            # take the last one (Standard, generally)
-            lines = [i for i in match[-1].split('\n') if i.strip()]
-            _ = lines.pop(0) # Discard "Input orientation" line
-            # Discard "Header"
-            for i in range(4):
-                _ = lines.pop(0)
-            # Discard Last Line that
-            _ = lines.pop(-1)
-            for line in lines:
-                Aux = line.split()
-                Atom = [int(i) for i in Aux[0:3]]
-                Atom.extend([float(i) for i in Aux[3:]])
-                self.orientation.append(AtomCoords(*Atom))
+        orientations = cls.re_orientation.findall(self.text)
+        
+        if not orientations: 
+            return
+        
+        # If Input and Standard orientation coexist
+        # take the last one (Standard, generally)
+        lines = [i for i in orientations[-1].split('\n') if i.strip()]
+        _ = lines.pop(0) # Discard "Input orientation" line
+        
+        # Discard "Header"
+        for _ in range(4):
+            _ = lines.pop(0)
+        
+        # Discard Last Line
+        _ = lines.pop(-1)
+        
+        for line in lines:
+            types = [int]*3+[float]*3
+            atom = [f(i) for f,i in zip(types,line.split())]
+            self.orientation.append(AtomCoords(*atom))
 
-    @Populates('DistanceMatrix')
+    @Populates('distance_matrix')
     @SilentFail
-    def _locate_DistanceMatrix(self):
+    def _locate_distance_matrix(self):
         """
         Looks for the keyword 'Distance matrix' and reads the
         Input orientation table that follows
         """
-        Iterator = self._text_iterbyline()
+        iterlines = self._text_iterbyline()
         cls = self.__class__
-        for line in Iterator:
+        
+        for line in iterlines:
             if "Distance matrix" in line:
                 break
         else: # Fail Silently
             return
+        
         for _ in range(2):
-            line = next(Iterator)
-        Items = []
+            line = next(iterlines)
+        
+        items = []
         while cls.re_number.match(line.strip()[0]):
             # while the first non blank character is a number
-            Atom = line.strip().split()
-            Item = []
-            if '.' not in line or cls.re_number.match(Atom[1]):
-                line = next(Iterator)
+            atom = line.strip().split()
+            item = []
+            if '.' not in line or cls.re_number.match(atom[1]):
+                line = next(iterlines)
                 continue
-            Item.append(int(Atom[0]))
-            Item.append(Atom[1])
-            Item.append(list(map(float,Atom[2:])))
-            Items.append(Item)
-            line = next(Iterator)
-        DicMatrix = {i[0]:['X',[]] for i in Items}
-        for i in Items:
-            Atom = DicMatrix[i[0]]
-            if Atom[0] == "X":
-                Atom[0] = i[1]
-            else:
-                if Atom[0] != i[1]:
-                    raise RuntimeError('''Two atoms with the same Center number
-                                     and different Symbol have been found ''')
-            Atom[1].extend(i[2])
-        self.DistanceMatrix = []
-        for Id, (Sym, Dist) in DicMatrix.items():
-            self.DistanceMatrix.append([Id,Sym,Dist])
+            item.append(int(atom[0]))
+            item.append(atom[1])
+            item.append(list(map(float,atom[2:])))
+            items.append(item)
+            line = next(iterlines)
+
+        dic_matrix = {i[0]:['X',[]] for i in items}
+        for i in items:
+            atom = dic_matrix[i[0]]
+            if atom[0] == "X":
+                atom[0] = i[1]
+            elif atom[0] != i[1]:
+                raise RuntimeError("Two atoms with the same Center number"
+                                    "number and different Symbol have been found")
+            atom[1].extend(i[2])
+
+        self.distance_matrix = []
+        for at_id, (sym, dist) in dic_matrix.items():
+            self.distance_matrix.append([at_id,sym,dist])
 
     def print_orientation(self):
         """
         Displays in console the geometry with a format similar to gaussian.
         """
-        Format = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'.format
-        Header = 'Center\tAtNum\t{0:^9s}\t{1:^9s}\t{2:^9s}'.format('X','Y','Z')
-        print(Header)
-        Out = [Format(*i) for i in self.orientation]
-        print(''.join(Out))
+        linefmt = '{0}\t{1}\t{3: 0.6f}\t{4: 0.6f}\t{5: 0.6f}\n'.format
+        header = 'Center\tAtNum\t{0:^9s}\t{1:^9s}\t{2:^9s}'.format('X','Y','Z')
+        print(header)
+        lines = [linefmt(*i) for i in self.orientation]
+        print(''.join(lines))
     def get_atom_mapping(self):
         """
         Returns a dictionary that relates the atomic number with the symbol
@@ -908,27 +927,32 @@ class Link202(LinkJob):
 
         Returns
         -------
-        Out
+        atom_mapping
             Dictionary with Atomic Number to Symbol mapping
         """
-        Out = dict()
+        
         if not self.orientation: # In case it was parched
             raise RuntimeError('Attempting to access a non-existing orientation')
-        atoms = [(atom[0],atom[1]) for atom in self.orientation ]
-        _iter = self._text_iterbyline()
-        for line in _iter:
+        
+        atom_mapping = dict()
+        atoms = [(atom[0],atom[1]) for atom in self.orientation]
+
+        lines_iter = self._text_iterbyline()
+        for line in lines_iter:
             if 'Distance matrix' in line:
                 break
+        
         try:
-            _ = next(_iter)
+            _ = next(lines_iter)
         except StopIteration:
             raise StopIteration('Attempting to get a mapping from a l202 without Distance matrix')
-        for AtId,AtNum in sorted(atoms,key=lambda x:float(x[0])):
-            line = next(_iter)
-            Aux = line.strip().split()[:2]
-            _, AtSym = Aux
-            Out[AtNum] = AtSym
-        return Out
+        
+        for _,at_num in sorted(atoms,key=lambda x:float(x[0])):
+            line = next(lines_iter)
+            at_sym = line.strip().split()[1]
+            atom_mapping[at_num] = at_sym
+            
+        return atom_mapping
 
 #@RegisterLinkJob
 class Link301(LinkJob):

@@ -244,7 +244,7 @@ class TestLink103(unittest.TestCase):
 
     def test_locate_mode(self):
         msg = 'Mode {} not properly recognized'.format
-        solutions = ['Init','Iteration','End','End','Iteration']
+        solutions = ['init','iteration','end','end','iteration']
         for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
             with self.subTest(Test_Object=i,mode=solution):
                 self.assertTrue(obj.mode == solution,msg(solution))
@@ -628,8 +628,8 @@ class TestLink202(unittest.TestCase):
             with self.subTest(text=i):
                 self.assertEqual(test,solution,msg)
 
-    def test_DistanceMatrix(self):
-        msg = 'DistanceMatrix not properly parsed'
+    def test_distance_matrix(self):
+        msg = 'distance_matrix not properly parsed'
         obj = self.objects[3]
         dmatrix_sol = []
         with open(self.dmatfile) as F:
@@ -640,7 +640,7 @@ class TestLink202(unittest.TestCase):
                     i1 = Aux.pop(0)
                     i2 = list(map(float, Aux))
                     dmatrix_sol.append([i0,i1,i2])
-        self.assertTrue(dmatrix_sol == obj.DistanceMatrix,msg)
+        self.assertTrue(dmatrix_sol == obj.distance_matrix,msg)
 
     def test_AtNum2Sym_error(self):
         msg = 'Obtained an unobtainable Mapping'

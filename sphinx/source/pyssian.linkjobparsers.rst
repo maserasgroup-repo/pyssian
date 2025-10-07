@@ -60,7 +60,7 @@ Link202
 -------
 
 .. autoclass:: pyssian.linkjobparsers.Link202
-   :members: print_orientation, get_atom_mapping, _locate_orientation, _locate_DistanceMatrix
+   :members: print_orientation, get_atom_mapping, _locate_orientation, _locate_distance_matrix
    :show-inheritance:
 
 
