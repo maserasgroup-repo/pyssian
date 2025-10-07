@@ -1078,14 +1078,14 @@ class TestLink913(unittest.TestCase):
         for sol,obj in zip_longest(solutions,self.objects):
             self.assertTrue(obj.MP4 == sol,msg)
 
-    def test_CCSDT(self):
-        msg = 'CCSDT energy not properly read'
+    def test_ccsdt(self):
+        msg = 'ccsdt energy not properly read'
         with open(self.ccsdtfile,'r') as F:
             txt = F.read().replace('D','E')
         solutions = [float(lines.strip()) if lines.strip() else None
                                         for lines in txt.split(SMARK)]
         for sol,obj in zip_longest(solutions,self.objects):
-            self.assertTrue(obj.CCSDT == sol,msg)
+            self.assertTrue(obj.ccsdt == sol,msg)
 
 class TestLink914(unittest.TestCase):
 

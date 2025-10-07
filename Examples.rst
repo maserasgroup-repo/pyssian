@@ -321,7 +321,7 @@ Link804 & Link913
 
    l913 = GOF.get_links(913)[-1]
    l913.MP4
-   l913.CCSDT
+   l913.ccsdt
 
 
 Link914
@@ -331,7 +331,7 @@ Link914
 
    l914 = GOF.get_links(914)[-1]
    for es in l914.excitedstates: 
-       number, energy, wavelen, OStrength, s2, transitions = es
+       number, energy, wavelength, OStrength, s2, transitions = es
        for transition in transitions: 
            donor = transition.donor
            acceptor = transition.acceptor 

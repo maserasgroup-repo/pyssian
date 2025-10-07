@@ -101,7 +101,7 @@ Link913
 -------
 
 .. autoclass:: pyssian.linkjobparsers.Link913
-   :members: _locate_MP4, _locate_CCSDT
+   :members: _locate_MP4, _locate_ccsdt
    :show-inheritance:
 
 Link914

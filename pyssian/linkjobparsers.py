@@ -1433,7 +1433,7 @@ class Link804(LinkJob):
             # Store spin Component
             name,T,E = line.split()
             self.spin_components.append(SpinComponent(name,float(T),float(E)))
-        
+    
     def get_SCScorr(self):
         """ Calculates and returns the MP2(SCS) potential energy, 
         see 'S. Grimme (2003) J. Chem. Phys. 118, pp. 9095'"""
@@ -1459,13 +1459,13 @@ class Link913(LinkJob):
     ----------
     MP4 : float
         MP4 potential energy
-    CCSDT : float
+    ccsdt : float
         CCSD(T) potential energy
     """
     # Current Implementation only stores the MP4(SDQ) Energy, other energies
     # Should be implemented using a different name or reestructure all code
 
-    __slots__ = ('MP4', 'CCSDT')
+    __slots__ = ('MP4', 'ccsdt')
 
     _token = 913
 
@@ -1475,27 +1475,33 @@ class Link913(LinkJob):
 
     def __init__(self,text,asEmpty=False):
         self.MP4 = None
-        self.CCSDT = None
+        self.ccsdt = None
         if asEmpty:
             super().__init__('',913)
         else:
             super().__init__(text,913)
             self._locate_MP4()
-            self._locate_CCSDT()
+            self._locate_ccsdt()
+    
+    @Populates('MP4')
+    @SilentFail
     def _locate_MP4(self):
         """ Looks for the First iteration and then looks for the keyword
         'UMP4(SDQ)' and reads the MP4 Potential Energy """
         cls = self.__class__
-        Match = cls.re_MP4.findall(self.text)
-        if Match and Match[-1].startswith('UMP4(SDQ)'):
-            self.MP4 = float(Match[-1].split("=")[1].replace('D','E'))
-    def _locate_CCSDT(self):
+        mp4_energy = cls.re_MP4.findall(self.text)
+        if mp4_energy and mp4_energy[-1].startswith('UMP4(SDQ)'):
+            self.MP4 = float(mp4_energy[-1].split("=")[1].replace('D','E'))
+    
+    @Populates('ccsdt')
+    @SilentFail
+    def _locate_ccsdt(self):
         """ Looks for the keywords 'Time for triples' which appears after the
         calculation has converged and reads the CCSD(T) Potential Energy """
         cls = self.__class__
-        Match = cls.re_ccsdt.findall(self.text)
-        if Match:
-            self.CCSDT = float(Match[0].replace('D','E'))
+        ccsdt_energy = cls.re_ccsdt.findall(self.text)
+        if ccsdt_energy:
+            self.ccsdt = float(ccsdt_energy[0].replace('D','E'))
 
 @RegisterLinkJob
 class Link914(LinkJob):
@@ -1522,14 +1528,14 @@ class Link914(LinkJob):
     _token = 914
 
     _ExcitedState = namedtuple('ExcitedState',
-                            'number energy wavelen OStrenght s2 transitions')
+                            'number energy wavelength osc_strength s2 transitions')
     _TransitionData = namedtuple('TransitionData',
                             'donor acceptor contribution isreversed')
 
     re_ExcitedState =  r'Excited\s*State\s*([0-9]{1,3})\:' # Excited State number
     re_ExcitedState += r'\s*(\S*)'     # Match Pointgroup
     re_ExcitedState += r'\s*(\S*)\seV' # Match Energy
-    re_ExcitedState += r'\s*(\S*)\snm' # Match wavelength
+    re_ExcitedState += r'\s*(\S*)\snm' # Match wavelengthgth
     re_ExcitedState += r'\s*f\=(\S*)'  # Match Oscilator Strength
     re_ExcitedState += r'\s*\S*\=(\S*).*' # Match <S**2>
     re_ExcitedState = re.compile(re_ExcitedState)
@@ -1558,29 +1564,30 @@ class Link914(LinkJob):
         ExcitedState = self._ExcitedState
         excitedstates = []
         matches = list(self.re_ExcitedState.finditer(self.text))
-        # Fail silently
+        
         if not matches:
             return
+        
         for current,new in zip(matches,matches[1:]):
             start,stop = current.end(),new.start()
             text = self.text[start:stop]
-            number,_,energy,wavelen,OStrenght,s2 = current.groups()
+            number,_,energy,wavelength,osc_strength,s2 = current.groups()
             transitions = self._extract_transitions(text)
             excitedstates.append(ExcitedState(int(number),
                                               float(energy),
-                                              float(wavelen),
-                                              float(OStrenght),
+                                              float(wavelength),
+                                              float(osc_strength),
                                               float(s2),
                                               transitions))
         else: # Ensure the last excited state is parsed
             text = self.text[stop:]
             if text.strip(): 
-                number,_,energy,wavelen,OStrenght,s2 = matches[-1].groups()
+                number,_,energy,wavelength,osc_strength,s2 = matches[-1].groups()
                 transitions = self._extract_transitions(text)
                 excitedstates.append(ExcitedState(int(number),
                                                 float(energy),
-                                                float(wavelen),
-                                                float(OStrenght),
+                                                float(wavelength),
+                                                float(osc_strength),
                                                 float(s2),
                                                 transitions))
         self.excitedstates = excitedstates
@@ -1635,15 +1642,19 @@ class Link914(LinkJob):
             default False
         """
         for ES in self.excitedstates:
+
             if ES.number not in ESnumbers:
                 continue
-            number,energy,wavelen,OStrenght,s2,_ = ES
-            print(f'ExcitedState(number={number} energy={energy} ' \
-                  f'wavelen={wavelen} OStrenght={OStrenght} ' \
+            
+            number,energy,wavelength,osc_strength,s2,_ = ES
+            
+            print(f'ExcitedState(number={number} energy={energy} ' 
+                  f'wavelength={wavelength} osc_strength={osc_strength} ' 
                   f's2={s2} transitions=[...])')
+            
             if show_transitions:
                 for transition in ES.transitions:
-                    print(f'\t{transition.donor} -> {transition.acceptor}'\
+                    print(f'\t{transition.donor} -> {transition.acceptor}'
                           f'\t {transition.contribution}')
 
 @RegisterLinkJob
