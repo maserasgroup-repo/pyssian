@@ -951,7 +951,7 @@ class Link202(LinkJob):
             line = next(lines_iter)
             at_sym = line.strip().split()[1]
             atom_mapping[at_num] = at_sym
-            
+
         return atom_mapping
 
 #@RegisterLinkJob
@@ -1008,9 +1008,9 @@ class Link502(LinkJob):
         rported as 'SCF Done:' and reads the potential energy.
         """
         cls = self.__class__
-        Match = cls.re_EDone.findall(self.text)
-        if Match:
-            self.energy = float(Match[0])
+        energy = cls.re_EDone.findall(self.text)
+        if energy:
+            self.energy = float(energy[0])
 
     @Populates('spin')
     @SilentFail
@@ -1020,10 +1020,10 @@ class Link502(LinkJob):
         rported as 'SCF Done:' and reads the potential energy.
         """
         cls = self.__class__
-        Match = cls.re_spin.findall(self.text)
-        if Match:
-            before,after = Match[0]
-            self.spin = float(before),float(after)
+        spin = cls.re_spin.findall(self.text)
+        if spin:
+            before,after = spin[0]
+            self.spin = (float(before),float(after))
     
 
 @RegisterLinkJob
@@ -1109,15 +1109,20 @@ class Link601(LinkJob):
         Mulliken charges and spin condensed to heavy atoms.
         """
         cls = self.__class__
-        Match = cls.re_MullikenHeavy.findall(self.text)
-        if Match:
-            lines =  Match[0][1].split('\n')
-            if Match[0][0]:
-                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
-            else:
-                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
-            self.mulliken_heavy = [Atom(line.strip().split())
-                                    for line in lines if line.strip()]
+        mulliken_heavy_lines = cls.re_MullikenHeavy.findall(self.text)
+        
+        if not mulliken_heavy_lines: 
+            return
+        
+        lines =  mulliken_heavy_lines[0][1].split('\n')
+        has_spin = bool(mulliken_heavy_lines[0][0])
+        if has_spin:
+            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
+        else:
+            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+        
+        self.mulliken_heavy = [atom(line.strip().split())
+                                for line in lines if line.strip()]
 
     @Populates('mulliken')
     @SilentFail
@@ -1127,16 +1132,21 @@ class Link601(LinkJob):
         atomic Mulliken charges.
         """
         cls = self.__class__
-        Match = cls.re_MullikenAtoms.findall(self.text)
-        if Match:
-            lines =  Match[0][1].split('\n')
-            if Match[0][0]:
-                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
-            else:
-                Atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
-            
-            self.mulliken = [Atom(line.strip().split())
-                             for line in lines if line.strip()]
+        mulliken_lines = cls.re_MullikenAtoms.findall(self.text)
+
+        if not mulliken_lines: 
+            return
+
+        lines =  mulliken_lines[0][1].split('\n')
+        has_spin = bool(mulliken_lines[0][0])
+
+        if has_spin:
+            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
+        else:
+            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+        
+        self.mulliken = [atom(line.strip().split())
+                            for line in lines if line.strip()]
 
 @RegisterLinkJob
 class Link716(LinkJob):
