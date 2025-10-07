@@ -77,9 +77,9 @@ class LinkJob(object):
     __slots__ = ('text','number')
     _token = 'Base'
     Register = {}
-    def __init__(self,text,number=None,asEmpty=False):
+    def __init__(self,text,number=None,as_empty=False):
         self.number = number
-        if asEmpty:
+        if as_empty:
             text = ''
         self.text = text
     def __repr__(self):
@@ -93,7 +93,7 @@ class LinkJob(object):
 
     @classmethod
     def as_empty(cls,text,number=None):
-        instance = cls(text,asEmpty=True)
+        instance = cls(text,as_empty=True)
         if instance.number is None:
             instance.number = cls._token
         return instance
@@ -110,7 +110,7 @@ class GeneralLinkJob(LinkJob):
         text that corresponds to the output of the lxxxx.exe
     number : int
         Integrer that represents the type of the LinkJob. (defaults to None)
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -129,15 +129,15 @@ class GeneralLinkJob(LinkJob):
 
     re_enter = re.compile(r'(?:Enter.*l)([0-9]{1,4})(?:\.exe)')
 
-    def __init__(self,text,number=None,asEmpty=False):
+    def __init__(self,text,number=None,as_empty=False):
         cls = self.__class__
         if number is None:
-            Match = cls.re_enter.findall(text)
-            if Match:
-                number = int(Match[0])
+            number_match = cls.re_enter.findall(text)
+            if number_match:
+                number = int(number_match[0])
             else:
                 number = -1
-        if asEmpty:
+        if as_empty:
             text = ''
         super().__init__(text,number)
 
@@ -169,7 +169,7 @@ class Link1(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l1.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -201,7 +201,7 @@ class Link1(LinkJob):
 
     InternalJobInfo = namedtuple('InternalJobInfo','number type new_InternalJob')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         super().__init__(text,1)
         self.info = None
         self.commandline = ''
@@ -209,7 +209,7 @@ class Link1(LinkJob):
         self.mem = None
         self.link0 = []
         self.IOps = []
-        if asEmpty:
+        if as_empty:
             self._locate_internaljob()
             self.text = '' # clear text
         else:
@@ -312,7 +312,7 @@ class Link101(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l101.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults is False)
 
@@ -328,10 +328,10 @@ class Link101(LinkJob):
     re_charge = re.compile(r'(?:Charge\s=\s*)(-{0,1}[0-9]*)')
     re_spin = re.compile(r'(?:Multiplicity\s=\s*)([0-9]*)')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.charge = None
         self.spin = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',101)
         else:
             super().__init__(text,101)
@@ -360,7 +360,7 @@ class Link103(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l103.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -403,7 +403,7 @@ class Link103(LinkJob):
     _ConverItem = namedtuple("ConverItem", "item value threshold converged")
     _Derivative = namedtuple("Derivative", "var old dEdX dXl dXq dXt new")
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.mode = None
         self.state = None
         self.convergence = []
@@ -411,7 +411,7 @@ class Link103(LinkJob):
         self.derivatives = []
         self.stepnumber = None
         self.scanpoint = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',103)
         else:
             super().__init__(text,103)
@@ -554,7 +554,7 @@ class Link120(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l120.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -574,10 +574,10 @@ class Link120(LinkJob):
     re_energy_partitions = re.compile(re_energy_partitions)
     _EnergyPartition = namedtuple('EnergyPartition','gridpoint level model energy')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.energy = None
         self.energy_partitions = []
-        if asEmpty:
+        if as_empty:
             super().__init__('',120)
         else:
             super().__init__(text,120)
@@ -612,7 +612,7 @@ class Link122(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l122.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -634,11 +634,11 @@ class Link122(LinkJob):
     re_fragments_energy = r'sum of fragments\s=\s*(-?[0-9]*\.[0-9]*)'
     re_fragments_energy = re.compile(re_fragments_energy)
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.energy_complex = None
         self.total_energy_fragments = None
         self.bsse_correction = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',122)
         else:
             super().__init__(text,122)
@@ -675,7 +675,7 @@ class Link123(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l202.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -719,12 +719,12 @@ class Link123(LinkJob):
     _AtomCoords = namedtuple('AtomCoords',
                             'CenterNum AtomicNum AtomType X Y Z')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.orientation = []
         self.direction = ''
         self.step = 0
         self.reactioncoord = 0
-        if asEmpty:
+        if as_empty:
             super().__init__('',123)
         else:
             super().__init__(text,123)
@@ -792,7 +792,7 @@ class Link202(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l202.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -822,10 +822,10 @@ class Link202(LinkJob):
     _AtomCoords = namedtuple('AtomCoords',
                             'CenterNum AtomicNum AtomType X Y Z')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.orientation = []
         self.distance_matrix = []
-        if asEmpty:
+        if as_empty:
             super().__init__('',202)
         else:
             super().__init__(text,202)
@@ -973,7 +973,7 @@ class Link502(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l502.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -991,9 +991,9 @@ class Link502(LinkJob):
     re_EDone = re.compile(r'SCF\sDone\:\s*E\(.*\).*=\s*(\-?[0-9]*\.[0-9]+)')
     re_spin = re.compile('S\*\*2 before annihilation\s*(-?[0-9]*\.[0-9]*),\s*after\s*(-?[0-9]*\.[0-9]*)')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.energy = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',502)
         else:
             super().__init__(text,502)
@@ -1035,7 +1035,7 @@ class Link508(Link502):
     ----------
     text : str
         text that corresponds to the output of the l508.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1050,8 +1050,8 @@ class Link508(Link502):
 
     _token = 508
 
-    def __init__(self,text,asEmpty=False):
-        super().__init__(text,asEmpty)
+    def __init__(self,text,as_empty=False):
+        super().__init__(text,as_empty)
         self.number = 508
 
 @RegisterLinkJob
@@ -1067,7 +1067,7 @@ class Link601(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l508.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1089,11 +1089,11 @@ class Link601(LinkJob):
     
     _token = 601
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self._Atom = namedtuple('Atom','number symbol charge spin')
         self.mulliken_heavy = None
         self.mulliken = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',601)
         else:
             super().__init__(text,601)
@@ -1157,7 +1157,7 @@ class Link716(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l716.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1209,7 +1209,7 @@ class Link716(LinkJob):
     _Displacement = namedtuple('FreqDisplacements','atomids atoms xyz')
     _EContrib = namedtuple('EContrib','Name Thermal CV S')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.dipole = []
         self.units = [] # The first one corresponds to the non tabulated
         self.zeropoint = []
@@ -1221,7 +1221,7 @@ class Link716(LinkJob):
         self.freq_displacements = []
         self.IR_spectrum = ''
         self.mode = ''
-        if asEmpty:
+        if as_empty:
             super().__init__('',716)
         else:
             super().__init__(text,716)
@@ -1371,7 +1371,7 @@ class Link804(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l804.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1390,10 +1390,10 @@ class Link804(LinkJob):
 
     _SpinComponent = namedtuple('SpinComponent','Name T E')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.MP2 = None
         self.spin_components = [] # The first one corresponds to the non tabulated
-        if asEmpty:
+        if as_empty:
             super().__init__('',804)
         else:
             super().__init__(text,804)
@@ -1451,7 +1451,7 @@ class Link913(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l913.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1473,10 +1473,10 @@ class Link913(LinkJob):
     re_MP4 = re.compile(re_MP4)
     re_ccsdt = re.compile(r'CCSD\(T\)=\s?(\-?[0-9]+\.[0-9]*D[\+|\-][0-9]{2,3})')
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.MP4 = None
         self.ccsdt = None
-        if asEmpty:
+        if as_empty:
             super().__init__('',913)
         else:
             super().__init__(text,913)
@@ -1513,7 +1513,7 @@ class Link914(LinkJob):
     ----------
     text : str
         text that corresponds to the output of the l913.exe
-    asEmpty : bool
+    as_empty : bool
         Flag to not parse and store the information of the text.
         (defaults to False)
 
@@ -1546,9 +1546,9 @@ class Link914(LinkJob):
     re_transition += r'(\-?[0-9]*\.[0-9]*)'   # Match contribution
     re_transition = re.compile(re_transition)
 
-    def __init__(self,text,asEmpty=False):
+    def __init__(self,text,as_empty=False):
         self.excitedstates = []
-        if asEmpty:
+        if as_empty:
             super().__init__('',914)
         else:
             super().__init__(text,914)
@@ -1672,8 +1672,8 @@ class Link9999(LinkJob):
 
     re_termination = re.compile(r'\s?([a-zA-Z]*)\stermination')
     
-    def __init__(self,text,asEmpty=False):
-        if asEmpty:
+    def __init__(self,text,as_empty=False):
+        if as_empty:
             super().__init__('',9999)
         else:
             super().__init__(text,9999)

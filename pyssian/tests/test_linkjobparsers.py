@@ -38,7 +38,7 @@ class TestGeneralLinkJob(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of GeneralLinkJob'
-        obj = GeneralLinkJob('Some Text',asEmpty=True)
+        obj = GeneralLinkJob('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertTrue(obj.number == -1,msg)
 
@@ -118,7 +118,7 @@ class TestLink1(unittest.TestCase):
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link1'
         text = 'Link1:  Proceeding to internal job step number 13.'
-        obj = Link1(text,asEmpty=True)
+        obj = Link1(text,as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,1)
         self.assertTrue(bool(obj.info),msg)
@@ -126,7 +126,7 @@ class TestLink1(unittest.TestCase):
     def test_guess_type(self):
         msg = 'Incorrect type guess'
         text = 'Link1:  Proceeding to internal job step number 13.'
-        obj = Link1(text,asEmpty=True)
+        obj = Link1(text,as_empty=True)
         types = {0:'Constrained Optimization',
                  1:'Optimization',
                  2:'Frequency Calculation',
@@ -202,7 +202,7 @@ class TestLink101(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link101'
-        obj = Link101('-> Input Text',asEmpty=True)
+        obj = Link101('-> Input Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,101)
 
@@ -235,7 +235,7 @@ class TestLink103(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link101'
-        obj = Link103('-> Input Text',asEmpty=True)
+        obj = Link103('-> Input Text',as_empty=True)
         attrs = ['mode','state','convergence', 'parameters', 'derivatives',
                  'stepnumber', 'scanpoint']
         for attr in attrs:
@@ -371,7 +371,7 @@ class TestLink120(unittest.TestCase):
             
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link120'
-        obj = Link120('Some Text',asEmpty=True)
+        obj = Link120('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,120)
 
@@ -463,7 +463,7 @@ class TestLink122(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link122'
-        obj = Link122('Some Text',asEmpty=True)
+        obj = Link122('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,122)
 
@@ -512,7 +512,7 @@ class TestLink123(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link101'
-        obj = Link123('-> Input Text',asEmpty=True)
+        obj = Link123('-> Input Text',as_empty=True)
         attrs = ['orientation', 'direction', 'step', 'reactioncoord']
         for attr in attrs:
             test = getattr(obj,attr)
@@ -602,7 +602,7 @@ class TestLink202(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link202'
-        obj = Link202('Some Text',asEmpty=True)
+        obj = Link202('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,202)
         self.assertFalse(bool(obj.orientation),msg)
@@ -711,7 +711,7 @@ class TestLink502(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link502'
-        obj = Link502('Some Text',asEmpty=True)
+        obj = Link502('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,502)
 
@@ -788,7 +788,7 @@ class TestLink601(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link502'
-        obj = Link601('Some Text',asEmpty=True)
+        obj = Link601('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,601)
 
@@ -938,7 +938,7 @@ class TestLink716(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link716'
-        obj = Link716('Some Text',asEmpty=True)
+        obj = Link716('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,716)
 
@@ -975,7 +975,7 @@ class TestLink804(unittest.TestCase):
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link804'
         text = 'Link1:  Proceeding to internal job step number 13.'
-        obj = Link804(text,asEmpty=True)
+        obj = Link804(text,as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,804)
         self.assertTrue(obj.MP2 is None,msg)
@@ -997,7 +997,7 @@ class TestLink804(unittest.TestCase):
 
     def test_SCSCorr(self):
         msg = 'SCS correction not properly calculated'
-        MockObject = Link804('',asEmpty=True)
+        MockObject = Link804('',as_empty=True)
         SpinComponent = Link804._SpinComponent
         MockObject.spin_components = [None,None,None]
         MockDict = dict(Name='',E=0,T=0)
@@ -1065,7 +1065,7 @@ class TestLink913(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link913'
-        obj = Link913('Some Text',asEmpty=True)
+        obj = Link913('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,913)
 
@@ -1148,7 +1148,7 @@ class TestLink914(unittest.TestCase):
 
     def test_init_empty(self):
         msg = 'Incorrect empty initialization of Link913'
-        obj = Link914('Some Text',asEmpty=True)
+        obj = Link914('Some Text',as_empty=True)
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,914)
 
@@ -1171,7 +1171,7 @@ class TestLink914(unittest.TestCase):
 
     def test_extract_transitions(self):
         msg = 'Wrong Transition Extraction: {1} does not match {0}'.format
-        L914 = Link914('',asEmpty=True)
+        L914 = Link914('',as_empty=True)
         txt = """
              107B ->166B        0.02496
              165B ->167B        0.02444
