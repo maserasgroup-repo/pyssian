@@ -79,10 +79,10 @@ class GaussianOutFile(object):
         file = self._file.name.split('/')[-1]
         repr = f'<{cls}({file})>\n'
         indent = '    '
-        for InternalJob in self:
-            repr += indent + f'{InternalJob} type <{InternalJob.type}>\n'
-            for Link in InternalJob:
-                 repr += indent*2 + f'{Link}\n'
+        for job in self:
+            repr += indent + f'{job} type <{job.type}>\n'
+            for link in job:
+                repr += indent*2 + f'{link}\n'
         return repr
 
     def __len__(self):
@@ -99,7 +99,7 @@ class GaussianOutFile(object):
         """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self._file.__exit__(exc_type, exc_value, traceback)
 
-    def _set_parsers(self,linkids:list[int],interblock=-1):
+    def _set_parsers(self,link_ids:list[int],interblock=-1):
         f"""
         Generates an internal copy of the available linkjob parsers which 
         has the specifications of whether to parse specific Links as empty or
@@ -107,7 +107,7 @@ class GaussianOutFile(object):
 
         Parameters
         ----------
-        linkids : list[int]
+        link_ids : list[int]
             List of integrers that represent which types of Links to parse.
             If None or an empty list are provided it will attempt to parse
             all LinkJobs. If {EMPTYLINKFLAG} is in the list, all Links will be parsed 
@@ -120,15 +120,15 @@ class GaussianOutFile(object):
         parsers = available_linkjobs.copy()
         assert interblock not in parsers
 
-        if not linkids: # If no specific Links are provided parse everything that is available
+        if not link_ids: # If no specific Links are provided parse everything that is available
             parsers[interblock] = GeneralLinkJob.as_empty
 
-        elif EMPTYLINKFLAG in linkids: # Signal to 
+        elif EMPTYLINKFLAG in link_ids: # Signal to 
             for key in parsers:
                 parsers[key] = parsers[key].as_empty
         else:
             for key in parsers:
-                if key not in linkids:
+                if key not in link_ids:
                     parsers[key] = parsers[key].as_empty
         
         parsers[interblock] = GeneralLinkJob.as_empty
@@ -192,21 +192,21 @@ class GaussianOutFile(object):
         for internaljob in self.jobs:
             internaljob.clean()
 
-    def get_links(self,*linkids):
+    def get_links(self,*link_ids):
         """
         Wrapper Method to get a list of Links with certain Ids across
         the different Internal Jobs.
 
         Parameters
         ----------
-        *LinkIds : int
+        *link_ids : int
             Integrers that correspond to the type of links to be return.
 
         Returns
         -------
         list
         """
-        link_lists = [job.get_links(*linkids) for job in self.jobs]
+        link_lists = [job.get_links(*link_ids) for job in self.jobs]
         return list(chain(*link_lists))
     
     # Generators and Coroutines for File Parsing
@@ -300,7 +300,7 @@ class GaussianOutFile(object):
             else:
                 is_explicit = link.info.new_InternalJob
                 if not is_explicit:
-                    info = link.InternalJobInfo(self.jobs[-1].number+1,'Linked',True)
+                    info = link.InternalJobInfo(self.jobs[-1].number+1,'linked',True)
                     link.info = info
                 new_job = InternalJob()
                 self.jobs.append(new_job)
@@ -311,7 +311,8 @@ class GaussianOutFile(object):
             block_type, block = yield
 
 class InternalJob(object):
-    """Gaussian 09/16 InternalJob parent class, if any special type of Job
+    """
+    Gaussian 09/16 InternalJob parent class, if any special type of Job
     requires different parsing it should be a subclass of this one.
 
     Parameters
@@ -323,7 +324,7 @@ class InternalJob(object):
     ----------
     type
         string identifier for the job.
-    Links
+    links
         List of the different Links that belong to the InternalJob.
     number
 
@@ -332,7 +333,7 @@ class InternalJob(object):
     def __init__(self,number=None):
         self.number = number
         self.type = None
-        self.Links = []
+        self.links = []
     def __repr__(self):
         cls = type(self).__name__
         if self.number is None:
@@ -342,23 +343,25 @@ class InternalJob(object):
     def __str__(self):
         return f'Internal Job {self.number}: {self.type}'
     def __getitem__(self,index):
-        return self.Links[index]
+        return self.links[index]
     def __len__(self):
-        return len(self.Links)
+        return len(self.links)
 
-    def append(self,Link):
+    def append(self,link):
         # Restrict to Link objects
-        if not isinstance(Link, LinkJob):
-            raise TypeError(f'{Link:!r} is not of class {LinkJob:!r}')
-        self.Links.append(Link)
+        if not isinstance(link, LinkJob):
+            raise TypeError(f'{link:!r} is not of class {LinkJob:!r}')
+        self.links.append(link)
     def guess_info(self):
-        """ Guesses the number and type attributes of itself using the stored
-        Links."""
-        if self.Links:
-            Links = (Link for Link in self.Links if Link.number == 1)
+        """
+        Guesses the number and type attributes of itself using the stored
+        Links.
+        """
+        if self.links:
+            links = (link for link in self.links if link.number == 1)
             try:
-                StarterLink = next(Links)
-                info = StarterLink.info
+                start_link = next(links)
+                info = start_link.info
             except AttributeError:
                 pass
             except StopIteration:
@@ -368,18 +371,18 @@ class InternalJob(object):
                 self.type = info.type
     def clean(self):
         """Removes all the Empty Link instances within Links."""
-        Indices2Remove = []
-        for i, Link in enumerate(self.Links):
-            if not Link.text:
-                Indices2Remove.append(i)
-        for index in reversed(Indices2Remove):
-            _ = self.Links.pop(index)
-    def get_links(self,*LinkIds):
+        idx_to_remove = []
+        for i, link in enumerate(self.links):
+            if not link.text:
+                idx_to_remove.append(i)
+        for index in reversed(idx_to_remove):
+            _ = self.links.pop(index)
+    def get_links(self,*link_ids):
         """Wrapper Method to get a list of Links with certain Ids.
 
         Parameters
         ----------
-        *LinkIds : int
+        *link_ids : int
             Integrers that correspond to the type of links to be return.
 
         Returns
@@ -388,7 +391,7 @@ class InternalJob(object):
             List of Link Objects ordered by appearance in the file and filtered
             by Link Number.
         """
-        return [Link for Link in self.Links if Link.number in LinkIds]
+        return [link for link in self.links if link.number in link_ids]
 
 class GaussianInFile(object):
     """
