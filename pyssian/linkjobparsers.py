@@ -1025,7 +1025,6 @@ class Link502(LinkJob):
             before,after = spin[0]
             self.spin = (float(before),float(after))
     
-
 @RegisterLinkJob
 class Link508(Link502):
     """
@@ -1654,6 +1653,13 @@ class Link9999(LinkJob):
 
     re_termination = re.compile(r'\s?([a-zA-Z]*)\stermination')
     
+    def __init__(self,text,asEmpty=False):
+        if asEmpty:
+            super().__init__('',9999)
+        else:
+            super().__init__(text,9999)
+            self._locate_termination()
+
     @Populates('termination')
     @SilentFail
     def _locate_termination(self): 
@@ -1661,6 +1667,6 @@ class Link9999(LinkJob):
         cls = self.__class__
         re_match = cls.re_termination.search(self.text)
         if re_match:
-            self.termination = re_match.group(1)
+            self.termination = re_match.group(1).lower()
         else:
             self.termination = 'unfinished'
