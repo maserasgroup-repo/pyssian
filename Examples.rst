@@ -314,7 +314,7 @@ Link804 & Link913
 
    l804 = GOF.get_links(804)[-1]
    l804.MP2
-   l804.SpinComponents
+   l804.spin_components
    scs_corr = Link804.get_SCScorr()
    HF_energy = GOF.get_links(502)[-1].energy 
    scs_energy = HF_energy + scs_corr

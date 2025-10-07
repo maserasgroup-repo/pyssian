@@ -1379,10 +1379,10 @@ class Link804(LinkJob):
     ----------
     MP2 : float
         Potential energy with MP2 method
-    SpinComponents : list
+    spin_components : list
         List of namedtuples with the fields Name, T, E.
     """
-    __slots__ = ('MP2', 'SpinComponents')
+    __slots__ = ('MP2', 'spin_components')
 
     _token = 804
 
@@ -1392,46 +1392,54 @@ class Link804(LinkJob):
 
     def __init__(self,text,asEmpty=False):
         self.MP2 = None
-        self.SpinComponents = [] # The first one corresponds to the non tabulated
+        self.spin_components = [] # The first one corresponds to the non tabulated
         if asEmpty:
             super().__init__('',804)
         else:
             super().__init__(text,804)
-            self._locate_SpinComponents()
+            self._locate_spin_components()
             self._locate_MP2()
 
+    @Populates('MP2')
+    @SilentFail
     def _locate_MP2(self):
         """ Looks for the keyword 'EUMP2=' and reads the MP2 Potential Energy """
         cls = self.__class__
-        Match = cls.re_MP2.findall(self.text)
-        if Match:
-            self.MP2 = float(Match[0].replace('D','E'))
-    def _locate_SpinComponents(self):
+        mp2_energy = cls.re_MP2.findall(self.text)
+        if mp2_energy:
+            self.MP2 = float(mp2_energy[0].replace('D','E'))
+    
+    @Populates('spin_components')
+    @SilentFail
+    def _locate_spin_components(self):
         """ Looks for the keywords 'Spin Components' and reads
         the Energies of the spin Components """
-        Iterator = self._text_iterbyline()
+        lines_iter = self._text_iterbyline()
         cls = self.__class__
         SpinComponent = cls._SpinComponent
-        for line in Iterator:
+
+        for line in lines_iter:
             if 'Spin components' in line:
                 break
         else: # fail silently
             return
+        
         for _ in range(3):
-            line = next(Iterator)
+            line = next(lines_iter)
             # Standarize number of columns
             line = line.replace('=',' ').replace('E2',' ').replace('T2',' ')
             # Change Number Notation
             line = line.replace('D','E')
             # Store spin Component
-            Name,T,E = line.split()
-            self.SpinComponents.append(SpinComponent(Name,float(T),float(E)))
+            name,T,E = line.split()
+            self.spin_components.append(SpinComponent(name,float(T),float(E)))
+        
     def get_SCScorr(self):
         """ Calculates and returns the MP2(SCS) potential energy, 
         see 'S. Grimme (2003) J. Chem. Phys. 118, pp. 9095'"""
-        aa = self.SpinComponents[0].E
-        ab = self.SpinComponents[1].E
-        bb = self.SpinComponents[2].E
+        aa = self.spin_components[0].E
+        ab = self.spin_components[1].E
+        bb = self.spin_components[2].E
         return (aa+bb)/3.0 +(6.0*ab)/5.0
 
 @RegisterLinkJob

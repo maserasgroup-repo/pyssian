@@ -959,7 +959,7 @@ class TestLink804(unittest.TestCase):
             self.assertTrue(bool(obj.text),msg)
             self.assertEqual(obj.number,804)
             self.assertTrue(obj.MP2 is not None,msg)
-            self.assertTrue(bool(obj.SpinComponents),msg)
+            self.assertTrue(bool(obj.spin_components),msg)
 
     def test_regex_MP2(self):
         msg = 're_MP2 regex does not match properly'
@@ -979,10 +979,10 @@ class TestLink804(unittest.TestCase):
         self.assertFalse(bool(obj.text),msg)
         self.assertEqual(obj.number,804)
         self.assertTrue(obj.MP2 is None,msg)
-        self.assertFalse(bool(obj.SpinComponents),msg)
+        self.assertFalse(bool(obj.spin_components),msg)
 
-    def test_SpinComponents(self):
-        msg = 'SpinComponents not properly parsed'
+    def test_spin_components(self):
+        msg = 'spin_components not properly parsed'
         SpinComponent = Link804._SpinComponent
         with open(self.propfile,'r') as F:
             txt = F.read().replace('D','E')
@@ -993,18 +993,18 @@ class TestLink804(unittest.TestCase):
             for line in lines:
                 a0,a1,a2 = line.split()
                 sol.append(SpinComponent(a0,float(a1),float(a2)))
-            self.assertTrue(obj.SpinComponents == sol,msg)
+            self.assertTrue(obj.spin_components == sol,msg)
 
     def test_SCSCorr(self):
         msg = 'SCS correction not properly calculated'
         MockObject = Link804('',asEmpty=True)
         SpinComponent = Link804._SpinComponent
-        MockObject.SpinComponents = [None,None,None]
+        MockObject.spin_components = [None,None,None]
         MockDict = dict(Name='',E=0,T=0)
         for item in [(0,0,0),(3,5,3),(1.5,10,1.5)]:
             for i,j in enumerate(item):
                 MockDict['E'] = j
-                MockObject.SpinComponents[i] = SpinComponent(**MockDict)
+                MockObject.spin_components[i] = SpinComponent(**MockDict)
             test = MockObject.get_SCScorr()
             aa,ab,bb = item
             sol = (aa+bb)/3.0 +(6.0*ab)/5.0

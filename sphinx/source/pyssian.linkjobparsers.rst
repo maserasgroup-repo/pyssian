@@ -94,7 +94,7 @@ Link804
 -------
 
 .. autoclass:: pyssian.linkjobparsers.Link804
-   :members: get_SCScorr, _locate_MP2, _locate_SpinComponents
+   :members: get_SCScorr, _locate_MP2, _locate_spin_components
    :show-inheritance:
 
 Link913
