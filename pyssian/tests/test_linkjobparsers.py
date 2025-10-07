@@ -800,7 +800,7 @@ class TestLink716(unittest.TestCase):
         cls.dipolefile      = TEST_FILEDIR.joinpath('l716_redipole.txt')
         cls.Thermofile      = TEST_FILEDIR.joinpath('l716_reThermo.txt')
         cls.EContribfile    = TEST_FILEDIR.joinpath('l716_reEContrib.txt')
-        cls.IRSpectrumfile  = TEST_FILEDIR.joinpath('l716_reIRSpectrum.txt')
+        cls.IR_spectrumfile  = TEST_FILEDIR.joinpath('l716_reIR_spectrum.txt')
         cls.Frequenciesfile = TEST_FILEDIR.joinpath('l716_reFrequencies.txt')
         cls.freqtextfile    = TEST_FILEDIR.joinpath('l716_refreqtxt.txt')
         cls.freqdispfile    = TEST_FILEDIR.joinpath('l716_refreqdisplacements.txt')
@@ -846,11 +846,11 @@ class TestLink716(unittest.TestCase):
                 self.assertTrue(test == solution,msg(test,solution))
             else:
                 self.assertFalse(bool(test),msg2(test))
-    def test_regex_IRSpectrum(self):
-        msg = 're_IRSpectrum does not match. \n{}\n!=\n{}'.format
-        msg2 = 're_IRSpectrum matches when it should not {}'.format
-        regex = Link716.re_IRSpectrum
-        with open(self.IRSpectrumfile,'r') as F:
+    def test_regex_IR_spectrum(self):
+        msg = 're_IR_spectrum does not match. \n{}\n!=\n{}'.format
+        msg2 = 're_IR_spectrum matches when it should not {}'.format
+        regex = Link716.re_IR_spectrum
+        with open(self.IR_spectrumfile,'r') as F:
             txt = F.read()
         solutions = txt.split(SMARK)
         for obj,solution in zip_longest(self.objects,solutions):

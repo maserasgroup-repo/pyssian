@@ -1170,16 +1170,16 @@ class Link716(LinkJob):
     thermal_energy : list
     enthalpy : list
     gibbs : list
-    EContribs : list
+    energy_contributions : list
         List of namedtuples with fields Name,Thermal,CV,S .
-    IRSpectrum : str
-        Text that corresponds to the IRSpectrum
+    IR_spectrum : str
+        Text that corresponds to the IR_spectrum
     mode : str
         Either 'Forces', 'Freq' or 'Other'.
     frequencies : list
     freq_displacements : list
     """
-    __slots__ = ('dipole', 'units','frequencies','EContribs', 'IRSpectrum',
+    __slots__ = ('dipole', 'units','frequencies','energy_contributions', 'IR_spectrum',
                   'zeropoint','thermal_energy', 'enthalpy', 'gibbs', 'mode',
                   'freq_displacements')
 
@@ -1191,7 +1191,7 @@ class Link716(LinkJob):
     re_EContrib += r'([\s\S]*\n)'                    # Body
     re_EContrib += r'(?:.*Q.*Log10\(Q\).*Ln\(Q\).*)' # Header of the next Table
     re_EContrib = re.compile(re_EContrib)
-    re_IRSpectrum = re.compile(r'(.*IR\sSpectrum[\s\S]*?\n)(?:\s?\-\-+)')
+    re_IR_spectrum = re.compile(r'(.*IR\sSpectrum[\s\S]*?\n)(?:\s?\-\-+)')
     re_Frequencies =  r'(?:.*Frequencies\s\-\-)(.*)\n'
     re_Frequencies += r'(?:.*Red\.\smasses\s\-\-)(.*)\n'
     re_Frequencies += r'(?:.*Frc\sconsts\s*\-\-)(.*)\n'
@@ -1217,22 +1217,22 @@ class Link716(LinkJob):
         self.thermal_energy = []
         self.enthalpy = []
         self.gibbs = []
-        self.EContribs = []
+        self.energy_contributions = []
         self.frequencies = []
         self.freq_displacements = []
-        self.IRSpectrum = ''
+        self.IR_spectrum = ''
         self.mode = ''
         if asEmpty:
             super().__init__('',716)
         else:
             super().__init__(text,716)
             if 'Forces' in self.text:
-                self.mode = 'Forces'
+                self.mode = 'forces'
             else:
-                self.mode = 'Other'
+                self.mode = 'other'
             self._locate_dipole()
             self._locate_thermochemistry()
-            self._locate_IRSpectrum()
+            self._locate_IR_spectrum()
             self._locate_frequencies()
             self._locate_freq_displacements()
 
@@ -1244,9 +1244,9 @@ class Link716(LinkJob):
         Vector.
         """
         cls = self.__class__
-        Match = cls.re_dipole.findall(self.text)
-        if Match:
-            self.dipole = [float(i.replace('D','E')) for i in Match[0]]
+        dipole = cls.re_dipole.findall(self.text)
+        if dipole:
+            self.dipole = [float(i.replace('D','E')) for i in dipole[0]]
 
     @Populates('frequencies')
     @SilentFail
@@ -1257,17 +1257,21 @@ class Link716(LinkJob):
         """
         cls = self.__class__
         Frequency = cls._Frequency
-        Match = cls.re_Frequencies.findall(self.text)
+        
+        frequencies_lines = cls.re_Frequencies.findall(self.text)
+        if not frequencies_lines:
+            return
+        
         frequencies = []
-        if Match:
-            for i in Match:
-                Aux = []
-                for line in i:
-                    Aux.append(tuple(map(float,line.strip().split())))
-                for items in zip(*Aux):
-                    frequencies.append(Frequency(*items))
-            self.frequencies = frequencies
-            self.mode = 'Freq'
+        for lines in frequencies_lines:
+            freq_data = []
+            for line in lines:
+                freq_data.append(tuple(map(float,line.strip().split())))
+            for frequency in zip(*freq_data):
+                frequencies.append(Frequency(*frequency))
+
+        self.frequencies = frequencies
+        self.mode = 'freq'
 
     @Populates('freq_displacements')
     @SilentFail
@@ -1278,29 +1282,40 @@ class Link716(LinkJob):
         """
         cls = self.__class__
         Displacement = cls._Displacement
-        match = cls.re_freq_text.findall(self.text)
-        if match:
-            displacements = []
-            for text in match[0].split('Atom'):
-                if not text.strip(): 
+        freq_text = cls.re_freq_text.findall(self.text)
+
+        if not freq_text:
+            return
+        
+        displacements = []
+        for text in freq_text[0].split('Atom'):
+
+            if not text.strip(): 
+                continue
+            
+            lines = cls.re_freq_displacements.findall(text)
+            
+            atomlines = []
+            for line in lines:
+
+                if not line.strip():
                     continue
-                lines = cls.re_freq_displacements.findall(text)
-                atomlines = []
-                for line in lines:
-                    atomline = []
-                    if not line.strip():
-                        continue
-                    atid,atnum,xyz = line.strip().split(maxsplit=2)
-                    atomline.append(int(atid))
-                    atomline.append(int(atnum))
-                    xyz = [float(i) for i in xyz.split()]
-                    for x,y,z in zip(xyz[0::3],xyz[1::3],xyz[2::3]): 
-                        atomline.append((x,y,z))
-                    atomlines.append(atomline)
-                atomids,atomnums,*matrices = zip(*atomlines)
-                for matrix in matrices: 
-                    displacements.append(Displacement(atomids,atomnums,matrix))
-            self.freq_displacements = displacements
+                
+                atid,atnum,xyz = line.strip().split(maxsplit=2)
+                atomline = [int(atid),int(atnum)]
+
+                xyz = [float(i) for i in xyz.split()]
+                for x,y,z in zip(xyz[0::3],xyz[1::3],xyz[2::3]): 
+                    atomline.append((x,y,z))
+                
+                atomlines.append(atomline)
+            
+            atomids,atomnums,*matrices = zip(*atomlines)
+            
+            for matrix in matrices: 
+                displacements.append(Displacement(atomids,atomnums,matrix))
+
+        self.freq_displacements = displacements
 
     @Populates('zeropoint','thermal_energy','enthalpy','gibbs')
     @SilentFail
@@ -1311,39 +1326,41 @@ class Link716(LinkJob):
         """
         cls = self.__class__
         EContrib = cls._EContrib
-        Match = cls.re_Thermo.findall(self.text)
-        if Match:
-            lines = [line.strip() for line in Match[0].split('\n') if line.strip()]
-            Properties = cycle([self.zeropoint,
+        thermo_lines = cls.re_Thermo.findall(self.text)
+        if thermo_lines:
+            lines = [line.strip() for line in thermo_lines[0].split('\n') if line.strip()]
+            properties = cycle([self.zeropoint,
                                 self.thermal_energy,
                                 self.enthalpy,
                                 self.gibbs])
-            for line,Property in zip(lines,Properties):
+            for line,prop in zip(lines,properties):
                 Aux = line.split("=")[-1].strip().split()
                 if len(Aux) == 2:
                     self.units.append(Aux[-1][1:-1])
-                Property.append(float(Aux[0]))
-        Match = cls.re_EContrib.findall(self.text)
-        if Match:
-            lines = [line.strip() for line in Match[0].split('\n') if line.strip()]
-            Header = lines.pop(0)
-            self.units.extend(Header.strip().split())
-            for line in lines:
-                Name, E, CV, S = line.strip().rsplit(maxsplit=3)
-                item = EContrib(Name,float(E),float(CV),float(S))
-                self.EContribs.append(item)
+                prop.append(float(Aux[0]))
+            
+        energy_contributions = cls.re_EContrib.findall(self.text)
+        if energy_contributions:
+            lines = [line.strip() for line in energy_contributions[0].split('\n') if line.strip()]
+            header = lines.pop(0)
+            self.units.extend(header.strip().split())
 
-    @Populates('IRSpectrum')
+            for line in lines:
+                name, E, CV, S = line.strip().rsplit(maxsplit=3)
+                item = EContrib(name,float(E),float(CV),float(S))
+                self.energy_contributions.append(item)
+
+    @Populates('IR_spectrum')
     @SilentFail
-    def _locate_IRSpectrum(self):
+    def _locate_IR_spectrum(self):
         """
         Uses regex expressions compiled as class attributes to find the IR
         spectrum.
         """
         cls = self.__class__
-        Match = cls.re_IRSpectrum.findall(self.text)
-        if Match:
-            self.IRSpectrum = Match[0]
+        IR_spectrum = cls.re_IR_spectrum.findall(self.text)
+        if IR_spectrum:
+            self.IR_spectrum = IR_spectrum[0]
 
 @RegisterLinkJob
 class Link804(LinkJob):

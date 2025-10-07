@@ -239,7 +239,7 @@ Link101 & Link103
    l103.parameters
    l103.stepnumber
    l103.scanpoint
-   if l103.mode == 'Iteration':
+   if l103.mode == 'iteration':
        l103.print_convergence()
 
 Link120
@@ -304,8 +304,8 @@ Link716
    l716.thermal_energy
    l716.enthalpy
    l716.gibbs
-   l716.EContribs
-   l716.IRSpectrum
+   l716.energy_contributions
+   l716.IR_spectrum
 
 Link804 & Link913
 +++++++++++++++++

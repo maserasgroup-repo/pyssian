@@ -87,7 +87,7 @@ Link716
 -------
 
 .. autoclass:: pyssian.linkjobparsers.Link716
-   :members: _locate_dipole, _locate_frequencies, _locate_thermochemistry, _locate_IRSpectrum
+   :members: _locate_dipole, _locate_frequencies, _locate_thermochemistry, _locate_IR_spectrum
    :show-inheritance:
 
 Link804
