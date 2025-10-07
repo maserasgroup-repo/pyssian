@@ -8,7 +8,7 @@ from itertools import chain
 import warnings
 
 from .chemistryutils import is_method, is_basis
-from .linkjobparsers import LinkJob, GeneralLinkJob
+from .linkjobparsers import LinkJob, GeneralLinkJob, NPROCSHARED_ALIASES, MEMORY_ALIASES
 
 # Pre-Initialized dictionary for the GaussianOutFile.Parse
 available_linkjobs = {i:GeneralLinkJob for i in range(1,10000)}
@@ -395,7 +395,7 @@ class InternalJob(object):
 
 class GaussianInFile(object):
     """
-    Gaussian 09/16 .in file parent class, if any special type of input
+    Gaussian 09/16 input file parent class, if any special type of input
     requires different processing it should be a subclass of this one.
 
     Parameters
@@ -429,7 +429,7 @@ class GaussianInFile(object):
         Input files.
     nprocs : int
         property to easily access and change the preprocessing['nprocshared'] value
-    mem : int
+    memory : int
         property to easily access and change the preprocessing['mem'] value
     extra_printout : bool
         Controls the behaviour of the command line's "#" or "#p". If True 
@@ -446,7 +446,7 @@ class GaussianInFile(object):
         'smd' -> the 'smd' suboption within the scrf is included.  
     """
     def __init__(self,file=None):
-        # Do Something
+
         if isinstance(file,io.TextIOBase):
             self._file = file
         elif file is None: 
@@ -455,6 +455,7 @@ class GaussianInFile(object):
             self._file = open(file,'a+')
             if self._file.tell() != 0:
                 self._file.seek(0)
+        
         self._txt = ''
         self.preprocessing = dict() # In the G16 Manual "Link 0 Commands"
         self.commandline = dict() # In the G16 Manual "Route Section"
@@ -466,10 +467,9 @@ class GaussianInFile(object):
         self.geometry = '' # In the G16 Manual "Molecule Specification"
         self.tail = [] # In the G16 Manual "Optional additional sections"
         self.extra_printout = True
-        self.structure = '{preprocessing}\n{commandline}\n\n'
-        self.structure += '{title}\n\n'
-        self.structure += '{charge} {spin}\n{geometry}\n'
-        self.structure += '{tail}\n\n'
+        self._nprocs_key = None
+        self._mem_key = None
+
     def __repr__(self):
         cls = type(self).__name__
         name = 'unnamed'
@@ -477,35 +477,36 @@ class GaussianInFile(object):
             name = self._file.name.split("/")[-1]
         #size = len(self)
         return f'<{cls}({name})>'
+
     def __str__(self):
-        geometry = str(self.geometry)
-        if geometry:
-            geometry += '\n'
-        else:
-            geometry = ''
+
+        title = self.title
+        if not title: 
+            title = 'title_placeholder'
         
-        kwargs = dict( preprocessing=self.preprocessing_as_str(),
-                       commandline=self.commandline_as_str(),
-                       title=self.title,
-                       charge=self.charge,
-                       spin=self.spin,
-                       geometry=geometry,
-                       tail='\n\n'.join(self.tail))
-        str_repr = self.structure.format(**kwargs)
-        # It is better to enfoce the condition here than for every 
-        # possible case of reading a file or adding the tail
-        if not str_repr.endswith('\n\n\n'):
-            n = 3 - str_repr[-3:].count('\n') 
-            str_repr += '\n'*n
+        structure = [
+            self.preprocessing_as_str(),
+            self.commandline_as_str(),
+            '',
+            title,
+            '',
+            self.charge_and_spin_as_str(),
+            str(self.geometry).rstrip(),
+            '',
+            '\n\n'.join(self.tail)
+        ]
+        str_repr = '\n'.join(structure).strip() +'\n\n\n'
         return str_repr
+
     def __len__(self):
         return len(str(self))
 
     def __enter__(self):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self
+
     def __exit__(self, exc_type, exc_value, traceback):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self._file.__exit__(exc_type, exc_value, traceback)
 
     @property
@@ -524,22 +525,25 @@ class GaussianInFile(object):
 
     @property
     def nprocs(self):
-        if 'nprocs' in self.preprocessing: 
-            return self.preprocessing.get('nprocs',None)
-        return self.preprocessing.get('nprocshared',None)
+        if self._nprocs_key is None: 
+            self._search_nprocs_key()
+        return self.preprocessing.get(self._nprocs_key,None)
     @nprocs.setter
     def nprocs(self,other):
-        if 'nprocs' in self.preprocessing: 
-            self.preprocessing['nprocs'] = other
-        else:
-            self.preprocessing['nprocshared'] = other
+        if self._nprocs_key is None: 
+            self._search_nprocs_key()
+        self.preprocessing[self._nprocs_key] = other
 
     @property
-    def mem(self):
-        return self.preprocessing.get('mem',None)
-    @mem.setter
-    def mem(self,other):
-        self.preprocessing['mem'] = other
+    def memory(self):
+        if self._mem_key is None: 
+            self._search_mem_key()
+        return self.preprocessing.get(self._mem_key,None)
+    @memory.setter
+    def memory(self,other):
+        if self._mem_key is None: 
+            self._search_mem_key()
+        self.preprocessing[self._mem_key] = other
     
     @property
     def solvent(self):
@@ -592,26 +596,39 @@ class GaussianInFile(object):
         bins = [i for i,line in enumerate(txt) if not line]
         # Ensure that the if the title is empty, the bins are not including it
         bins = [i for i in bins if not set((i-1,i,i+1)).issubset(set(bins))]
+
         stop = bins[0]
         header = iter(txt[:stop])
+
+        # Define the ids of the block where the title starts
+        start_idx = 0
+        stop_idx = 1
+
+        # Parse preprocessing if there is preprocessing
         preprocessing = []
         for line in header:
             if line.startswith("%"):
                 preprocessing.append(line.lstrip("%"))
             elif line.startswith("#"):
                 break
+        else:
+            # if the preprocessing and the command line are separated by newline
+            # update accordingly
+            header = iter(txt[bins[0]+1:bins[1]])
+            line = next(header)
+            start_idx = 1
+            stop_idx = 2
+        
         self.parse_preprocessing(preprocessing)
 
-        # Read the command line assuming that the keywords cannot be in a
-        # 'chopped in half' version between lines
         commandline = [line.strip(),]
         for line in header:
             commandline.append(line.strip())
         self.parse_commandline(commandline)
 
         # Read the Title Section
-        start = bins[0]+1
-        stop = bins[1]
+        start = bins[start_idx]+1
+        stop = bins[stop_idx]
         title = [line for line in txt[start:stop]]
         self.title = '\n'.join(title)
 
@@ -621,7 +638,7 @@ class GaussianInFile(object):
 
         # Now we read the geometry
         start = stop+1
-        stop = bins[2]
+        stop = bins[stop_idx+1]
         geometry = [line for line in txt[start+1:stop]]
         self.parse_geometry(geometry)
 
@@ -646,10 +663,8 @@ class GaussianInFile(object):
         """
         self._txt = str(self)
         if filepath is None:
-            # Write to self._file
             self._file.write(self._txt)
         else:
-            # open the file write and close the file
             with open(filepath,'w') as F:
                 F.write(self._txt)
 
@@ -688,7 +703,9 @@ class GaussianInFile(object):
         lines : list[str]
             list of strings. Empty lines will be ignored.
         """
-        lines = [line.split() for line in lines]
+        print(lines)
+        lines = [line.split() for line in lines if line.strip()]
+        print(lines)
         # the first line contains the "#p"
         self.extra_printout = lines[0][0] == '#p'
         # parse all the keywords
@@ -828,8 +845,41 @@ class GaussianInFile(object):
                 Aux = f"{key}"
             commandline.append(Aux)
         return ' '.join(commandline)
-    
+    def charge_and_spin_as_str(self):
+        """
+        generates a string in the appropriate format for the charge and spin 
+        information
+
+        Returns
+        -------
+        str
+            string with the charge and spin data
+        """
+        return f'{self.charge} {self.spin}'
+
     # Private functions for properties management
+    def _search_nprocs_key(self):
+        for key in NPROCSHARED_ALIASES: 
+            if key in self.preprocessing: 
+                self._nprocs_key = key
+                break
+        else:
+            self._nprocs_key = NPROCSHARED_ALIASES[0]
+    def _search_mem_key(self):
+        for key in MEMORY_ALIASES: 
+            if key in self.preprocessing: 
+                self._mem_key = key
+                break
+        else:
+            self._mem_key = MEMORY_ALIASES[0]
+    def _remove_nprocs(self): 
+        key = self._nprocs_key
+        self._nprocs_key = None
+        return self.preprocessing.pop(key,None)
+    def _remove_mem(self): 
+        key = self._mem_key
+        self._mem_key = None
+        return self.preprocessing.pop(key,None)
     def _remove_solvent(self,remove_solvation=False):
         if remove_solvation: 
             _ = self.commandline.pop('scrf')
@@ -866,7 +916,6 @@ class GaussianInFile(object):
         _ = items.pop(i)
         self.commandline['scrf'] = items
     def _set_solvent_model(self,other):
-        # If scrf does not exist
         current = self.solvent_model 
         items = self.commandline.get('scrf',[])
         if current is None: 
@@ -1012,7 +1061,7 @@ class GaussianInFile(object):
         self.commandline[where] = items
     def pop_l0_kwd(self,keyword,where=None):
         """
-        Removes a keyword from the preprocessing and returns it. 
+        Removes a keyword from the preprocessing and returns it.
 
         Parameters
         ----------
@@ -1028,8 +1077,15 @@ class GaussianInFile(object):
             Returns the removed keyword (or None when the keyword was not in the
             preprocessing)  
         """
+        if key in NPROCSHARED_ALIASES or where in NPROCSHARED_ALIASES:
+            return self._remove_nprocs()
+
+        if key in MEMORY_ALIASES or where in MEMORY_ALIASES:
+            return self._remove_mem()
+
         if where is None:
             return self.preprocessing.pop(keyword,None)
+
         kwd = self.preprocessing.get(where,None)
         self.preprocessing[where] = ''
         return kwd
@@ -1047,12 +1103,16 @@ class GaussianInFile(object):
             add_kwd('40GB',where='mem')
 
         """
-        if where is None:
-            self.preprocessing[keyword] = ''
-        elif 'nproc' in where: 
+        if where in NPROCSHARED_ALIASES: 
             self.nprocs = keyword
-        elif 'mem' in where: 
-            self.mem = keyword
+        elif keyword in NPROCSHARED_ALIASES:
+            self.preprocessing[keyword] = ''
+        elif where in MEMORY_ALIASES: 
+            self.memory = keyword
+        elif keyword in MEMORY_ALIASES:
+            self.preprocessing[keyword] = ''
+        elif where is None:
+            self.preprocessing[keyword] = ''
         else:
             self.preprocessing[where] = keyword
 

@@ -9,7 +9,7 @@ from collections import namedtuple
 from itertools import cycle
 import re
 
-NPROCSHARED_ALIASES = ['nprocs','nprocshared','NPROCS','NPROCSHARED']
+NPROCSHARED_ALIASES = ['nprocshared','nprocs','NPROCSHARED','NPROCS']
 MEMORY_ALIASES = ['mem','memory','MEM','MEMORY']
 
 # Auxiliar Documenting Decorators
