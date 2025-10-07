@@ -9,6 +9,9 @@ from collections import namedtuple
 from itertools import cycle
 import re
 
+NPROCSHARED_ALIASES = ['nprocs','nprocshared','NPROCS','NPROCSHARED']
+MEMORY_ALIASES = ['mem','memory','MEM','MEMORY']
+
 # Auxiliar Documenting Decorators
 def Populates(*attributes, defaults=None):
     """
@@ -225,15 +228,15 @@ class Link1(LinkJob):
         of the "current" internal job at the file.
         """
         cls = self.__class__
-        Match = cls.re_internaljob.findall(self.text)
-        if Match:
-            JobNumber = int(Match[0])
-            New_InternalJob = True
+        jobnumber_match = cls.re_internaljob.findall(self.text)
+        if jobnumber_match:
+            jobnumber = int(jobnumber_match[0])
+            is_new_job = True
         else:
-            JobNumber = 1
-            New_InternalJob = False
+            jobnumber = 1
+            is_new_job = False
         jobtype = self._guess_type()
-        self.info = cls.InternalJobInfo(JobNumber, jobtype, New_InternalJob)
+        self.info = cls.InternalJobInfo(jobnumber, jobtype, is_new_job)
 
     @Populates('nprocs','mem', 'link0', defaults=['Defaults to None',
     'Defaults to None','If none is found defaults to an empty list'])
@@ -242,18 +245,20 @@ class Link1(LinkJob):
         Uses regex expressions compiled as class attributes to search the link0
         options (specified with a % at the start of the option).
         """
-        link0_opt = []
+        self.link0 = []
         cls = self.__class__
-        Match = cls.re_link0.findall(self.text)
-        if Match:
-            for item in Match:
-                if 'nprocshared' in item:
-                    self.nprocs = int(item.strip().split('=')[-1])
-                elif 'mem' in item:
-                    self.mem = item.strip().split('=')[-1]
-                else:
-                    link0_opt.append(item[1:])
-        self.link0 = link0_opt
+        link0_data = cls.re_link0.findall(self.text)
+        
+        if not link0_data: 
+            return
+        
+        for item in link0_data:
+            if any(key in item for key in NPROCSHARED_ALIASES): 
+                self.nprocs = int(item.strip().split('=')[-1])
+            elif any(key in item for key in MEMORY_ALIASES): 
+                self.mem = item.strip().split('=')[-1]
+            else:
+                self.link0.append(item[1:])
 
     @Populates('commandline')
     @SilentFail
@@ -263,11 +268,14 @@ class Link1(LinkJob):
         gaussian commands, which start with a "#".
         """
         cls = self.__class__
-        Match = cls.re_commandline.findall(self.text)
-        if Match:
-            lines = Match[0].split('\n')
-            commandline = ''.join([line.lstrip() for line in lines])
-            self.commandline = commandline
+        commandline_match = cls.re_commandline.findall(self.text)
+        if not commandline_match:
+            return
+        lines = commandline_match[0].split('\n')
+        commandline = ''.join([line.lstrip() for line in lines])
+        # The lstrip and ''.join are necessary to reconstruct any keyword that 
+        # was splitted across lines. 
+        self.commandline = commandline
 
     @Populates('IOps')
     @SilentFail
@@ -277,9 +285,9 @@ class Link1(LinkJob):
         Gaussian Manual).
         """
         cls = self.__class__
-        Match = cls.re_IOps.findall(self.text)
-        if Match:
-            self.IOps = [line for line in Match]
+        iops_lines = cls.re_IOps.findall(self.text)
+        if iops_lines:
+            self.IOps = [line for line in iops_lines]
 
     def _guess_type(self):
         """
@@ -289,18 +297,18 @@ class Link1(LinkJob):
         Returns
         -------
         str
-            {Constrained Optimization, Optimization,Frequency Calculation, 
-            Unidentified, Linked} the Linked type is only assigned externally
+            {constrained optimization, optimization,frequency calculation, 
+            unidentified, linked} the linked type is only assigned externally
         """
         target = self.commandline.lower()
         if 'modredundant' in target:
-            jobtype = 'Constrained Optimization'
+            jobtype = 'constrained optimization'
         elif 'opt' in target:
-            jobtype = 'Optimization'
+            jobtype = 'optimization'
         elif 'freq' in target:
-            jobtype = 'Frequency Calculation'
+            jobtype = 'frequency calculation'
         else:
-            jobtype = 'Unidentified'
+            jobtype = 'unidentified'
         return jobtype
 
 @RegisterLinkJob
