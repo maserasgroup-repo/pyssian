@@ -185,7 +185,7 @@ class Link1(LinkJob):
         (defaults to an empty string).
     nprocs : int
         contains the number of the %nprocshared link0 option
-    mem : str
+    memory : str
         contains the right hand side of the %mem link0 option
     link0 : list
         list of lines containing the link0 specifications.
@@ -209,7 +209,7 @@ class Link1(LinkJob):
         self.info = None
         self.commandline = ''
         self.nprocs = None
-        self.mem = None
+        self.memory = None
         self.link0 = []
         self.IOps = []
         if as_empty:
@@ -238,7 +238,7 @@ class Link1(LinkJob):
         jobtype = self._guess_type()
         self.info = cls.InternalJobInfo(jobnumber, jobtype, is_new_job)
 
-    @Populates('nprocs','mem', 'link0', defaults=['Defaults to None',
+    @Populates('nprocs','memory', 'link0', defaults=['Defaults to None',
     'Defaults to None','If none is found defaults to an empty list'])
     def _locate_link0(self):
         """
@@ -256,7 +256,7 @@ class Link1(LinkJob):
             if any(key in item for key in NPROCSHARED_ALIASES): 
                 self.nprocs = int(item.strip().split('=')[-1])
             elif any(key in item for key in MEMORY_ALIASES): 
-                self.mem = item.strip().split('=')[-1]
+                self.memory = item.strip().split('=')[-1]
             else:
                 self.link0.append(item[1:])
 
