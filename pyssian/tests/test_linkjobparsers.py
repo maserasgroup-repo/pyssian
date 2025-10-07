@@ -800,7 +800,7 @@ class TestLink716(unittest.TestCase):
         cls.dipolefile      = TEST_FILEDIR.joinpath('l716_redipole.txt')
         cls.Thermofile      = TEST_FILEDIR.joinpath('l716_reThermo.txt')
         cls.EContribfile    = TEST_FILEDIR.joinpath('l716_reEContrib.txt')
-        cls.IR_spectrumfile  = TEST_FILEDIR.joinpath('l716_reIR_spectrum.txt')
+        cls.IR_spectrumfile  = TEST_FILEDIR.joinpath('l716_reIRSpectrum.txt')
         cls.Frequenciesfile = TEST_FILEDIR.joinpath('l716_reFrequencies.txt')
         cls.freqtextfile    = TEST_FILEDIR.joinpath('l716_refreqtxt.txt')
         cls.freqdispfile    = TEST_FILEDIR.joinpath('l716_refreqdisplacements.txt')
