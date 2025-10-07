@@ -11,13 +11,15 @@ from .chemistryutils import is_method, is_basis
 from .linkjobparsers import LinkJob, GeneralLinkJob
 
 # Pre-Initialized dictionary for the GaussianOutFile.Parse
-Available_Linkjobs = {i:GeneralLinkJob for i in range(1,10000)}
+available_linkjobs = {i:GeneralLinkJob for i in range(1,10000)}
 for key in LinkJob.Register.keys():
-    Available_Linkjobs[key] = LinkJob.Register[key]
+    available_linkjobs[key] = LinkJob.Register[key]
 
+EMPTYLINKFLAG = -1 
 
 class GaussianOutFile(object):
-    """Gaussian 09/16 '.log' file parent class, if any special type of calculation
+    f"""
+    Gaussian 09/16 '.log' file parent class, if any special type of calculation
     requires different processing it should be a subclass of this one. Accepts
     a context manager usage similar to 'with open(file) as F:...'
     *For a Gaussian .log file to be parsable it requires that its corresponding 
@@ -27,13 +29,16 @@ class GaussianOutFile(object):
     ----------
     file : io.TextIOBase or str
         File instance (Result of open(filename,'r')) or valid filename.
-    parselist : list
-        List of integrers that represent which types of Links to parse
-        (the default is None).
+    parselist : list[int]
+        List of integrers that represent which types of Links to parse.
+        If None or an empty list are provided it will attempt to parse
+        all LinkJobs. If {EMPTYLINKFLAG} is in the list, all Links will be parsed 
+        as_empty (This is usefull when only the structure of the file wants
+        to be ascertained). Otherwise, only the specified Links will be parsed. 
 
     Attributes
     ----------
-    InternalJobs
+    jobs : list
         List of InternalJobs done by gaussian i.e an gaussian calculation with
         the opt freq keywords will run first an InternalJob for the Optimization
         and after an InternalJob for the Frequency calculation.
@@ -41,27 +46,34 @@ class GaussianOutFile(object):
     _interblock = -1        # interblock token
     _EOF = -9999            # EOF token
 
-    def __init__(self,file,parselist=None):
+    def __init__(self,file,parselist:None|list[int]=None):
         cls = self.__class__
-        self.InternalJobs = [InternalJob(),]
+
+        self.jobs = [InternalJob(),]
+
         if isinstance(file,io.TextIOBase):
             self._file = file
         else:
             self._file = open(file,'r')
+        
         if parselist is None:
             parselist = []
+        
         # Access the dictionary that holds the constructors for each LinkJob
-        self._SetParsers(parselist,cls._interblock)
+        self._set_parsers(parselist,cls._interblock)
+        
         # Initialize the generators/coroutines
         self._BlockFetcher = self.BlockFetcher(cls._EOF,cls._interblock)
         _ = next(self._BlockFetcher)
         self._BlockHandler = self.BlockHandler()
         _ = next(self._BlockHandler)
+
     def __repr__(self):
         cls = type(self).__name__
         file = self._file.name.split('/')[-1]
         size = len(self)
         return f'<{cls}({file})> with {size} InternalJobs'
+
     def __str__(self):
         cls = type(self).__name__
         file = self._file.name.split('/')[-1]
@@ -72,79 +84,117 @@ class GaussianOutFile(object):
             for Link in InternalJob:
                  repr += indent*2 + f'{Link}\n'
         return repr
+
     def __len__(self):
-        return len(self.InternalJobs)
+        return len(self.jobs)
+
     def __getitem__(self,index):
-        return self.InternalJobs[index]
+        return self.jobs[index]
 
     def __enter__(self):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self
+
     def __exit__(self, exc_type, exc_value, traceback):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self._file.__exit__(exc_type, exc_value, traceback)
 
-    def _SetParsers(self,ParseList,interblock=-1):
-        Parsers = Available_Linkjobs.copy()
-        assert interblock not in Parsers
-        if ParseList:
-            if ParseList[0] == -1: # flag to parse all as empty
-                for key in Parsers:
-                    Parsers[key] = Parsers[key].as_empty
-            else: # Set up the appropiate parsers
-                for key in Parsers:
-                    if key not in ParseList:
-                        Parsers[key] = Parsers[key].as_empty
-        else: # Parse all normally
-            pass
-        Parsers[interblock] = GeneralLinkJob.as_empty
-        self._Parsers = Parsers
+    def _set_parsers(self,linkids:list[int],interblock=-1):
+        f"""
+        Generates an internal copy of the available linkjob parsers which 
+        has the specifications of whether to parse specific Links as empty or
+        not. 
+
+        Parameters
+        ----------
+        linkids : list[int]
+            List of integrers that represent which types of Links to parse.
+            If None or an empty list are provided it will attempt to parse
+            all LinkJobs. If {EMPTYLINKFLAG} is in the list, all Links will be parsed 
+            as_empty (This is usefull when only the structure of the file wants
+            to be ascertained). Otherwise, only the specified Links will be parsed.
+        interblock : int, optional
+            Number used to indicate the text between LinkJob blocks or 
+            InternalJobs, by default -1
+        """
+        parsers = available_linkjobs.copy()
+        assert interblock not in parsers
+
+        if not linkids: # If no specific Links are provided parse everything that is available
+            parsers[interblock] = GeneralLinkJob.as_empty
+
+        elif EMPTYLINKFLAG in linkids: # Signal to 
+            for key in parsers:
+                parsers[key] = parsers[key].as_empty
+        else:
+            for key in parsers:
+                if key not in linkids:
+                    parsers[key] = parsers[key].as_empty
+        
+        parsers[interblock] = GeneralLinkJob.as_empty
+        self._parsers = parsers
+
     def print_file_structure(self):
         """Display the structure of links and internal jobs of the file."""
         indent = "  "
-        Result = f"{self.__repr__():}\n"
+        output = f"{self.__repr__():}\n"
         for intjob in self:
-            Result += indent + f"{intjob.__repr__():}\n"
+            output += indent + f"{intjob.__repr__():}\n"
             for link in intjob:
-                Result += indent*2 + f"{link.__repr__():}\n"
-        print(Result)
+                output += indent*2 + f"{link.__repr__():}\n"
+        print(output)
+
     def read(self):
-        """Alias of update for consistency with GaussianInFile class"""
+        """
+        Alias of update for consistency with GaussianInFile class. It 
+        automatically removes empty LinkJobs
+        """
         self.update()
+
     def close(self):
         """Alias to file.close for consistency with the io.TextIOBase class"""
         self._file.close()
-    def update(self,clean=True,FinalPrint=False):
-        """Tries to fetch new data. If it exists it parses it appropiately
+    
+    def update(self,clean=True,final_print=False):
+        """
+        Tries to fetch new data. If it exists it parses it appropiately
         otherwise it fails silently.
 
         Parameters
         ----------
         clean : Bool
             If True removes all the EmptyLinkJobs found (the default is True).
-        FinalPrint : Bool
+        final_print : Bool
             If True after a normal execution has finished it will print in the
             console a message to notify the user (the default is False).
         """
         cls = self.__class__
+
         BlockFetcher = self._BlockFetcher
         BlockHandler = self._BlockHandler
         BlockType, Block = next(BlockFetcher)
+
         while BlockType != cls._EOF:
             BlockHandler.send((BlockType, Block))
             BlockType, Block = next(BlockFetcher)
-        if self.InternalJobs[0].number is None:
-            self.InternalJobs[0].guess_info()
+
+        if self.jobs[0].number is None:
+            self.jobs[0].guess_info()
+
         if clean:
             self.clean()
-        if FinalPrint:
+
+        if final_print:
             print(f"{self:!r} UPDATED")
+    
     def clean(self):
         """Removes per each InternalJob stored all the EmptyLinkJobs."""
-        for InternalJob in self.InternalJobs:
-            InternalJob.clean()
-    def get_links(self,*LinkIds):
-        """Wrapper Method to get a list of Links with certain Ids across
+        for internaljob in self.jobs:
+            internaljob.clean()
+
+    def get_links(self,*linkids):
+        """
+        Wrapper Method to get a list of Links with certain Ids across
         the different Internal Jobs.
 
         Parameters
@@ -156,25 +206,28 @@ class GaussianOutFile(object):
         -------
         list
         """
-        LinkLists = [IntJob.get_links(*LinkIds) for IntJob in self.InternalJobs]
-        return list(chain(*LinkLists))
+        link_lists = [job.get_links(*linkids) for job in self.jobs]
+        return list(chain(*link_lists))
+    
     # Generators and Coroutines for File Parsing
     def Reader(self,file):
         """ Generator for line by line reading without stopiteration """
         while True:
-            Pos_old = file.tell()
+            old_pos = file.tell()
             line = file.readline()
-            Pos_new = file.tell()
-            ReachedEOF = Pos_old == Pos_new
-            yield ReachedEOF,line
+            new_pos = file.tell()
+            reached_EOF = old_pos == new_pos
+            yield reached_EOF,line
+    
     def BlockFetcher(self,EOF=-9999,interblock=-1):
         """
         Generator that yields the text sliced in blocks and their type.
 
         A block is an iterable of strings and its type refers to a token that
-        can be recognized by the ._Parsers variable, something in betweem
+        can be recognized by the ._parsers variable, something in betweem
         Link Blocks (interblock=-1) or no end was found (EOF=-9999)
         """
+
         # Regex generation
         re_enter = re.compile(r'(?:Enter.*l)([0-9]{1,4})(?:\.exe)')
         re_exit = re.compile(r'(?:Leave\s*Link\s*)([0-9]{1,4})')
@@ -187,76 +240,75 @@ class GaussianOutFile(object):
         # If more than 1 EndKeyws then BlockType Assesment has to be modified
         while True:
             start = False
-            Block = []
+            block = []
+
             # Ask the Reader until a "start line" is found
             while not start:
-                ReachedEOF,line = next(Reader)
-                if ReachedEOF:
+                reached_EOF,line = next(Reader)
+                if reached_EOF:
                     yield EOF, ''
                 else:
                     start = re_enter.findall(line)
                     if not start:
-                        Block.append(line)
+                        block.append(line)
                     else: # Store the number of the Link
                         number = int(start[0])
+            
             # When found yield it as a "InterBlock" and prepare Block
-            if Block:
-                yield interblock, ''.join(Block)
-                Block = [line,]
+            if block:
+                yield interblock, ''.join(block)
+                block = [line,]
             else:
-                Block.append(line)
+                block.append(line)
+            
             # Now that the start of the Link has been found, accumulate lines
             ## until the end or termination line is found
             end = False
             while not end:
-                ReachedEOF,line = next(Reader)
-                if ReachedEOF:
-                    Target = Block[-10:] + [line,]
-                    terminated = re_termination.findall(''.join(Target))
+                reached_EOF,line = next(Reader)
+                if reached_EOF:
+                    target = block[-10:] + [line,]
+                    terminated = re_termination.findall(''.join(target))
                     if terminated:
-                        Block.append(line)
-                        #if terminated[0] == 'Normal':
-                        #    other = str(BlockTypes[Termination_key])
-                        #elif terminated[0] == 'Error':
-                        #    other = str(BlockTypes[Error_key])
+                        block.append(line)
                         break
                     else:
                         yield EOF, ''
                 else:
                     end = bool(re_exit.findall(line))
                     end = end or bool(re_termination.findall(line))
-                Block.append(line)
+                block.append(line)
             # when end found, do return type token and yield the block
-            yield number, ''.join(Block)
+            yield number, ''.join(block)
+    
     def BlockHandler(self):
         """ Coroutine. Receives a block, chooses the parser and parses it """
         # Initialization
-        Parsers = self._Parsers
-        CurrentJob = self.InternalJobs[-1]
+        parsers = self._parsers
+        current_job = self.jobs[-1]
         first_link = True
-        BlockType, Block = yield 'Initialization done'
+        block_type, block = yield 'Initialization done'
         while True:
-            #Parser = Parsers.get(BlockType,Parsers[ignore])
-            Parser = Parsers[BlockType]
-            Link =  Parser(Block)
-            if Link.number != 1:
-                CurrentJob.append(Link)
+            parser = parsers[block_type]
+            link =  parser(block)
+            if link.number != 1:
+                current_job.append(link)
+            elif first_link:
+                current_job.append(link)
+                current_job.guess_info()
+                first_link = False
             else:
-                if first_link:
-                    CurrentJob.append(Link)
-                    CurrentJob.guess_info()
-                    first_link = False
-                else:
-                    is_explicit = Link.info.new_InternalJob
-                    if not is_explicit:
-                        info = Link.InternalJobInfo(self.InternalJobs[-1].number+1,'Linked',True)
-                        Link.info = info
-                    New = InternalJob()
-                    self.InternalJobs.append(New)
-                    CurrentJob = self.InternalJobs[-1]
-                    CurrentJob.append(Link)
-                    CurrentJob.guess_info()
-            BlockType, Block = yield
+                is_explicit = link.info.new_InternalJob
+                if not is_explicit:
+                    info = link.InternalJobInfo(self.jobs[-1].number+1,'Linked',True)
+                    link.info = info
+                new_job = InternalJob()
+                self.jobs.append(new_job)
+                current_job = self.jobs[-1]
+                current_job.append(link)
+                current_job.guess_info()
+
+            block_type, block = yield
 
 class InternalJob(object):
     """Gaussian 09/16 InternalJob parent class, if any special type of Job
