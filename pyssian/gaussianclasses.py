@@ -630,10 +630,10 @@ class GaussianInFile(object):
         
         self.parse_preprocessing(preprocessing)
 
-        commandline = [line.strip(),]
+        commandlines = [line.strip(),]
         for line in header:
-            commandline.append(line.strip())
-        self.parse_commandline(commandline)
+            commandlines.append(line.strip())
+        self.parse_commandlines(commandlines)
 
         # Read the Title Section
         start = bins[start_idx]+1
@@ -702,7 +702,7 @@ class GaussianInFile(object):
             else:
                 pass
             self.preprocessing[key] = val
-    def parse_commandline(self,lines:list[str]):
+    def parse_commandlines(self,lines:list[str]):
         """
         Parses the lines that contain the calculation commands keywords and
         transforms them into a dictionary representation.

@@ -126,10 +126,10 @@ steps.
 
    # Now write the new input file
    with GaussianInFile('new_calculation.com') as GIF:
-       GIF.parse_commandline([commandline,])
+       GIF.parse_commandlines([commandline,])
        # We can instead set a dict for the variable GIF.commandline
        # "GIF.commandline = {'opt':'','freq':'NoRamman','b3lyp':''}"
-       # but using parse_commandline is easier in this case.
+       # but using parse_commandlines is easier in this case.
        # we can also add keywords to the command line either directly
        # GIF.commandline['keyword'] = ''
        # or with a method
