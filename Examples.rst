@@ -116,7 +116,7 @@ steps.
    # Extract the calculation type and commands
    commandline = l1.commandline
    nprocs = l1.nprocs
-   mem = l1.mem
+   mem = l1.memory
    preprocessing = l1.link0
 
    # Get Charge and spin from Link101
@@ -217,7 +217,7 @@ Link1
    # Attributes of Link1
    l1.commandline
    l1.nprocs
-   l1.mem
+   l1.memory
    l1.link0
    l1.IOps
    l1.info # Will be deprecated in the future

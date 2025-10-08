@@ -1281,12 +1281,11 @@ class MultiGaussianInFile(object):
 
     Attributes
     ----------
-    jobs : list
+    jobs : list[GaussianInFile]
         List providing access to each one of the individual GaussianInFile
         objects representing each one of the linked calculations. 
     """
     def __init__(self,file=None):
-        # Do Something
         if isinstance(file,io.TextIOBase):
             self._file = file
         elif file is None: 
@@ -1295,29 +1294,27 @@ class MultiGaussianInFile(object):
             self._file = open(file,'a+')
             if self._file.tell() != 0:
                 self._file.seek(0)
-        self.jobs = []
+        self.jobs:list[GaussianInFile] = []
 
     def __repr__(self):
         cls = type(self).__name__
         file = self._file.name.split("/")[-1]
-        #size = len(self)
         return f'<{cls}({file} with njobs={len(self.jobs)})>'
+    
     def __str__(self):
         str_repr = '\n\n--Link1--\n'.join([str(job).rstrip() for job in self.jobs])
-        # It is better to enfoce the condition here than for every 
-        # possible case of reading a file or adding the tail
-        if not str_repr.endswith('\n\n\n'):
-            n = 3 - str_repr[-3:].count('\n') 
-            str_repr += '\n'*n
+        str_repr = str_repr.rstrip() + '\n\n\n'
         return str_repr
+    
     def __len__(self):
         return len(str(self))
 
     def __enter__(self):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self
+
     def __exit__(self, exc_type, exc_value, traceback):
-        ''' Wrapper to have similar behaviour to "_io.TextIOWrapper" '''
+        """ Wrapper to have similar behaviour to '_io.TextIOWrapper' """
         return self._file.__exit__(exc_type, exc_value, traceback)
 
     def read(self):
@@ -1328,6 +1325,7 @@ class MultiGaussianInFile(object):
             return
         txt = self._file.read()
         self.jobs = [GaussianInFile.from_str(job.lstrip()) for job in txt.split('--Link1--')] 
+
     def write(self,filepath=None):
         """
         Writes the File object to a File. If a filepath is provided it will
@@ -1341,12 +1339,21 @@ class MultiGaussianInFile(object):
         """
         self._txt = str(self)
         if filepath is None:
-            # Write to self._file
             self._file.write(self._txt)
         else:
-            # open the file write and close the file
             with open(filepath,'w') as F:
                 F.write(self._txt)
+
+    def add(self,other:GaussianInFile): 
+        """
+        Adds a GaussianInputFile to the jobs of the MultiGaussianInFile. 
+
+        Parameters
+        ----------
+        other : GaussianInFile
+            gaussian input job
+        """
+        self.jobs.append(other)
 
     def enforce_same_chk(self,chk=None): 
         """
@@ -1360,8 +1367,10 @@ class MultiGaussianInFile(object):
         """
         if chk is None: 
             chk = self.jobs[0].preprocessing['chk']
+        
         for job in self.jobs: 
             job.add_l0_kwd(chk,where='chk')
+    
     def enforce_continuous_chk(self,basename=None):
         """
         Enforces that the chk of job i-1 is retained and a copy of it is used 
@@ -1386,11 +1395,13 @@ class MultiGaussianInFile(object):
         """
         if basename is None: 
             basename = self.jobs[0].preprocessing['chk'].rsplit('.',maxsplit=1)[0]
+        
         for (i,job) in enumerate(self.jobs):
             job.add_l0_kwd(f'{basename}_job{i}.chk',where='chk')
             if i-1 >= 0: 
                 job.add_l0_kwd(f'{basename}_job{i-1}.chk',where='oldchk')
-    def enforce_same_nprocs(self,nprocs=None):
+    
+    def enforce_same_nprocs(self,nprocs:int|None=None):
         """
         Enforces the same nprocs in all jobs. 
 
@@ -1402,23 +1413,27 @@ class MultiGaussianInFile(object):
         """
         if nprocs is None: 
             nprocs = self.jobs[0].nprocs
+        
         for job in self.jobs: 
             job.nprocs = nprocs
-    def enforce_same_mem(self,mem=None):
+
+    def enforce_same_mem(self,memory:str|None=None):
         """
         Enforces the same memory in all jobs. 
 
         Parameters
         ----------
-        mem : int, optional
+        memory : str, optional
             Memory to use in a calculation, if none is provided it 
             defaults to the value of the mem of the first job. 
         """
-        if mem is None: 
-            mem = self.jobs[0].mem
+        if memory is None: 
+            memory = self.jobs[0].memory
+        
         for job in self.jobs: 
-            job.mem = mem
-    def enforce_same_method(self,method):
+            job.memory = memory
+
+    def enforce_same_method(self,method:str|None=None):
         """
         Enforces the same method in all jobs. 
 
@@ -1430,8 +1445,28 @@ class MultiGaussianInFile(object):
         """
         if method is None: 
             method = self.jobs[0].method
+
         for job in self.jobs: 
             job.method = method
+
+    def chain_geometries(self,include_cs:bool=False): 
+        """
+        Ensures that the final geometry at the chk of job[i] is used by job[i+1]
+        removing the need to specify the geometry section at job[i+1].
+
+        Parameters
+        ----------
+        include_cs : bool, optional
+            If enabled, the charge and spin will be read from the chk files 
+            instead of from their corresponding sections in the input files. 
+        """
+
+        initial_job = self.jobs[0]
+        if len(self.jobs) < 2:
+            return 
+        for job in self.jobs[1:]:
+            job.geometry_from_chk(include_cs=include_cs)
+
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
 # class BasisTail(object), whose str function returns things as it should and
