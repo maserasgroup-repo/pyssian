@@ -8,14 +8,16 @@ from itertools import chain
 import warnings
 
 from .chemistryutils import is_method, is_basis
-from .linkjobparsers import LinkJob, GeneralLinkJob, NPROCSHARED_ALIASES, MEMORY_ALIASES
+from .linkjobparsers import (LinkJob, GeneralLinkJob, Link1,      # classes
+                             NPROCSHARED_ALIASES, MEMORY_ALIASES, # constants
+                             InternalJobInfo)                     # types
 
 # Type hinting
 import os
-from typing import Generator
+from typing import Generator, Any
 
 # Pre-Initialized dictionary for the GaussianOutFile.Parse
-available_linkjobs = {i:GeneralLinkJob for i in range(1,10000)}
+available_linkjobs:dict[int|str,Any] = {i:GeneralLinkJob for i in range(1,10000)}
 for key in LinkJob.Register.keys():
     available_linkjobs[key] = LinkJob.Register[key]
 
@@ -41,28 +43,32 @@ class InternalJob(object):
 
     """
 
-    def __init__(self,number=None):
+    def __init__(self,number:int|None=None):
         self.number = number
-        self.type = None
-        self.links = []
-    def __repr__(self):
+        self.type:str|None = None
+        self.links:list[GeneralLinkJob] = []
+    
+    def __repr__(self) -> str:
         cls = type(self).__name__
         if self.number is None:
             return f'<{cls} Created but Empty>'
         else:
             return f'<{cls} {self.number}>'
-    def __str__(self):
+    
+    def __str__(self) -> str:
         return f'Internal Job {self.number}: {self.type}'
-    def __getitem__(self,index):
+    
+    def __getitem__(self,index:int) -> GeneralLinkJob:
         return self.links[index]
-    def __len__(self):
+    
+    def __len__(self) -> int:
         return len(self.links)
 
-    def append(self,link):
-        # Restrict to Link objects
+    def append(self,link:GeneralLinkJob):
         if not isinstance(link, LinkJob):
             raise TypeError(f'{link:!r} is not of class {LinkJob:!r}')
         self.links.append(link)
+    
     def guess_info(self):
         """
         Guesses the number and type attributes of itself using the stored
@@ -114,9 +120,9 @@ class GaussianOutFile(object):
 
     Parameters
     ----------
-    ifile : io.TextIOBase | str | bytes | os.Pathlike
+    ifile : io.TextIOWrapper | str | bytes | os.PathLike
         File instance (Result of open(filename,'r')) or valid filename.
-    parselist : list[int]
+    parselist : list[int] | None
         List of integrers that represent which types of Links to parse.
         If None or an empty list are provided it will attempt to parse
         all LinkJobs. If {EMPTYLINKFLAG} is in the list, all Links will be parsed 
@@ -134,13 +140,13 @@ class GaussianOutFile(object):
     _EOF = -9999            # EOF token
 
     def __init__(self,
-                 ifile:io.TextIOBase|str|bytes|os.Pathlike,
+                 ifile:io.TextIOWrapper|str|bytes|os.PathLike,
                  parselist:list[int]|None=None):
         cls = self.__class__
 
         self.jobs:list[InternalJob] = [InternalJob(),]
 
-        if isinstance(ifile,io.TextIOBase):
+        if isinstance(ifile,io.TextIOWrapper):
             self._file = ifile
         else:
             self._file = open(ifile,'r')
@@ -168,9 +174,9 @@ class GaussianOutFile(object):
         file = self._file.name.split('/')[-1]
         repr = f'<{cls}({file})>\n'
         indent = '    '
-        for job in self:
+        for job in self.jobs:
             repr += indent + f'{job} type <{job.type}>\n'
-            for link in job:
+            for link in job.links:
                 repr += indent*2 + f'{link}\n'
         return repr
 
@@ -325,10 +331,10 @@ class GaussianOutFile(object):
         # Initialize the Reader generator
         Reader = self.Reader(self._file)
 
-        yield 'Initialization done'
+        yield 0,'Initialization done'
         # If more than 1 EndKeyws then BlockType Assesment has to be modified
         while True:
-            start = False
+            start:list[str] = []
             block = []
 
             # Ask the Reader until a "start line" is found
@@ -389,6 +395,7 @@ class GaussianOutFile(object):
             else:
                 is_explicit = link.info.new_InternalJob
                 if not is_explicit:
+                    assert self.jobs[-1].number is not None
                     info = link.InternalJobInfo(self.jobs[-1].number+1,'linked',True)
                     link.info = info
                 new_job = InternalJob()
@@ -397,7 +404,7 @@ class GaussianOutFile(object):
                 current_job.append(link)
                 current_job.guess_info()
 
-            block_type, block = yield
+            block_type, block = yield None
 
 class GaussianInFile(object):
     """
@@ -406,7 +413,7 @@ class GaussianInFile(object):
 
     Parameters
     ----------
-    file : io.TextIOBase or str
+    ifile : :io.TextIOWrapper | str | bytes | os.PathLike | None
         File instance (Result of open(filename,'r')) or valid filename.
 
     Attributes
@@ -451,27 +458,27 @@ class GaussianInFile(object):
         'pcm' -> the 'pcm' suboption within scrf is included
         'smd' -> the 'smd' suboption within the scrf is included.  
     """
-    def __init__(self,file=None):
+    def __init__(self,ifile:io.TextIOWrapper|str|bytes|os.PathLike|None=None):
 
-        if isinstance(file,io.TextIOBase):
-            self._file = file
-        elif file is None: 
+        if isinstance(ifile,io.TextIOBase):
+            self._file = ifile
+        elif ifile is None: 
             self._file = None
         else:
-            self._file = open(file,'a+')
+            self._file = open(ifile,'a+')
             if self._file.tell() != 0:
                 self._file.seek(0)
         
         self._txt = ''
-        self.preprocessing = dict() # In the G16 Manual "Link 0 Commands"
-        self.commandline = dict() # In the G16 Manual "Route Section"
+        self.preprocessing:dict[str,str|list[str]] = dict() # In the G16 Manual "Link 0 Commands"
+        self.commandline:dict[str,list[str]] = dict() # In the G16 Manual "Route Section"
         self.title = ''
         self._method = ''
         self._basis = ''
         self.spin = 1
         self.charge = 0
         self.geometry = '' # In the G16 Manual "Molecule Specification"
-        self.tail = [] # In the G16 Manual "Optional additional sections"
+        self.tail:list[str] = [] # In the G16 Manual "Optional additional sections"
         self.extra_printout = True
         self._nprocs_key = None
         self._mem_key = None
@@ -1282,7 +1289,7 @@ class MultiGaussianInFile(object):
 
     Parameters
     ----------
-    file : io.TextIOBase or str (the default is None)
+    ifile : io.TextIOWrapper | str | bytes | os.PathLike | None
         File instance (Result of open(filename,'r')) or valid filename.
 
     Attributes
@@ -1291,13 +1298,13 @@ class MultiGaussianInFile(object):
         List providing access to each one of the individual GaussianInFile
         objects representing each one of the linked calculations. 
     """
-    def __init__(self,file=None):
-        if isinstance(file,io.TextIOBase):
-            self._file = file
-        elif file is None: 
+    def __init__(self,ifile:io.TextIOWrapper|str|bytes|os.PathLike|None=None):
+        if isinstance(ifile,io.TextIOBase):
+            self._file = ifile
+        elif ifile is None: 
             self._file = None
         else:
-            self._file = open(file,'a+')
+            self._file = open(ifile,'a+')
             if self._file.tell() != 0:
                 self._file.seek(0)
         self.jobs:list[GaussianInFile] = []
@@ -1332,7 +1339,7 @@ class MultiGaussianInFile(object):
         txt = self._file.read()
         self.jobs = [GaussianInFile.from_str(job.lstrip()) for job in txt.split('--Link1--')] 
 
-    def write(self,filepath=None):
+    def write(self,filepath:str|bytes|os.PathLike|None=None):
         """
         Writes the File object to a File. If a filepath is provided it will
         write to that filepath otherwise it will attempt to write to the path
@@ -1340,8 +1347,9 @@ class MultiGaussianInFile(object):
 
         Parameters
         ----------
-        filepath : str
-            A valid filepath.
+        filepath : str | bytes | os.PathLike | None
+            A valid filepath. If None is provided it will attempt to write
+            into the file used to create the instance.
         """
         self._txt = str(self)
         if filepath is None:
@@ -1377,7 +1385,7 @@ class MultiGaussianInFile(object):
         for job in self.jobs: 
             job.add_l0_kwd(chk,where='chk')
     
-    def enforce_continuous_chk(self,basename=None):
+    def enforce_continuous_chk(self,basename:str|None=None):
         """
         Enforces that the chk of job i-1 is retained and a copy of it is used 
         at the start of job i. For an example with two jobs, the first link0 
@@ -1395,7 +1403,7 @@ class MultiGaussianInFile(object):
 
         Parameters
         ----------
-        basename : str, optional
+        basename : str | None, optional
             basename of the chk to use, if none is provided it defaults to the 
             one of the first job. 
         """
@@ -1471,7 +1479,7 @@ class MultiGaussianInFile(object):
         if len(self.jobs) < 2:
             return 
         for job in self.jobs[1:]:
-            job.geometry_from_chk(include_cs=include_cs)
+            job.geometry_from_chk(with_cs=include_cs)
 
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
