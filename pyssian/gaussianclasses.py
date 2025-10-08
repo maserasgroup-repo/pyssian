@@ -490,11 +490,20 @@ class GaussianInFile(object):
             '',
             title,
             '',
-            self.charge_and_spin_as_str(),
-            str(self.geometry).rstrip(),
-            '',
-            '\n\n'.join(self.tail)
-        ]
+            ]
+
+        # The geom=check, geom=read, geom=allcheck may require or not 
+        # to include the geometries/charge&spin
+        chrg_spin = self.charge_and_spin_as_str()
+        if chrg_spin:
+            structure.append(chrg_spin)
+
+        geom = self.geometry_as_str()
+        if geom: 
+            structure.append(geom)
+        
+        structure.extend(['',
+                          '\n\n'.join(self.tail)])
         str_repr = '\n'.join(structure).strip() +'\n\n\n'
         return str_repr
 
@@ -703,9 +712,7 @@ class GaussianInFile(object):
         lines : list[str]
             list of strings. Empty lines will be ignored.
         """
-        print(lines)
         lines = [line.split() for line in lines if line.strip()]
-        print(lines)
         # the first line contains the "#p"
         self.extra_printout = lines[0][0] == '#p'
         # parse all the keywords
@@ -855,7 +862,27 @@ class GaussianInFile(object):
         str
             string with the charge and spin data
         """
+        keywords = [k.lower() for k in self.commandline.get('geom',[])]
+        if 'geom' in self.commandline and 'allcheck' in keywords:
+            # the allcheck keyword does not require geometry nor charge and 
+            # spin specification
+            return ''
         return f'{self.charge} {self.spin}'
+    def geometry_as_str(self): 
+        """
+        generates a string in the appropriate format for the geometry, based 
+        on the available geometry attribute and the command line keywords
+
+        Returns
+        -------
+        str
+            string of the geometry
+        """
+        keywords = [k.lower() for k in self.commandline.get('geom',[])]
+        is_geometry_fromfile = any([item in keywords for item in ['check','read','allcheck']])
+        if 'geom' in self.commandline and is_geometry_fromfile:
+            return ''
+        return str(self.geometry).rstrip()
 
     # Private functions for properties management
     def _search_nprocs_key(self):
@@ -928,6 +955,54 @@ class GaussianInFile(object):
         self.commandline['scrf'] = items
         
     # Attribute modifying functions
+    def geometry_from_chk(self,name=None,with_cs=False): 
+        """
+        Adds the specific keywords to read the geometry from the chk. 
+        If no chk is present in the preprocessing options it will be 
+        added. 
+
+        Parameters
+        ----------
+        name : str, optional
+            stem of the chk file. If none provided it will use the default 
+            behavior of the add_chk method. 
+        with_cs : bool, optional
+            If enabled the allchk will be used instead of chk or read, which 
+            leads to gaussian reading the charge and spin directly from the 
+            chk. 
+        """
+        
+        if 'chk' not in self.preprocessing: 
+            self.add_chk(name)
+        
+        if with_cs: 
+            self.add_kwd('allcheck',where='geom')
+        else:
+            self.add_kwd('check',where='geom')
+        self.add_kwd('read',where='guess')
+    def geometry_not_from_chk(self):
+        """
+        Undoes the effects of the geometry_from_chk method, except the creation
+        of the chk. 
+        """
+        keywords = self.commandline.get('geom',[])
+        for target in ['allcheck','check','read']: 
+            keywords.pop(keywords.index(target))
+        
+        if keywords: 
+            self.commandline['geom'] = keywords
+        else: 
+            self.pop_kwd('geom')
+
+        keywords = self.commandline.get('guess',[])
+        for target in ['allcheck','check','read']: 
+            keywords.pop(keywords.index(target))
+        
+        if keywords: 
+            self.commandline['guess'] = keywords
+        else: 
+            self.pop_kwd('guess')
+
     def pop_chk(self,default=None):
         """
         Removes the chk from the file, returns 'default' if the chk was not
@@ -1059,6 +1134,58 @@ class GaussianInFile(object):
             return
         items.append(keyword)
         self.commandline[where] = items
+    def pop_kwds(self,*keywords,where=None): 
+        """
+        Removes the provided keywords from the command line and returns them. 
+
+        Parameters
+        ----------
+        *keywords : str
+            keywords to remove from the command line.
+        where : str, optional
+            if provided it searches the keywords as a suboption of the "where" 
+            keyword i.e. pop_kwds('smd',where='scrf') or 
+            pop_kwds('cartesian',where='opt')
+
+        Returns
+        -------
+        list[str]
+            Returns the removed keywords if they were in the command line
+        """
+        if where is None:
+            output = [self.commandline.pop(k,None) for k in keywords]
+            return [o for o in output if o is not None]
+        
+        items = self.commandline.get(where,[])
+        output = []
+        indices = [items.index(keyword) for keyword in keywords if keyword in items]
+        output = [items.pop(idx) for idx in reversed(indices)]
+        self.commandline[where] = items 
+        return list(reversed(output))
+    def add_kwds(self,*keywords,where=None): 
+        """
+        Adds keywords to the command line. 
+
+        Parameters
+        ----------
+        keyword : str
+            keyword to add to the command line.
+        where : str, optional
+            if provided it adds the keywords as suboptions of the "where" 
+            keyword i.e. add_kwds('smd','solvent=water',where='scrf') or 
+            add_kwds('cartesian','ts','noeigentest',where='opt')
+
+        """
+        if where is None:
+            for keyword in keywords: 
+                self.add_kwd(keyword)
+            return
+        
+        items = self.commandline.get(where,[])
+        keywords_to_add = [k for k in keywords if k not in items]
+        items.extend(keywords_to_add)
+        self.commandline[where] = items
+
     def pop_l0_kwd(self,keyword,where=None):
         """
         Removes a keyword from the preprocessing and returns it.
