@@ -2,12 +2,13 @@
 Contains auxiliary classes, usefull in combination with the gaussianclasses.
 """
 import os
+import io
 from warnings import warn
 from math import ceil
 from itertools import cycle
 from pathlib import Path
 
-import numpy
+import numpy as np
 
 from .chemistryutils import PeriodicTable
 
@@ -28,73 +29,97 @@ class Geometry(object):
         cls = type(self)
         self.title = str(cls.counter)
         cls.counter += 1
+        self._coords_as_numpy = False
+
     def __repr__(self):
         return f'< Geometry {self.title} object >'
+
     def __str__(self):
         linef = " {:<}\t{: 0.09f}\t{: 0.09f}\t{: 0.09f}"
-        As = self.atoms
-        XYZ = self.coordinates
+        if self._coords_as_numpy: 
+            atoms = self.atoms.flatten().tolist()
+            coordinates = self.coordinates.tolist()
+        else:
+            atoms = self.atoms
+            coordinates = self.coordinates
         text = "\n".join([linef.format(str(atom),*xyz)
-                                        for atom,xyz in zip(As,XYZ)])
+                                        for atom,xyz in zip(atoms,coordinates)])
         return text
-    def write(self,File):
-        """ Write Geometry to a File """
-        File.write(str(self))
 
-    def update_atoms(self,other):
+    def write(self,fd:io.TextIOWrapper):
+        """
+        Write Geometry to a File
+
+        Parameters
+        ----------
+        fd : str | bytes | os.PathLike
+            file where the xyz formatted geometry will be written
+        """
+        fd.write(str(self))
+
+    def update_atoms(self,mapping):
         """ Updates the atoms names from a mapping """
-        self.atoms = [other[atom] for atom in self.atoms]
+        if self._coords_as_numpy: 
+            for i,atom in self.atoms.flatten().tolist(): 
+                self.atoms[i] = mapping[atom]
+        else:
+            self.atoms = [mapping[atom] for atom in self.atoms]
+
+    def to_numpy(self): 
+        """
+        Changes the coordinate representation and atoms into a numpy arrays.
+        """
+        self.atoms = np.array(self.atoms,dtype=object).reshape(-1,1)
+        self.coordinates = np.array(self.coordinates)
+        self._coords_as_numpy = True
+    def to_python(self): 
+        """
+        Changes the coordinate representation and atoms into python lists.
+        """
+        self.atoms = self.atoms.flatten().tolist()
+        self.coordinates = self.coordinates.tolist()
+        self._coords_as_numpy = False
 
     @classmethod
     def from_L202(cls,L202):
-        """Generate a Geometry instance from a Gaussian file. If it can't find a
+        """
+        Generate a Geometry instance from a Gaussian file. If it can't find a
         mapping from atomic Number to symbol it will store the string
-        representation of the number """
-        Geom = cls()
-        Coords = []
-        Atoms = []
+        representation of the number
+        """
+        geometry = cls()
         orientation = L202.orientation
         for atom in orientation:
-            Coords.append(atom[3:])
-            Atoms.append(PeriodicTable[atom[1]])
-        Geom.atoms = Atoms
-        Geom.coordinates = Coords
-        return Geom
+            geometry.coordinates.append(atom[3:])
+            geometry.atoms.append(PeriodicTable[atom[1]])
+        return geometry
+
     @classmethod
-    def from_Input(cls,InputFile):
+    def from_Input(cls,inputfile):
         """Generate a Geometry instance from a Gaussian Input File instance."""
-        Geom = cls()
-        Coords = []
-        Atoms = []
-        for line in InputFile.geometry.split('\n'):
-            Aux = line.strip().split()
-            Atoms.append(Aux[0])
-            B = tuple(map(float,Aux[1:]))
-            Coords.append(B)
-        Geom.atoms = Atoms
-        Geom.coordinates = Coords
-        return Geom
+        geometry = cls()
+        for line in str(inputfile.geometry).split('\n'):
+            atid, *xyz = line.strip().split()
+            geometry.atoms.append(atid)
+            geometry.coordinates.append(tuple(map(float,xyz)))
+        return geometry
+
     @classmethod
     def from_xyz(cls,xyzfile):
         """Generate a Geometry instance from a xyz file."""
-        Geom = cls()
-        Coords = []
-        Atoms = []
+        geometry = cls()
         with open(xyzfile,'r') as F:
             _iter = F.__iter__()
             n = int(next(_iter).strip())
             _ = next(_iter)
-            for i in range(n):
+            for _ in range(n):
                 line = next(_iter)
-                aux = line.strip().split()
-                Atoms.append(aux[0])
-                B = tuple(map(float,aux[1:]))
-                Coords.append(B)
-        Geom.atoms = Atoms
-        Geom.coordinates = Coords
-        return Geom
+                atid, *xyz = line.strip().split()
+                geometry.atoms.append(atid)
+                geometry.coordinates.append(tuple(map(float,xyz)))
+        return geometry
 
-    def to_xyz(self,title=None):
+    def to_xyz(self,title:str|None=None) -> str:
         if title is None: 
             title = f'{self.title}'
         return f'{len(self.atoms)}\n{title}\n{self}\n'
@@ -114,7 +139,7 @@ class Cube(object):
         total number of atoms
     type : str
         Type of cube. Currently only {'MO','other'} are considered
-    isUnrestricted : bool
+    is_unrestricted : bool
         True if the line that contains the number of atoms has 5 elements
         instead of 4.
     origin : tuple
@@ -131,14 +156,14 @@ class Cube(object):
     MO_Ids : list
         Ids of the MO orbitals.
         (Current implementation is designed for only one MO per Cube)
-    matrix : numpy.array
+    matrix : np.array
         Matrix of values of the Cube.
     """
 
     def __init__(self):
         self.natoms = 0
         self.type = 'empty'
-        self.isUnrestricted = False
+        self.is_unrestricted = False
         self.origin = (0,0,0)
         self.shape = (0,0,0)
         self.basis = [(0,0,0),
@@ -152,22 +177,22 @@ class Cube(object):
         return f'<{type(self).__name__}_{id(self)}>'
 
     def __add__(self,other):
-        New = self.__class__()
+        new_item = self.__class__()
         for attr in 'natoms type origin shape basis atoms nMO'.split():
             if getattr(self,attr) != getattr(self,attr):
                 raise ValueError(f'{self}.{attr} != {other}.{attr}')
             else:
-                setattr(New,attr,getattr(self,attr))
-            New.matrix = self.matrix + other.matrix
-        return New
+                setattr(new_item,attr,getattr(self,attr))
+            new_item.matrix = self.matrix + other.matrix
+        return new_item
     def __radd__(self,other):
         return self + other
     def __mul__(self,other):
-        New = self.__class__()
+        new_item = self.__class__()
         for attr in 'natoms type origin shape basis atoms nMO'.split():
-            setattr(New,attr,getattr(self,attr))
-        New.matrix = self.matrix*other
-        return New
+            setattr(new_item,attr,getattr(self,attr))
+        new_item.matrix = self.matrix*other
+        return new_item
     def __rmul__(self,other):
         return self*other
     def __neg__(self):
@@ -175,20 +200,20 @@ class Cube(object):
     def __sub__(self,other):
         return self + (-other)
     def __pow__(self,other):
-        New = self.__class__()
+        new_item = self.__class__()
         for attr in 'natoms type origin shape basis atoms nMO'.split():
-            setattr(New,attr,getattr(self,attr))
-        New.matrix = self.matrix**other
-        return New
+            setattr(new_item,attr,getattr(self,attr))
+        new_item.matrix = self.matrix**other
+        return new_item
 
     # Writing functions
-    def write(self,OFile):
+    def write(self,ofile):
         """
         Writes a cube to a File. 
 
         Parameters
         ----------
-        OFile : str
+        ofile : str
             A valid path to a file. 
         """
         # Formats
@@ -209,11 +234,11 @@ class Cube(object):
         n_MO_line = ['{: >5}'.format(str(self.nMO)),]
         n_MO_line.extend(list(map('{: >5}'.format, MO_Ids)))
         # Writing
-        with open(OFile,'w') as F:
+        with open(ofile,'w') as F:
             F.write('Default Title Line\n')
             F.write('Default Other Title Line\n')
             line = f'{sign+natoms: >5}   {x0: .6f}   {y0: .6f}   {z0: .6f}\n'
-            if self.isUnrestricted:
+            if self.is_unrestricted:
                 line += '   1'
             F.write(line)
             F.write(basis_format(Nx,ix,jx,kx))
@@ -223,14 +248,14 @@ class Cube(object):
                 F.write(atom_format(*atom))
             F.write(''.join(n_MO_line)+'\n')
             self.write_values(F)
-    def write_values(self,File):
+    def write_values(self,fd:io.TextIOWrapper):
         """
         Handles the writing in of the values of self.matrix with the fortran77
         format
 
         Parameters
         ----------
-        File : _io.TextIOWrapper
+        fd : io.TextIOWrapper
             the output of a open(Filename,'w')
         """
         # Formats
@@ -245,23 +270,23 @@ class Cube(object):
                     for Id,_ in enumerate(MO_Ids):
                         for k in range(Nz):
                             counter += 1
-                            File.write(val_format(self.matrix[i][j][k][Id]))
+                            fd.write(val_format(self.matrix[i][j][k][Id]))
                             if counter == 6:
-                                File.write('\n')
+                                fd.write('\n')
                                 counter = 0
                     if counter != 0:
                         counter = 0
-                        File.write('\n')
+                        fd.write('\n')
                 else:
                     for k in range(Nz):
                         counter += 1
-                        File.write(val_format(self.matrix[i][j][k]))
+                        fd.write(val_format(self.matrix[i][j][k]))
                         if counter == 6:
-                            File.write('\n')
+                            fd.write('\n')
                             counter = 0
                     if counter != 0:
                         counter = 0
-                        File.write('\n')
+                        fd.write('\n')
 
     # Constructor methos
     @classmethod
@@ -303,7 +328,7 @@ class Cube(object):
         Aux = line.strip().split()
         natoms,x0,y0,z0 = Aux[:4]
         if len(Aux) > 4:
-            self.isUnrestricted = '1' == Aux[5]
+            self.is_unrestricted = '1' == Aux[5]
         x0,y0,z0 = map(float,(x0,y0,z0))
         if int(natoms) < 0:
             self.type = 'MO'
@@ -350,14 +375,14 @@ class Cube(object):
         nVals = Nz*nMO
         nlines = ceil(nVals/6)
         if nMO > 1:
-            matrix = numpy.zeros(shape=(Nx,Ny,Nz,nMO))
+            matrix = np.zeros(shape=(Nx,Ny,Nz,nMO))
         else:
-            matrix = numpy.zeros(shape=(Nx,Ny,Nz))
+            matrix = np.zeros(shape=(Nx,Ny,Nz))
 
         data = []
         values = []
         for index,line in zip(cycle(range(nlines)),iterable):
-            values.extend(list(map(numpy.float64,line.strip().split())))
+            values.extend(list(map(np.float64,line.strip().split())))
             if index == nlines-1:
                 data.append(values)
                 values = []
