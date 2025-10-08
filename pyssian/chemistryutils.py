@@ -48,7 +48,7 @@ compoundmethod_re = re.compile(compoundMethodRegex)
 
 
 ###################### THE PRETTY FUNCTION ######################
-def is_method(candidate):
+def is_method(candidate:str) -> bool:
     """
     Tests if a candidate string is a valid method recognized by Gaussian.
 
@@ -125,7 +125,7 @@ basis_expr = '|'.join([f'({i})' for i in all_basis])
 #print(basis_expr)
 basis_regex = re.compile(basis_expr)
 ######################## THE PRETTY FUNCTION ###################################
-def is_basis(candidate):
+def is_basis(candidate:str) -> bool:
     """
     Tests if a candidate string is a valid basis set recognized by Gaussian.
 
@@ -159,7 +159,7 @@ items = """X
     Fr Ra Ac Th Pa  U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Uub Uut Uuq Uup Uuh Uus Uuo
     """
 items = items.replace('\n',' ').strip().split()
-PeriodicTable = dict()
+PeriodicTable:dict[str|int,str|int] = dict()
 for i,Sym in enumerate(items):
     PeriodicTable[i] = Sym        #  1  -> 'H'
     PeriodicTable[str(i)] = Sym   # '1' -> 'H'
