@@ -8,9 +8,8 @@ from itertools import chain
 import warnings
 
 from .chemistryutils import is_method, is_basis
-from .linkjobparsers import (LinkJob, GeneralLinkJob, Link1,      # classes
-                             NPROCSHARED_ALIASES, MEMORY_ALIASES, # constants
-                             InternalJobInfo)                     # types
+from .linkjobparsers import (LinkJob, GeneralLinkJob,             # classes
+                             NPROCSHARED_ALIASES, MEMORY_ALIASES) # constants
 
 # Type hinting
 import os

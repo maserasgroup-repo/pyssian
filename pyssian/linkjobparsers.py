@@ -5,9 +5,10 @@ registered with the appropiate decorator are considered for parsing.
 """
 
 import warnings
+import re
 from collections import namedtuple
 from itertools import cycle
-import re
+from typing import Any, NamedTuple
 
 NPROCSHARED_ALIASES = ['nprocshared','nprocs','NPROCSHARED','NPROCS']
 MEMORY_ALIASES = ['mem','memory','MEM','MEMORY']
@@ -56,7 +57,7 @@ def SilentFail(f):
     f.__doc__ += '(Fails Silently).'
     return f
 
-#Base Class
+# Base Class Definitions
 class LinkJob(object):
     """LinkJob Base class. Represents the output of a lxxxx.exe.
 
@@ -78,8 +79,8 @@ class LinkJob(object):
 
     """
     __slots__ = ('text','number')
-    _token = 'Base'
-    Register = {}
+    _token:int|str = 'Base'
+    Register:dict[int|str,Any] = {}
     def __init__(self,text,number=None,as_empty=False):
         self.number = number
         if as_empty:
@@ -162,6 +163,104 @@ def RegisterLinkJob(cls):
     LinkJob.Register[key] = cls
     return cls
 
+################################################################################
+# Namedtuples definition for slightly more structured data within the LinkJobs #
+################################################################################
+
+# Link 1
+class InternalJobInfo(NamedTuple): 
+    number: int
+    type: str
+    new_InternalJob: bool
+
+# Link 103 types
+class Parameter(NamedTuple): 
+    name: str
+    definition: str
+    value: float
+    derivative: float
+
+class ConverItem(NamedTuple):
+    item: str
+    value: float
+    threshold: float
+    converged: bool|str
+
+class Derivative(NamedTuple): 
+    var: str
+    old: float
+    dEdX: float
+    dXl: float
+    dXq: float
+    dXt: float
+    new: float
+
+# Link120
+class EnergyPartition(NamedTuple): 
+    gridpoint:int
+    level:str
+    model:str
+    energy:float
+
+# Link123 and Link202
+class AtomCoords(NamedTuple): 
+    center:int
+    atom_num:int
+    atom_type:int
+    X:float
+    Y:float
+    Z:float
+
+# Link601
+class MullikenAtom(NamedTuple): 
+    number:int
+    symbol:str
+    charge:float
+    spin:float|None = None
+
+# Link 716
+class Frequency(NamedTuple): 
+    freq: float
+    redmass: float
+    forcek: float
+    IRint: float
+
+class FreqDisplacements(NamedTuple): 
+    atomids:list[int]
+    atoms:list[int]
+    xyz:list[tuple[float,float,float]]
+
+class EnergyContribution(NamedTuple): 
+    name:str
+    thermal:float
+    CV:float
+    S:float
+
+# Link804
+class SpinComponent(NamedTuple): 
+    name:str
+    T:float
+    E:float
+
+# Link914
+class TransitionData(NamedTuple): 
+    donor: str
+    acceptor: str
+    contribution: float
+    is_reversed: bool
+
+class ExcitedState(NamedTuple): 
+    number:int
+    energy:float
+    wavelength:float
+    osc_strength:float
+    s2:float
+    transitions:list[TransitionData]
+
+################################################################################
+#                LinkJob Specialized parser definitions                        #
+################################################################################
+
 @RegisterLinkJob
 class Link1(LinkJob):
     """
@@ -178,7 +277,7 @@ class Link1(LinkJob):
 
     Attributes
     ----------
-    info : namedtuple
+    info : InternalJobInfo
         tuple that contains information needed to instantiate an InternalJob.
     commandline : str
         contains the information of the gaussian commands
@@ -187,31 +286,29 @@ class Link1(LinkJob):
         contains the number of the %nprocshared link0 option
     memory : str
         contains the right hand side of the %mem link0 option
-    link0 : list
+    link0 : list[str]
         list of lines containing the link0 specifications.
-    IOps : list
+    IOps : list[str]
         list of lines containing the IOps that appear below the command line
     text
     number
     """
 
-    _token = 1
+    _token:int|str = 1
 
     re_link0 = re.compile(r'\%.*')
     re_commandline = re.compile(r'(?:\-{10,}\n)(.*?#[\s\S]*?)(?:\-{10,}\n)')
     re_IOps = re.compile(r'.*\;')
     re_internaljob = re.compile(r'Link1\:.*internal.*job.*([0-9]{1,3})\.')
 
-    InternalJobInfo = namedtuple('InternalJobInfo','number type new_InternalJob')
-
-    def __init__(self,text,as_empty=False):
+    def __init__(self,text:str,as_empty:bool=False):
         super().__init__(text,1)
-        self.info = None
+        self.info:InternalJobInfo|None = None
         self.commandline = ''
         self.nprocs = None
         self.memory = None
-        self.link0 = []
-        self.IOps = []
+        self.link0:list[str] = []
+        self.IOps:list[str] = []
         if as_empty:
             self._locate_internaljob()
             self.text = '' # clear text
@@ -378,11 +475,11 @@ class Link103(LinkJob):
         'init', 'iteration' or 'end'
     state : str
         Either 'optimized', 'non-optimized' or 'initial'
-    convergence : list
+    convergence : list[ConverItem]
         List of namedtuples with fields item,value,threshold,converged.
-    parameters : list
+    parameters : list[Parameter]
         List of namedtuples with fields name,definition,value,derivative.
-    derivatives : list
+    derivatives : list[Derivative]
         List of namedtuples with fields var,old,dEdX,dXl,dXq,dXt,new.
     stepnumber
     scanpoint
@@ -406,10 +503,6 @@ class Link103(LinkJob):
     re_convergence = re.compile(re_convergence)
     re_stepnum = re.compile(r'Step\s*number\s*([0-9]*)\s*out\s*of')
     re_scanpoint = re.compile(r'scan\spoint\s*([0-9]*)\s*out\s*of')
-
-    _Parameter = namedtuple("Parameter", "name definition value derivative")
-    _ConverItem = namedtuple("ConverItem", "item value threshold converged")
-    _Derivative = namedtuple("Derivative", "var old dEdX dXl dXq dXt new")
 
     def __init__(self,text,as_empty=False):
         self.mode = None
@@ -473,8 +566,8 @@ class Link103(LinkJob):
                 derivative = columns[-2]
             else:
                 derivative = float(columns[-2])
-            par = cls._Parameter(name, definition,
-                                 value, derivative)
+            par = Parameter(name, definition,
+                            value, derivative)
             parameters.append(par)
         self.parameters = parameters
 
@@ -493,7 +586,7 @@ class Link103(LinkJob):
         
         for m in text_match:
             Var, old, dEdX, dXl, dXq, dX, new = m
-            item = cls._Derivative(Var, old, dEdX, dXl, dXq, dX, new)
+            item = Derivative(Var, old, dEdX, dXl, dXq, dX, new)
             items.append(item)
         self.derivatives = items
 
@@ -518,7 +611,7 @@ class Link103(LinkJob):
                 val = float(m[1])
             threshold = float(m[2])
             is_converged = m[3] == "YES"
-            item = cls._ConverItem(name,val,threshold,is_converged)
+            item = ConverItem(name,val,threshold,is_converged)
             items.append(item)
         self.convergence = items
 
@@ -580,7 +673,6 @@ class Link120(LinkJob):
     re_energy = re.compile(re_energy)
     re_energy_partitions = r'gridpoint\s*([0-9]*)\smethod:\s*([a-zA-Z]*)\s*system:\s*([a-zA-Z]*)\s*energy:\s*(-?[0-9]*\.[0-9]*)'
     re_energy_partitions = re.compile(re_energy_partitions)
-    _EnergyPartition = namedtuple('EnergyPartition','gridpoint level model energy')
 
     def __init__(self,text,as_empty=False):
         self.energy = None
@@ -603,7 +695,6 @@ class Link120(LinkJob):
         if text_match:
             self.energy = float(text_match[0])
 
-        EnergyPartition = cls._EnergyPartition
         text_match = cls.re_energy_partitions.findall(self.text)
         if not text_match:
             return 
@@ -724,9 +815,6 @@ class Link123(LinkJob):
     re_totalsteps = r'\#\sOF\sPOINTS\sALONG\sTHE\sPATH\s*=\s*([0-9]*)'
     re_totalsteps = re.compile(re_totalsteps)
 
-    _AtomCoords = namedtuple('AtomCoords',
-                            'CenterNum AtomicNum AtomType X Y Z')
-
     def __init__(self,text,as_empty=False):
         self.orientation = []
         self.direction = ''
@@ -747,7 +835,6 @@ class Link123(LinkJob):
         the geometry of the molecule.
         """
         cls = self.__class__
-        AtomCoords = cls._AtomCoords
         orientation_lines = cls.re_orientation.findall(self.text)
         if not orientation_lines: 
             return
@@ -827,9 +914,6 @@ class Link202(LinkJob):
     re_orientation = re.compile(re_orientation)
     re_number = re.compile('[0-9]')
 
-    _AtomCoords = namedtuple('AtomCoords',
-                            'CenterNum AtomicNum AtomType X Y Z')
-
     def __init__(self,text,as_empty=False):
         self.orientation = []
         self.distance_matrix = []
@@ -848,7 +932,6 @@ class Link202(LinkJob):
         the geometry of the molecule.
         """
         cls = self.__class__
-        AtomCoords = cls._AtomCoords
         orientations = cls.re_orientation.findall(self.text)
         
         if not orientations: 
@@ -1098,7 +1181,6 @@ class Link601(LinkJob):
     _token = 601
 
     def __init__(self,text,as_empty=False):
-        self._Atom = namedtuple('Atom','number symbol charge spin')
         self.mulliken_heavy = None
         self.mulliken = None
         if as_empty:
@@ -1124,9 +1206,9 @@ class Link601(LinkJob):
         lines =  mulliken_heavy_lines[0][1].split('\n')
         has_spin = bool(mulliken_heavy_lines[0][0])
         if has_spin:
-            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
+            atom = lambda x: MullikenAtom(int(x[0]),x[1],float(x[2]),float(x[3]))
         else:
-            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            atom = lambda x: MullikenAtom(int(x[0]),x[1],float(x[2]))
         
         self.mulliken_heavy = [atom(line.strip().split())
                                 for line in lines if line.strip()]
@@ -1213,10 +1295,6 @@ class Link716(LinkJob):
     re_dipole = r'(?:Dipole.*\=)'+r'(.?[0-9]\.[0-9]*D[\-|\+][0-9]{2,})'*3
     re_dipole = re.compile(re_dipole)
 
-    _Frequency = namedtuple('Frequency','freq redmass forcek IRint')
-    _Displacement = namedtuple('FreqDisplacements','atomids atoms xyz')
-    _EContrib = namedtuple('EContrib','Name Thermal CV S')
-
     def __init__(self,text,as_empty=False):
         self.dipole = []
         self.units = [] # The first one corresponds to the non tabulated
@@ -1263,7 +1341,6 @@ class Link716(LinkJob):
         frequencies table.
         """
         cls = self.__class__
-        Frequency = cls._Frequency
         
         frequencies_lines = cls.re_Frequencies.findall(self.text)
         if not frequencies_lines:
@@ -1288,7 +1365,6 @@ class Link716(LinkJob):
         cartesian displacements of the frequencies.
         """
         cls = self.__class__
-        Displacement = cls._Displacement
         freq_text = cls.re_freq_text.findall(self.text)
 
         if not freq_text:
@@ -1320,7 +1396,7 @@ class Link716(LinkJob):
             atomids,atomnums,*matrices = zip(*atomlines)
             
             for matrix in matrices: 
-                displacements.append(Displacement(atomids,atomnums,matrix))
+                displacements.append(FreqDisplacements(atomids,atomnums,matrix))
 
         self.freq_displacements = displacements
 
@@ -1332,7 +1408,6 @@ class Link716(LinkJob):
         thermochemistry computed properties.
         """
         cls = self.__class__
-        EContrib = cls._EContrib
         thermo_lines = cls.re_Thermo.findall(self.text)
         if thermo_lines:
             lines = [line.strip() for line in thermo_lines[0].split('\n') if line.strip()]
@@ -1354,7 +1429,7 @@ class Link716(LinkJob):
 
             for line in lines:
                 name, E, CV, S = line.strip().rsplit(maxsplit=3)
-                item = EContrib(name,float(E),float(CV),float(S))
+                item = EnergyContribution(name,float(E),float(CV),float(S))
                 self.energy_contributions.append(item)
 
     @Populates('IR_spectrum')
@@ -1396,8 +1471,6 @@ class Link804(LinkJob):
 
     re_MP2 = re.compile(r'EUMP2\s=\s*(\-?[0-9]+\.[0-9]*D[\-|\+][0-9]{2,3})')
 
-    _SpinComponent = namedtuple('SpinComponent','Name T E')
-
     def __init__(self,text,as_empty=False):
         self.MP2 = None
         self.spin_components = [] # The first one corresponds to the non tabulated
@@ -1424,7 +1497,6 @@ class Link804(LinkJob):
         the Energies of the spin Components """
         lines_iter = self._text_iterbyline()
         cls = self.__class__
-        SpinComponent = cls._SpinComponent
 
         for line in lines_iter:
             if 'Spin components' in line:
@@ -1535,11 +1607,6 @@ class Link914(LinkJob):
 
     _token = 914
 
-    _ExcitedState = namedtuple('ExcitedState',
-                            'number energy wavelength osc_strength s2 transitions')
-    _TransitionData = namedtuple('TransitionData',
-                            'donor acceptor contribution isreversed')
-
     re_ExcitedState =  r'Excited\s*State\s*([0-9]{1,3})\:' # Excited State number
     re_ExcitedState += r'\s*(\S*)'     # Match Pointgroup
     re_ExcitedState += r'\s*(\S*)\seV' # Match Energy
@@ -1569,7 +1636,6 @@ class Link914(LinkJob):
         Does the logic of finding and slicing the text of the link into the
         different excited states
         """
-        ExcitedState = self._ExcitedState
         excitedstates = []
         matches = list(self.re_ExcitedState.finditer(self.text))
         
@@ -1600,7 +1666,7 @@ class Link914(LinkJob):
                                                 transitions))
         self.excitedstates = excitedstates
 
-    def _extract_transitions(self,text):
+    def _extract_transitions(self,text) -> list[TransitionData]:
         """
         Given the slice of output text that corresponds to the transition
         contributions of a ExcitedState, returns each contribution as a
@@ -1614,11 +1680,10 @@ class Link914(LinkJob):
 
         Returns
         -------
-        transitions
+        transitions : list[TransitionData]
             list of TransitionData instances.
 
         """
-        TransitionData = self._TransitionData
         transitions_matches = self.re_transition.findall(text)
         transitions = []
         if transitions_matches:
