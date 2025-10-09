@@ -374,7 +374,7 @@ Code snippet to display 'Filename HF MP2 MP2(SCS)'
    l804 = GOF.get_links(804)[-1]
    MP2 = l804.MP2
    MP2scs = HF + l804.get_SCScorr()
-   print(f'{MyFile}\t{HF}\t{MP2}\t{MP2scs}')
+   print(f'{myfile}\t{HF}\t{MP2}\t{MP2scs}')
 
 
 Code Snippet to follow an ongoing gaussian calculation

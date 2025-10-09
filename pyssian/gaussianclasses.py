@@ -492,17 +492,17 @@ class GaussianInFile(object):
 
     def __str__(self):
 
-        title = self.title
-        if not title: 
-            title = 'title_placeholder'
+        if not self.title.strip(): 
+            self.title = 'title_placeholder'
         
         structure = [
             self.preprocessing_as_str(),
             self.commandline_as_str(),
-            '',
-            title,
-            '',
-            ]
+        ]
+
+        title = self.title_as_str()
+        if title: 
+            structure.append(title)
 
         # The geom=check, geom=read, geom=allcheck may require or not 
         # to include the geometries/charge&spin
@@ -514,8 +514,7 @@ class GaussianInFile(object):
         if geom: 
             structure.append(geom)
         
-        structure.extend(['',
-                          '\n\n'.join(self.tail)])
+        structure.append('\n\n'.join(self.tail))
         str_repr = '\n'.join(structure).strip() +'\n\n\n'
         return str_repr
 
@@ -823,7 +822,7 @@ class GaussianInFile(object):
                 self.tail.append('\n'.join(Aux))
 
     # Helper functions for writing
-    def preprocessing_as_str(self):
+    def preprocessing_as_str(self) -> str:
         """
         Transforms the preprocessing attribute to a suitable string 
         representation.
@@ -841,7 +840,7 @@ class GaussianInFile(object):
                 Aux = f'%{key}'
             preprocessing.append(Aux)
         return '\n'.join(preprocessing)
-    def commandline_as_str(self): 
+    def commandline_as_str(self) -> str: 
         """
         Transforms the commandline attribute to a suitable string 
         representation.
@@ -863,8 +862,8 @@ class GaussianInFile(object):
             else:
                 Aux = f"{key}"
             commandline.append(Aux)
-        return ' '.join(commandline)
-    def charge_and_spin_as_str(self):
+        return ' '.join(commandline)+'\n'
+    def charge_and_spin_as_str(self) -> str:
         """
         generates a string in the appropriate format for the charge and spin 
         information
@@ -880,7 +879,7 @@ class GaussianInFile(object):
             # spin specification
             return ''
         return f'{self.charge} {self.spin}'
-    def geometry_as_str(self): 
+    def geometry_as_str(self) -> str: 
         """
         generates a string in the appropriate format for the geometry, based 
         on the available geometry attribute and the command line keywords
@@ -894,8 +893,22 @@ class GaussianInFile(object):
         is_geometry_fromfile = any([item in keywords for item in ['check','read','allcheck']])
         if 'geom' in self.commandline and is_geometry_fromfile:
             return ''
-        return str(self.geometry).rstrip()
+        return str(self.geometry).rstrip()+'\n'
+    def title_as_str(self) -> str: 
+        """
+        generates a string in the appropriate format for the title
 
+        Returns
+        -------
+        str
+            string with the title correctly formatted
+        """
+        keywords = [k.lower() for k in self.commandline.get('geom',[])]
+        if 'geom' in self.commandline and 'allcheck' in keywords:
+            # the allcheck keyword does not require geometry nor charge and 
+            # spin specification nor title
+            return ''
+        return self.title.rstrip()+'\n'
     # Private functions for properties management
     def _search_nprocs_key(self):
         for key in NPROCSHARED_ALIASES: 
@@ -967,7 +980,7 @@ class GaussianInFile(object):
         self.commandline['scrf'] = items
         
     # Attribute modifying functions
-    def geometry_from_chk(self,name=None,with_cs=False): 
+    def geometry_from_chk(self,name=None,allcheck=False): 
         """
         Adds the specific keywords to read the geometry from the chk. 
         If no chk is present in the preprocessing options it will be 
@@ -978,8 +991,8 @@ class GaussianInFile(object):
         name : str, optional
             stem of the chk file. If none provided it will use the default 
             behavior of the add_chk method. 
-        with_cs : bool, optional
-            If enabled the allchk will be used instead of chk or read, which 
+        allcheck : bool, optional
+            If enabled the allcheck will be used instead of chk or read, which 
             leads to gaussian reading the charge and spin directly from the 
             chk. 
         """
@@ -987,7 +1000,7 @@ class GaussianInFile(object):
         if 'chk' not in self.preprocessing: 
             self.add_chk(name)
         
-        if with_cs: 
+        if allcheck: 
             self.add_kwd('allcheck',where='geom')
         else:
             self.add_kwd('check',where='geom')
@@ -1056,7 +1069,7 @@ class GaussianInFile(object):
 
         """
         if not is_method(method):
-            raise NotImplementedError(f'method {method} not implemented')
+            raise NotImplementedError(f'method {method} not implemented. Please check that the spelling is correct.')
         key = self._method
         _ = self.commandline.pop(key,None) # Used to ensure deletion of the key
         self._method = method
@@ -1078,7 +1091,7 @@ class GaussianInFile(object):
 
         """
         if not is_basis(basis):
-            raise NotImplementedError(f'basis {basis} not implemented')
+            raise NotImplementedError(f'basis {basis} not implemented. Please check that the spelling is correct.')
         key = self._basis
         _ = self.commandline.pop(key,None) # Used to ensure deletion of the key
         self._basis = basis
@@ -1462,23 +1475,22 @@ class MultiGaussianInFile(object):
         for job in self.jobs: 
             job.method = method
 
-    def chain_geometries(self,include_cs:bool=False): 
+    def chain_geometries(self,allcheck:bool=False): 
         """
         Ensures that the final geometry at the chk of job[i] is used by job[i+1]
         removing the need to specify the geometry section at job[i+1].
 
         Parameters
         ----------
-        include_cs : bool, optional
+        allcheck : bool, optional
             If enabled, the charge and spin will be read from the chk files 
             instead of from their corresponding sections in the input files. 
         """
 
-        initial_job = self.jobs[0]
         if len(self.jobs) < 2:
-            return 
+            return
         for job in self.jobs[1:]:
-            job.geometry_from_chk(with_cs=include_cs)
+            job.geometry_from_chk(allcheck=allcheck)
 
 
 # TODO: Implement a class to read and manipulate the basis functions in the tail
