@@ -305,8 +305,8 @@ class Link1(LinkJob):
         super().__init__(text,1)
         self.info:InternalJobInfo|None = None
         self.commandline = ''
-        self.nprocs = None
-        self.memory = None
+        self._nprocs_idx = None
+        self._memory_idx = None
         self.link0:list[str] = []
         self.IOps:list[str] = []
         if as_empty:
@@ -333,7 +333,7 @@ class Link1(LinkJob):
             jobnumber = 1
             is_new_job = False
         jobtype = self._guess_type()
-        self.info = cls.InternalJobInfo(jobnumber, jobtype, is_new_job)
+        self.info = InternalJobInfo(jobnumber, jobtype, is_new_job)
 
     @Populates('nprocs','memory', 'link0', defaults=['Defaults to None',
     'Defaults to None','If none is found defaults to an empty list'])
@@ -350,10 +350,12 @@ class Link1(LinkJob):
             return
         
         for item in link0_data:
-            if any(key in item for key in NPROCSHARED_ALIASES): 
-                self.nprocs = int(item.strip().split('=')[-1])
-            elif any(key in item for key in MEMORY_ALIASES): 
-                self.memory = item.strip().split('=')[-1]
+            if any(key in item for key in NPROCSHARED_ALIASES):
+                self._nprocs_idx = len(self.link0)
+                self.append(item[1:])
+            elif any(key in item for key in MEMORY_ALIASES):
+                self._mem_idx = len(self.link0)
+                self.append(item[1:])
             else:
                 self.link0.append(item[1:])
 
@@ -386,7 +388,19 @@ class Link1(LinkJob):
         if iops_lines:
             self.IOps = [line for line in iops_lines]
 
-    def _guess_type(self):
+    @property
+    def nprocs(self) -> None|int:
+        if self._nprocs_idx is None: 
+            return None
+        return int(self.link0[self._nprocs_idx].strip().split('=')[-1])
+
+    @property
+    def memory(self) -> None|str: 
+        if self._memory_idx is None: 
+            return None
+        return self.link0[self._memory_idx].strip().split('=')[-1]
+
+    def _guess_type(self) -> str:
         """
         Guesses the type of Job depending on the keywords in the
         self.commandline.
@@ -1230,9 +1244,9 @@ class Link601(LinkJob):
         has_spin = bool(mulliken_lines[0][0])
 
         if has_spin:
-            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),float(x[3]))
+            atom = lambda x: MullikenAtom(int(x[0]),x[1],float(x[2]),float(x[3]))
         else:
-            atom = lambda x: self._Atom(int(x[0]),x[1],float(x[2]),spin=None)
+            atom = lambda x: MullikenAtom(int(x[0]),x[1],float(x[2]),spin=None)
         
         self.mulliken = [atom(line.strip().split())
                             for line in lines if line.strip()]
