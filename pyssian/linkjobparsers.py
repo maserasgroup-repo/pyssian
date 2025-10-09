@@ -294,7 +294,7 @@ class Link1(LinkJob):
     number
     """
 
-    _token:int|str = 1
+    _token = 1
 
     re_link0 = re.compile(r'\%.*')
     re_commandline = re.compile(r'(?:\-{10,}\n)(.*?#[\s\S]*?)(?:\-{10,}\n)')
@@ -352,10 +352,10 @@ class Link1(LinkJob):
         for item in link0_data:
             if any(key in item for key in NPROCSHARED_ALIASES):
                 self._nprocs_idx = len(self.link0)
-                self.append(item[1:])
+                self.link0.append(item[1:])
             elif any(key in item for key in MEMORY_ALIASES):
-                self._mem_idx = len(self.link0)
-                self.append(item[1:])
+                self._memory_idx = len(self.link0)
+                self.link0.append(item[1:])
             else:
                 self.link0.append(item[1:])
 
