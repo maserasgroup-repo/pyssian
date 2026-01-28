@@ -1,11 +1,11 @@
-1,Optimization,0
+1,optimization,0
 #p opt=(calcfc,ts,noeigentest) freq b3lyp/6-31+g(d) scrf=(solvent=dichloromethane,smd) nosymm empiricaldispersion=gd3
 ## Split Here ##
-2,Frequency Calculation,1
+2,frequency calculation,1
 #P Geom=AllCheck Guess=TCheck SCRF=Check GenChk RB3LYP/6-31+G(d) Freq
 ## Split Here ##
-1,Unidentified,0
+1,unidentified,0
 #p b3lyp 6-31+g(d) irc=(calcfc,reverse) scrf=(smd,solvent=dichloromethane) empiricaldispersion=gd3 nosymm
 ## Split Here ##
-1,Constrained Optimization,0
+1,constrained optimization,0
 #p opt=modredundant b3lyp/6-31+g(d) scrf=(solvent=dichloromethane,smd)nosymm empiricaldispersion=gd3

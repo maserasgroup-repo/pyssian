@@ -127,10 +127,10 @@ class TestLink1(unittest.TestCase):
         msg = 'Incorrect type guess'
         text = 'Link1:  Proceeding to internal job step number 13.'
         obj = Link1(text,as_empty=True)
-        types = {0:'Constrained Optimization',
-                 1:'Optimization',
-                 2:'Frequency Calculation',
-                 3:'Unidentified'}
+        types = {0:'constrained optimization',
+                 1:'optimization',
+                 2:'frequency calculation',
+                 3:'unidentified'}
         keywords = ['modredundant','opt','modredundant',
                     'opt','freq','opt','freq',
                     'optimization','#p','redundant']
@@ -153,14 +153,13 @@ class TestLink1(unittest.TestCase):
 
     def test_info(self):
         msg = 'InternalJobInfo not properly added'
-        InternalJobInfo = Link1.InternalJobInfo
         with open(self.propfile) as F:
             txt = F.read()
         items = [i.rstrip('\n').split('\n') for i in txt.split(SMARK)]
         for item,obj in zip_longest(items,self.objects):
             Aux = item[0].split(',')
             sol = InternalJobInfo(int(Aux[0]),Aux[1],Aux[2]=='1')
-            self.assertTrue(obj.info == sol,msg)
+            self.assertEqual(obj.info,sol,msg)
 
 class TestLink101(unittest.TestCase):
 
@@ -387,7 +386,6 @@ class TestLink120(unittest.TestCase):
     def test_energy_partition(self):
         msg = 'Energy partitions not properly read'
         solutions = self.re_energy_partition_solutions
-        EnergyPartition = Link120._EnergyPartition
         for obj,solution in zip_longest(self.objects,solutions):
             match = obj.energy_partitions
             self.assertEqual(bool(match),bool(solution),msg)
@@ -982,7 +980,6 @@ class TestLink804(unittest.TestCase):
 
     def test_spin_components(self):
         msg = 'spin_components not properly parsed'
-        SpinComponent = Link804._SpinComponent
         with open(self.propfile,'r') as F:
             txt = F.read().replace('D','E')
         items = [lines for lines in txt.split(SMARK)]
@@ -997,9 +994,8 @@ class TestLink804(unittest.TestCase):
     def test_SCSCorr(self):
         msg = 'SCS correction not properly calculated'
         MockObject = Link804('',as_empty=True)
-        SpinComponent = Link804._SpinComponent
         MockObject.spin_components = [None,None,None]
-        MockDict = dict(Name='',E=0,T=0)
+        MockDict = dict(name='',E=0,T=0)
         for item in [(0,0,0),(3,5,3),(1.5,10,1.5)]:
             for i,j in enumerate(item):
                 MockDict['E'] = j
