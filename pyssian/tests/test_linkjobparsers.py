@@ -609,7 +609,6 @@ class TestLink202(unittest.TestCase):
 
     def test_orientation(self):
         msg = 'Orientation not properly parsed'
-        AtomCoords = Link202._AtomCoords
         with open(self.orifile) as F:
             txt = F.read()
         items = []
@@ -1118,7 +1117,7 @@ class TestLink914(unittest.TestCase):
                 aux.append(tuple(ES.split('\n')[0].strip().split()))
             solutions.append(aux)
         items = [obj.text for obj in self.objects]
-        import pprint
+        
         for txt,solution in zip_longest(items,solutions):
             test = regex.findall(txt)
             # Test only for the last match as it is the only one stored
@@ -1203,6 +1202,66 @@ class TestLink914(unittest.TestCase):
             for sol,test in zip_longest(sol,transitions):
                 self.assertEqual(tuple(test),sol,msg(test,sol))
 
+class TestLink1002(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.testfile = TEST_FILEDIR.joinpath('l1002.txt')
+        cls.nmrfile = TEST_FILEDIR.joinpath('l1002_NMR.txt')
+        # Read and store the Examples
+        with open(cls.testfile,'r') as F:
+            txt = F.read()
+        cls.objects = [Link1002(i) for i in txt.split(SMARK) if i.strip()]
+        with open(cls.nmrfile,'r') as F:
+            txt = F.read()
+        cls.solutions = []
+        for sol in txt.split(SMARK): 
+            if not sol.strip(): 
+                cls.solutions.append(tuple())
+            else:
+                cls.solutions.append([tuple(atom.split(','))
+                                      for atom in sol.split('\n')])
+
+    def test_init(self):
+        msg = 'Incorrect parsing of Link1002'
+        for obj in self.objects:
+            self.assertTrue(bool(obj.text),msg)
+            self.assertEqual(obj.number,1002)
+
+    def test_regex_NMR(self):
+        msg = 're_NMR regex does not match'
+        regex = Link1002.re_NMR
+        solutions = self.solutions
+        items = [obj.text for obj in self.objects]
+        
+        for i,(txt,solution) in enumerate(zip_longest(items,solutions)):
+            with self.subTest(text=i):
+                test = regex.findall(txt)
+                self.assertEqual(test,solution,msg)
+
+    def test_locate_shieldings(self):
+        msg = 'shieldings not properly parsed'
+        
+        solutions = []
+        for solution in self.solutions: 
+            if not solution: 
+                solutions.append(None)
+            else:
+                atoms = []
+                for i in solution:
+                    atoms.append(AtomNMR(int(i[0]),i[1],float(i[2]),float(i[3])))
+                solutions.append(atoms)
+
+        for i,(obj,solution) in enumerate(zip_longest(self.objects,solutions)):
+            test = obj.shieldings
+            with self.subTest(text=i):
+                self.assertEqual(test,solution,msg)
+
+    def test_init_empty(self):
+        msg = 'Incorrect empty initialization of Link913'
+        obj = Link1002('Some Text',as_empty=True)
+        self.assertFalse(bool(obj.text),msg)
+        self.assertEqual(obj.number,1002)
 
 if __name__ == '__main__':
     unittest.main()

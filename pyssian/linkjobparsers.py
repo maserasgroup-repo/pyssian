@@ -6,8 +6,8 @@ registered with the appropiate decorator are considered for parsing.
 
 import warnings
 import re
-from collections import namedtuple
 from itertools import cycle
+from operator import attrgetter
 from typing import Any, NamedTuple
 
 NPROCSHARED_ALIASES = ['nprocshared','nprocs','NPROCSHARED','NPROCS']
@@ -256,6 +256,13 @@ class ExcitedState(NamedTuple):
     osc_strength:float
     s2:float
     transitions:list[TransitionData]
+
+# Link1002
+class AtomNMR(NamedTuple):
+    number:int
+    symbol:str
+    isotropic:float
+    anisotropic:float
 
 ################################################################################
 #                LinkJob Specialized parser definitions                        #
@@ -1743,6 +1750,79 @@ class Link914(LinkJob):
                 for transition in ES.transitions:
                     print(f'\t{transition.donor} -> {transition.acceptor}'
                           f'\t {transition.contribution}')
+
+@RegisterLinkJob
+class Link1002(LinkJob):
+    """
+    Representation and parser for the output of l1002.exe, 
+    each does a GIAO NMR calculation. Holds information 
+    about NMR shielding tensors and the Isotropic and Anisotropic 
+    NMR shieldings of each atom. 
+
+    Parameters
+    ----------
+    text : str
+        text that corresponds to the output of the l508.exe
+    as_empty : bool
+        Flag to not parse and store the information of the text.
+        (defaults to False)
+
+    Attributes
+    ----------
+    shieldings : list[AtomNMR]
+    anisotropic_shieldings : list[tuple[str,float]]
+        list, sorted by atom number, of atomic anisotropic shieldings.
+    isotropic_shieldings : list
+        list, sorted by atom number, of atomic isotropic shieldings.
+    """
+    re_NMR =  (r'^[\s]*([0-9]+)\s*([a-zA-Z]+)[\s]*'
+               r'Isotropic = [\s]*(-?[0-9]+\.[0-9]+)[\s]*'
+               r'Anisotropy = [\s]*(-?[0-9]+\.[0-9]+)')
+    re_NMR = re.compile(re_NMR,re.MULTILINE)
+
+    _token = 1002
+
+    def __init__(self,text,as_empty=False):
+        self.shieldings:None|list[AtomNMR] = None
+        if as_empty:
+            super().__init__('',1002)
+        else:
+            super().__init__(text,1002)
+            self._locate_shieldings()
+
+    @property
+    def anisotropic_shieldings(self): 
+        if self.shieldings is None: 
+            return None
+        return [(a.symbol,a.anisotropic) for a in 
+                sorted(self.shieldings,key=attrgetter('number'))]
+
+    @property
+    def isotropic_shieldings(self): 
+        if self.shieldings is None: 
+            return None
+        return [(a.symbol,a.isotropic) for a in 
+                sorted(self.shieldings,key=attrgetter('number'))]
+
+    @Populates('shieldings')
+    @SilentFail
+    def _locate_shieldings(self):
+        """
+        Uses regex expressions compiled as class attributes to find the
+        NMR Isotropic and anisotropic shieldings per each atom.
+        """
+        cls = self.__class__
+        nmr_shieldings_raw = cls.re_NMR.findall(self.text)
+        
+        if not nmr_shieldings_raw: 
+            return
+        
+        nmr_shieldings:list[AtomNMR] = []
+        for number,symbol,isotropic,anisotropic in nmr_shieldings_raw:
+            atom = AtomNMR(int(number),symbol,float(isotropic),float(anisotropic))
+            nmr_shieldings.append(atom)
+
+        self.shieldings = nmr_shieldings
 
 @RegisterLinkJob
 class Link9999(LinkJob):

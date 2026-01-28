@@ -11,3 +11,4 @@ pages/
 .vscode
 .pytest_cache
 dist/
+build/

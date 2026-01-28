@@ -1,0 +1,351 @@
+ (Enter /mnt/data/applications/gaussian/g16_legacy/l1002.exe)
+ Minotr:  Closed shell wavefunction.
+ NEqPCM:  Using equilibrium solvation (IEInf=0, Eps=   4.7113, EpsInf=   2.0906)
+          Direct CPHF calculation.
+          Differentiating once with respect to magnetic field using GIAOs.
+          Electric field/nuclear overlap derivatives assumed to be zero.
+          Requested convergence is 1.0D-08 RMS, and 1.0D-07 maximum.
+          Secondary convergence is 1.0D-12 RMS, and 1.0D-12 maximum.
+          NewPWx=T KeepS1=F KeepF1=F KeepIn=T MapXYZ=F SortEE=F KeepMc=T.
+ Defaulting to unpruned grid for atomic number  79.
+        18132 words used for storage of precomputed grid.
+ Two-electron integral symmetry not used.
+          MDV=    6442450944 using IRadAn=       1.
+          Solving linear equations simultaneously, MaxMat=     384.
+   1 Symmetry operations used in ECPInt.
+ ECPInt:  NShTT=   50721 NPrTT=  182771 LenC2=   50722 LenP2D=  182771.
+ LDataN:  DoStor=T MaxTD1= 7 Len=  274
+ FoFJK:  IHMeth= 1 ICntrl=    6127 DoSepK=F KAlg= 0 I1Cent=           0 FoldK=F
+ IRaf=         1 NMat=       1 IRICut=       1 DoRegI=T DoRafI=F ISym2E= 0 IDoP0=0 IntGTp=1.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+          There are     3 degrees of freedom in the 1st order CPHF.  IDoFFX=0 NUNeed=     3.
+      3 vectors produced by pass  0 Test12= 3.17D-12 3.33D-08 XBig12= 2.85D+04 1.96D+01.
+ AX will form     3 AO Fock derivatives at one time.
+      3 vectors produced by pass  1 Test12= 3.17D-12 3.33D-08 XBig12= 6.28D+01 2.56D+00.
+      3 vectors produced by pass  2 Test12= 3.17D-12 3.33D-08 XBig12= 3.53D-01 2.67D-01.
+      3 vectors produced by pass  3 Test12= 3.17D-12 3.33D-08 XBig12= 1.68D-03 2.01D-02.
+      3 vectors produced by pass  4 Test12= 3.17D-12 3.33D-08 XBig12= 2.02D-05 1.38D-03.
+      3 vectors produced by pass  5 Test12= 3.17D-12 3.33D-08 XBig12= 8.30D-08 7.95D-05.
+      3 vectors produced by pass  6 Test12= 3.17D-12 3.33D-08 XBig12= 3.01D-10 3.44D-06.
+      1 vectors produced by pass  7 Test12= 3.17D-12 3.33D-08 XBig12= 1.22D-12 1.41D-07.
+ InvSVY:  IOpt=1 It=  1 EMax= 2.84D-14
+ Solved reduced A of dimension    22 with     3 vectors.
+ Calculating GIAO nuclear magnetic shielding tensors.
+ SCF GIAO Magnetic shielding tensor (ppm):
+      1  Au   Isotropic =   211.7521   Anisotropy =    95.7546
+   XX=   242.8702   YX=    22.9033   ZX=   -37.3178
+   XY=    20.5574   YY=   183.1399   ZY=   -16.0062
+   XZ=   -38.6781   YZ=   -16.7775   ZZ=   209.2462
+   Eigenvalues:   174.8273   184.8406   275.5885
+      2  P    Isotropic =   285.1375   Anisotropy =    64.2060
+   XX=   307.5900   YX=   -11.7911   ZX=   -35.1831
+   XY=     3.3523   YY=   293.1445   ZY=   -14.7389
+   XZ=   -39.9159   YZ=   -24.0784   ZZ=   254.6779
+   Eigenvalues:   229.4086   298.0623   327.9415
+      3  Cl   Isotropic =  1033.5804   Anisotropy =   143.1963
+   XX=  1069.1880   YX=     5.3319   ZX=   -72.0380
+   XY=    37.1006   YY=  1008.7131   ZY=   -27.7390
+   XZ=   -71.6577   YZ=   -16.2401   ZZ=  1022.8400
+   Eigenvalues:   969.6762  1002.0204  1129.0446
+      4  N    Isotropic =  -122.1584   Anisotropy =   480.1899
+   XX=   125.1387   YX=  -154.2419   ZX=   -41.2900
+   XY=  -125.9927   YY=  -288.4246   ZY=   157.1771
+   XZ=   -56.3317   YZ=   220.2895   ZZ=  -203.1894
+   Eigenvalues:  -450.9168  -113.5267   197.9681
+      5  C    Isotropic =    42.2904   Anisotropy =   196.0235
+   XX=    -1.7716   YX=   -49.2071   ZX=     5.0026
+   XY=   -44.1427   YY=   -23.1062   ZY=   -66.1072
+   XZ=    -2.1000   YZ=   -57.9330   ZZ=   151.7489
+   Eigenvalues:   -71.2007    25.0991   172.9727
+      6  H    Isotropic =    24.4195   Anisotropy =    11.7463
+   XX=    26.8198   YX=    -6.4985   ZX=    -5.1686
+   XY=    -3.3496   YY=    23.2168   ZY=     2.3944
+   XZ=    -1.7253   YZ=     2.5356   ZZ=    23.2220
+   Eigenvalues:    19.7738    21.2344    32.2504
+      7  C    Isotropic =    43.7789   Anisotropy =   191.6795
+   XX=   104.5218   YX=   -30.1137   ZX=   -81.2597
+   XY=   -31.5371   YY=    31.3190   ZY=    62.1382
+   XZ=   -82.0626   YZ=    59.3156   ZZ=    -4.5041
+   Eigenvalues:   -66.4564    26.2278   171.5652
+      8  H    Isotropic =    25.2942   Anisotropy =    13.2910
+   XX=    25.2429   YX=     4.4541   ZX=     4.2181
+   XY=     7.5072   YY=    27.2746   ZY=     4.6676
+   XZ=     3.0725   YZ=     0.7659   ZZ=    23.3650
+   Eigenvalues:    19.6905    22.0372    34.1548
+      9  C    Isotropic =    42.5765   Anisotropy =   171.8807
+   XX=    78.8812   YX=   -64.0591   ZX=   -74.7466
+   XY=   -62.4840   YY=    14.3933   ZY=    13.9751
+   XZ=   -71.8608   YZ=     8.3024   ZZ=    34.4550
+   Eigenvalues:   -41.9618    12.5277   157.1636
+     10  C    Isotropic =    44.6424   Anisotropy =   179.6650
+   XX=     3.1798   YX=    18.3160   ZX=    31.1827
+   XY=    23.0510   YY=    -6.1511   ZY=   -61.2737
+   XZ=    41.7604   YZ=   -61.8534   ZZ=   136.8985
+   Eigenvalues:   -49.7911    19.2993   164.4190
+     11  C    Isotropic =    40.5664   Anisotropy =   186.0533
+   XX=    96.0485   YX=   -65.8005   ZX=   -56.4829
+   XY=   -58.3062   YY=   -17.6189   ZY=    54.7470
+   XZ=   -46.6753   YZ=    55.8595   ZZ=    43.2697
+   Eigenvalues:   -57.0381    14.1354   164.6019
+     12  C    Isotropic =    45.7900   Anisotropy =   188.5058
+   XX=   110.6329   YX=   -64.8797   ZX=   -44.2445
+   XY=   -67.4104   YY=   -27.9751   ZY=    54.3500
+   XZ=   -46.0467   YZ=    53.5147   ZZ=    54.7123
+   Eigenvalues:   -65.4180    31.3275   171.4606
+     13  H    Isotropic =    24.4017   Anisotropy =     6.3154
+   XX=    24.1575   YX=     1.8774   ZX=     3.1962
+   XY=     2.1085   YY=    23.8006   ZY=     0.9415
+   XZ=     3.0914   YZ=     0.4845   ZZ=    25.2471
+   Eigenvalues:    21.0172    23.5760    28.6120
+     14  C    Isotropic =    42.6095   Anisotropy =   195.7923
+   XX=    11.3084   YX=   108.8805   ZX=    33.9274
+   XY=   105.6419   YY=    74.7877   ZY=    30.0600
+   XZ=    40.1818   YZ=    36.5855   ZZ=    41.7323
+   Eigenvalues:   -69.7524    24.4432   173.1376
+     15  H    Isotropic =    24.4092   Anisotropy =    13.6650
+   XX=    19.5704   YX=    -1.6638   ZX=    -1.7350
+   XY=    -0.6269   YY=    23.7263   ZY=    -3.6650
+   XZ=    -1.2465   YZ=    -8.1135   ZZ=    29.9310
+   Eigenvalues:    18.0769    21.6315    33.5193
+     16  C    Isotropic =    47.7406   Anisotropy =   173.8864
+   XX=    67.3163   YX=    63.5874   ZX=    15.9115
+   XY=    66.8602   YY=    75.5934   ZY=    79.3199
+   XZ=    15.9711   YZ=    67.1240   ZZ=     0.3121
+   Eigenvalues:   -48.8882    28.4451   163.6649
+     17  C    Isotropic =    47.3944   Anisotropy =   189.8585
+   XX=   -60.8089   YX=   -11.9525   ZX=    28.3419
+   XY=   -11.6124   YY=    47.3356   ZY=   -42.9005
+   XZ=    30.6209   YZ=   -39.9593   ZZ=   155.6565
+   Eigenvalues:   -65.1189    33.3353   173.9668
+     18  H    Isotropic =    24.0963   Anisotropy =     6.0025
+   XX=    23.2721   YX=    -1.5107   ZX=    -2.0940
+   XY=    -0.7377   YY=    26.3673   ZY=     2.1588
+   XZ=    -1.3909   YZ=     2.3505   ZZ=    22.6494
+   Eigenvalues:    20.9386    23.2524    28.0979
+     19  C    Isotropic =    43.4517   Anisotropy =   197.2694
+   XX=     3.3255   YX=    29.6719   ZX=    34.7217
+   XY=    29.3904   YY=   -17.1767   ZY=   -69.8011
+   XZ=    37.0004   YZ=   -74.4800   ZZ=   144.2063
+   Eigenvalues:   -68.2321    23.6225   174.9647
+     20  H    Isotropic =    23.8151   Anisotropy =     3.0199
+   XX=    25.1481   YX=     0.9700   ZX=    -0.7730
+   XY=     1.0822   YY=    24.2013   ZY=     1.4235
+   XZ=    -0.5268   YZ=     1.5324   ZZ=    22.0960
+   Eigenvalues:    21.0591    24.5578    25.8284
+     58  H    Isotropic =    29.3755   Anisotropy =     8.0544
+   XX=    32.1867   YX=     3.3450   ZX=    -0.8305
+   XY=     3.2943   YY=    30.2697   ZY=    -1.0359
+   XZ=    -0.2715   YZ=     0.0109   ZZ=    25.6702
+   Eigenvalues:    25.6056    27.7758    34.7451
+ End of Minotr F.D. properties file   721 does not exist.
+ End of Minotr F.D. properties file   722 does not exist.
+ End of Minotr F.D. properties file   788 does not exist.
+ Leave Link 1002 at Sun Jan  4 23:58:45 2026, MaxMem=  6442450944 cpu:            9549.4 elap:             403.9
+## Split Here ##
+ (Enter /mnt/data/applications/gaussian/g16_legacy/l1002.exe)
+ Minotr:  UHF open shell wavefunction.
+ NEqPCM:  Using equilibrium solvation (IEInf=0, Eps=   4.7113, EpsInf=   2.0906)
+          Direct CPHF calculation.
+          Differentiating once with respect to magnetic field using GIAOs.
+          Electric field/nuclear overlap derivatives assumed to be zero.
+          Requested convergence is 1.0D-08 RMS, and 1.0D-07 maximum.
+          Secondary convergence is 1.0D-12 RMS, and 1.0D-12 maximum.
+          NewPWx=T KeepS1=F KeepF1=F KeepIn=T MapXYZ=F SortEE=F KeepMc=T.
+ Defaulting to unpruned grid for atomic number  79.
+        18104 words used for storage of precomputed grid.
+ Two-electron integral symmetry not used.
+          MDV=    6442450944 using IRadAn=       1.
+          Solving linear equations simultaneously, MaxMat=     384.
+   1 Symmetry operations used in ECPInt.
+ ECPInt:  NShTT=   50721 NPrTT=  182771 LenC2=   50722 LenP2D=  182771.
+ LDataN:  DoStor=T MaxTD1= 7 Len=  274
+ FoFJK:  IHMeth= 1 ICntrl=    6127 DoSepK=F KAlg= 0 I1Cent=           0 FoldK=F
+ IRaf=         1 NMat=       1 IRICut=       1 DoRegI=T DoRafI=F ISym2E= 0 IDoP0=0 IntGTp=1.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+ Defaulting to unpruned grid for atomic number  79.
+          There are     3 degrees of freedom in the 1st order CPHF.  IDoFFX=0 NUNeed=     3.
+      3 vectors produced by pass  0 Test12= 6.30D-12 3.33D-08 XBig12= 6.10D+04 1.65D+01.
+ AX will form     3 AO Fock derivatives at one time.
+      3 vectors produced by pass  1 Test12= 6.30D-12 3.33D-08 XBig12= 1.39D+02 2.59D+00.
+      3 vectors produced by pass  2 Test12= 6.30D-12 3.33D-08 XBig12= 1.27D+00 4.04D-01.
+      3 vectors produced by pass  3 Test12= 6.30D-12 3.33D-08 XBig12= 1.22D-02 4.91D-02.
+      3 vectors produced by pass  4 Test12= 6.30D-12 3.33D-08 XBig12= 1.10D-04 2.94D-03.
+      3 vectors produced by pass  5 Test12= 6.30D-12 3.33D-08 XBig12= 7.58D-07 4.00D-04.
+      3 vectors produced by pass  6 Test12= 6.30D-12 3.33D-08 XBig12= 7.01D-09 2.79D-05.
+      3 vectors produced by pass  7 Test12= 6.30D-12 3.33D-08 XBig12= 3.82D-11 2.12D-06.
+      2 vectors produced by pass  8 Test12= 6.30D-12 3.33D-08 XBig12= 1.55D-12 2.43D-07.
+      1 vectors produced by pass  9 Test12= 6.30D-12 3.33D-08 XBig12= 6.66D-15 4.33D-08.
+ InvSVY:  IOpt=1 It=  1 EMax= 5.68D-14
+ Solved reduced A of dimension    27 with     3 vectors.
+ Calculating GIAO nuclear magnetic shielding tensors.
+ SCF GIAO Magnetic shielding tensor (ppm):
+      1  Au   Isotropic =   200.2876   Anisotropy =   100.4017
+   XX=   216.5091   YX=    40.0540   ZX=   -22.0191
+   XY=    38.3123   YY=   199.9614   ZY=   -30.5594
+   XZ=   -25.8088   YZ=   -35.3741   ZZ=   184.3923
+   Eigenvalues:   157.2398   176.4009   267.2221
+      2  P    Isotropic =   283.9369   Anisotropy =    44.9654
+   XX=   287.7584   YX=    -6.9002   ZX=   -30.7411
+   XY=    20.1754   YY=   291.3591   ZY=   -13.2017
+   XZ=   -22.7073   YZ=    -7.3177   ZZ=   272.6931
+   Eigenvalues:   251.9897   285.9071   313.9138
+      3  Cl   Isotropic =  1011.4903   Anisotropy =   165.5994
+   XX=  1019.8163   YX=    57.8504   ZX=   -54.4810
+   XY=    81.8220   YY=   998.9864   ZY=   -59.2174
+   XZ=   -44.8722   YZ=   -29.8238   ZZ=  1015.6683
+   Eigenvalues:   938.7562   973.8249  1121.8899
+      4  N    Isotropic =  -130.6006   Anisotropy =   286.2816
+   XX=    14.6857   YX=  -101.1429   ZX=   -25.4401
+   XY=  -120.6896   YY=  -376.7868   ZY=    58.8443
+   XZ=   -28.3188   YZ=    32.8251   ZZ=   -29.7008
+   Eigenvalues:  -409.7530   -42.3026    60.2538
+      5  C    Isotropic =    45.2376   Anisotropy =   191.4306
+   XX=    18.9023   YX=   -51.4244   ZX=     0.8532
+   XY=   -50.2582   YY=    22.9230   ZY=  -106.0404
+   XZ=     1.2723   YZ=   -98.3292   ZZ=    93.8875
+   Eigenvalues:   -69.4807    32.3355   172.8580
+      6  H    Isotropic =    24.8632   Anisotropy =    12.4979
+   XX=    27.7908   YX=    -4.2120   ZX=    -6.7489
+   XY=    -0.9961   YY=    21.4471   ZY=     1.8082
+   XZ=    -4.0220   YZ=     3.1980   ZZ=    25.3517
+   Eigenvalues:    20.2247    21.1697    33.1951
+      7  C    Isotropic =    38.7466   Anisotropy =   199.1595
+   XX=    76.9952   YX=     0.5349   ZX=  -109.0619
+   XY=    -0.6234   YY=     8.3901   ZY=    39.6517
+   XZ=  -114.4173   YZ=    35.0462   ZZ=    30.8544
+   Eigenvalues:   -71.0283    15.7484   171.5196
+      8  H    Isotropic =    24.7899   Anisotropy =    14.6900
+   XX=    23.1720   YX=     3.3679   ZX=     3.9154
+   XY=     7.4701   YY=    29.0420   ZY=     5.6811
+   XZ=     4.2348   YZ=     1.8613   ZZ=    22.1557
+   Eigenvalues:    18.4506    21.3358    34.5832
+      9  C    Isotropic =    41.3552   Anisotropy =   182.5695
+   XX=    76.1486   YX=   -33.5765   ZX=   -98.3661
+   XY=   -33.8776   YY=    -2.1759   ZY=    -2.3264
+   XZ=   -91.2399   YZ=     5.0884   ZZ=    50.0928
+   Eigenvalues:   -44.1476     5.1450   163.0682
+     10  C    Isotropic =    46.1038   Anisotropy =   177.3362
+   XX=     4.3137   YX=     5.5418   ZX=    45.8394
+   XY=     6.3153   YY=    50.2463   ZY=   -88.1722
+   XZ=    53.7745   YZ=   -87.6740   ZZ=    83.7514
+   Eigenvalues:   -49.8063    23.7899   164.3280
+     11  C    Isotropic =    46.1405   Anisotropy =   177.7435
+   XX=    97.1643   YX=   -18.4647   ZX=   -72.9218
+   XY=   -12.9387   YY=   -32.6030   ZY=    41.0818
+   XZ=   -69.5237   YZ=    35.6549   ZZ=    73.8602
+   Eigenvalues:   -45.4587    19.2440   164.6362
+     12  C    Isotropic =    38.1406   Anisotropy =   201.1885
+   XX=   102.7142   YX=   -23.3073   ZX=   -73.5729
+   XY=   -17.9438   YY=   -64.6668   ZY=    40.2446
+   XZ=   -75.7224   YZ=    36.1669   ZZ=    76.3744
+   Eigenvalues:   -74.3707    16.5262   172.2663
+     13  H    Isotropic =    23.8272   Anisotropy =     7.0253
+   XX=    23.5549   YX=     1.5218   ZX=     3.4721
+   XY=     2.5752   YY=    23.9850   ZY=     1.7645
+   XZ=     3.5162   YZ=     0.9133   ZZ=    23.9417
+   Eigenvalues:    20.1429    22.8279    28.5107
+     14  C    Isotropic =    42.1269   Anisotropy =   196.2082
+   XX=   -25.5494   YX=    82.0462   ZX=    45.2964
+   XY=    75.7008   YY=   112.9197   ZY=    36.3051
+   XZ=    52.3688   YZ=    43.1223   ZZ=    39.0106
+   Eigenvalues:   -69.6544    23.1028   172.9324
+     15  H    Isotropic =    24.9740   Anisotropy =    14.1423
+   XX=    20.1220   YX=    -2.5749   ZX=    -0.4787
+   XY=    -2.9840   YY=    26.3550   ZY=    -4.1571
+   XZ=     2.4094   YZ=    -8.7676   ZZ=    28.4451
+   Eigenvalues:    18.6788    21.8411    34.4022
+     16  C    Isotropic =    45.7963   Anisotropy =   172.1038
+   XX=    32.6795   YX=    63.1994   ZX=     1.7061
+   XY=    63.1311   YY=    84.1516   ZY=    84.0435
+   XZ=     5.0839   YZ=    71.5877   ZZ=    20.5578
+   Eigenvalues:   -47.9514    24.8082   160.5321
+     17  C    Isotropic =    46.9013   Anisotropy =   190.9334
+   XX=   -52.8174   YX=   -38.2160   ZX=    30.6257
+   XY=   -41.0196   YY=    79.4852   ZY=   -65.3958
+   XZ=    34.1110   YZ=   -62.9601   ZZ=   114.0362
+   Eigenvalues:   -65.1223    31.6359   174.1903
+     18  H    Isotropic =    24.2627   Anisotropy =     6.2864
+   XX=    24.0990   YX=    -0.8603   ZX=    -2.7591
+   XY=    -0.5805   YY=    24.2167   ZY=     2.6946
+   XZ=    -1.9334   YZ=     3.2189   ZZ=    24.4724
+   Eigenvalues:    20.8906    23.4439    28.4537
+     19  C    Isotropic =    42.7482   Anisotropy =   199.1898
+   XX=    -3.7790   YX=     7.9057   ZX=    54.7267
+   XY=     8.9101   YY=    56.3380   ZY=   -99.1617
+   XZ=    57.8878   YZ=  -103.7359   ZZ=    75.6855
+   Eigenvalues:   -68.6451    21.3483   175.5413
+     20  H    Isotropic =    23.9393   Anisotropy =     2.9811
+   XX=    24.8533   YX=     1.3719   ZX=    -0.8252
+   XY=     1.4452   YY=    23.6580   ZY=     1.8543
+   XZ=    -0.5149   YZ=     1.8284   ZZ=    23.3066
+   Eigenvalues:    21.0698    24.8214    25.9267
+     58  H    Isotropic =    29.5360   Anisotropy =     7.7250
+   XX=    28.2172   YX=    -2.3560   ZX=    -2.0330
+   XY=    -3.2962   YY=    33.4480   ZY=     0.0561
+   XZ=    -1.8482   YZ=    -2.0628   ZZ=    26.9429
+   Eigenvalues:    24.7813    29.1407    34.6860
+ g value of the free electron [g_e]: 0.20023193D+01
+ relativistic mass correction [g_RMC]:-0.18265067D-03
+ diamagnetic correction to g tensor [g_DC]:
+   XX= 0.37790322D-03   YX=-0.36903774D-03   ZX= 0.34932260D-02
+   XY=-0.18300843D-03   YY= 0.22605317D-02   ZY=-0.16771765D-03
+   XZ= 0.31425230D-03   YZ=-0.15266545D-02   ZZ=-0.69342409D-03
+ orbital Zeeman and spin-orbit coupling contribution to g tensor [g_OZ/SOC]:
+   XX= 0.72269844D-02   YX=-0.87780792D-02   ZX=-0.10600535D-01
+   XY=-0.32354429D-02   YY= 0.73627517D-02   ZY= 0.92255124D-02
+   XZ=-0.84036451D-02   YZ= 0.11269782D-01   ZZ= 0.24001443D-01
+ g tensor [g = g_e + g_RMC + g_DC + g_OZ/SOC]:
+   XX= 0.20097415D+01   YX=-0.91471169D-02   ZX=-0.71073090D-02
+   XY=-0.34184513D-02   YY= 0.20117599D+01   ZY= 0.90577948D-02
+   XZ=-0.80893928D-02   YZ= 0.97431277D-02   ZZ= 0.20254447D+01
+ g shifts relative to the free electron (ppm):
+   xx=         2059.9   yy=         6188.6   zz=        31744.0
+ End of Minotr F.D. properties file   721 does not exist.
+ End of Minotr F.D. properties file   722 does not exist.
+ End of Minotr F.D. properties file   788 does not exist.
+ Leave Link 1002 at Tue Jan 27 22:08:04 2026, MaxMem=  6442450944 cpu:           16666.3 elap:             717.7
