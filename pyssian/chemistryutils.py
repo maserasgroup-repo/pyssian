@@ -25,7 +25,7 @@ methodsRegex = ['DFT','MM','Amber','Dreiding','UFF','AM1','PM3','PM3MM','PM6',
                 'CBS-APNO','G1','G2','G2MP2','G3','G3MP2','G3B3','G3MP2B3','G4',
                 'G4MP2','W1U','W1BD','W1RO','CIS',r'CIS\(D\)','CID','CISD','TD',
                 'EOMCCSD','ZINDO','DFTB','DFTBA','GVB','CNDO','INDO','MINDO',
-                'MNDO','NMR','SAC-CI']
+                'MNDO','SAC-CI']
 methodsRegex = [i.upper() for i in methodsRegex]
 methodsRegex = '|'.join(methodsRegex)
 
