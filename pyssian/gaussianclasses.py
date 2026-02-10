@@ -608,6 +608,10 @@ class GaussianInFile(object):
         txt = [line.rstrip() for line in self._file]
         if not txt: 
             raise EOFError('Attempting to read an empty or non-existent file')
+        
+        while txt and not txt[0].strip(): 
+            txt.pop(0)
+        
         if txt[-1]: # If the file ends without a blank line add it
             txt.append('')
         if txt[-2]: # If the file ends without two blank lines add one
